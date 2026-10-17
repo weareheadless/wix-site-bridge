@@ -1,8 +1,9 @@
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { spawnSync } from "node:child_process";
 import { generateArtifacts } from "./artifacts.mjs";
 import { loadManifest, selectSite } from "./manifest.mjs";
-import { inspectPublishTarget, invokeWixPublish } from "./publish.mjs";
+import { inspectPublishTarget, invokeWixPublish, wixExecutable } from "./publish.mjs";
 import { executeRelease, planRelease } from "./release-operation.mjs";
 import { deploySnippets, inspectSnippets, planSnapshot, planSnippetDeployment, readConfiguredSnippet, restoreSnippets, snapshotSnippets } from "./release.mjs";
 import { assertAllowedTarget, newId, redact, sha256, targetAllowlist, writePrivateJson } from "./security.mjs";
@@ -25,6 +26,38 @@ function clientFor(site, env) {
   return new WixCustomEmbedsClient({ siteId: site.siteId, tokenProvider: WixAppTokenProvider.fromEnv(env) });
 }
 
+function routeGuardedEmbed(sourceHtml, route) {
+  const routePath = route.replace(/\/+$/, "") || "/";
+  if (!routePath.startsWith("/") || routePath === "/" || /[?#\\\s]/.test(routePath) || routePath.includes("//") || routePath.split("/").includes("..")) {
+    throw new Error("Pass --route as one exact, non-root page path, such as /atelier-prototype.");
+  }
+  if (!sourceHtml.trim()) throw new Error("The Custom Embed HTML source file is empty.");
+  const htmlLiteral = JSON.stringify(sourceHtml).replaceAll("<", "\\u003c");
+  return `<script>(() => {
+  const currentPath = window.location.pathname.replace(/\\/+$/, "") || "/";
+  if (currentPath !== ${JSON.stringify(routePath)}) return;
+  const template = document.createElement("template");
+  template.innerHTML = ${htmlLiteral};
+  const root = document.createElement("div");
+  root.id = "wix-bridge-prototype";
+  document.body.replaceChildren(root);
+  root.append(template.content);
+  for (const inertScript of root.querySelectorAll("script")) {
+    const activeScript = document.createElement("script");
+    for (const attribute of inertScript.attributes) activeScript.setAttribute(attribute.name, attribute.value);
+    activeScript.textContent = inertScript.textContent;
+    inertScript.replaceWith(activeScript);
+  }
+})();</script>`;
+}
+
+function parseBooleanOption(value, fallback, label) {
+  if (value === undefined) return fallback;
+  if (value === true || value === "true") return true;
+  if (value === false || value === "false") return false;
+  throw new Error(`--${label} must be true or false.`);
+}
+
 export async function runOperation(command, args, env = process.env, options = {}) {
   const ctx = await loadContext(args, env);
   const { site, stateDir, sourceRoot } = ctx;
@@ -34,14 +67,77 @@ export async function runOperation(command, args, env = process.env, options = {
     let publish;
     if (sourceRoot) publish = await inspectPublishTarget(site, sourceRoot);
     const authConfigured = Boolean(env.WIX_APP_ID && env.WIX_APP_SECRET && env.WIX_APP_INSTANCE_ID);
+    const cli = spawnSync(wixExecutable(), ["--version"], { encoding: "utf8", stdio: "ignore", env });
     return {
       status: "ok",
       target: { alias: site.alias, siteId: site.siteId, connectedRepo: site.connectedRepo, defaultBranch: site.defaultBranch },
       allowlisted: true,
       customEmbedsAuth: authConfigured ? "configured (not contacted)" : "missing Wix app credentials",
-      wixCli: "checked when publish or release is requested",
-      sourceRepo: publish ? { branch: publish.branch, sourceCommit: publish.sourceCommit, uiConfigSha256: publish.uiConfigSha256 } : "not checked; pass --site-repo"
+      wixCli: cli.status === 0 ? `installed (${wixExecutable() === "wix" ? "PATH" : "workspace"})` : "not installed",
+      sourceRepo: publish
+        ? { branch: publish.branch, sourceCommit: publish.sourceCommit, uiConfigSha256: publish.uiConfigSha256 }
+        : site.connectedRepo ? "not checked; pass --site-repo" : "not connected; create and connect a separate Wix site source repository"
     };
+  }
+
+  if (command === "create-snippet") {
+    if (!args.name || args.name.trim().length > 100) throw new Error("Pass --name with a custom embed name from 1 to 100 characters.");
+    if (!args.htmlFile) throw new Error("Pass --html-file with the local HTML fragment for the new custom embed.");
+    const position = args.position ?? "BODY_END";
+    const category = args.category ?? "FUNCTIONAL";
+    if (!["HEAD", "BODY_START", "BODY_END"].includes(position)) throw new Error("--position must be HEAD, BODY_START, or BODY_END.");
+    if (!["ESSENTIAL", "FUNCTIONAL", "ANALYTICS", "ADVERTISING", "DATA_TO_THIRD_PARTY"].includes(category)) {
+      throw new Error("--category must be a documented Wix Custom Embed category.");
+    }
+    if (!args.route) throw new Error("Pass --route for the exact prototype path. The API applies new embeds to all pages by default.");
+    const routePath = args.route.replace(/\/+$/, "") || "/";
+    const sourcePath = path.resolve(args.htmlFile);
+    const sourceHtml = await readFile(sourcePath, "utf8");
+    const html = routeGuardedEmbed(sourceHtml, routePath);
+    const loadOnce = parseBooleanOption(args.loadOnce, false, "load-once");
+    const enabled = parseBooleanOption(args.enabled, true, "enabled");
+    const details = {
+      name: args.name.trim(),
+      enabled,
+      loadOnce,
+      position,
+      category,
+      routeGuard: routePath,
+      apiPageScope: "all pages (pageFilter is read-only)",
+      htmlBytes: Buffer.byteLength(html, "utf8"),
+      htmlSha256: sha256(html),
+      sourcePath
+    };
+    if (!apply) return { status: "dry-run", target: { alias: site.alias, siteId: site.siteId }, wouldCreate: details };
+
+    const operationId = newId("embed-create");
+    const receiptPath = path.join(stateDir, "receipts", `${operationId}.json`);
+    const receiptBase = { operationId, siteAlias: site.alias, siteId: site.siteId, createdAt: new Date().toISOString(), ...details };
+    await writePrivateJson(receiptPath, { ...receiptBase, status: "pending" });
+    try {
+      const client = clientFor(site, env);
+      const sameName = (await client.listAll()).filter((embed) => embed.name?.toLowerCase() === details.name.toLowerCase());
+      if (sameName.length) throw new Error(`A custom embed named ${details.name} already exists on ${site.alias}; choose a unique name after inspecting the existing embed.`);
+      const created = await client.create({ name: details.name, enabled, loadOnce, position, category, html });
+      const receipt = {
+        ...receiptBase,
+        status: "created",
+        customEmbedId: created.id,
+        revision: String(created.revision),
+        confirmedEnabled: created.enabled,
+        confirmedPosition: created.position,
+        confirmedPageScope: created.pageFilter?.pageIds?.length ? { type: "pages", pageIds: created.pageFilter.pageIds } : { type: "all" }
+      };
+      await writePrivateJson(receiptPath, receipt);
+      return { ...receipt, receiptPath };
+    } catch (error) {
+      await writePrivateJson(receiptPath, {
+        ...receiptBase,
+        status: "failed",
+        failure: { name: error.name, httpStatus: Number.isInteger(error.status) ? error.status : null }
+      }).catch(() => {});
+      throw error;
+    }
   }
 
   if (command === "build") {
