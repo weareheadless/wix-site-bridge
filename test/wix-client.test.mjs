@@ -37,6 +37,40 @@ test("Custom Embed updates send explicit site context and the current revision",
   assert.deepEqual(JSON.parse(request.init.body), { customEmbed: { id: "embed-1", revision: "7", embedData: { category: "ESSENTIAL", html: "new" } } });
 });
 
+test("Custom Embed creation uses the documented POST shape and explicit site context", async () => {
+  let request;
+  const client = new WixCustomEmbedsClient({
+    siteId: "site-123",
+    tokenProvider: { getToken: async () => "app-access-token" },
+    fetchImpl: async (url, init) => {
+      request = { url: String(url), init };
+      return new Response(JSON.stringify({ customEmbed: { id: "embed-new", revision: "1", enabled: true, position: "BODY_END" } }), { status: 200 });
+    }
+  });
+  const created = await client.create({
+    name: "Prototype",
+    enabled: true,
+    loadOnce: false,
+    position: "BODY_END",
+    category: "FUNCTIONAL",
+    html: "<script>prototype()</script>"
+  });
+  assert.equal(created.id, "embed-new");
+  assert.equal(request.url, "https://www.wixapis.com/embeds/v1/custom-embeds");
+  assert.equal(request.init.method, "POST");
+  assert.equal(request.init.headers.authorization, "app-access-token");
+  assert.equal(request.init.headers["wix-site-id"], "site-123");
+  assert.deepEqual(JSON.parse(request.init.body), {
+    customEmbed: {
+      name: "Prototype",
+      enabled: true,
+      loadOnce: false,
+      position: "BODY_END",
+      embedData: { category: "FUNCTIONAL", html: "<script>prototype()</script>" }
+    }
+  });
+});
+
 test("revision conflicts fail without retry", async () => {
   let calls = 0;
   const client = new WixCustomEmbedsClient({
