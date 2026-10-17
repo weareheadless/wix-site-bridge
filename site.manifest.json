@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "site": {
+    "alias": "atelier-harmonie",
+    "siteId": "376faa89-fe6c-4ae8-8feb-10520e813a89",
+    "liveUrl": "https://www.atelier-harmonie.com/",
+    "routes": ["/"],
+    "components": [],
+    "customCode": []
+  }
+}
