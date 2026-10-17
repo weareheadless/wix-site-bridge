@@ -16,9 +16,10 @@ flowchart LR
 
 ## Current status
 
-- Local CLI and MCP adapter, site manifest, deterministic packet generation, custom embed read/update, snapshot, release, verification, and snippet rollback are implemented.
-- The bridge currently has no Wix target configured. The example identifiers are placeholders and the new-site manifest is intentionally blocked by target allowlisting until an actual test site is supplied.
-- No real Wix deployment or publishing has been run. Live DOM inspection and desktop/mobile visual review are still required before calling a visible change verified.
+- Local CLI and MCP adapter, deterministic packet generation, Custom Embed create/read/update, snapshot, release, verification, and snippet rollback are implemented.
+- `site.manifest.json` selects Atelier Harmonie explicitly. The exact site ID is also recorded in `.env.example` for the required `WIX_ALLOWED_SITE_IDS` boundary.
+- The Wix CLI for Sites (`@wix/cli` 1.1.263) is installed locally in the ignored `.wix-cli/` directory. The site does not yet have a connected Wix source repository, and no Custom Embeds app credentials are configured.
+- No live Wix API mutation or publish has been run. Live DOM inspection and desktop/mobile visual review are still required before calling a visible change verified.
 - `site-agent` is a separate generic content manager and is not the Wix bridge. The existing `susimacdonald-rentals` repository is not used or changed here.
 
 ## Prerequisites
@@ -42,7 +43,7 @@ The official **Publish Site** SDK action also exists. It publishes saved changes
 
 ### Custom Embeds API
 
-The Custom Embeds API manages dashboard code snippets at `HEAD`, `BODY_START`, or `BODY_END`. These are not canvas HTML embed elements or general editor layout APIs. The API supports list, get, create, update, and delete operations; this bridge intentionally only reads and updates IDs already listed in a site's manifest. List supports cursor paging with a maximum of 100 items per request. The documented custom embed name length is 1–100 characters. The API object marks `pageFilter` read-only, so the bridge records and checks expected page scope and refuses to alter or widen it. The API schema pages reviewed here don't list an HTML-body size limit; deployments still fail closed on any Wix API rejection. Categories affect consent/loading behavior and are preserved.
+The Custom Embeds API manages dashboard code snippets at `HEAD`, `BODY_START`, or `BODY_END`. These are not canvas HTML embed elements or general editor layout APIs. The API supports list, get, create, update, and delete operations; the bridge supports creating new embeds and reading/updating IDs already listed in a site's manifest. List supports cursor paging with a maximum of 100 items per request. The documented custom embed name length is 1–100 characters. The API object marks `pageFilter` read-only, so new API-created embeds apply to all pages. To make a prototype safe, `create-snippet` requires an exact non-root route and wraps the HTML so it only replaces page content on that route. The API page scope itself remains site-wide, and the bridge reports that explicitly. The API schema pages reviewed here don't list an HTML-body size limit; deployments still fail closed on any Wix API rejection. Categories affect consent/loading behavior and are preserved. See [Create Custom Embed](https://dev.wix.com/docs/api-reference/business-management/custom-embeds/create-custom-embed) and [Custom Embed Object](https://dev.wix.com/docs/api-reference/business-management/custom-embeds/custom-embed-object).
 
 An update must include the current `revision`. The bridge does one read, sends one update with that revision, and never retries a conflict automatically. Wix documents that a Custom Embed update is applied on the next site render; it does not wait for a site publish. See [Custom Embeds API reference and sample flows](https://dev.wix.com/docs/api-reference/business-management/custom-embeds/create-custom-embed), [Update Custom Embed](https://dev.wix.com/docs/api-reference/business-management/custom-embeds/update-custom-embed), and [Custom Embed Object](https://dev.wix.com/docs/api-reference/business-management/custom-embeds/custom-embed-object).
 
@@ -88,6 +89,25 @@ From the bridge checkout, after copying and completing a site manifest:
 
 ```sh
 export WIX_ALLOWED_SITE_IDS="<exact-wix-site-id>"
+
+# API-created prototypes are dry-run by default and require an exact route guard.
+npm run bridge -- create-snippet \
+  --manifest ./site.manifest.json \
+  --site atelier-harmonie \
+  --name "Atelier Harmonie Prototype" \
+  --html-file ./prototype/home.html \
+  --route /accueil-prototype
+
+# After reviewing the plan, --apply calls Wix Create Custom Embed and saves a private receipt.
+npm run bridge -- create-snippet \
+  --manifest ./site.manifest.json \
+  --site atelier-harmonie \
+  --name "Atelier Harmonie Prototype" \
+  --html-file ./prototype/home.html \
+  --route /accueil-prototype \
+  --position BODY_END \
+  --category FUNCTIONAL \
+  --apply
 
 npm run bridge -- doctor \
   --manifest ./site.manifest.json \
@@ -169,7 +189,7 @@ SusiMacDonald is not an authorized deployment target for this work. For a future
 
 ## Supported and unsupported operations
 
-Supported: manifest validation, target inspection, Custom Embed list/read, deterministic component packet generation, plan/diff, private snapshot, revision-checked snippet deploy, selected-branch Wix CLI publish, concise code-plus-snippet release, hash/HTTP verification, and snippet rollback.
+Supported: manifest validation, target inspection, Custom Embed list/read/create, deterministic component packet generation, plan/diff, private snapshot, revision-checked snippet deploy, selected-branch Wix CLI publish, concise code-plus-snippet release, hash/HTTP verification, and snippet rollback.
 
 Unsupported: creating or deleting Custom Embeds; changing snippet placement or page filter; adding/repositioning Wix editor elements; changing page layout or dataset wiring through a fabricated API; pushing site source commits on the user's behalf; CMS record/schema mutation; atomic code-plus-snippet deployment; automated visual approval; and automatic code rollback. Use Wix's editor for the explicitly documented one-time native placement and supported Git/Wix CLI workflows for site code.
 
