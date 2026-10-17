@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "site": {
+    "alias": "new-test-site",
+    "siteId": "REPLACE_WITH_NEW_TEST_SITE_ID",
+    "liveUrl": "REPLACE_WITH_NEW_TEST_SITE_URL",
+    "connectedRepo": "weareheadless/REPLACE_WITH_WIX_CONNECTED_SOURCE_REPO",
+    "defaultBranch": "main",
+    "wixConfigPath": "wix.config.json",
+    "routes": ["/"],
+    "components": [
+      {
+        "name": "property-card",
+        "source": "src/public/custom-elements/property-card.js",
+        "tagName": "wh-property-card",
+        "routes": ["/"],
+        "wixElementIds": ["propertyCard"],
+        "datasetBindings": [
+          {
+            "elementId": "propertyCard",
+            "datasetId": "featuredPropertiesDataset",
+            "property": "data"
+          }
+        ]
+      }
+    ],
+    "customCode": [
+      {
+        "id": "REPLACE_WITH_EXISTING_CUSTOM_EMBED_ID",
+        "position": "HEAD",
+        "pageScope": { "type": "all" },
+        "component": "property-card",
+        "category": "ESSENTIAL",
+        "loadOnce": true
+      }
+    ]
+  }
+}

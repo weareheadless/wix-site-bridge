@@ -1,0 +1,17 @@
+{
+  "name": "wix-site-bridge",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "A small Git, Wix Custom Embeds API, and Wix CLI bridge for AI coding agents.",
+  "engines": {
+    "node": ">=20.11"
+  },
+  "scripts": {
+    "test": "node --test",
+    "example:build": "node examples/build-example.mjs",
+    "bridge": "node src/cli.mjs",
+    "mcp": "node src/mcp.mjs"
+  },
+  "license": "MIT"
+}
