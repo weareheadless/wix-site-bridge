@@ -13,9 +13,14 @@ export function validateManifest(input) {
   const site = input.site;
   site.alias = requireString(site.alias, "site.alias");
   site.siteId = requireString(site.siteId, "site.siteId");
-  site.connectedRepo = requireString(site.connectedRepo, "site.connectedRepo").replace(/\.git$/i, "");
-  if (!/^[\w.-]+\/[\w.-]+$/.test(site.connectedRepo)) throw new Error("site.connectedRepo must use owner/repository form.");
-  site.defaultBranch = requireString(site.defaultBranch, "site.defaultBranch");
+  if (site.connectedRepo !== undefined && site.connectedRepo !== null && site.connectedRepo !== "") {
+    site.connectedRepo = requireString(site.connectedRepo, "site.connectedRepo").replace(/\.git$/i, "");
+    if (!/^[\w.-]+\/[\w.-]+$/.test(site.connectedRepo)) throw new Error("site.connectedRepo must use owner/repository form.");
+    site.defaultBranch = requireString(site.defaultBranch, "site.defaultBranch");
+  } else {
+    site.connectedRepo = null;
+    site.defaultBranch = null;
+  }
   site.wixConfigPath = site.wixConfigPath ?? "wix.config.json";
   if (typeof site.wixConfigPath !== "string" || path.isAbsolute(site.wixConfigPath)) throw new Error("site.wixConfigPath must be a relative path inside the Wix source repository.");
   if (site.liveUrl !== undefined) site.liveUrl = requireString(site.liveUrl, "site.liveUrl");
