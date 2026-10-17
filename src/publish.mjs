@@ -1,8 +1,21 @@
 import { readFile } from "node:fs/promises";
+import { accessSync, constants as fsConstants } from "node:fs";
+import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { normalizeRepoUrl, sha256 } from "./security.mjs";
 import { resolveSource } from "./artifacts.mjs";
+
+const localWixCli = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../.wix-cli/node_modules/.bin/wix");
+
+export function wixExecutable() {
+  try {
+    accessSync(localWixCli, fsConstants.X_OK);
+    return localWixCli;
+  } catch {
+    return "wix";
+  }
+}
 
 function git(repoPath, args) {
   const result = spawnSync("git", ["-C", repoPath, ...args], { encoding: "utf8" });
@@ -13,6 +26,7 @@ function git(repoPath, args) {
 
 export async function inspectPublishTarget(site, repoPath) {
   if (!repoPath) throw new Error("Pass --site-repo with the separately connected Wix source repository.");
+  if (!site.connectedRepo || !site.defaultBranch) throw new Error("The selected site manifest does not yet record its separate Wix-connected source repository and default branch.");
   const root = path.resolve(repoPath);
   const branch = git(root, ["branch", "--show-current"]);
   if (branch !== site.defaultBranch) throw new Error(`Current branch ${branch || "(detached)"} does not match configured Wix default branch ${site.defaultBranch}.`);
@@ -41,19 +55,19 @@ export async function inspectPublishTarget(site, repoPath) {
   };
 }
 
-export function checkWixCliAuth(env = process.env, exec = spawnSync) {
-  let who = exec("wix", ["whoami"], { encoding: "utf8", stdio: "ignore" });
+export function checkWixCliAuth(env = process.env, exec = spawnSync, executable = wixExecutable()) {
+  let who = exec(executable, ["whoami"], { encoding: "utf8", stdio: "ignore", env });
   if (who.error?.code === "ENOENT") throw new Error("Wix CLI for Sites is not installed. Install @wix/cli using Wix's official setup instructions.");
   if (who.status === 0) return { authenticated: true, method: "wix-cli-session" };
   if (!env.WIX_CLI_API_KEY) throw new Error("Wix CLI is not authenticated. Run `wix login`, or configure the Wix CLI for Sites API key in WIX_CLI_API_KEY.");
-  const login = exec("wix", ["login", "--api-key", env.WIX_CLI_API_KEY], { encoding: "utf8", stdio: "ignore" });
+  const login = exec(executable, ["login", "--api-key", env.WIX_CLI_API_KEY], { encoding: "utf8", stdio: "ignore", env });
   if (login.status !== 0) throw new Error("Wix CLI API-key authentication failed. No key or CLI output was logged.");
   return { authenticated: true, method: "wix-cli-api-key" };
 }
 
-export function invokeWixPublish(repoPath, { exec = spawnSync, env = process.env, stdio = "inherit" } = {}) {
-  checkWixCliAuth(env, exec);
-  const result = exec("wix", ["publish"], { cwd: repoPath, env, stdio, encoding: "utf8" });
+export function invokeWixPublish(repoPath, { exec = spawnSync, env = process.env, stdio = "inherit", executable = wixExecutable() } = {}) {
+  checkWixCliAuth(env, exec, executable);
+  const result = exec(executable, ["publish"], { cwd: repoPath, env, stdio, encoding: "utf8" });
   if (result.error) throw new Error("Could not start the Wix CLI publish command.");
   if (result.status !== 0) throw new Error(`Wix CLI publish exited with status ${result.status ?? "unknown"}. Custom Embed snippets were not updated.`);
   return { status: "published" };
