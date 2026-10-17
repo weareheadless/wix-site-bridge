@@ -130,4 +130,20 @@ export class WixCustomEmbedsClient {
     });
     return result.customEmbed;
   }
+
+  async create({ name, position, category, html, enabled = true, loadOnce = false, domain }) {
+    const customEmbed = {
+      name,
+      enabled,
+      loadOnce,
+      position,
+      embedData: { category, html }
+    };
+    if (domain) customEmbed.domain = domain;
+    const result = await this.request(API, {
+      method: "POST",
+      body: JSON.stringify({ customEmbed })
+    });
+    return result.customEmbed;
+  }
 }
