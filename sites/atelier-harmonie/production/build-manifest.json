@@ -1,7 +1,7 @@
 {
   "siteAlias": "atelier-harmonie",
   "siteId": "376faa89-fe6c-4ae8-8feb-10520e813a89",
-  "release": "atelier-production-20261018-v33",
+  "release": "atelier-production-20261018-v34",
   "components": {
     "navbar": {
       "tag": "atelier-navbar-v1",
@@ -81,7 +81,7 @@
     },
     "product": {
       "tag": "atelier-product-v1",
-      "sha256": "53a55b8cbf186b21c9116bdbd1b5f8068002ded3972692ac929d846049926822"
+      "sha256": "5b634af5e257537de298e197f6297ae4762e27f0f69ff1fa6a7d962426c42cc4"
     },
     "productfaq": {
       "tag": "atelier-product-faq-v1",
@@ -192,7 +192,7 @@
     {
       "key": "product",
       "file": "early-packet-product-1.html",
-      "characters": 10229
+      "characters": 10577
     },
     {
       "key": "productfaq",

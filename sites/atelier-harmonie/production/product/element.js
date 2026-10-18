@@ -36,7 +36,13 @@ class AtelierProduct extends HTMLElement{
  readProduct(){const p=JSON.parse(this.getAttribute('product'));if(!p?.id)return;this.reset();this.product=p;const r=this.shadowRoot;
  r.querySelector('[data-loading]').hidden=true;r.querySelector('[data-content]').hidden=false;r.querySelector('[data-layout]').setAttribute('aria-busy','false');r.querySelector('[data-title]').textContent=p.name;r.querySelector('[data-crumb]').hidden=false;r.querySelector('[data-crumb]').textContent='/ '+p.name;
  const ribbon=r.querySelector('[data-ribbon]');ribbon.textContent=p.ribbon||'';ribbon.hidden=!p.ribbon;
- r.querySelector('[data-description-wrap]').open=false;r.querySelector('[data-description]').replaceChildren(rich(p.description));r.querySelector('[data-description-wrap]').hidden=!p.description;
+ const description=rich(p.description),plain=[...description.childNodes].map(n=>n.textContent).join(' ').replace(/\s+/g,' ').trim();
+ const excerpt=plain.length>220?plain.slice(0,220).replace(/\s+\S*$/,'').trimEnd()+'…':plain;
+ r.querySelector('[data-excerpt]').textContent=excerpt;r.querySelector('[data-excerpt]').hidden=!plain;
+ const disclosure=r.querySelector('[data-description-wrap]');disclosure.open=false;disclosure.hidden=plain.length<=220;
+ disclosure.ontoggle=()=>{r.querySelector('[data-description-label]').textContent=disclosure.open?'Réduire la description':'Lire la description';};
+ r.querySelector('[data-description]').replaceChildren(description);
+ r.querySelector('[data-email]').href='mailto:mathildevalle.atelier@gmail.com?subject='+encodeURIComponent('Une question sur '+p.name);
  r.querySelector('[data-details]').innerHTML=(p.additionalInfoSections||[]).map((s,i)=>'<details name="atelier-product-details"><summary>'+escape(s.title)+'</summary><div class="rich" data-section="'+i+'"></div></details>').join('');
  (p.additionalInfoSections||[]).forEach((s,i)=>r.querySelector('[data-section="'+i+'"]').append(rich(s.description)));
  r.querySelector('[data-options]').innerHTML=(p.options||[]).map((o,i)=>'<label class="option"><span>'+escape(o.name)+'</span><select data-option="'+i+'" required><option value="">Choisir…</option>'+o.choices.map(c=>'<option value="'+escape(c.value)+'"'+(c.inStock?'':' disabled')+'>'+escape(c.label)+(c.inStock?'':' — indisponible')+'</option>').join('')+'</select></label>').join('');

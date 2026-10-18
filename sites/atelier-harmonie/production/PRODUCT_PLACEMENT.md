@@ -1,10 +1,10 @@
 # Product Page — one reusable custom element
 
-Target `--site atelier-harmonie`, exact dynamic route family `/product-page/:slug`, Wix page `Product Page.lj022.js`. Connected source `weareheadless/atelier-harmonie`, commit `4f402b7`.
+Target `--site atelier-harmonie`, exact dynamic route family `/product-page/:slug`, Wix page `Product Page.lj022.js`. Connected source `weareheadless/atelier-harmonie`, commit `113fc43`.
 
 ## Status
 
-Source pushed and startup release `atelier-production-20261018-v33` installed after explicit human approval. Product startup ID `d1343538-27ba-4069-8c5b-4d20db25e22a`; receipt hash, HEAD/load-once placement and manifest mapping inspected. Human placement, visual/live review and publication remain pending.
+Source pushed and startup release `atelier-production-20261018-v34` installed after explicit human approval. Product startup ID `d1343538-27ba-4069-8c5b-4d20db25e22a`; receipt hash, HEAD/load-once placement and manifest mapping inspected. Human placement, visual/live review and publication remain pending.
 
 ## Human placement
 
@@ -30,7 +30,7 @@ Images are supported; product video presentation is not implemented. Preserve an
 
 ## Startup and readiness gate
 
-Installed v33 registry matches `/product-page/<one slug>` explicitly and includes shared navbar/footer. Product packet is under the 15,000-character limit, source fingerprint recorded in build-manifest. Normal Wix custom-element file remains fallback. Static gallery geometry and editorial shell render immediately; product-specific content arrives through Velo. Only the actual first selected product image receives a matching preload/high priority; no global catalog snapshot or bulk preload.
+Installed v34 registry matches `/product-page/<one slug>` explicitly and includes shared navbar/footer. Product packet is under the 15,000-character limit, source fingerprint recorded in build-manifest. Normal Wix custom-element file remains fallback. Static gallery geometry and editorial shell render immediately; product-specific content arrives through Velo. Only the actual first selected product image receives a matching preload/high priority; no global catalog snapshot or bulk preload.
 
 Visual inspection is pending: in-app browser control returned “Local browser use is disabled in Work settings.” No other browser was used. Human should preview multiple image orientations, long descriptions, options/variant prices, custom text, sold-out items, quantity limits, cart/checkout and product-to-product navigation. Live fresh/internal navigation, SEO and saved section geometry are release gates, not inferred from registration or a successful build. No tests or performance audit run.
 
@@ -47,3 +47,7 @@ Requested image-fit and expandable-details corrections are in source `fde0abb`; 
 ## Approved native host fallback
 
 Source `4f402b7`, installed startup v33. No human visibility setting is necessary. The real custom element reports product ID/load token after two animation frames; page code collapses `productPage1` only for the matching load. Native view remains available during initial loading and is expanded on data/render failure or a 12-second readiness timeout; the failed custom element is collapsed. Native widget may appear briefly before custom readiness. This preserves a recoverable native fallback and is not evidence of faster paint. Human current-layout publication and fresh/internal navigation review remain pending.
+
+## Product questions and excerpt
+
+Source `113fc43`: question CTA uses mailto `mathildevalle.atelier@gmail.com` with product name in subject. Original description provides a visible plain-text excerpt up to 220 characters above the purchase controls; “Lire la description” expands the complete original rich copy below. Descriptions that fit entirely in the excerpt do not duplicate an accordion. Human reported native collapse works; these latest text/link refinements await live visual confirmation.
