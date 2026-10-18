@@ -1,7 +1,7 @@
 {
   "siteAlias": "atelier-harmonie",
   "siteId": "376faa89-fe6c-4ae8-8feb-10520e813a89",
-  "release": "atelier-production-20261018-v5",
+  "release": "atelier-production-20261018-v6",
   "components": {
     "navbar": {
       "tag": "atelier-navbar-v1",
@@ -14,6 +14,10 @@
     "footer": {
       "tag": "atelier-footer-v1",
       "sha256": "3ce2472b19b18f3e051ca710bd734435041bdc28f6d0de9b07e37dea43ab870a"
+    },
+    "shop": {
+      "tag": "atelier-shop-v1",
+      "sha256": "0cc4de2864ddb7e1315c0115cf72c7b92db9be6b82fe1c83ab6a502d1776e6a9"
     }
   },
   "packets": [
@@ -36,6 +40,11 @@
       "key": "footer",
       "file": "early-packet-footer-1.html",
       "characters": 4401
+    },
+    {
+      "key": "shop",
+      "file": "early-packet-shop-1.html",
+      "characters": 8227
     }
   ],
   "coverage": {
@@ -44,10 +53,14 @@
       "/",
       "/copy-of-accueil"
     ],
+    "shop": [
+      "/shop"
+    ],
     "elementIds": {
       "navbar": "customElement1",
       "home": "customElement2",
-      "footer": "customElement3"
+      "footer": "customElement3",
+      "shop": "atelierShop"
     },
     "otherPages": "native page UI preserved; shared navbar bundle only",
     "status": "pending full route inventory and Wix placement"

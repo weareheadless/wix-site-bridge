@@ -6,7 +6,8 @@
     "liveUrl": "https://www.atelier-harmonie.com/",
     "routes": [
       "/",
-      "/copy-of-accueil"
+      "/copy-of-accueil",
+      "/shop"
     ],
     "components": [
       {
@@ -44,6 +45,20 @@
           "customElement3"
         ],
         "datasetBindings": []
+      },
+      {
+        "name": "shop",
+        "source": "sites/atelier-harmonie/production/custom-elements/atelier-shop-v1.js",
+        "tagName": "atelier-shop-v1",
+        "routes": [
+          "/shop"
+        ],
+        "wixElementIds": [
+          "atelierShop"
+        ],
+        "datasetBindings": [
+          "Read-only Stores/Products via backend/atelier-shop.web; native Wix currentCart"
+        ]
       }
     ],
     "customCode": [
@@ -299,6 +314,18 @@
         "category": "ESSENTIAL",
         "loadOnce": true,
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-footer-1.html",
+        "purpose": "nonvisual-early-registration"
+      },
+      {
+        "id": "79fcc94b-358e-4454-aff7-1c6192156fe5",
+        "name": "Atelier production early-packet-shop-1.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": true,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-shop-1.html",
         "purpose": "nonvisual-early-registration"
       }
     ],
