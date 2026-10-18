@@ -31,10 +31,10 @@
     }
   },
   "startupCustomCodeInstalled": true,
-  "startupRelease": "atelier-production-20261018-v18",
+  "startupRelease": "atelier-production-20261018-v19",
   "layoutWarning": "Local UI version 740 predates human placement. Do not CLI-publish it.",
   "liveObservedRelease": "atelier-production-20261018-v2",
-  "pendingPublication": "Integrated contact UI prepared but inactive. Await human new Wix Form ID and exact field mapping; retain original form until migration confirmed.",
+  "pendingPublication": "Contact section/adapter removed from restoration embed; human publishes current saved Wix layout and retains native contact section.",
   "fixes": [
     "Scope fragment lookups through componentRoot to avoid hero local root temporal-dead-zone error; restores hero/carousel initialization and deferred reviews",
     "Load shared prototype Google Fonts stylesheet in document head so shadow components can use Parisienne and other fonts",
@@ -111,18 +111,14 @@
     "route": "/tapisserie-restauration",
     "tag": "atelier-restoration-v1",
     "requestedElementId": "customElement10",
-    "sourceCommit": "045f878",
+    "sourceCommit": "0fb2f0c",
     "placement": "pending human; retain native contact form below custom element",
     "published": false,
     "instructions": "RESTORATION_PLACEMENT.md",
     "startupInstalled": true,
     "startupEmbedId": "da2e0e39-6ae0-40f8-ae59-6174aaed74fd",
     "contactIntegration": {
-      "status": "User corrected element ID to form3; await publication of binding to inspect supported field keys. Inactive until mapped.",
-      "config": "velo/restoration-form-config.js",
-      "notificationsVerified": false,
-      "submissionSent": false,
-      "elementId": "#form3"
+      "status": "Removed at user request; all contact UI and submissions remain native Wix"
     }
   }
 }
