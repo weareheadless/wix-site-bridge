@@ -295,6 +295,20 @@
         "datasetBindings": [
           "Read-only Stores/Products and Stores/Variants; documented getProductVariants; Wix currentCart owns pricing and checkout"
         ]
+      },
+      {
+        "name": "productfaq",
+        "source": "sites/atelier-harmonie/production/custom-elements/atelier-product-faq-v1.js",
+        "tagName": "atelier-product-faq-v1",
+        "routes": [
+          "/product-page/:slug"
+        ],
+        "wixElementIds": [
+          "customElement21"
+        ],
+        "datasetBindings": [
+          "Static original five FAQ answers; keep native contact form separately"
+        ]
       }
     ],
     "customCode": [
@@ -754,6 +768,18 @@
         "category": "ESSENTIAL",
         "loadOnce": true,
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-product-1.html",
+        "purpose": "nonvisual-early-registration"
+      },
+      {
+        "id": "48172cc5-b758-4a53-86bd-f9536dbb16c6",
+        "name": "Atelier production early-packet-productfaq-1.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": true,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-productfaq-1.html",
         "purpose": "nonvisual-early-registration"
       }
     ],

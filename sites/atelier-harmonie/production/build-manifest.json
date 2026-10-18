@@ -1,7 +1,7 @@
 {
   "siteAlias": "atelier-harmonie",
   "siteId": "376faa89-fe6c-4ae8-8feb-10520e813a89",
-  "release": "atelier-production-20261018-v31",
+  "release": "atelier-production-20261018-v32",
   "components": {
     "navbar": {
       "tag": "atelier-navbar-v1",
@@ -81,7 +81,11 @@
     },
     "product": {
       "tag": "atelier-product-v1",
-      "sha256": "741d69e20e83e46d31f920d10b14c6e51e7b0448da1d80dd65750f37b7edf9a5"
+      "sha256": "3e40a6c5bedaaf4f7a82cb9fa461ca6dd550edd4f91b03c3e59e1f9ec093908b"
+    },
+    "productfaq": {
+      "tag": "atelier-product-faq-v1",
+      "sha256": "b5f6f6720a0c574223ba9dfb09c06814cc1591b9350f1ac025128d674790c35a"
     }
   },
   "packets": [
@@ -188,7 +192,12 @@
     {
       "key": "product",
       "file": "early-packet-product-1.html",
-      "characters": 10061
+      "characters": 10069
+    },
+    {
+      "key": "productfaq",
+      "file": "early-packet-productfaq-1.html",
+      "characters": 3516
     }
   ],
   "coverage": {
@@ -256,7 +265,8 @@
       "quotebottom": "customElement17",
       "journaltop": "customElement18",
       "journalbottom": "customElement19",
-      "product": "customElement20"
+      "product": "customElement20",
+      "productfaq": "customElement21"
     },
     "otherPages": "native page UI preserved; shared navbar bundle only",
     "status": "pending full route inventory and Wix placement"

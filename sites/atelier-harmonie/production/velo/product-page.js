@@ -1,10 +1,13 @@
 import wixLocationFrontend from 'wix-location-frontend';
 import wixEcomFrontend from 'wix-ecom-frontend';
 import { getAtelierProduct, quoteAtelierProduct, addAtelierProductDetail } from 'backend/atelier-product.web';
+import { seoMarkup as faqSeo } from 'public/atelier-productfaq-seo';
 import { getAtelierProducts } from 'backend/atelier-shop.web';
 
 $w.onReady(function(){
  const element=$w('#customElement20');
+ // FAQ is an independent placement; its absence must not block the product.
+ try{$w('#customElement21').seoMarkup=faqSeo;}catch{}
  let generation=0,selection=0,current=null,pendingAdd=false;
  const escape=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  async function load(){

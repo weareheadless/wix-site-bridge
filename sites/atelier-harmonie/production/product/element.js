@@ -36,8 +36,8 @@ class AtelierProduct extends HTMLElement{
  readProduct(){const p=JSON.parse(this.getAttribute('product'));if(!p?.id)return;this.reset();this.product=p;const r=this.shadowRoot;
  r.querySelector('[data-loading]').hidden=true;r.querySelector('[data-content]').hidden=false;r.querySelector('[data-layout]').setAttribute('aria-busy','false');r.querySelector('[data-title]').textContent=p.name;r.querySelector('[data-crumb]').hidden=false;r.querySelector('[data-crumb]').textContent='/ '+p.name;
  const ribbon=r.querySelector('[data-ribbon]');ribbon.textContent=p.ribbon||'';ribbon.hidden=!p.ribbon;
- r.querySelector('[data-description]').replaceChildren(rich(p.description));r.querySelector('[data-description-wrap]').hidden=!p.description;
- r.querySelector('[data-details]').innerHTML=(p.additionalInfoSections||[]).map((s,i)=>'<details><summary>'+escape(s.title)+'</summary><div class="rich" data-section="'+i+'"></div></details>').join('');
+ r.querySelector('[data-description-wrap]').open=false;r.querySelector('[data-description]').replaceChildren(rich(p.description));r.querySelector('[data-description-wrap]').hidden=!p.description;
+ r.querySelector('[data-details]').innerHTML=(p.additionalInfoSections||[]).map((s,i)=>'<details name="atelier-product-details"><summary>'+escape(s.title)+'</summary><div class="rich" data-section="'+i+'"></div></details>').join('');
  (p.additionalInfoSections||[]).forEach((s,i)=>r.querySelector('[data-section="'+i+'"]').append(rich(s.description)));
  r.querySelector('[data-options]').innerHTML=(p.options||[]).map((o,i)=>'<label class="option"><span>'+escape(o.name)+'</span><select data-option="'+i+'" required><option value="">Choisir…</option>'+o.choices.map(c=>'<option value="'+escape(c.value)+'"'+(c.inStock?'':' disabled')+'>'+escape(c.label)+(c.inStock?'':' — indisponible')+'</option>').join('')+'</select></label>').join('');
  r.querySelector('[data-custom]').innerHTML=(p.customTextFields||[]).map(f=>'<label class="option"><span>'+escape(f.title)+(f.mandatory?' *':'')+'</span><textarea data-field="'+escape(f.title)+'" maxlength="'+Number(f.maxLength)+'"'+(f.mandatory?' required':'')+'></textarea></label>').join('');
