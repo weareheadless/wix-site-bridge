@@ -78,3 +78,7 @@
 - `/les-ateliers`, published page ID `ntpl0`: `atelier-workshops-v1.js`, tag `atelier-workshops-v1`, requested ID `customElement14`; see `production/WORKSHOPS_PLACEMENT.md`.
 - Three workshop tabs reuse original article photographs/descriptions. Reservations use the exact three external Wecandoo URLs recovered from original article embed; never replace booking buttons with email or invent dates/prices/availability.
 - Shared desktop/mobile navbar and homepage workshop destinations point to `/les-ateliers`. Keep original article intact; promotional bar is a separate implementation.
+
+## About Mathilde
+
+- `/a-propos`: `atelier-about-v1.js`, tag `atelier-about-v1`, requested ID `customElement15`; see `production/ABOUT_PLACEMENT.md`. Preserve original story, portrait/chairs photographs and social/Ecomaison links. Keep native contact section below; no custom form adapter.

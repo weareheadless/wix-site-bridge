@@ -31,10 +31,10 @@
     }
   },
   "startupCustomCodeInstalled": true,
-  "startupRelease": "atelier-production-20261018-v27",
+  "startupRelease": "atelier-production-20261018-v28",
   "layoutWarning": "Local UI version 740 predates human placement. Do not CLI-publish it.",
   "liveObservedRelease": "atelier-production-20261018-v2",
-  "pendingPublication": "Workshops landing source/startup and navigation ready; human selects atelier-workshops-v1 on customElement14 and publishes saved Wix layout.",
+  "pendingPublication": "About page ready; human places customElement15, retains native contact and previews/publishes saved layout.",
   "fixes": [
     "Scope fragment lookups through componentRoot to avoid hero local root temporal-dead-zone error; restores hero/carousel initialization and deferred reviews",
     "Load shared prototype Google Fonts stylesheet in document head so shadow components can use Parisienne and other fonts",
@@ -177,5 +177,16 @@
       "method": "wix-seo-frontend setTitle/setMetaTags in page onReady",
       "social": "Open Graph and Twitter large image; existing workshop photo"
     }
+  },
+  "about": {
+    "route": "/a-propos",
+    "tag": "atelier-about-v1",
+    "requestedElementId": "customElement15",
+    "sourceCommit": "5a96b02",
+    "placement": "pending human; native contact retained",
+    "published": false,
+    "instructions": "ABOUT_PLACEMENT.md",
+    "startupInstalled": true,
+    "startupEmbedId": "3a7f985a-d818-4646-acef-0e4fa5069221"
   }
 }

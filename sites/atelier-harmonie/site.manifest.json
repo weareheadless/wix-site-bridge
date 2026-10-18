@@ -15,7 +15,8 @@
       "/tapisserie-restauration",
       "/les-tissus",
       "/b2b",
-      "/les-ateliers"
+      "/les-ateliers",
+      "/a-propos"
     ],
     "components": [
       {
@@ -206,6 +207,20 @@
         ],
         "datasetBindings": [
           "Original external Wecandoo booking URLs; no local booking/payment store"
+        ]
+      },
+      {
+        "name": "about",
+        "source": "sites/atelier-harmonie/production/custom-elements/atelier-about-v1.js",
+        "tagName": "atelier-about-v1",
+        "routes": [
+          "/a-propos"
+        ],
+        "wixElementIds": [
+          "customElement15"
+        ],
+        "datasetBindings": [
+          "Editorial only; keep native Wix contact form separately"
         ]
       }
     ],
@@ -594,6 +609,18 @@
         "category": "ESSENTIAL",
         "loadOnce": true,
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-workshops-1.html",
+        "purpose": "nonvisual-early-registration"
+      },
+      {
+        "id": "3a7f985a-d818-4646-acef-0e4fa5069221",
+        "name": "Atelier production early-packet-about-1.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": true,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-about-1.html",
         "purpose": "nonvisual-early-registration"
       }
     ],

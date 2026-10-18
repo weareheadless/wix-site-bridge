@@ -1,7 +1,7 @@
 {
   "siteAlias": "atelier-harmonie",
   "siteId": "376faa89-fe6c-4ae8-8feb-10520e813a89",
-  "release": "atelier-production-20261018-v27",
+  "release": "atelier-production-20261018-v28",
   "components": {
     "navbar": {
       "tag": "atelier-navbar-v1",
@@ -58,6 +58,10 @@
     "workshops": {
       "tag": "atelier-workshops-v1",
       "sha256": "53d19ad6b29e5db98206ea2896e08fde11d813aca07b42dcf18e5e6b2e914777"
+    },
+    "about": {
+      "tag": "atelier-about-v1",
+      "sha256": "c39de2743823ac454aa140e0ab3ff5498915e27892c11199d87fdcb0a8f09b89"
     }
   },
   "packets": [
@@ -135,6 +139,11 @@
       "key": "workshops",
       "file": "early-packet-workshops-1.html",
       "characters": 7511
+    },
+    {
+      "key": "about",
+      "file": "early-packet-about-1.html",
+      "characters": 4563
     }
   ],
   "coverage": {
@@ -170,6 +179,9 @@
     "workshops": [
       "/les-ateliers"
     ],
+    "about": [
+      "/a-propos"
+    ],
     "elementIds": {
       "navbar": "customElement1",
       "home": "customElement2",
@@ -184,7 +196,8 @@
       "contact": "customElement11",
       "fabrics": "customElement12",
       "b2b": "customElement13",
-      "workshops": "customElement14"
+      "workshops": "customElement14",
+      "about": "customElement15"
     },
     "otherPages": "native page UI preserved; shared navbar bundle only",
     "status": "pending full route inventory and Wix placement"
