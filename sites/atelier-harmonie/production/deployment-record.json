@@ -31,10 +31,10 @@
     }
   },
   "startupCustomCodeInstalled": true,
-  "startupRelease": "atelier-production-20261018-v22",
+  "startupRelease": "atelier-production-20261018-v23",
   "layoutWarning": "Local UI version 740 predates human placement. Do not CLI-publish it.",
   "liveObservedRelease": "atelier-production-20261018-v2",
-  "pendingPublication": "Fabrics masonry/detail dialog source and startup ready; human places customElement12, retains contact form and previews/publishes current saved Wix layout.",
+  "pendingPublication": "B2B tabs/project/guarantees ready; human places customElement13, retains native contact and previews/publishes saved Wix layout.",
   "fixes": [
     "Scope fragment lookups through componentRoot to avoid hero local root temporal-dead-zone error; restores hero/carousel initialization and deferred reviews",
     "Load shared prototype Google Fonts stylesheet in document head so shadow components can use Parisienne and other fonts",
@@ -142,5 +142,16 @@
     "instructions": "FABRICS_PLACEMENT.md",
     "startupInstalled": true,
     "startupEmbedId": "1af5b53c-30ec-4516-a034-d9bd64f47819"
+  },
+  "b2b": {
+    "route": "/b2b",
+    "tag": "atelier-b2b-v1",
+    "requestedElementId": "customElement13",
+    "sourceCommit": "148c7e1",
+    "placement": "pending human; native contact section retained below",
+    "published": false,
+    "instructions": "B2B_PLACEMENT.md",
+    "startupInstalled": true,
+    "startupEmbedId": "669b0d3b-3a56-41f0-a84f-ae1fb22d9c49"
   }
 }

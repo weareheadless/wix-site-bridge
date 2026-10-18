@@ -65,3 +65,8 @@
 
 - `/les-tissus`: `atelier-fabrics-v1.js`, tag `atelier-fabrics-v1`, requested ID `customElement12`; see `production/FABRICS_PLACEMENT.md`.
 - Six original fabric houses use shortest-column photo masonry and accessible native detail dialogs instead of long stacked paragraphs. Preserve original full descriptions/photos/external links, natural image proportions and keyboard focus return. No invented brand classifications or duplicate contact form. Keep native contact section below.
+
+## Professional projects
+
+- `/b2b`: `atelier-b2b-v1.js`, tag `atelier-b2b-v1`, requested ID `customElement13`; see `production/B2B_PLACEMENT.md`.
+- Original audience text uses accessible tabs; Villa du Clos Normand project precedes compact expandable guarantees. Preserve original photos, logos, project deliverables/external link and RSE/technical copy without adding new claims. Keep native contact section/form below; no custom submission adapter.

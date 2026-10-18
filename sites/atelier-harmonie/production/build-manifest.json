@@ -1,7 +1,7 @@
 {
   "siteAlias": "atelier-harmonie",
   "siteId": "376faa89-fe6c-4ae8-8feb-10520e813a89",
-  "release": "atelier-production-20261018-v22",
+  "release": "atelier-production-20261018-v23",
   "components": {
     "navbar": {
       "tag": "atelier-navbar-v1",
@@ -50,6 +50,10 @@
     "fabrics": {
       "tag": "atelier-fabrics-v1",
       "sha256": "733ce1d3f7c6710ecec54751845bd37513984311a2d693bd496ad139fe45bdf6"
+    },
+    "b2b": {
+      "tag": "atelier-b2b-v1",
+      "sha256": "743a7c6a5a92df9a63a4c79f01ea844a402f73368ed411cdb58e9262979772fc"
     }
   },
   "packets": [
@@ -117,6 +121,11 @@
       "key": "fabrics",
       "file": "early-packet-fabrics-1.html",
       "characters": 7869
+    },
+    {
+      "key": "b2b",
+      "file": "early-packet-b2b-1.html",
+      "characters": 7197
     }
   ],
   "coverage": {
@@ -146,6 +155,9 @@
     "fabrics": [
       "/les-tissus"
     ],
+    "b2b": [
+      "/b2b"
+    ],
     "elementIds": {
       "navbar": "customElement1",
       "home": "customElement2",
@@ -158,7 +170,8 @@
       "giftguide": "customElement9",
       "restoration": "customElement10",
       "contact": "customElement11",
-      "fabrics": "customElement12"
+      "fabrics": "customElement12",
+      "b2b": "customElement13"
     },
     "otherPages": "native page UI preserved; shared navbar bundle only",
     "status": "pending full route inventory and Wix placement"

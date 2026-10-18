@@ -13,7 +13,8 @@
       "/objets-deco",
       "/gift-card",
       "/tapisserie-restauration",
-      "/les-tissus"
+      "/les-tissus",
+      "/b2b"
     ],
     "components": [
       {
@@ -176,6 +177,20 @@
         ],
         "datasetBindings": [
           "Editorial only; preserve original native Wix contact form below component"
+        ]
+      },
+      {
+        "name": "b2b",
+        "source": "sites/atelier-harmonie/production/custom-elements/atelier-b2b-v1.js",
+        "tagName": "atelier-b2b-v1",
+        "routes": [
+          "/b2b"
+        ],
+        "wixElementIds": [
+          "customElement13"
+        ],
+        "datasetBindings": [
+          "Editorial only. Native Wix contact form and notifications preserved separately."
         ]
       }
     ],
@@ -540,6 +555,18 @@
         "category": "ESSENTIAL",
         "loadOnce": true,
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-fabrics-1.html",
+        "purpose": "nonvisual-early-registration"
+      },
+      {
+        "id": "669b0d3b-3a56-41f0-a84f-ae1fb22d9c49",
+        "name": "Atelier production early-packet-b2b-1.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": true,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-b2b-1.html",
         "purpose": "nonvisual-early-registration"
       }
     ],
