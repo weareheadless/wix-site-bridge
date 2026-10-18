@@ -1,10 +1,10 @@
 # Product Page — one reusable custom element
 
-Target `--site atelier-harmonie`, exact dynamic route family `/product-page/:slug`, Wix page `Product Page.lj022.js`. Connected source `weareheadless/atelier-harmonie`, commit `b1a439a`.
+Target `--site atelier-harmonie`, exact dynamic route family `/product-page/:slug`, Wix page `Product Page.lj022.js`. Connected source `weareheadless/atelier-harmonie`, commit `116ec33`.
 
 ## Status
 
-Source pushed and startup release `atelier-production-20261018-v36` installed after explicit human approval. Product startup ID `d1343538-27ba-4069-8c5b-4d20db25e22a`; receipt hash, HEAD/load-once placement and manifest mapping inspected. Human placement, visual/live review and publication remain pending.
+Source pushed and startup release `atelier-production-20261018-v37` installed after explicit human approval. Product startup ID `d1343538-27ba-4069-8c5b-4d20db25e22a`; receipt hash, HEAD/load-once placement and manifest mapping inspected. Human placement, visual/live review and publication remain pending.
 
 ## Human placement
 
@@ -30,7 +30,7 @@ Images are supported; product video presentation is not implemented. Preserve an
 
 ## Startup and readiness gate
 
-Installed v36 registry matches `/product-page/<one slug>` explicitly and includes shared navbar/footer. Product packet is under the 15,000-character limit, source fingerprint recorded in build-manifest. Normal Wix custom-element file remains fallback. Static gallery geometry and editorial shell render immediately; product-specific content arrives through Velo. Only the actual first selected product image receives a matching preload/high priority; no global catalog snapshot or bulk preload.
+Installed v37 registry matches `/product-page/<one slug>` explicitly and includes shared navbar/footer. Product packet is under the 15,000-character limit, source fingerprint recorded in build-manifest. Normal Wix custom-element file remains fallback. Static gallery geometry and editorial shell render immediately; product-specific content arrives through Velo. Only the actual first selected product image receives a matching preload/high priority; no global catalog snapshot or bulk preload.
 
 Visual inspection is pending: in-app browser control returned “Local browser use is disabled in Work settings.” No other browser was used. Human should preview multiple image orientations, long descriptions, options/variant prices, custom text, sold-out items, quantity limits, cart/checkout and product-to-product navigation. Live fresh/internal navigation, SEO and saved section geometry are release gates, not inferred from registration or a successful build. No tests or performance audit run.
 
@@ -61,3 +61,7 @@ Source `3616c67` supports a narrative saved in a named description/product-info 
 Human screenshot showed excerpt already present above the buttons, and native widget intermittently reappearing. Source `b1a439a` moves the excerpt immediately above “Lire la suite”. User explicitly requested disabling the native visual widget: current page code hides AND collapses `productPage1` immediately and on every product navigation. No native expand/show calls or automatic fallback remain. A 12-second readiness timeout or data failure displays the custom error state instead. The native host/app stays installed, not uninstalled.
 
 For zero flash before Velo initializes, human should select `productPage1` → Properties & Events and enable **Hidden on load** and **Collapsed on load**, then publish the current saved layout/source. Code alone starts at onReady and cannot guarantee absence of a pre-onReady flash. Keep `customElement20` visible and expanded on load. Do not collapse its containing section. Screenshot inspection is evidence for the previous excerpt placement only; latest behavior remains pending human publication and live review.
+
+## Current behavior — supersedes readiness timeout notes
+
+Source `116ec33` removes the 12-second destructive timeout entirely. It could clear valid content if the readiness acknowledgement was lost. Same-product URL changes are idempotent; only a changed slug resets product data. SEO markup updates are isolated so SEO failure cannot route a successful product load into the error path. Duplicate attribute notifications and stale error/loading tokens cannot reset a painted current product. Native UI stays suppressed, without a fallback. Source/startup changes do not prove live behavior; human must publish saved layout/page code, then confirm the view stays visible beyond 12 seconds and through internal product navigation. No automated tests or browser runtime verification performed.

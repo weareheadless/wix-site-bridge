@@ -12,31 +12,28 @@ $w.onReady(function(){
 
  // FAQ is an independent placement; its absence must not block the product.
  try{$w('#customElement21').seoMarkup=faqSeo;}catch{}
- let generation=0,selection=0,current=null,pendingAdd=false,readyTimer;
- element.on('atelier-product-rendered',event=>{
-  if(event.detail?.renderToken===generation&&event.detail?.productId===current?.id)clearTimeout(readyTimer);
- });
- element.on('atelier-product-render-error',()=>clearTimeout(readyTimer));
+ let generation=0,selection=0,current=null,pendingAdd=false,activeSlug=null;
  const escape=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  async function load(){
+  const path=wixLocationFrontend.path;
+  if(path.length!==2||path[0]!=='product-page')return;
+  let slug=path[1];try{slug=decodeURIComponent(slug);}catch{}
+  // Wix can emit URL changes for the same product; never reset a painted view for those.
+  if(slug===activeSlug)return;
+  activeSlug=slug;
   const version=++generation;current=null;++selection;
-  clearTimeout(readyTimer);
   // Keep native UI suppressed on every product navigation, including failures.
   try{await native?.hide();await native?.collapse();await element.expand();}catch{}
   if(version!==generation)return;
-  readyTimer=setTimeout(()=>{if(version===generation)element.setAttribute('product-error',String(version));},12000);
   element.setAttribute('product-loading',String(version));
   try{
-   const path=wixLocationFrontend.path;
-   if(path.length!==2||path[0]!=='product-page')throw Error('Invalid product route');
-   let slug=path[1];try{slug=decodeURIComponent(slug);}catch{}
    const product=await getAtelierProduct(slug);
    if(version!==generation)return;
    current=product;element.setAttribute('product',JSON.stringify({...product,renderToken:version}));
    // Wix Stores retains its native canonical, structured Product data and SEO settings.
-   element.seoMarkup='<article><h1>'+escape(product.name)+'</h1><p>'+escape(product.price)+' '+escape(product.currency)+'</p><p>'+escape(product.description.replace(/<[^>]*>/g,' '))+'</p></article>';
+   try{element.seoMarkup='<article><h1>'+escape(product.name)+'</h1><p>'+escape(product.price)+' '+escape(product.currency)+'</p><p>'+escape(product.description.replace(/<[^>]*>/g,' '))+'</p></article>';}catch{}
    getAtelierProducts(0).then(data=>{if(version===generation)element.setAttribute('related',JSON.stringify(data.items.filter(p=>p.id!==product.id).slice(0,4)));}).catch(()=>{});
-  }catch{if(version===generation){element.setAttribute('product-error',String(version));element.seoMarkup='';clearTimeout(readyTimer);}}
+  }catch{if(version===generation){element.setAttribute('product-error',String(version));try{element.seoMarkup='';}catch{}}}
  }
  element.on('atelier-product-select',async event=>{
   if(!current)return;const token=++selection,id=current.id,version=generation;

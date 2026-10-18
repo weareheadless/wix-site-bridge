@@ -17,7 +17,7 @@ function rich(value){
 class AtelierProduct extends HTMLElement{
  static get observedAttributes(){return ['product','product-loading','product-error','selection-result','cart-result','related'];}
  constructor(){super();this.attachShadow({mode:'open'});this.sequence=0;this.index=0;this.busy=false;this.product=null;}
- connectedCallback(){if(this.rendered)return;this.rendered=true;this.dataset.atelierProductVersion='20261018-v36';this.shadowRoot.innerHTML=__PRODUCT_HTML__;
+ connectedCallback(){if(this.rendered)return;this.rendered=true;this.dataset.atelierProductVersion='20261018-v37';this.shadowRoot.innerHTML=__PRODUCT_HTML__;
  const font='https://fonts.googleapis.com/css2?family=Parisienne&family=DM+Sans:wght@400;500;600&family=Libre+Caslon+Text:ital,wght@0,400;1,400&display=swap';
  if(![...document.querySelectorAll('link[data-atelier-fonts]')].some(l=>l.href===font)){const link=document.createElement('link');link.rel='stylesheet';link.href=font;link.dataset.atelierFonts='true';document.head.append(link);}
  const r=this.shadowRoot;
@@ -30,7 +30,7 @@ class AtelierProduct extends HTMLElement{
  if(this.hasAttribute('product'))this.readProduct();else if(this.hasAttribute('product-error'))this.error();this.related();
  }
  disconnectedCallback(){this.resize?.disconnect();this.rendered=false;}
- attributeChangedCallback(name){if(!this.rendered)return;try{if(name==='product')this.readProduct();if(name==='product-loading')this.reset();if(name==='product-error')this.error();if(name==='related')this.related();if(name==='selection-result')this.selection(JSON.parse(this.getAttribute(name)));if(name==='cart-result')this.cartResult(JSON.parse(this.getAttribute(name)));}catch{if(name==='product')this.error();}}
+ attributeChangedCallback(name,previous,value){if(!this.rendered||previous===value)return;if((name==='product-loading'||name==='product-error')&&this.product&&Number(value)<=Number(this.product.renderToken))return;try{if(name==='product')this.readProduct();if(name==='product-loading')this.reset();if(name==='product-error')this.error();if(name==='related')this.related();if(name==='selection-result')this.selection(JSON.parse(this.getAttribute(name)));if(name==='cart-result')this.cartResult(JSON.parse(this.getAttribute(name)));}catch{if(name==='product')this.error();}}
  reset(){const r=this.shadowRoot;this.product=null;this.available=false;this.busy=false;this.quoting=false;this.quoted=false;++this.sequence;this.index=0;r.querySelector('dialog').close();r.querySelector('[data-layout]').hidden=false;r.querySelector('[data-layout]').setAttribute('aria-busy','true');r.querySelector('[data-content]').hidden=true;r.querySelector('[data-loading]').hidden=false;r.querySelector('[data-error]').hidden=true;r.querySelector('[data-zoom]').hidden=true;r.querySelector('[data-zoom-note]').hidden=true;r.querySelector('[data-skeleton]').hidden=false;r.querySelector('[data-thumbs]').replaceChildren();r.querySelector('[data-related]').hidden=true;r.querySelector('[data-crumb]').hidden=true;r.querySelector('[data-photo-count]').textContent='';}
  error(){this.reset();const r=this.shadowRoot;r.querySelector('[data-layout]').hidden=true;const box=r.querySelector('[data-error]');box.hidden=false;box.innerHTML='Cette création ne peut pas être affichée pour le moment. <a href="/shop">Retrouver la boutique →</a>';this.dispatchEvent(new CustomEvent('atelier-product-render-error'));}
  readProduct(){const p=JSON.parse(this.getAttribute('product'));if(!p?.id)return;this.reset();this.product=p;const r=this.shadowRoot;
