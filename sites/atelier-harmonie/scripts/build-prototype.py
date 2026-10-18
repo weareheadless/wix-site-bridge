@@ -28,6 +28,7 @@ assets={
 'bauhaus':photo('667aea_7874a1dad4bd485b8afe5e875eb88286~mv2.jpg'),
 'bauhaus2':photo('667aea_3b044d6c40c149a09fb388e40386e1f9~mv2.jpg'),
 'atelier':photo('667aea_e108c95ad4db4e63adcc4f03d9412349~mv2.jpg',900,900),
+'salon-boheme':MEDIA+'667aea_f2aab8dfb47e4e468fdd113890cab224~mv2.png',
 'fabric':photo('bae3ac_1cce7da9980d4b2a9bcbb94c710b2ee2~mv2.png',900,750),
 'diy':photo('667aea_a2993b7928a24b0e8e8de7d9c091f788~mv2.jpg',900,750),
 'editorial':photo('667aea_64396ab440954223857778aff4767d22~mv2.jpg',1200,900),
@@ -99,7 +100,7 @@ def split(eye,title,text,cta,href,img,alt,reverse=False):
     copy=f'<div class="ah-split-copy"><p class="ah-eyebrow">{eye}</p><h2>{title}</h2>'+ (f'<p>{text}</p>' if text else '')+f'<a class="ah-cta" href="{href}">{cta}</a></div>'
     pic=f'<div class="ah-split-image"><img src="{assets[img]}" alt="{alt}" loading="lazy"></div>'
     return '<section class="ah-split">'+(pic+copy if reverse else copy+pic)+'</section>'
-write('02c-sur-mesure.html','sur-mesure',25,split('Votre projet, mon savoir-faire','Donnons vie à vos idées, ensemble !','Vous avez un fauteuil de famille à sauver ? Un pied de lampe nu qui rêve de son abat-jour idéal ? Une envie de coussins qui n’existent que dans votre imagination ?','Demander un devis','/devis','fabric','Tissus et matières pour un projet sur mesure'))
+write('02c-sur-mesure.html','sur-mesure',25,split('Votre projet, mon savoir-faire','Donnons vie à vos idées, ensemble !','Vous avez un fauteuil de famille à sauver ? Un pied de lampe nu qui rêve de son abat-jour idéal ? Une envie de coussins qui n’existent que dans votre imagination ?','Demander un devis','/devis','salon-boheme','Salon bohème — inspiration pour votre projet sur mesure'))
 products=[('escale','escale2','L’Escale — Seventies','Abat-jour tambour','80,00 €','abat-jour-tambour-l-escale-collection-seventies'),('rose','rose2','Le Mini-Phare — Les Roses','Baladeuse en tissu','70,00 €','baladeuse-le-mini-phare-les-roses'),('pagode','pagode2','Pagode — Les Cousus','Suspension couture','185,00 €','suspension-pagode-les-cousus-rose'),('ondine','ondine2','L’Ondine — Rose','Baladeuse à franges','95,00 €','baladeuse-a-franges-l-ondine'),('vegetal','vegetal2','Le Mini-Phare — Végétal','Baladeuse en tissu','70,00 €','baladeuse-le-mini-phare-végétal'),('boheme','boheme2','L’Escale — Bohème','Abat-jour tambour','80,00 €','abat-jour-tambour-l-escale-collection-bohème'),('bauhaus','bauhaus2','L’Escale — Bauhaus','Abat-jour tambour','80,00 €','abat-jour-tambour-l-escale-collection-bauhaus'),('kit','kit2','Ma lampe à poser','Kit DIY','39,00 €','kit-diy-ma-lampe-à-poser')]
 shop='<section class="ah-container"><header class="ah-shop-heading"><h2>La petite boutique de l’atelier</h2><a class="ah-link" href="/shop">Voir tous les produits</a></header><div class="ah-carousel"><div class="ah-scroller" data-rail>'
 for asset,hover,title,desc,price,slug in products:
