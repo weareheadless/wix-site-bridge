@@ -1,7 +1,7 @@
 {
   "siteAlias": "atelier-harmonie",
   "siteId": "376faa89-fe6c-4ae8-8feb-10520e813a89",
-  "release": "atelier-production-20261018-v9",
+  "release": "atelier-production-20261018-v10",
   "components": {
     "navbar": {
       "tag": "atelier-navbar-v1",
@@ -21,39 +21,39 @@
     },
     "lamps": {
       "tag": "atelier-lamps-v1",
-      "sha256": "f0b4c2f33218c26acc986d77c85e428a2b0ea6a656cc5bd76906b00de4d80292"
+      "sha256": "277a20046e7f7d15f9d515b3105775c785d01f192dab20b9f625d7fa8d19973e"
     }
   },
   "packets": [
     {
       "key": "navbar",
       "file": "early-packet-navbar-1.html",
-      "characters": 6485
+      "characters": 6488
     },
     {
       "key": "home",
       "file": "early-packet-home-1.html",
-      "characters": 12159
+      "characters": 12162
     },
     {
       "key": "home",
       "file": "early-packet-home-2.html",
-      "characters": 5867
+      "characters": 5870
     },
     {
       "key": "footer",
       "file": "early-packet-footer-1.html",
-      "characters": 4401
+      "characters": 4404
     },
     {
       "key": "shop",
       "file": "early-packet-shop-1.html",
-      "characters": 9183
+      "characters": 9186
     },
     {
       "key": "lamps",
       "file": "early-packet-lamps-1.html",
-      "characters": 6888
+      "characters": 7599
     }
   ],
   "coverage": {
