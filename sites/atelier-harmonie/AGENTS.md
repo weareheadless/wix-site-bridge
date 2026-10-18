@@ -27,3 +27,9 @@
 - Original shop introduction and philosophy copy must stay intact. Products, stock, prices and discounts come from public Wix `Stores/Products` through `backend/atelier-shop.web.js`; never embed a parallel catalog snapshot in production.
 - Native Wix currentCart handles add-to-cart. Products requiring options/custom text open their existing product page. Never accept client-provided prices, arbitrary catalog apps or quantities in the cart endpoint.
 - `production/SHOP_PLACEMENT.md` is the human setup checklist. Do not operate Wix Editor or publish the stale local layout.
+
+## Luminaires page
+
+- `/lampes`: `atelier-lamps-v1.js`, tag `atelier-lamps-v1`, requested ID `customElement5`. Human placement pending; see `production/LAMPS_PLACEMENT.md`.
+- Reuse the current live page’s five category descriptions and native `/lampes/<category>` destinations. Preserve dynamic Wix category pages and shared header/footer.
+- Latest creations reuse the existing live backend/cart service; name-based lighting filtering is presentation logic, not a parallel CMS or Wix collection membership.

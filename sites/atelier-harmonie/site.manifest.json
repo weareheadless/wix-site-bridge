@@ -7,7 +7,8 @@
     "routes": [
       "/",
       "/copy-of-accueil",
-      "/shop"
+      "/shop",
+      "/lampes"
     ],
     "components": [
       {
@@ -58,6 +59,20 @@
         ],
         "datasetBindings": [
           "Read-only Stores/Products via backend/atelier-shop.web; native Wix currentCart"
+        ]
+      },
+      {
+        "name": "lamps",
+        "source": "sites/atelier-harmonie/production/custom-elements/atelier-lamps-v1.js",
+        "tagName": "atelier-lamps-v1",
+        "routes": [
+          "/lampes"
+        ],
+        "wixElementIds": [
+          "customElement5"
+        ],
+        "datasetBindings": [
+          "Live Stores/Products through existing backend/atelier-shop.web; native currentCart"
         ]
       }
     ],
@@ -326,6 +341,18 @@
         "category": "ESSENTIAL",
         "loadOnce": true,
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-shop-1.html",
+        "purpose": "nonvisual-early-registration"
+      },
+      {
+        "id": "c3341e82-ffc0-4d73-a3be-cc8de6915376",
+        "name": "Atelier production early-packet-lamps-1.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": true,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-lamps-1.html",
         "purpose": "nonvisual-early-registration"
       }
     ],
