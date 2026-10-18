@@ -17,3 +17,6 @@
 - Build footer separately from homepage content. Never duplicate its markup inside the homepage component.
 - Source selection is Velo file in `src/public/custom-elements/`, with matching file basename and tag. Existing placements receive future source changes without recreation.
 - The checkout's old UI revision 740 predates the human's latest placement; never publish that snapshot over their work.
+
+- Fragment scripts may declare their own `root`; production conversion must use the distinct `componentRoot` name for shadow-root lookup. A collision prevents all following interactions and review loading.
+- Load prototype webfont stylesheets once in the document head from the component source. Font-face definitions inside shadow-root imports do not provide the same font availability as the prototype.

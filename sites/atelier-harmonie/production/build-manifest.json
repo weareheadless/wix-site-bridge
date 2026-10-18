@@ -1,26 +1,26 @@
 {
   "siteAlias": "atelier-harmonie",
   "siteId": "376faa89-fe6c-4ae8-8feb-10520e813a89",
-  "release": "atelier-production-20261018-v2",
+  "release": "atelier-production-20261018-v3",
   "components": {
     "navbar": {
       "tag": "atelier-navbar-v1",
-      "sha256": "c4c5c1e5b8b5d2eacb351cdba3685bddb6651d52068be7bf4f0954bdf7a825cf"
+      "sha256": "d4b184eaeb99163b0dfe6f4ca8d5233fa190ea611f0995ff56fcfaea9489d1b9"
     },
     "home": {
       "tag": "atelier-home-v1",
-      "sha256": "a7abc187eb0b8844ded240d471b30ea81a075bc776bd8e0c3d1a86b6773824ec"
+      "sha256": "da8d614b38698b30f7457b8df4a55ee956a31fb31787d666d3985d2e27fedc64"
     },
     "footer": {
       "tag": "atelier-footer-v1",
-      "sha256": "231fd2e7f48180fa243ea52c9ae6d7e0d49bb2695e672b79775baa7570145e37"
+      "sha256": "3ce2472b19b18f3e051ca710bd734435041bdc28f6d0de9b07e37dea43ab870a"
     }
   },
   "packets": [
     {
       "key": "navbar",
       "file": "early-packet-navbar-1.html",
-      "characters": 5997
+      "characters": 6253
     },
     {
       "key": "home",
@@ -30,12 +30,12 @@
     {
       "key": "home",
       "file": "early-packet-home-2.html",
-      "characters": 5631
+      "characters": 5831
     },
     {
       "key": "footer",
       "file": "early-packet-footer-1.html",
-      "characters": 4245
+      "characters": 4401
     }
   ],
   "coverage": {
