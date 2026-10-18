@@ -72,3 +72,9 @@
 - Original audience text uses accessible tabs; Villa du Clos Normand project precedes compact expandable guarantees. Preserve original photos, logos, project deliverables/external link and RSE/technical copy without adding new claims. Keep native contact section/form below; no custom submission adapter.
 
 - B2B photo attribution correction: all professional project photographs show Villa du Clos Normand. Never label the lampshade series as a separate restaurant project. Current project layout is one contained card: stable portrait gallery on the left, enlarged Villa illustration and readable story/deliverables on the right, heading above. Desktop preview visually reviewed. Do not restore the scattered centred gallery or crowded mosaic.
+
+## Workshops
+
+- `/les-ateliers`, published page ID `ntpl0`: `atelier-workshops-v1.js`, tag `atelier-workshops-v1`, requested ID `customElement14`; see `production/WORKSHOPS_PLACEMENT.md`.
+- Three workshop tabs reuse original article photographs/descriptions. Reservations use the exact three external Wecandoo URLs recovered from original article embed; never replace booking buttons with email or invent dates/prices/availability.
+- Shared desktop/mobile navbar and homepage workshop destinations point to `/les-ateliers`. Keep original article intact; promotional bar is a separate implementation.

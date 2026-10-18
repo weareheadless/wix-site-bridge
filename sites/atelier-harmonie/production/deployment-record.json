@@ -31,10 +31,10 @@
     }
   },
   "startupCustomCodeInstalled": true,
-  "startupRelease": "atelier-production-20261018-v26",
+  "startupRelease": "atelier-production-20261018-v27",
   "layoutWarning": "Local UI version 740 predates human placement. Do not CLI-publish it.",
   "liveObservedRelease": "atelier-production-20261018-v2",
-  "pendingPublication": "B2B tabs/project/guarantees ready; human places customElement13, retains native contact and previews/publishes saved Wix layout.",
+  "pendingPublication": "Workshops landing source/startup and navigation ready; human selects atelier-workshops-v1 on customElement14 and publishes saved Wix layout.",
   "fixes": [
     "Scope fragment lookups through componentRoot to avoid hero local root temporal-dead-zone error; restores hero/carousel initialization and deferred reviews",
     "Load shared prototype Google Fonts stylesheet in document head so shadow components can use Parisienne and other fonts",
@@ -156,5 +156,19 @@
     "photoAttribution": "All project photographs are Villa du Clos Normand, not a separate restaurant project",
     "layout": "Unified project card: gallery left, enlarged illustration/name/description/deliverables right; compact heading above",
     "inspection": "Live old layout inspected in IAB; rebuilt local desktop preview visually reviewed at 1280px; next/previous gallery checked with stable 586.66px frame; live publication pending"
+  },
+  "workshops": {
+    "route": "/les-ateliers",
+    "pageId": "ntpl0",
+    "tag": "atelier-workshops-v1",
+    "requestedElementId": "customElement14",
+    "sourceCommit": "688ea46",
+    "placement": "human created page and fresh element; source settings pending",
+    "published": false,
+    "instructions": "WORKSHOPS_PLACEMENT.md",
+    "startupInstalled": true,
+    "startupEmbedId": "e4194673-654e-4e14-93f9-d1fb45198336",
+    "booking": "Exact original external Wecandoo URLs from article embed",
+    "navigation": "Navbar desktop/mobile and homepage workshop links updated"
   }
 }

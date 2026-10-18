@@ -1,15 +1,15 @@
 {
   "siteAlias": "atelier-harmonie",
   "siteId": "376faa89-fe6c-4ae8-8feb-10520e813a89",
-  "release": "atelier-production-20261018-v26",
+  "release": "atelier-production-20261018-v27",
   "components": {
     "navbar": {
       "tag": "atelier-navbar-v1",
-      "sha256": "7037b5f437b8007765241abc8e29eb53d63831a3c72f01a1de510ad131d80f4c"
+      "sha256": "4fd1d9ef3c062850906c8d4708cef9f5b09e8676dd1cea81c17221409ede746f"
     },
     "home": {
       "tag": "atelier-home-v1",
-      "sha256": "dab6f62ab818e13f7957ba7f06120d517da2a0897fc56bdcae2af51d62c004e4"
+      "sha256": "ebaf7f2f0329197032b33af97d324b145b78e8198464fe1b30ee3e571a91f8a7"
     },
     "footer": {
       "tag": "atelier-footer-v1",
@@ -54,13 +54,17 @@
     "b2b": {
       "tag": "atelier-b2b-v1",
       "sha256": "a2873ee032489140339fdf7fa9c2bf9860077244a99ae587f461dcc5b1bd07ee"
+    },
+    "workshops": {
+      "tag": "atelier-workshops-v1",
+      "sha256": "53d19ad6b29e5db98206ea2896e08fde11d813aca07b42dcf18e5e6b2e914777"
     }
   },
   "packets": [
     {
       "key": "navbar",
       "file": "early-packet-navbar-1.html",
-      "characters": 6488
+      "characters": 6436
     },
     {
       "key": "home",
@@ -70,7 +74,7 @@
     {
       "key": "home",
       "file": "early-packet-home-2.html",
-      "characters": 5870
+      "characters": 5834
     },
     {
       "key": "footer",
@@ -126,6 +130,11 @@
       "key": "b2b",
       "file": "early-packet-b2b-1.html",
       "characters": 8345
+    },
+    {
+      "key": "workshops",
+      "file": "early-packet-workshops-1.html",
+      "characters": 7511
     }
   ],
   "coverage": {
@@ -158,6 +167,9 @@
     "b2b": [
       "/b2b"
     ],
+    "workshops": [
+      "/les-ateliers"
+    ],
     "elementIds": {
       "navbar": "customElement1",
       "home": "customElement2",
@@ -171,7 +183,8 @@
       "restoration": "customElement10",
       "contact": "customElement11",
       "fabrics": "customElement12",
-      "b2b": "customElement13"
+      "b2b": "customElement13",
+      "workshops": "customElement14"
     },
     "otherPages": "native page UI preserved; shared navbar bundle only",
     "status": "pending full route inventory and Wix placement"
