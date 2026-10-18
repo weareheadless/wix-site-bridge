@@ -24,16 +24,27 @@ const help = `Wix Site Bridge
 
 Usage: npm run bridge -- <operation> --manifest <file> --site <alias> [options]
 
-Read-only/planning: inspect, doctor, snippets, snippet, build, plan, verify
-Mutations (dry-run by default): build --apply, snapshot --apply, deploy --apply,
+Read-only/planning: inspect, doctor, snippets, snippet, build, plan, verify,
+  create-snippet (requires --name, --html-file, and exact --route)
+  update-snippet (requires --snippet, --html-file, and exact --route)
+Mutations (dry-run by default): create-snippet --apply, build --apply, snapshot --apply, deploy --apply,
   publish --apply, release --apply, restore --snapshot <release-id> --apply
 
 Options: --site-repo <Wix-connected repo> --state-dir <private local state dir>
          --snippet <configured embed id> --snapshot <release id> --out <artifact path>
+         --name <new embed name> --html-file <HTML fragment> --route </prototype-path>
+         --position <HEAD|BODY_START|BODY_END> --category <Wix category>
+         --enabled <true|false> --load-once <true|false> --category <Wix category>
+         --mount-id <section-id> --mount-order <0..999> (append a stacked section)
+         --from-category <current category, for an explicit category change>
 
 Every operation requires an explicit target alias and a matching site ID in
 WIX_ALLOWED_SITE_IDS. Custom Embeds also require a Wix app installation and
-WIX_APP_ID, WIX_APP_SECRET, and WIX_APP_INSTANCE_ID.\n`;
+WIX_APP_ID, WIX_APP_SECRET, and WIX_APP_INSTANCE_ID. New embeds are page-wide
+at the API level; create-snippet requires an exact non-root --route. Pass both
+--mount-id and --mount-order to append a section to the shared prototype root;
+the manifest order determines the stack. Without them, the legacy single-embed
+mode replaces that route's page content.\n`;
 
 try {
   const { command, options } = parseArgs(process.argv.slice(2));

@@ -1,11 +1,48 @@
 const API = "https://www.wixapis.com/embeds/v1/custom-embeds";
 const TOKEN_ENDPOINT = "https://www.wixapis.com/oauth2/token";
 
+function validationHint(violation) {
+  const constraint = [violation?.violatedRule, violation?.ruleName, violation?.description, violation?.message]
+    .filter((value) => typeof value === "string")
+    .join(" ");
+  if (/length|size|too\s+long|exceed|max(?:imum)?|limit/i.test(constraint)) return "SIZE_OR_LENGTH_LIMIT";
+  if (/required|missing/i.test(constraint)) return "REQUIRED_VALUE";
+  if (/invalid|unsupported|malformed|not\s+allowed/i.test(constraint)) return "INVALID_VALUE";
+  return null;
+}
+
+function detailedValidationHints(violation) {
+  const hints = [];
+  const rule = [violation?.violatedRule, violation?.ruleName]
+    .find((value) => typeof value === "string" && /^[A-Za-z0-9_.-]{1,50}$/.test(value));
+  if (rule) hints.push(`RULE_${rule.replace(/[^A-Za-z0-9_.-]/g, "_").toUpperCase()}`);
+  const description = [violation?.description, violation?.message]
+    .filter((value) => typeof value === "string")
+    .join(" ");
+  const statedLimit = description.match(/(?:maximum|max(?:imum)?\s+(?:length|size)|limit(?:\s+of)?)\D{0,24}(\d{1,7})\s*(kb|mb|bytes|characters|chars)?/i);
+  if (statedLimit) hints.push(`STATED_LIMIT_${statedLimit[1]}${statedLimit[2] ? `_${statedLimit[2].toUpperCase()}` : ""}`);
+  const collectLimits = (data, prefix = "", depth = 0) => {
+    if (!data || typeof data !== "object" || depth > 3) return;
+    for (const [key, value] of Object.entries(data)) {
+      if (!/^[A-Za-z0-9_.-]{1,40}$/.test(key)) continue;
+      const path = prefix ? `${prefix}.${key}` : key;
+      if (/(?:max|limit|length|size|bytes|characters)/i.test(key) && Number.isSafeInteger(value) && value >= 0 && value <= 10_000_000) {
+        hints.push(`META_${path.toUpperCase()}_${value}`);
+      } else if (typeof value === "object") collectLimits(value, path, depth + 1);
+    }
+  };
+  collectLimits(violation?.data);
+  return hints;
+}
+
 export class WixRequestError extends Error {
-  constructor(status, message = "Wix request failed") {
+  constructor(status, code = null, fields = [], hints = [], message = "Wix request failed") {
     super(message);
     this.name = "WixRequestError";
     this.status = status;
+    this.code = typeof code === "string" && /^[A-Z0-9_-]{1,60}$/.test(code) ? code : null;
+    this.fields = Array.isArray(fields) ? fields.filter((field) => typeof field === "string" && /^[A-Za-z0-9_.$\[\]-]{1,100}$/.test(field)).slice(0, 8) : [];
+    this.hints = Array.isArray(hints) ? [...new Set(hints.filter((hint) => typeof hint === "string" && /^(?:SIZE_OR_LENGTH_LIMIT|REQUIRED_VALUE|INVALID_VALUE|RULE_[A-Z0-9_.-]{1,50}|STATED_LIMIT_\d{1,7}(?:_KB|_MB|_BYTES|_CHARACTERS|_CHARS)?|LIMIT_\d{1,8}|META_[A-Z0-9_.-]{1,60}_\d{1,8})$/.test(hint)))].slice(0, 8) : [];
   }
 }
 
@@ -54,7 +91,7 @@ export class WixAppTokenProvider {
     } catch {
       throw new Error("Could not reach the Wix OAuth token endpoint.");
     }
-    if (!response.ok) throw new WixRequestError(response.status, "Wix OAuth token request failed; response details were omitted.");
+    if (!response.ok) throw new WixRequestError(response.status, null, [], [], "Wix OAuth token request failed; response details were omitted.");
     const data = await response.json();
     if (typeof data.access_token !== "string" || !data.access_token) throw new Error("Wix OAuth response did not include an access token.");
     const lifetimeMs = Number(data.expires_in ?? 14_400) * 1000;
@@ -87,7 +124,32 @@ export class WixCustomEmbedsClient {
       throw new Error("Could not reach the Wix Custom Embeds API.");
     }
     if (response.status === 409 || response.status === 412) throw new WixRevisionConflictError(response.status);
-    if (!response.ok) throw new WixRequestError(response.status);
+    if (!response.ok) {
+      let code = null;
+      const fields = [];
+      const hints = [];
+      try {
+        const errorBody = await response.json();
+        code = errorBody.code ?? errorBody.errorCode ?? errorBody.details?.applicationError?.code ?? null;
+        const violations = [
+          errorBody.fieldViolations,
+          errorBody.validationError?.fieldViolations,
+          errorBody.details?.fieldViolations,
+          errorBody.details?.validationError?.fieldViolations,
+          errorBody.details?.validationError?.violations,
+          errorBody.data?.violations
+        ].flat().filter(Boolean);
+        for (const violation of violations) {
+          fields.push(violation.field ?? violation.path ?? violation.fieldName ?? violation.fieldPath);
+          const hint = validationHint(violation);
+          if (hint) hints.push(hint);
+          hints.push(...detailedValidationHints(violation));
+        }
+      } catch {
+        // Wix error bodies aren't consistent; only a safe, generic status will be reported.
+      }
+      throw new WixRequestError(response.status, code, fields, hints);
+    }
     if (response.status === 204) return {};
     try {
       return await response.json();
@@ -117,16 +179,32 @@ export class WixCustomEmbedsClient {
     return result.customEmbed;
   }
 
-  async updateHtml(embed, html) {
+  async updateHtml(embed, html, category = embed.embedData.category) {
     const result = await this.request(`${API}/${encodeURIComponent(embed.id)}`, {
       method: "PATCH",
       body: JSON.stringify({
         customEmbed: {
           id: embed.id,
           revision: String(embed.revision),
-          embedData: { category: embed.embedData.category, html }
+          embedData: { category, html }
         }
       })
+    });
+    return result.customEmbed;
+  }
+
+  async create({ name, position, category, html, enabled = true, loadOnce = false, domain }) {
+    const customEmbed = {
+      name,
+      enabled,
+      loadOnce,
+      position,
+      embedData: { category, html }
+    };
+    if (domain) customEmbed.domain = domain;
+    const result = await this.request(API, {
+      method: "POST",
+      body: JSON.stringify({ customEmbed })
     });
     return result.customEmbed;
   }

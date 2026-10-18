@@ -13,9 +13,14 @@ export function validateManifest(input) {
   const site = input.site;
   site.alias = requireString(site.alias, "site.alias");
   site.siteId = requireString(site.siteId, "site.siteId");
-  site.connectedRepo = requireString(site.connectedRepo, "site.connectedRepo").replace(/\.git$/i, "");
-  if (!/^[\w.-]+\/[\w.-]+$/.test(site.connectedRepo)) throw new Error("site.connectedRepo must use owner/repository form.");
-  site.defaultBranch = requireString(site.defaultBranch, "site.defaultBranch");
+  if (site.connectedRepo !== undefined && site.connectedRepo !== null && site.connectedRepo !== "") {
+    site.connectedRepo = requireString(site.connectedRepo, "site.connectedRepo").replace(/\.git$/i, "");
+    if (!/^[\w.-]+\/[\w.-]+$/.test(site.connectedRepo)) throw new Error("site.connectedRepo must use owner/repository form.");
+    site.defaultBranch = requireString(site.defaultBranch, "site.defaultBranch");
+  } else {
+    site.connectedRepo = null;
+    site.defaultBranch = null;
+  }
   site.wixConfigPath = site.wixConfigPath ?? "wix.config.json";
   if (typeof site.wixConfigPath !== "string" || path.isAbsolute(site.wixConfigPath)) throw new Error("site.wixConfigPath must be a relative path inside the Wix source repository.");
   if (site.liveUrl !== undefined) site.liveUrl = requireString(site.liveUrl, "site.liveUrl");
@@ -37,6 +42,7 @@ export function validateManifest(input) {
     components.set(component.name, component);
   }
   const snippetIds = new Set();
+  const mountIds = new Set();
   for (const snippet of site.customCode) {
     snippet.id = requireString(snippet.id, "customCode.id");
     if (/^REPLACE_/i.test(snippet.id)) continue;
@@ -48,6 +54,16 @@ export function validateManifest(input) {
     }
     if (snippet.pageScope.type === "pages" && (!Array.isArray(snippet.pageScope.pageIds) || snippet.pageScope.pageIds.length === 0)) {
       throw new Error(`Custom embed ${snippet.id} page scope must list at least one page ID.`);
+    }
+    const hasMountId = snippet.mountId !== undefined;
+    const hasMountOrder = snippet.mountOrder !== undefined;
+    if (hasMountId !== hasMountOrder) throw new Error(`Custom embed ${snippet.id} must declare both mountId and mountOrder for a stacked page section.`);
+    if (hasMountId) {
+      snippet.mountId = requireString(snippet.mountId, `customCode ${snippet.id}.mountId`);
+      if (!/^[a-z0-9][a-z0-9_-]{0,63}$/.test(snippet.mountId)) throw new Error(`Custom embed ${snippet.id} mountId must be a lowercase URL-safe identifier.`);
+      if (!Number.isInteger(snippet.mountOrder) || snippet.mountOrder < 0 || snippet.mountOrder > 999) throw new Error(`Custom embed ${snippet.id} mountOrder must be an integer from 0 to 999.`);
+      if (mountIds.has(snippet.mountId)) throw new Error(`Duplicate custom embed mountId ${snippet.mountId}.`);
+      mountIds.add(snippet.mountId);
     }
     if (snippet.component && !components.has(snippet.component)) throw new Error(`Custom embed ${snippet.id} references unknown component ${snippet.component}.`);
     snippet.category ??= "ESSENTIAL";

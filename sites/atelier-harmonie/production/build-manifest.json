@@ -1,0 +1,42 @@
+{
+  "siteAlias": "atelier-harmonie",
+  "siteId": "376faa89-fe6c-4ae8-8feb-10520e813a89",
+  "release": "atelier-production-20261018-v1",
+  "components": {
+    "navbar": {
+      "tag": "atelier-navbar-v1",
+      "sha256": "32214f2f1441ca71ac23d49d7dda9251650d20ce0b3993c73bca6f08188fd971"
+    },
+    "home": {
+      "tag": "atelier-home-v1",
+      "sha256": "8421168a895acb59439b8fe23f97f913aebd3aea48bc0d5153eeb584f631a506"
+    }
+  },
+  "packets": [
+    {
+      "key": "navbar",
+      "file": "early-packet-navbar-1.html",
+      "characters": 5571
+    },
+    {
+      "key": "home",
+      "file": "early-packet-home-1.html",
+      "characters": 12153
+    },
+    {
+      "key": "home",
+      "file": "early-packet-home-2.html",
+      "characters": 7065
+    }
+  ],
+  "coverage": {
+    "sharedHeader": "all routes with Wix shared header; placement must be inventoried",
+    "home": [
+      "/",
+      "/copy-of-accueil"
+    ],
+    "otherPages": "native page UI preserved; shared navbar bundle only",
+    "status": "pending full route inventory and Wix placement"
+  },
+  "deployed": false
+}

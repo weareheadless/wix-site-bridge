@@ -221,7 +221,7 @@ export async function restoreSnippets({ site, snapshotId, client, stateDir, appl
   const result = { status: "complete", snapshotId, rollbackSnapshotId: rollbackSnapshot.snapshotId, restored: [], failed: null, plan: publicItems };
   for (const item of restoreItems) {
     try {
-      await client.updateHtml(item.current, item.previous.embedData.html);
+      await client.updateHtml(item.current, item.previous.embedData.html, item.previous.embedData.category);
       const confirmed = await client.get(item.id);
       if (hashHtml(confirmed) !== hashHtml(item.previous)) throw new Error("Restored content hash did not match the saved snapshot.");
       result.restored.push(item.id);

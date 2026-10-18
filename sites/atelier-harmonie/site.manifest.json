@@ -1,0 +1,197 @@
+{
+  "version": 1,
+  "site": {
+    "alias": "atelier-harmonie",
+    "siteId": "376faa89-fe6c-4ae8-8feb-10520e813a89",
+    "liveUrl": "https://www.atelier-harmonie.com/",
+    "routes": [
+      "/",
+      "/copy-of-accueil"
+    ],
+    "components": [],
+    "customCode": [
+      {
+        "id": "00b2da0f-23a8-4f8f-b400-2f8a29d9d8b2",
+        "position": "BODY_END",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "routeGuard": "/copy-of-accueil",
+        "mountId": "navbar",
+        "mountOrder": 5,
+        "htmlFile": "sites/atelier-harmonie/prototype/00-navbar.html"
+      },
+      {
+        "id": "0888c6ad-ed2b-477a-ade0-aea3f4c913b7",
+        "position": "BODY_END",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "routeGuard": "/copy-of-accueil",
+        "mountId": "hero",
+        "mountOrder": 10,
+        "htmlFile": "sites/atelier-harmonie/prototype/01-hero.html"
+      },
+      {
+        "id": "0fd09e54-ee53-4fdb-be6b-6cf36e0e2bda",
+        "position": "BODY_END",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "routeGuard": "/copy-of-accueil",
+        "mountId": "introduction",
+        "mountOrder": 15,
+        "htmlFile": "sites/atelier-harmonie/prototype/01b-introduction.html"
+      },
+      {
+        "id": "8641c6b4-5169-4a52-9c79-29cc1a47de88",
+        "position": "BODY_END",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "routeGuard": "/copy-of-accueil",
+        "mountId": "categories",
+        "mountOrder": 18,
+        "htmlFile": "sites/atelier-harmonie/prototype/01c-categories.html"
+      },
+      {
+        "id": "606cc89d-7f6a-4f0f-90b1-c9f16f319edc",
+        "position": "BODY_END",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "routeGuard": "/copy-of-accueil",
+        "mountId": "savoir-faire",
+        "mountOrder": 20,
+        "htmlFile": "sites/atelier-harmonie/prototype/02-savoir-faire.html"
+      },
+      {
+        "id": "1c297f6d-1811-42b4-bc47-5ed4b0e3f347",
+        "position": "BODY_END",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "routeGuard": "/copy-of-accueil",
+        "mountId": "collections",
+        "mountOrder": 23,
+        "htmlFile": "sites/atelier-harmonie/prototype/02b-collections.html"
+      },
+      {
+        "id": "e41647d5-b491-4250-b8c9-4fc494dce8db",
+        "position": "BODY_END",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "routeGuard": "/copy-of-accueil",
+        "mountId": "sur-mesure",
+        "mountOrder": 25,
+        "htmlFile": "sites/atelier-harmonie/prototype/02c-sur-mesure.html"
+      },
+      {
+        "id": "7bbada7c-f7bb-4a42-ba13-5da6562c885b",
+        "position": "BODY_END",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "routeGuard": "/copy-of-accueil",
+        "mountId": "boutique",
+        "mountOrder": 30,
+        "htmlFile": "sites/atelier-harmonie/prototype/03-boutique.html"
+      },
+      {
+        "id": "444403e8-465c-47d4-9e7f-9d26c975593a",
+        "position": "BODY_END",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "routeGuard": "/copy-of-accueil",
+        "mountId": "inspiration",
+        "mountOrder": 35,
+        "htmlFile": "sites/atelier-harmonie/prototype/03b-inspiration.html"
+      },
+      {
+        "id": "104fef32-a0a4-419e-8943-b4bb466c637a",
+        "position": "BODY_END",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "routeGuard": "/copy-of-accueil",
+        "mountId": "avis",
+        "mountOrder": 37,
+        "htmlFile": "sites/atelier-harmonie/prototype/03c-avis.html"
+      },
+      {
+        "id": "2feaa5e8-e8ec-4818-9fc2-a33de6bf679c",
+        "position": "BODY_END",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "routeGuard": "/copy-of-accueil",
+        "mountId": "atelier",
+        "mountOrder": 40,
+        "htmlFile": "sites/atelier-harmonie/prototype/04-atelier.html"
+      },
+      {
+        "id": "6ea520f8-9838-4d9f-af4e-39cdc12520ae",
+        "position": "BODY_END",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "routeGuard": "/copy-of-accueil",
+        "mountId": "engagements",
+        "mountOrder": 45,
+        "htmlFile": "sites/atelier-harmonie/prototype/04b-engagements.html"
+      },
+      {
+        "id": "6de2a6af-1855-4dc0-a292-a6f1c0ff4e1d",
+        "position": "BODY_END",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "routeGuard": "/copy-of-accueil",
+        "mountId": "instagram",
+        "mountOrder": 47,
+        "htmlFile": "sites/atelier-harmonie/prototype/04c-instagram.html"
+      },
+      {
+        "id": "a80089fa-8f13-4e5d-9121-fe980ff955b5",
+        "position": "BODY_END",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "routeGuard": "/copy-of-accueil",
+        "mountId": "contact",
+        "mountOrder": 50,
+        "htmlFile": "sites/atelier-harmonie/prototype/05-contact.html"
+      }
+    ]
+  }
+}
