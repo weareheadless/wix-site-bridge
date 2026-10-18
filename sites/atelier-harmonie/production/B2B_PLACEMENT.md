@@ -25,3 +25,7 @@ Target `--site atelier-harmonie`, `/b2b`; connected source `weareheadless/atelie
 ## Villa photo correction
 
 User confirmed all project photographs are for Villa du Clos Normand. Removed erroneous restaurant caption and corrected reused image alt text. Four project photographs now form one two-column staggered mosaic beside the project heading/logo; original description and deliverables sit below. Same `customElement13`; source `484e03c`, startup `atelier-production-20261018-v24`. Human previews current layout and adjusts section height if needed before publishing.
+
+## Gallery replaces mosaic
+
+User rejected the mosaic’s mixed proportions and cramped text. Current source `cfafce8`, startup `atelier-production-20261018-v25`: project heading/name with enlarged Villa illustration (280px desktop / 240px mobile), then a centred manual 3:4 portrait gallery (up to 480px wide) with stable frame, uncropped contained photos, arrows, count and thumbnails. No autoplay. Description/deliverables below, full-width on mobile. Old mosaic is superseded. Same ID/tag; preview current saved layout and publish when ready. No live verification or tests claimed.

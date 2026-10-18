@@ -71,4 +71,4 @@
 - `/b2b`: `atelier-b2b-v1.js`, tag `atelier-b2b-v1`, requested ID `customElement13`; see `production/B2B_PLACEMENT.md`.
 - Original audience text uses accessible tabs; Villa du Clos Normand project precedes compact expandable guarantees. Preserve original photos, logos, project deliverables/external link and RSE/technical copy without adding new claims. Keep native contact section/form below; no custom submission adapter.
 
-- B2B photo attribution correction: all professional project photographs show Villa du Clos Normand. Never label the lampshade series as a separate restaurant project. Project uses four complementary images in a unified mosaic beside its heading, with description/deliverables below.
+- B2B photo attribution correction: all professional project photographs show Villa du Clos Normand. Never label the lampshade series as a separate restaurant project. Project now uses a stable portrait gallery with manual arrows/thumbnails below its heading and enlarged Villa illustration; description/deliverables have their own full-width area. Do not restore the crowded side-by-side mosaic.
