@@ -18,7 +18,8 @@
       "/les-ateliers",
       "/a-propos",
       "/devis",
-      "/blog"
+      "/blog",
+      "/product-page/:slug"
     ],
     "components": [
       {
@@ -279,6 +280,20 @@
         ],
         "datasetBindings": [
           "Retain real native Wix Blog feed, posts, categories, pagination and members behavior"
+        ]
+      },
+      {
+        "name": "product",
+        "source": "sites/atelier-harmonie/production/custom-elements/atelier-product-v1.js",
+        "tagName": "atelier-product-v1",
+        "routes": [
+          "/product-page/:slug"
+        ],
+        "wixElementIds": [
+          "customElement20"
+        ],
+        "datasetBindings": [
+          "Read-only Stores/Products and Stores/Variants; documented getProductVariants; Wix currentCart owns pricing and checkout"
         ]
       }
     ],

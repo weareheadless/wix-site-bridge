@@ -34,7 +34,7 @@
   "startupRelease": "atelier-production-20261018-v30",
   "layoutWarning": "Local UI version 740 predates human placement. Do not CLI-publish it.",
   "liveObservedRelease": "atelier-production-20261018-v2",
-  "pendingPublication": "Journal top/bottom ready; human places customElement18/customElement19 around retained native Wix Blog feed, previews and publishes current saved layout.",
+  "pendingPublication": "Product source ready; startup v31 blocked by automatic approval review pending explicit human release approval; placement and visual/live review pending.",
   "fixes": [
     "Scope fragment lookups through componentRoot to avoid hero local root temporal-dead-zone error; restores hero/carousel initialization and deferred reviews",
     "Load shared prototype Google Fonts stylesheet in document head so shadow components can use Parisienne and other fonts",
@@ -223,5 +223,19 @@
       "requestedElementId": "customElement19",
       "startupEmbedId": "44549894-ece3-466e-90ef-0375f9a3a02d"
     }
+  },
+  "product": {
+    "route": "/product-page/:slug",
+    "tag": "atelier-product-v1",
+    "requestedElementId": "customElement20",
+    "sourceCommit": "2a13b58",
+    "placement": "pending human; retain Store Page/app and URLs",
+    "published": false,
+    "instructions": "PRODUCT_PLACEMENT.md",
+    "startupInstalled": false,
+    "plannedStartupRelease": "atelier-production-20261018-v31",
+    "startupStatus": "Apply rejected by automatic approval review pending explicit human authorization of product release",
+    "visualReview": "pending; in-app browser disabled in Work settings",
+    "dataSource": "Wix Stores/Products and Stores/Variants; documented variant and currentCart APIs"
   }
 }

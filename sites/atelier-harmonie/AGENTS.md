@@ -92,3 +92,10 @@
 
 - `/blog`: two editorial components around retained native Wix Blog feed. Top `atelier-journal-top-v1.js`, tag `atelier-journal-top-v1`, requested ID `customElement18`; bottom `atelier-journal-bottom-v1.js`, tag `atelier-journal-bottom-v1`, requested ID `customElement19`. See `production/JOURNAL_PLACEMENT.md`.
 - Preserve original introduction copy and native posts, categories, pagination, article URLs, membership and comments. No parallel post store or selectors styling app internals. Human owns native feed styling and placement.
+
+## Product template
+
+- `/product-page/:slug`, Wix `Product Page.lj022.js`: `atelier-product-v1.js`, tag `atelier-product-v1`, requested ID `customElement20`. See `production/PRODUCT_PLACEMENT.md`.
+- Live Wix Products/Variants are authoritative. Preserve original descriptions/images/options and existing product URLs. Backend validates choices/text/quantity/stock and uses fixed Wix Stores catalog references; never client prices or a parallel catalog. Native cart/checkout owns payments and inventory enforcement.
+- Planned v31 startup apply was blocked by automatic approval review pending explicit human authorization of this product release. Do not mark it installed until apply succeeds and receipt/manifest ID is inspected. Source commit `2a13b58` is pushed; visual inspection and human placement pending.
+- Do not remove the Store Page/app or retain hidden duplicate product widgets. If Wix requires retaining its old widget, resolve that architecture with the human before removal/hiding. Product video, app reviews/wishlist/back-in-stock features are not rebuilt by this template; preserve their native experience until separately handled.

@@ -1,7 +1,7 @@
 {
   "siteAlias": "atelier-harmonie",
   "siteId": "376faa89-fe6c-4ae8-8feb-10520e813a89",
-  "release": "atelier-production-20261018-v30",
+  "release": "atelier-production-20261018-v31",
   "components": {
     "navbar": {
       "tag": "atelier-navbar-v1",
@@ -78,6 +78,10 @@
     "journalbottom": {
       "tag": "atelier-journal-bottom-v1",
       "sha256": "2856afffef4622f90e964b7020143aff756d3f2bfd999bcb09cf706e38ba536d"
+    },
+    "product": {
+      "tag": "atelier-product-v1",
+      "sha256": "741d69e20e83e46d31f920d10b14c6e51e7b0448da1d80dd65750f37b7edf9a5"
     }
   },
   "packets": [
@@ -180,6 +184,11 @@
       "key": "journalbottom",
       "file": "early-packet-journalbottom-1.html",
       "characters": 2587
+    },
+    {
+      "key": "product",
+      "file": "early-packet-product-1.html",
+      "characters": 10061
     }
   ],
   "coverage": {
@@ -224,6 +233,9 @@
     "journal": [
       "/blog"
     ],
+    "product": [
+      "/product-page/:slug"
+    ],
     "elementIds": {
       "navbar": "customElement1",
       "home": "customElement2",
@@ -243,7 +255,8 @@
       "quotetop": "customElement16",
       "quotebottom": "customElement17",
       "journaltop": "customElement18",
-      "journalbottom": "customElement19"
+      "journalbottom": "customElement19",
+      "product": "customElement20"
     },
     "otherPages": "native page UI preserved; shared navbar bundle only",
     "status": "pending full route inventory and Wix placement"
