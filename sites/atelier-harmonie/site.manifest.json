@@ -781,6 +781,18 @@
         "loadOnce": true,
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-productfaq-1.html",
         "purpose": "nonvisual-early-registration"
+      },
+      {
+        "id": "d6615a9d-f7a2-46d1-b5b2-efc6651d4cc6",
+        "name": "Atelier production early-packet-product-2.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": true,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-product-2.html",
+        "purpose": "nonvisual-early-registration"
       }
     ],
     "connectedRepo": "weareheadless/atelier-harmonie",

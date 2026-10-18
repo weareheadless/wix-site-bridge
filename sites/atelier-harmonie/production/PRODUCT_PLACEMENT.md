@@ -1,10 +1,10 @@
 # Product Page — one reusable custom element
 
-Target `--site atelier-harmonie`, exact dynamic route family `/product-page/:slug`, Wix page `Product Page.lj022.js`. Connected source `weareheadless/atelier-harmonie`, commit `14580f7`.
+Target `--site atelier-harmonie`, exact dynamic route family `/product-page/:slug`, Wix page `Product Page.lj022.js`. Connected source `weareheadless/atelier-harmonie`, commit `67359ae`.
 
 ## Status
 
-Source pushed and startup release `atelier-production-20261018-v38` installed after explicit human approval. Product startup ID `d1343538-27ba-4069-8c5b-4d20db25e22a`; receipt hash, HEAD/load-once placement and manifest mapping inspected. Human placement, visual/live review and publication remain pending.
+Source pushed and startup release `atelier-production-20261018-v39` installed after explicit human approval. Product startup ID `d1343538-27ba-4069-8c5b-4d20db25e22a`; receipt hash, HEAD/load-once placement and manifest mapping inspected. Human placement, visual/live review and publication remain pending.
 
 ## Human placement
 
@@ -30,7 +30,7 @@ Images are supported; product video presentation is not implemented. Preserve an
 
 ## Startup and readiness gate
 
-Installed v38 registry matches `/product-page/<one slug>` explicitly and includes shared navbar/footer. Product packet is under the 15,000-character limit, source fingerprint recorded in build-manifest. Normal Wix custom-element file remains fallback. Static gallery geometry and editorial shell render immediately; product-specific content arrives through Velo. Only the actual first selected product image receives a matching preload/high priority; no global catalog snapshot or bulk preload.
+Installed v39 registry matches `/product-page/<one slug>` explicitly and includes shared navbar/footer. Product packet is under the 15,000-character limit, source fingerprint recorded in build-manifest. Normal Wix custom-element file remains fallback. Static gallery geometry and editorial shell render immediately; product-specific content arrives through Velo. Only the actual first selected product image receives a matching preload/high priority; no global catalog snapshot or bulk preload.
 
 Visual inspection is pending: in-app browser control returned “Local browser use is disabled in Work settings.” No other browser was used. Human should preview multiple image orientations, long descriptions, options/variant prices, custom text, sold-out items, quantity limits, cart/checkout and product-to-product navigation. Live fresh/internal navigation, SEO and saved section geometry are release gates, not inferred from registration or a successful build. No tests or performance audit run.
 
@@ -69,3 +69,11 @@ Source `116ec33` removes the 12-second destructive timeout entirely. It could cl
 ## Compact gallery and one expanding description
 
 Source `14580f7` caps the photo frame at min(520px,58svh) desktop and min(400px,46svh) mobile, with contain fit so the full photo stays uncropped. Its frame remains stable across different photo proportions. Smaller thumbnails and explicit previous/next controls provide access to the complete gallery without scrolling through an oversized portrait. Description uses a native button with aria-expanded/aria-controls: expansion replaces the excerpt with the complete rich description at the same location; collapse restores the excerpt, with no duplicate paragraph. Other product-info disclosures remain independent. No new placement IDs or page-code changes required for this revision. Human current-layout publish keeps normal Wix source fallback synchronized. Live visual confirmation remains pending.
+
+## Current description interaction — responsive side panel
+
+Source `67359ae` replaces the inline description toggle and info accordions with a native modal dialog. “Lire la description” and each product-info row open the same independent scroll panel, at the corresponding section. Desktop panel is right-aligned, maximum width 580px; mobile uses the full viewport. Product excerpt, gallery and purchase controls remain in their original positions and do not expand vertically. Full original rich copy remains sanitized and preserved inside the panel. FAQ stays separate.
+
+Native dialog supplies modal focus handling, Escape and inert background. Close button and backdrop close it. Root scroll styles are saved/locked while open and restored on close, with previous page position; reset/disconnect restores styles without forcing the old route position. Original image-zoom dialog remains separate. No new Wix element or sizing setup is required. Source fallback and two product startup packets must stay synchronized. Current saved-layout publication and live desktop/mobile visual confirmation remain pending; no tests run.
+
+Second product packet installed as `d6615a9d-f7a2-46d1-b5b2-efc6651d4cc6`; receipt hash and manifest mapping inspected.
