@@ -24,3 +24,24 @@ Target `--site atelier-harmonie`, `/tapisserie-restauration`. Source repo `weare
 - Static text renders immediately; route-specific hero preload matches visible URL. Shared header/footer and source fallback preserved. Startup controllers/packets synchronized, within size limits.
 - Placement, final saved geometry, publication and live content/interaction verification remain pending human setup. No speed scores claimed.
 - Private receipts/snapshots under customer state directory. Recovery restores prior startup HTML or disables the affected entries, synchronizing normal Wix sources and packets.
+
+## Integrated contact form — prepared, NOT activated
+
+Human authorized custom fields mapped to Wix. Source `497026d` (component prepared in `ce12951`), startup `atelier-production-20261018-v18`.
+
+Compatibility check: existing generated Wix CLI types expose the original contact form as legacy `$w.Form` (`#form2`), with separate TextInput/TextBox controls. Official Wix docs say old forms only work with old APIs; the programmatic `setFieldValues` / `submit` flow is `WixFormsV2`. Do not invoke undocumented legacy submission endpoints or click internal submit buttons.
+
+Required human step (Editor workflow): add a NEW Wix Form with **Nom, Email, Objet, Message**, leave the old form temporarily, and provide its element ID. Confirm exact field keys using the new form's Advanced settings; do not infer keys from labels. Existing old form history remains untouched. New form notifications/automations must be configured to match intended recipients; they are not automatically inherited or claimed verified.
+
+Prepared source:
+- Custom fields live inside `atelier-restoration-v1` and remain hidden until `contact-state` reports a correctly configured new native adapter.
+- `public/atelier-restoration-form-config.js` is intentionally `enabled:false`, `elementId:null`, null field mappings. It must remain inactive until exact mapping is confirmed.
+- Page binding copies only bounded name/email/subject/message values to exact configured keys and calls documented native `form.submit()`. No direct CMS insert, arbitrary backend form ID, private endpoints or replacement CRM.
+- Wix validates and performs the submission. Thank-you shown only on native successful completion; failure preserves custom draft and expands/scrolls to the native form so any validation/challenge can be completed. No personal values logged or stored in browser storage.
+- `collapseNative:false` initially retains native widget for setup. Enable collapse only after confirming successful submission/notification behavior; failure always re-expands it. Do not remove the new native adapter widget. Remove old legacy visual form only after migration is confirmed.
+- No real enquiry, test email or form submission has been sent. Native schema/field mapping, notification configuration and end-to-end verification remain outstanding. Agent must not claim this integration is active.
+
+Official references:
+- https://dev.wix.com/docs/velo/velo-only-apis/$w/wix-forms/migrate-from-wix-forms
+- https://dev.wix.com/docs/velo/velo-only-apis/$w/wix-forms-v2/set-field-values
+- https://dev.wix.com/docs/velo/velo-only-apis/$w/wix-forms-v2/submit

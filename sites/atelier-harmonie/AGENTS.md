@@ -55,4 +55,4 @@
 
 - `/tapisserie-restauration`: source `atelier-restoration-v1.js`, tag `atelier-restoration-v1`, requested ID `customElement10`; human placement pending. See `production/RESTORATION_PLACEMENT.md`.
 - Preserve original complete copy and distinct images, combined before/after intact, service shortcuts and native accessible cushion details. No fabricated comparison slider or numbered labels.
-- **Keep the original real Wix contact form below the custom element**, including submission bindings and settings; never replace it with a decorative HTML form or parallel backend. Human applies native form styling.
+- Human authorized an integrated custom contact UI mapped to supported WixFormsV2. Original legacy form remains until migration is confirmed. Prepared configuration stays disabled until exact new form ID/keys are known; preserve Wix submission validation/challenges and notifications. Never use a parallel backend or undocumented legacy submit endpoint. See RESTORATION_PLACEMENT.md.

@@ -1,7 +1,7 @@
 {
   "siteAlias": "atelier-harmonie",
   "siteId": "376faa89-fe6c-4ae8-8feb-10520e813a89",
-  "release": "atelier-production-20261018-v17",
+  "release": "atelier-production-20261018-v18",
   "components": {
     "navbar": {
       "tag": "atelier-navbar-v1",
@@ -41,7 +41,7 @@
     },
     "restoration": {
       "tag": "atelier-restoration-v1",
-      "sha256": "f1c2431d43b37f26c891255035403101980071af95c447dff763007a158c1530"
+      "sha256": "5bcb113324dcb19e849b43edd094673ad9cf34de94e7065e3af0b606a31ef392"
     }
   },
   "packets": [
@@ -98,7 +98,7 @@
     {
       "key": "restoration",
       "file": "early-packet-restoration-1.html",
-      "characters": 6889
+      "characters": 8405
     }
   ],
   "coverage": {
