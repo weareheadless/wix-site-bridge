@@ -31,10 +31,10 @@
     }
   },
   "startupCustomCodeInstalled": true,
-  "startupRelease": "atelier-production-20261018-v45",
+  "startupRelease": "atelier-production-20261018-v46",
   "layoutWarning": "Local UI version 740 predates human placement. Do not CLI-publish it.",
   "liveObservedRelease": "atelier-production-20261018-v2",
-  "pendingPublication": "Privacy redesign source/startup installed; human places customElement24, removes replaced body and publishes current saved layout.",
+  "pendingPublication": "Cookies policy redesign source/startup installed; human places customElement25, removes replaced native body and publishes current saved layout.",
   "fixes": [
     "Scope fragment lookups through componentRoot to avoid hero local root temporal-dead-zone error; restores hero/carousel initialization and deferred reviews",
     "Load shared prototype Google Fonts stylesheet in document head so shadow components can use Parisienne and other fonts",
@@ -337,6 +337,19 @@
     "startupEmbedId": "f72d84b1-cb9f-4521-8e5d-9a05851988f1",
     "instructions": "PRIVACY_PLACEMENT.md",
     "content": "Original five articles, subsections and dates preserved; design only",
+    "placement": "pending human",
+    "published": false
+  },
+  "cookies": {
+    "route": "/politique-de-cookies",
+    "pageId": "ignax",
+    "tag": "atelier-cookies-v1",
+    "requestedElementId": "customElement25",
+    "sourceCommit": "6793638",
+    "startupInstalled": true,
+    "startupEmbedId": "8f960fea-1796-4738-bde8-62b6dbabaf8a",
+    "instructions": "COOKIES_PLACEMENT.md",
+    "content": "Original three sections and guidance links preserved; native consent behavior unchanged",
     "placement": "pending human",
     "published": false
   }

@@ -1,7 +1,7 @@
 {
   "siteAlias": "atelier-harmonie",
   "siteId": "376faa89-fe6c-4ae8-8feb-10520e813a89",
-  "release": "atelier-production-20261018-v45",
+  "release": "atelier-production-20261018-v46",
   "components": {
     "navbar": {
       "tag": "atelier-navbar-v1",
@@ -98,6 +98,10 @@
     "privacy": {
       "tag": "atelier-privacy-v1",
       "sha256": "720981c23983178c39e978d5c8eaf6433f5bdf58c74f8192a6d793debfff1b1e"
+    },
+    "cookies": {
+      "tag": "atelier-cookies-v1",
+      "sha256": "99553d08f84cdf64bda17dbc4dcc6f4f0f7ef77d635a4fa6e220b7241237fbbe"
     }
   },
   "packets": [
@@ -235,6 +239,11 @@
       "key": "privacy",
       "file": "early-packet-privacy-1.html",
       "characters": 7437
+    },
+    {
+      "key": "cookies",
+      "file": "early-packet-cookies-1.html",
+      "characters": 5269
     }
   ],
   "coverage": {
@@ -291,6 +300,9 @@
     "privacy": [
       "/politique-de-confidentialite"
     ],
+    "cookies": [
+      "/politique-de-cookies"
+    ],
     "elementIds": {
       "navbar": "customElement1",
       "home": "customElement2",
@@ -315,7 +327,8 @@
       "productfaq": "customElement21",
       "terms": "customElement22",
       "generalterms": "customElement23",
-      "privacy": "customElement24"
+      "privacy": "customElement24",
+      "cookies": "customElement25"
     },
     "otherPages": "native page UI preserved; shared navbar bundle only",
     "status": "pending full route inventory and Wix placement"

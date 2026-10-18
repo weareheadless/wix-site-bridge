@@ -141,3 +141,8 @@
 
 - `/politique-de-confidentialite`, Wix page `u54cx`: `atelier-privacy-v1.js`, tag `atelier-privacy-v1`, requested ID `customElement24`. See `production/PRIVACY_PLACEMENT.md`.
 - Preserve all five original articles, subsections, dates, retention period and hosting details from `production/privacy/content.json`. Use the matching legal-page design and full searchable copy; do not silently rewrite policy or change consent, forms, newsletter, analytics or data processing behavior.
+
+## Cookies policy
+
+- `/politique-de-cookies`, Wix page `ignax`: `atelier-cookies-v1.js`, tag `atelier-cookies-v1`, requested ID `customElement25`. See `production/COOKIES_PLACEMENT.md`.
+- Preserve all three original sections/paragraphs and external guidance URLs from `production/cookies/content.json`. Matching legal-page design only: do not change native cookie-consent settings, tracking behavior or policy wording, and do not invent an updated date.

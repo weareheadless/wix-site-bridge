@@ -22,7 +22,8 @@
       "/product-page/:slug",
       "/conditions-generales-de-vente",
       "/conditions-generales",
-      "/politique-de-confidentialite"
+      "/politique-de-confidentialite",
+      "/politique-de-cookies"
     ],
     "components": [
       {
@@ -355,6 +356,20 @@
         ],
         "datasetBindings": [
           "Five original privacy articles and subsections preserved; original issue/update dates and retention text unchanged; design only"
+        ]
+      },
+      {
+        "name": "cookies",
+        "source": "sites/atelier-harmonie/production/custom-elements/atelier-cookies-v1.js",
+        "tagName": "atelier-cookies-v1",
+        "routes": [
+          "/politique-de-cookies"
+        ],
+        "wixElementIds": [
+          "customElement25"
+        ],
+        "datasetBindings": [
+          "Original three cookie-policy sections and external guidance links preserved; native consent behavior untouched"
         ]
       }
     ],
@@ -887,6 +902,18 @@
         "category": "ESSENTIAL",
         "loadOnce": true,
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-privacy-1.html",
+        "purpose": "nonvisual-early-registration"
+      },
+      {
+        "id": "8f960fea-1796-4738-bde8-62b6dbabaf8a",
+        "name": "Atelier production early-packet-cookies-1.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": true,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-cookies-1.html",
         "purpose": "nonvisual-early-registration"
       }
     ],
