@@ -60,3 +60,8 @@
 - Separate presentational contact intro is now available on `/tapisserie-restauration`: `atelier-contact-v1.js`, tag `atelier-contact-v1`, requested ID `customElement11`, placed above real native Wix form. No custom submission fields/adapter; see `production/CONTACT_PLACEMENT.md`.
 
 - Restoration now uses shared-hero Sièges / Abat-jour / Coussins tabs, Sièges initially active; keyboard accessible, mobile no horizontal tab scrolling. Preserve original full copy/images, inactive-panel inert state and stable panel geometry. Contact remains separate below.
+
+## Fabrics
+
+- `/les-tissus`: `atelier-fabrics-v1.js`, tag `atelier-fabrics-v1`, requested ID `customElement12`; see `production/FABRICS_PLACEMENT.md`.
+- Six original fabric houses use shortest-column photo masonry and accessible native detail dialogs instead of long stacked paragraphs. Preserve original full descriptions/photos/external links, natural image proportions and keyboard focus return. No invented brand classifications or duplicate contact form. Keep native contact section below.
