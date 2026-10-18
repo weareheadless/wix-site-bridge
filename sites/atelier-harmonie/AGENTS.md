@@ -121,3 +121,8 @@
 - Homepage availability/prices resolve exact normalized slugs and canonical product URLs against the existing paginated `getAtelierProducts` live catalog feed; no static stock snapshot. Pending/unknown lookup must not imply availability. See `production/AVAILABILITY.md`. Keep the home request/readiness handshake and normal source/startup packets synchronized.
 
 - Homepage stock labels must explicitly show “Disponible” (muted blue) or “Épuisé” (muted rose) for resolved products. The earlier separate slug-query method is retired. Unknown catalog matches remain unknown; do not use “Voir la disponibilité” as a substitute for resolved stock.
+
+## Homepage carousel filters
+
+- Two product rails must use distinct category sets: Collections = Abat-jour/Suspensions/Baladeuses; Boutique = Lampes à poser/Sièges/Déco/DIY. Defaults are Abat-jour and Lampes à poser, respectively. Do not return both rails to near-identical curated product lists.
+- Both render live getAtelierProducts results with availability and prices; filters are presentation rules based on normalized names, not a parallel CMS category store. Preserve accessible pressed states, honest empty states, rail controls and immediate hero rendering. See `production/HOME_FILTERS.md`.

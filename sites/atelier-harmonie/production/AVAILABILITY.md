@@ -17,3 +17,7 @@ Recovery: private startup receipts/before snapshots retain restoration instructi
 ## Lookup correction
 
 The separate hasSome slug lookup was removed after the human reported unresolved status. Homepage now reuses the existing shop catalog feed and matches normalized authoritative slugs and canonical product-page URLs. A known in-stock product gets the actual “Disponible” label, not a hidden badge containing fallback wording. Missing catalog matches remain explicitly unknown; never invent stock for an outdated product URL. Actual rendered status remains pending human publication/confirmation.
+
+## Current homepage rails
+
+Homepage now renders live product cards directly, with disjoint category filters, rather than matching the old curated cards. Availability and prices come from each live record; see HOME_FILTERS.md. Previous curated-slug matching notes describe the retired implementation.

@@ -31,10 +31,10 @@
     }
   },
   "startupCustomCodeInstalled": true,
-  "startupRelease": "atelier-production-20261018-v41",
+  "startupRelease": "atelier-production-20261018-v42",
   "layoutWarning": "Local UI version 740 predates human placement. Do not CLI-publish it.",
   "liveObservedRelease": "atelier-production-20261018-v2",
-  "pendingPublication": "Homepage explicit stock lookup correction source/startup installed; human current-layout publish and actual availability confirmation pending.",
+  "pendingPublication": "Distinct homepage live product filters source/startup installed; human current-layout publish and visual confirmation pending.",
   "fixes": [
     "Scope fragment lookups through componentRoot to avoid hero local root temporal-dead-zone error; restores hero/carousel initialization and deferred reviews",
     "Load shared prototype Google Fonts stylesheet in document head so shadow components can use Parisienne and other fonts",
@@ -276,5 +276,26 @@
     "data": "Established Wix getAtelierProducts feed with exact normalized slug/canonical URL matching; no separate slug-query method",
     "published": false,
     "homeLabels": "Disponible or Épuisé when resolved; unknown explicitly unknown"
+  },
+  "homeFilters": {
+    "sourceCommit": "9fa081f",
+    "startupRelease": "atelier-production-20261018-v42",
+    "instructions": "HOME_FILTERS.md",
+    "first": [
+      "Abat-jour",
+      "Suspensions",
+      "Baladeuses"
+    ],
+    "second": [
+      "Lampes à poser",
+      "Les sièges",
+      "Objets déco",
+      "Kits DIY"
+    ],
+    "defaults": [
+      "Abat-jour",
+      "Lampes à poser"
+    ],
+    "published": false
   }
 }
