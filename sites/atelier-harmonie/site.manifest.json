@@ -20,7 +20,8 @@
       "/devis",
       "/blog",
       "/product-page/:slug",
-      "/conditions-generales-de-vente"
+      "/conditions-generales-de-vente",
+      "/conditions-generales"
     ],
     "components": [
       {
@@ -325,6 +326,20 @@
         ],
         "datasetBindings": [
           "Original 18 legal articles and withdrawal annex preserved in static source; no transaction or terms modification"
+        ]
+      },
+      {
+        "name": "generalterms",
+        "source": "sites/atelier-harmonie/production/custom-elements/atelier-general-terms-v1.js",
+        "tagName": "atelier-general-terms-v1",
+        "routes": [
+          "/conditions-generales"
+        ],
+        "wixElementIds": [
+          "customElement23"
+        ],
+        "datasetBindings": [
+          "Original CGU preamble, eight articles and existing effective date preserved; visual redesign only"
         ]
       }
     ],
@@ -833,6 +848,18 @@
         "category": "ESSENTIAL",
         "loadOnce": true,
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-terms-2.html",
+        "purpose": "nonvisual-early-registration"
+      },
+      {
+        "id": "2ee1ebe8-02e8-43e8-b45f-13a88f908888",
+        "name": "Atelier production early-packet-generalterms-1.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": true,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-generalterms-1.html",
         "purpose": "nonvisual-early-registration"
       }
     ],

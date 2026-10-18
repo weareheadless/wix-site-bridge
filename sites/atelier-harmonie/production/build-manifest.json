@@ -1,7 +1,7 @@
 {
   "siteAlias": "atelier-harmonie",
   "siteId": "376faa89-fe6c-4ae8-8feb-10520e813a89",
-  "release": "atelier-production-20261018-v43",
+  "release": "atelier-production-20261018-v44",
   "components": {
     "navbar": {
       "tag": "atelier-navbar-v1",
@@ -90,6 +90,10 @@
     "terms": {
       "tag": "atelier-terms-v1",
       "sha256": "a39362f9edb52f05221eccfe4860d0ca9a341387c2cfd650e50c61f05340fbe4"
+    },
+    "generalterms": {
+      "tag": "atelier-general-terms-v1",
+      "sha256": "0f033cb37832464356f9bf220f0884f6a2fe8fa5ada3fadf0e10e1a4cb57dcdd"
     }
   },
   "packets": [
@@ -217,6 +221,11 @@
       "key": "terms",
       "file": "early-packet-terms-2.html",
       "characters": 2187
+    },
+    {
+      "key": "generalterms",
+      "file": "early-packet-generalterms-1.html",
+      "characters": 7310
     }
   ],
   "coverage": {
@@ -267,6 +276,9 @@
     "terms": [
       "/conditions-generales-de-vente"
     ],
+    "generalterms": [
+      "/conditions-generales"
+    ],
     "elementIds": {
       "navbar": "customElement1",
       "home": "customElement2",
@@ -289,7 +301,8 @@
       "journalbottom": "customElement19",
       "product": "customElement20",
       "productfaq": "customElement21",
-      "terms": "customElement22"
+      "terms": "customElement22",
+      "generalterms": "customElement23"
     },
     "otherPages": "native page UI preserved; shared navbar bundle only",
     "status": "pending full route inventory and Wix placement"

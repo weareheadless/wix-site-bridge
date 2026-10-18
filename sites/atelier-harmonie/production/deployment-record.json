@@ -31,10 +31,10 @@
     }
   },
   "startupCustomCodeInstalled": true,
-  "startupRelease": "atelier-production-20261018-v43",
+  "startupRelease": "atelier-production-20261018-v44",
   "layoutWarning": "Local UI version 740 predates human placement. Do not CLI-publish it.",
   "liveObservedRelease": "atelier-production-20261018-v2",
-  "pendingPublication": "Sales terms redesign source/startup installed; human places customElement22, removes replaced native body, fits all legal copy and publishes current saved layout.",
+  "pendingPublication": "CGU redesign source/startup installed; human places customElement23, removes replaced body and publishes current saved layout.",
   "fixes": [
     "Scope fragment lookups through componentRoot to avoid hero local root temporal-dead-zone error; restores hero/carousel initialization and deferred reviews",
     "Load shared prototype Google Fonts stylesheet in document head so shadow components can use Parisienne and other fonts",
@@ -311,6 +311,19 @@
     ],
     "instructions": "TERMS_PLACEMENT.md",
     "content": "Original 18 articles and withdrawal annex, visual redesign only",
+    "placement": "pending human",
+    "published": false
+  },
+  "generalterms": {
+    "route": "/conditions-generales",
+    "pageId": "vgud5",
+    "tag": "atelier-general-terms-v1",
+    "requestedElementId": "customElement23",
+    "sourceCommit": "bcd2b20",
+    "startupInstalled": true,
+    "startupEmbedId": "2ee1ebe8-02e8-43e8-b45f-13a88f908888",
+    "instructions": "GENERAL_TERMS_PLACEMENT.md",
+    "content": "Original preamble, eight articles and effective date 30/10/2023 preserved; design only",
     "placement": "pending human",
     "published": false
   }

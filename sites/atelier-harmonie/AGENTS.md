@@ -131,3 +131,8 @@
 
 - `/conditions-generales-de-vente`, Wix page `i8cyj`: `atelier-terms-v1.js`, tag `atelier-terms-v1`, requested ID `customElement22`. See `production/TERMS_PLACEMENT.md`.
 - Preserve all 18 original articles and the complete withdrawal annex from `production/terms/content.json`. This is a visual/structural redesign, not a legal rewrite: do not silently alter clauses, dates, amounts, identifiers or form wording. All text stays visible/searchable, with desktop contents sidebar and collapsible mobile navigation. No legal approval claims or invented update dates.
+
+## Usage terms
+
+- `/conditions-generales`, Wix page `vgud5`: `atelier-general-terms-v1.js`, tag `atelier-general-terms-v1`, requested ID `customElement23`. See `production/GENERAL_TERMS_PLACEMENT.md`.
+- Preserve original preamble, eight articles and the original “En vigueur au 30/10/2023” date from `production/general-terms/content.json`. Match CGV editorial navigation/design without legal rewriting or changing cookie consent behavior. All legal text stays visible/searchable.
