@@ -40,3 +40,8 @@
 
 - `/sieges`: source `atelier-seats-v1.js`, tag `atelier-seats-v1`, requested ID `customElement6`; human placement pending. See `production/SEATS_PLACEMENT.md`.
 - Preserve original introduction/restoration copy, existing photos and Wix runtime catalog/cart. Use natural photo proportions and subtle ivory product boxes.
+
+## Objets déco page
+
+- `/objets-deco`: `atelier-deco-v1.js`, tag `atelier-deco-v1`, requested ID `customElement7`; human placement pending. See `production/DECO_PLACEMENT.md`.
+- Preserve original cushion photo and original intro/cushion copy. Original page currently has no products: keep an honest empty state, never invent catalog entries.

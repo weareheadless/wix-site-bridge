@@ -9,7 +9,8 @@
       "/copy-of-accueil",
       "/shop",
       "/lampes",
-      "/sieges"
+      "/sieges",
+      "/objets-deco"
     ],
     "components": [
       {
@@ -88,6 +89,20 @@
         ],
         "datasetBindings": [
           "Live Stores/Products through backend/atelier-shop.web; native Wix currentCart"
+        ]
+      },
+      {
+        "name": "deco",
+        "source": "sites/atelier-harmonie/production/custom-elements/atelier-deco-v1.js",
+        "tagName": "atelier-deco-v1",
+        "routes": [
+          "/objets-deco"
+        ],
+        "wixElementIds": [
+          "customElement7"
+        ],
+        "datasetBindings": [
+          "Live Stores/Products via backend/atelier-shop.web; native currentCart"
         ]
       }
     ],
@@ -380,6 +395,18 @@
         "category": "ESSENTIAL",
         "loadOnce": true,
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-seats-1.html",
+        "purpose": "nonvisual-early-registration"
+      },
+      {
+        "id": "a15c64a9-afab-425b-963a-dcfe10a88c8b",
+        "name": "Atelier production early-packet-deco-1.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": true,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-deco-1.html",
         "purpose": "nonvisual-early-registration"
       }
     ],

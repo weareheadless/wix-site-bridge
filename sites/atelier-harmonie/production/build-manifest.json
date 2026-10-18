@@ -1,7 +1,7 @@
 {
   "siteAlias": "atelier-harmonie",
   "siteId": "376faa89-fe6c-4ae8-8feb-10520e813a89",
-  "release": "atelier-production-20261018-v14",
+  "release": "atelier-production-20261018-v15",
   "components": {
     "navbar": {
       "tag": "atelier-navbar-v1",
@@ -26,6 +26,10 @@
     "seats": {
       "tag": "atelier-seats-v1",
       "sha256": "3ed2c31641e6f229a2c38060ac53ad35411f195ebac48d6ca82171077148efb2"
+    },
+    "deco": {
+      "tag": "atelier-deco-v1",
+      "sha256": "646b99d52ebf7324cb8e963651497cc47f38ea98878258c0377350582f8b8acf"
     }
   },
   "packets": [
@@ -63,6 +67,11 @@
       "key": "seats",
       "file": "early-packet-seats-1.html",
       "characters": 5887
+    },
+    {
+      "key": "deco",
+      "file": "early-packet-deco-1.html",
+      "characters": 5906
     }
   ],
   "coverage": {
@@ -80,13 +89,17 @@
     "seats": [
       "/sieges"
     ],
+    "deco": [
+      "/objets-deco"
+    ],
     "elementIds": {
       "navbar": "customElement1",
       "home": "customElement2",
       "footer": "customElement3",
       "shop": "customElement4",
       "lamps": "customElement5",
-      "seats": "customElement6"
+      "seats": "customElement6",
+      "deco": "customElement7"
     },
     "otherPages": "native page UI preserved; shared navbar bundle only",
     "status": "pending full route inventory and Wix placement"

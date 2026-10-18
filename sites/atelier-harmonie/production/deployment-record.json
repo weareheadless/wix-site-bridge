@@ -31,10 +31,10 @@
     }
   },
   "startupCustomCodeInstalled": true,
-  "startupRelease": "atelier-production-20261018-v14",
+  "startupRelease": "atelier-production-20261018-v15",
   "layoutWarning": "Local UI version 740 predates human placement. Do not CLI-publish it.",
   "liveObservedRelease": "atelier-production-20261018-v2",
-  "pendingPublication": "Seats source/startup ready; human places customElement6 on /sieges and previews/publishes current saved Wix layout.",
+  "pendingPublication": "Objets déco source/startup ready; human places customElement7 and previews/publishes current saved Wix layout.",
   "fixes": [
     "Scope fragment lookups through componentRoot to avoid hero local root temporal-dead-zone error; restores hero/carousel initialization and deferred reviews",
     "Load shared prototype Google Fonts stylesheet in document head so shadow components can use Parisienne and other fonts",
@@ -77,5 +77,16 @@
     "instructions": "SEATS_PLACEMENT.md",
     "startupInstalled": true,
     "startupEmbedId": "0824f76d-abf7-482b-80b0-e8337a786d75"
+  },
+  "deco": {
+    "route": "/objets-deco",
+    "tag": "atelier-deco-v1",
+    "requestedElementId": "customElement7",
+    "sourceCommit": "49b23bb",
+    "placement": "pending human",
+    "published": false,
+    "instructions": "DECO_PLACEMENT.md",
+    "startupInstalled": true,
+    "startupEmbedId": "a15c64a9-afab-425b-963a-dcfe10a88c8b"
   }
 }
