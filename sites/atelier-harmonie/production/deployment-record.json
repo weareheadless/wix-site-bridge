@@ -31,10 +31,10 @@
     }
   },
   "startupCustomCodeInstalled": true,
-  "startupRelease": "atelier-production-20261018-v46",
+  "startupRelease": "atelier-production-20261018-v47",
   "layoutWarning": "Local UI version 740 predates human placement. Do not CLI-publish it.",
   "liveObservedRelease": "atelier-production-20261018-v2",
-  "pendingPublication": "Cookies policy redesign source/startup installed; human places customElement25, removes replaced native body and publishes current saved layout.",
+  "pendingPublication": "Shared navbar basket count source/startup installed; human current saved-layout publish deploys masterPage binding; live cart confirmation pending.",
   "fixes": [
     "Scope fragment lookups through componentRoot to avoid hero local root temporal-dead-zone error; restores hero/carousel initialization and deferred reviews",
     "Load shared prototype Google Fonts stylesheet in document head so shadow components can use Parisienne and other fonts",
@@ -351,6 +351,15 @@
     "instructions": "COOKIES_PLACEMENT.md",
     "content": "Original three sections and guidance links preserved; native consent behavior unchanged",
     "placement": "pending human",
+    "published": false
+  },
+  "navbarCart": {
+    "sourceCommit": "e0e2b53",
+    "startupRelease": "atelier-production-20261018-v47",
+    "instructions": "NAVBAR_CART.md",
+    "elementId": "customElement1",
+    "count": "Sum of native Wix currentCart line-item quantities",
+    "events": "Initial load, component ready and Wix onCartChange",
     "published": false
   }
 }

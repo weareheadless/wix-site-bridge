@@ -36,7 +36,9 @@
         "wixElementIds": [
           "customElement1"
         ],
-        "datasetBindings": []
+        "datasetBindings": [
+          "Wix currentCart read-only total line-item quantity; onCartChange drives numeric cart-count attribute via shared masterPage"
+        ]
       },
       {
         "name": "home",

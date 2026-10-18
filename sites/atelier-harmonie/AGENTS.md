@@ -146,3 +146,8 @@
 
 - `/politique-de-cookies`, Wix page `ignax`: `atelier-cookies-v1.js`, tag `atelier-cookies-v1`, requested ID `customElement25`. See `production/COOKIES_PLACEMENT.md`.
 - Preserve all three original sections/paragraphs and external guidance URLs from `production/cookies/content.json`. Matching legal-page design only: do not change native cookie-consent settings, tracking behavior or policy wording, and do not invent an updated date.
+
+## Navbar basket count
+
+- Existing shared `customElement1` displays total cart quantity in desktop Panier and mobile-menu Mon panier badges. Use Wix currentCart and onCartChange, not a local/parallel cart counter. Existing custom add flows must retain refreshCart so the count updates.
+- Badge value is the sum of quantities, including 0 when known; unknown read state must not show a stale/fake count. Keep count-only attributes, initialization handshake and startup/source synchronization. See `production/NAVBAR_CART.md`.

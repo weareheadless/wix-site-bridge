@@ -1,12 +1,23 @@
 import { seoMarkup as footerSeoMarkup } from 'public/atelier-footer-seo';
 import { seoMarkup } from 'public/atelier-navbar-seo';
 import wixEcomFrontend from 'wix-ecom-frontend';
+import { currentCart } from 'wix-ecom-backend';
 
-// Shared navigation lives in Wix's header; cart state remains in Wix eCommerce.
 $w.onReady(function () {
-    $w('#customElement1').seoMarkup = seoMarkup;
-    $w('#customElement3').seoMarkup = footerSeoMarkup;
-    $w('#customElement1').on('atelier-cart', () => {
-        return wixEcomFrontend.navigateToCartPage();
-    });
+ try{$w('#customElement3').seoMarkup=footerSeoMarkup;}catch{}
+ let navbar;try{navbar=$w('#customElement1');navbar.seoMarkup=seoMarkup;}catch{return;}
+ navbar.on('atelier-cart',()=>wixEcomFrontend.navigateToCartPage());
+ let fetching=false,again=false;
+ async function updateCount(){
+  if(fetching){again=true;return;}fetching=true;
+  try{
+   const cart=await currentCart.getCurrentCart();
+   const count=(cart.lineItems||[]).reduce((sum,item)=>sum+(Number.isSafeInteger(item.quantity)&&item.quantity>0?item.quantity:0),0);
+   navbar.setAttribute('cart-count',String(count));
+  }catch{navbar.setAttribute('cart-count','');}
+  finally{fetching=false;if(again){again=false;updateCount();}}
+ }
+ wixEcomFrontend.onCartChange(updateCount);
+ navbar.on('atelier-navbar-ready',updateCount);
+ updateCount();
 });
