@@ -13,7 +13,7 @@ function requiresOptions(p){return Object.keys(p.productOptions||{}).length>0||(
 export const getAtelierProducts=webMethod(Permissions.Anyone,async(skip=0)=>{
  if(!Number.isSafeInteger(skip)||skip<0||skip>10000)throw Error('Invalid catalog page');
  // Query Wix's public app collection; never suppress permissions or include hidden products.
- const result=await wixData.query('Stores/Products').skip(skip).limit(PAGE_SIZE).find();
+ const result=await wixData.query('Stores/Products').descending('_updatedDate').skip(skip).limit(PAGE_SIZE).find();
  return {items:result.items.map(p=>({id:p._id,name:p.name,url:p.productPageUrl,image:imageUrl(p.mainMedia),secondaryImage:imageUrl((p.mediaItems||[]).filter(m=>m.type==='Image'&&m.src!==p.mainMedia)[0]?.src),price:p.discountedPrice??p.price,originalPrice:p.price,currency:p.currency||'EUR',inStock:p.inStock===true,ribbon:p.ribbon||'',requiresOptions:requiresOptions(p)})),hasMore:result.hasNext(),nextSkip:skip+result.items.length};
 });
 export const addAtelierProduct=webMethod(Permissions.Anyone,async(productId)=>{

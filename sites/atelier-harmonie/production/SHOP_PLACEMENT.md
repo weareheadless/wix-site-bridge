@@ -31,3 +31,7 @@ Product types are presentation filters inferred from existing product names (not
 ## Release status
 
 Source and startup definitions prepared/pushed. Human placement, current-layout publication and live behavior checks are pending. No tests, performance audits, shop publication or Editor mutation were performed for this redesign.
+
+## Featured hero
+
+The hero highlights the most recently updated available product with a photo, name, live price and native product link. The photo area reserves its height while Wix data loads. Original introductory paragraphs remain beneath the hero. Source release: `8baeaee`; startup release: `atelier-production-20261018-v7`. Preview and publish using the current saved Editor layout.
