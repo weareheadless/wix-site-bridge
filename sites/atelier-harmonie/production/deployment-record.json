@@ -31,7 +31,7 @@
     }
   },
   "startupCustomCodeInstalled": true,
-  "startupRelease": "atelier-production-20261018-v12",
+  "startupRelease": "atelier-production-20261018-v13",
   "layoutWarning": "Local UI version 740 predates human placement. Do not CLI-publish it.",
   "liveObservedRelease": "atelier-production-20261018-v2",
   "pendingPublication": "Luminaires source and startup synchronized; human places customElement5 on /lampes, previews current saved layout and publishes from Wix Editor.",
@@ -58,12 +58,13 @@
     "route": "/lampes",
     "tag": "atelier-lamps-v1",
     "requestedElementId": "customElement5",
-    "sourceCommit": "25c8aac",
+    "sourceCommit": "5bf1db9",
     "placement": "pending human",
     "published": false,
     "instructions": "LAMPS_PLACEMENT.md",
     "startupInstalled": true,
     "startupEmbedId": "c3341e82-ffc0-4d73-a3be-cc8de6915376",
-    "design": "Measured masonry tiles with ivory backgrounds, fine beige borders, padded captions and square corners; pending human publication"
+    "design": "Measured masonry tiles with ivory backgrounds, fine beige borders, padded captions and square corners; pending human publication",
+    "carouselImageFit": "Natural width/height; no fixed photo frame; pending human publication"
   }
 }
