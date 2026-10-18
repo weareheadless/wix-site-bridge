@@ -19,7 +19,8 @@
       "/a-propos",
       "/devis",
       "/blog",
-      "/product-page/:slug"
+      "/product-page/:slug",
+      "/conditions-generales-de-vente"
     ],
     "components": [
       {
@@ -310,6 +311,20 @@
         ],
         "datasetBindings": [
           "Static original five FAQ answers; keep native contact form separately"
+        ]
+      },
+      {
+        "name": "terms",
+        "source": "sites/atelier-harmonie/production/custom-elements/atelier-terms-v1.js",
+        "tagName": "atelier-terms-v1",
+        "routes": [
+          "/conditions-generales-de-vente"
+        ],
+        "wixElementIds": [
+          "customElement22"
+        ],
+        "datasetBindings": [
+          "Original 18 legal articles and withdrawal annex preserved in static source; no transaction or terms modification"
         ]
       }
     ],
@@ -794,6 +809,30 @@
         "category": "ESSENTIAL",
         "loadOnce": true,
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-product-2.html",
+        "purpose": "nonvisual-early-registration"
+      },
+      {
+        "id": "2df3654a-bafe-4fdc-bb9f-a6e9dbec1147",
+        "name": "Atelier production early-packet-terms-1.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": true,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-terms-1.html",
+        "purpose": "nonvisual-early-registration"
+      },
+      {
+        "id": "72053d34-0095-46a1-a93f-1e16c0407434",
+        "name": "Atelier production early-packet-terms-2.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": true,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-terms-2.html",
         "purpose": "nonvisual-early-registration"
       }
     ],

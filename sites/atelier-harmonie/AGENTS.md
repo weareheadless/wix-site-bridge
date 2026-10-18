@@ -126,3 +126,8 @@
 
 - Two product rails must use distinct category sets: Collections = Abat-jour/Suspensions/Baladeuses; Boutique = Lampes à poser/Sièges/Déco/DIY. Defaults are Abat-jour and Lampes à poser, respectively. Do not return both rails to near-identical curated product lists.
 - Both render live getAtelierProducts results with availability and prices; filters are presentation rules based on normalized names, not a parallel CMS category store. Preserve accessible pressed states, honest empty states, rail controls and immediate hero rendering. See `production/HOME_FILTERS.md`.
+
+## Sales terms
+
+- `/conditions-generales-de-vente`, Wix page `i8cyj`: `atelier-terms-v1.js`, tag `atelier-terms-v1`, requested ID `customElement22`. See `production/TERMS_PLACEMENT.md`.
+- Preserve all 18 original articles and the complete withdrawal annex from `production/terms/content.json`. This is a visual/structural redesign, not a legal rewrite: do not silently alter clauses, dates, amounts, identifiers or form wording. All text stays visible/searchable, with desktop contents sidebar and collapsible mobile navigation. No legal approval claims or invented update dates.

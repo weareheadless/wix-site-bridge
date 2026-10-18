@@ -1,7 +1,7 @@
 {
   "siteAlias": "atelier-harmonie",
   "siteId": "376faa89-fe6c-4ae8-8feb-10520e813a89",
-  "release": "atelier-production-20261018-v42",
+  "release": "atelier-production-20261018-v43",
   "components": {
     "navbar": {
       "tag": "atelier-navbar-v1",
@@ -86,6 +86,10 @@
     "productfaq": {
       "tag": "atelier-product-faq-v1",
       "sha256": "b5f6f6720a0c574223ba9dfb09c06814cc1591b9350f1ac025128d674790c35a"
+    },
+    "terms": {
+      "tag": "atelier-terms-v1",
+      "sha256": "a39362f9edb52f05221eccfe4860d0ca9a341387c2cfd650e50c61f05340fbe4"
     }
   },
   "packets": [
@@ -203,6 +207,16 @@
       "key": "productfaq",
       "file": "early-packet-productfaq-1.html",
       "characters": 3516
+    },
+    {
+      "key": "terms",
+      "file": "early-packet-terms-1.html",
+      "characters": 12163
+    },
+    {
+      "key": "terms",
+      "file": "early-packet-terms-2.html",
+      "characters": 2187
     }
   ],
   "coverage": {
@@ -250,6 +264,9 @@
     "product": [
       "/product-page/:slug"
     ],
+    "terms": [
+      "/conditions-generales-de-vente"
+    ],
     "elementIds": {
       "navbar": "customElement1",
       "home": "customElement2",
@@ -271,7 +288,8 @@
       "journaltop": "customElement18",
       "journalbottom": "customElement19",
       "product": "customElement20",
-      "productfaq": "customElement21"
+      "productfaq": "customElement21",
+      "terms": "customElement22"
     },
     "otherPages": "native page UI preserved; shared navbar bundle only",
     "status": "pending full route inventory and Wix placement"

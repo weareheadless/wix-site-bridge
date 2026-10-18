@@ -31,10 +31,10 @@
     }
   },
   "startupCustomCodeInstalled": true,
-  "startupRelease": "atelier-production-20261018-v42",
+  "startupRelease": "atelier-production-20261018-v43",
   "layoutWarning": "Local UI version 740 predates human placement. Do not CLI-publish it.",
   "liveObservedRelease": "atelier-production-20261018-v2",
-  "pendingPublication": "Distinct homepage live product filters source/startup installed; human current-layout publish and visual confirmation pending.",
+  "pendingPublication": "Sales terms redesign source/startup installed; human places customElement22, removes replaced native body, fits all legal copy and publishes current saved layout.",
   "fixes": [
     "Scope fragment lookups through componentRoot to avoid hero local root temporal-dead-zone error; restores hero/carousel initialization and deferred reviews",
     "Load shared prototype Google Fonts stylesheet in document head so shadow components can use Parisienne and other fonts",
@@ -296,6 +296,22 @@
       "Abat-jour",
       "Lampes à poser"
     ],
+    "published": false
+  },
+  "terms": {
+    "route": "/conditions-generales-de-vente",
+    "pageId": "i8cyj",
+    "tag": "atelier-terms-v1",
+    "requestedElementId": "customElement22",
+    "sourceCommit": "c27eba3",
+    "startupInstalled": true,
+    "startupEmbedIds": [
+      "2df3654a-bafe-4fdc-bb9f-a6e9dbec1147",
+      "72053d34-0095-46a1-a93f-1e16c0407434"
+    ],
+    "instructions": "TERMS_PLACEMENT.md",
+    "content": "Original 18 articles and withdrawal annex, visual redesign only",
+    "placement": "pending human",
     "published": false
   }
 }
