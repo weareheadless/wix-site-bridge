@@ -17,7 +17,7 @@ function rich(value){
 class AtelierProduct extends HTMLElement{
  static get observedAttributes(){return ['product','product-loading','product-error','selection-result','cart-result','related'];}
  constructor(){super();this.attachShadow({mode:'open'});this.sequence=0;this.index=0;this.busy=false;this.product=null;}
- connectedCallback(){if(this.rendered)return;this.rendered=true;this.dataset.atelierProductVersion='20261018-v35';this.shadowRoot.innerHTML=__PRODUCT_HTML__;
+ connectedCallback(){if(this.rendered)return;this.rendered=true;this.dataset.atelierProductVersion='20261018-v36';this.shadowRoot.innerHTML=__PRODUCT_HTML__;
  const font='https://fonts.googleapis.com/css2?family=Parisienne&family=DM+Sans:wght@400;500;600&family=Libre+Caslon+Text:ital,wght@0,400;1,400&display=swap';
  if(![...document.querySelectorAll('link[data-atelier-fonts]')].some(l=>l.href===font)){const link=document.createElement('link');link.rel='stylesheet';link.href=font;link.dataset.atelierFonts='true';document.head.append(link);}
  const r=this.shadowRoot;
@@ -43,7 +43,7 @@ class AtelierProduct extends HTMLElement{
  const excerpt=plain.length>220?plain.slice(0,220).replace(/\s+\S*$/,'').trimEnd()+'…':plain;
  r.querySelector('[data-excerpt]').textContent=excerpt;r.querySelector('[data-excerpt]').hidden=!plain;
  const disclosure=r.querySelector('[data-description-wrap]');disclosure.open=false;disclosure.hidden=plain.length<=220;
- disclosure.ontoggle=()=>{r.querySelector('[data-description-label]').textContent=disclosure.open?'Réduire la description':'Lire la description';};
+ disclosure.ontoggle=()=>{r.querySelector('[data-description-label]').textContent=disclosure.open?'Réduire la description':'Lire la suite';};
  r.querySelector('[data-description]').replaceChildren(description);
  r.querySelector('[data-email]').href='mailto:mathildevalle.atelier@gmail.com?subject='+encodeURIComponent('Une question sur '+p.name);
  r.querySelector('[data-details]').innerHTML=(p.additionalInfoSections||[]).map((s,i)=>'<details name="atelier-product-details"><summary>'+escape(s.title)+'</summary><div class="rich" data-section="'+i+'"></div></details>').join('');

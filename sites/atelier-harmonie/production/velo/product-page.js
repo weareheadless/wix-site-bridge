@@ -6,33 +6,25 @@ import { getAtelierProducts } from 'backend/atelier-shop.web';
 
 $w.onReady(function(){
  let native,element;
- try{native=$w('#productPage1');}catch{}
+ try{native=$w('#productPage1');native.hide();native.collapse();}catch{}
+ // The retained native app host must never be displayed as a loading/error fallback.
  try{element=$w('#customElement20');if(typeof element.on!=='function')return;}catch{return;}
 
  // FAQ is an independent placement; its absence must not block the product.
  try{$w('#customElement21').seoMarkup=faqSeo;}catch{}
  let generation=0,selection=0,current=null,pendingAdd=false,readyTimer;
- async function nativeFallback(version){
-  if(version!==generation)return;
-  clearTimeout(readyTimer);
-  try{await native?.expand();}catch{}
-  if(version===generation)try{await element.collapse();}catch{}
- }
- element.on('atelier-product-rendered',async event=>{
-  const version=event.detail?.renderToken;
-  if(version!==generation||event.detail?.productId!==current?.id)return;
-  clearTimeout(readyTimer);
-  try{await element.expand();if(version===generation)await native?.collapse();}catch{await nativeFallback(version);}
+ element.on('atelier-product-rendered',event=>{
+  if(event.detail?.renderToken===generation&&event.detail?.productId===current?.id)clearTimeout(readyTimer);
  });
- element.on('atelier-product-render-error',()=>nativeFallback(generation));
+ element.on('atelier-product-render-error',()=>clearTimeout(readyTimer));
  const escape=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  async function load(){
   const version=++generation;current=null;++selection;
   clearTimeout(readyTimer);
-  // Native widget remains the supported route host and visible fallback until paint is acknowledged.
-  try{await native?.expand();await element.expand();}catch{}
+  // Keep native UI suppressed on every product navigation, including failures.
+  try{await native?.hide();await native?.collapse();await element.expand();}catch{}
   if(version!==generation)return;
-  readyTimer=setTimeout(()=>nativeFallback(version),12000);
+  readyTimer=setTimeout(()=>{if(version===generation)element.setAttribute('product-error',String(version));},12000);
   element.setAttribute('product-loading',String(version));
   try{
    const path=wixLocationFrontend.path;
@@ -44,7 +36,7 @@ $w.onReady(function(){
    // Wix Stores retains its native canonical, structured Product data and SEO settings.
    element.seoMarkup='<article><h1>'+escape(product.name)+'</h1><p>'+escape(product.price)+' '+escape(product.currency)+'</p><p>'+escape(product.description.replace(/<[^>]*>/g,' '))+'</p></article>';
    getAtelierProducts(0).then(data=>{if(version===generation)element.setAttribute('related',JSON.stringify(data.items.filter(p=>p.id!==product.id).slice(0,4)));}).catch(()=>{});
-  }catch{if(version===generation){element.setAttribute('product-error',String(version));element.seoMarkup='';await nativeFallback(version);}}
+  }catch{if(version===generation){element.setAttribute('product-error',String(version));element.seoMarkup='';clearTimeout(readyTimer);}}
  }
  element.on('atelier-product-select',async event=>{
   if(!current)return;const token=++selection,id=current.id,version=generation;
