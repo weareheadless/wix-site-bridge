@@ -54,7 +54,7 @@
           "/shop"
         ],
         "wixElementIds": [
-          "atelierShop"
+          "customElement4"
         ],
         "datasetBindings": [
           "Read-only Stores/Products via backend/atelier-shop.web; native Wix currentCart"

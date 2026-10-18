@@ -6,7 +6,7 @@ Site: `--site atelier-harmonie`, `376faa89-fe6c-4ae8-8feb-10520e813a89`; route `
 
 1. Save the current page in Wix history before replacing it. Remove the old shop introduction, native product gallery and philosophy sections only on BOUTIQUE. Keep the shared header/footer and existing product pages.
 2. Add a fresh Wix section and a **Custom Element** (not an HTML iframe).
-3. In Properties, set the element ID to `atelierShop`.
+3. In Properties, set the element ID to `customElement4`.
 4. Choose Source → Velo file → `atelier-shop-v1.js`; tag `atelier-shop-v1`.
 5. Stretch full width with zero side margins. Start the element at the top of its section. Reserve the element AND containing section height in desktop/mobile views. The whole shop body is inside this component; do not add another copy of the header/footer.
 6. Preview with live catalog data before publishing. Check the last philosophy section is visible and the footer follows without clipping/large blank gaps. Filters and catalog pagination can change the content height; adjust the saved parent geometry based on the actual catalog and breakpoint. No automatic Wix parent-section resizing is claimed.
@@ -16,7 +16,7 @@ Site: `--site atelier-harmonie`, `376faa89-fe6c-4ae8-8feb-10520e813a89`; route `
 
 - Connected deployment repository: `weareheadless/atelier-harmonie`, source revision `bb5c888`.
 - `src/public/custom-elements/atelier-shop-v1.js`: separate shop component, no catalog snapshot.
-- `src/pages/BOUTIQUE.uafgz.js`: binds `#atelierShop`, loads public live Wix catalog pages, assigns equivalent SEO markup and handles native cart actions.
+- `src/pages/BOUTIQUE.uafgz.js`: binds `#customElement4`, loads public live Wix catalog pages, assigns equivalent SEO markup and handles native cart actions.
 - `src/backend/atelier-shop.web.js`: documented public Stores/Products query and currentCart integration. Hidden products are not requested and permissions are not suppressed. Cart accepts only a public, in-stock product ID with no required options, fixes quantity to one, and lets Wix calculate price/inventory.
 - `src/public/atelier-shop-seo.js`: equivalent static introductory/philosophy content. Loaded product links/prices are appended through the documented seoMarkup property.
 - Shared navbar/footer remain independent. The shop component never hides or replaces Wix shell elements.

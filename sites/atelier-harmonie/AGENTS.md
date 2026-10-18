@@ -23,7 +23,7 @@
 
 ## Shop component
 
-- `/shop`: `atelier-shop-v1.js`, tag `atelier-shop-v1`, requested Wix ID `atelierShop` (human must confirm placement). Shared header/footer stay separate.
+- `/shop`: `atelier-shop-v1.js`, tag `atelier-shop-v1`, requested Wix ID `customElement4` (human must confirm placement). Shared header/footer stay separate.
 - Original shop introduction and philosophy copy must stay intact. Products, stock, prices and discounts come from public Wix `Stores/Products` through `backend/atelier-shop.web.js`; never embed a parallel catalog snapshot in production.
 - Native Wix currentCart handles add-to-cart. Products requiring options/custom text open their existing product page. Never accept client-provided prices, arbitrary catalog apps or quantities in the cart endpoint.
 - `production/SHOP_PLACEMENT.md` is the human setup checklist. Do not operate Wix Editor or publish the stale local layout.

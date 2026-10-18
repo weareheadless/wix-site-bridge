@@ -60,7 +60,7 @@
       "navbar": "customElement1",
       "home": "customElement2",
       "footer": "customElement3",
-      "shop": "atelierShop"
+      "shop": "customElement4"
     },
     "otherPages": "native page UI preserved; shared navbar bundle only",
     "status": "pending full route inventory and Wix placement"

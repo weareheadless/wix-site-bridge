@@ -3,7 +3,7 @@ import wixEcomFrontend from 'wix-ecom-frontend';
 import { seoMarkup } from 'public/atelier-shop-seo';
 
 $w.onReady(function(){
- const element=$w('#atelierShop');
+ const element=$w('#customElement4');
  let items=[],nextSkip=0,loading=false,loaded=false;
  element.seoMarkup=seoMarkup;
  const escape=value=>String(value||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));

@@ -34,7 +34,7 @@
   "startupRelease": "atelier-production-20261018-v6",
   "layoutWarning": "Local UI version 740 predates human placement. Do not CLI-publish it.",
   "liveObservedRelease": "atelier-production-20261018-v2",
-  "pendingPublication": "Shop source and startup synchronized; human places atelierShop on /shop, confirms current-layout preview and publishes from Wix Editor.",
+  "pendingPublication": "Shop source and startup synchronized; human places customElement4 on /shop, confirms current-layout preview and publishes from Wix Editor.",
   "fixes": [
     "Scope fragment lookups through componentRoot to avoid hero local root temporal-dead-zone error; restores hero/carousel initialization and deferred reviews",
     "Load shared prototype Google Fonts stylesheet in document head so shadow components can use Parisienne and other fonts",
@@ -43,7 +43,7 @@
   "shop": {
     "route": "/shop",
     "tag": "atelier-shop-v1",
-    "requestedElementId": "atelierShop",
+    "requestedElementId": "customElement4",
     "sourceCommit": "bb5c888",
     "placement": "pending human",
     "published": false,
