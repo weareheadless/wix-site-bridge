@@ -5,7 +5,7 @@ if(process.argv[2]!=='--site'||process.argv[3]!=='atelier-harmonie')throw Error(
 const manifest=JSON.parse(await readFile('sites/atelier-harmonie/site.manifest.json','utf8'));
 if(manifest.site.siteId!=='376faa89-fe6c-4ae8-8feb-10520e813a89')throw Error('Wrong site');
 const out='sites/atelier-harmonie/production';
-const modules=JSON.parse(await readFile('work/reference-modules.json','utf8'));
+const modules=JSON.parse(await readFile('sites/atelier-harmonie/.build/modules.json','utf8'));
 const bundles={navbar:[],home:[]};
 for(const m of modules){
  let html=await readFile(m.file,'utf8');

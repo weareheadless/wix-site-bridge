@@ -1,15 +1,17 @@
-import {readFile,writeFile} from 'node:fs/promises';
+import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {spawnSync} from 'node:child_process';
 const mode=process.argv[2]??'dry-run',only=process.argv[3];
 if(!['dry-run','apply'].includes(mode))throw Error('Invalid mode');
-const modules=JSON.parse(await readFile('work/reference-modules.json','utf8'));
+const modules=JSON.parse(await readFile('sites/atelier-harmonie/.build/modules.json','utf8'));
 const manifestPath='sites/atelier-harmonie/site.manifest.json';
+const stateDir='sites/atelier-harmonie/.wix-bridge-state';
+if(mode==='apply')await mkdir(stateDir,{recursive:true,mode:0o700});
 const summary=[];
 for(const m of modules.filter(m=>!only||only.split(',').includes(m.mountId))){
  const manifest=JSON.parse(await readFile(manifestPath,'utf8'));
  if(manifest.site.alias!=='atelier-harmonie'||manifest.site.siteId!=='376faa89-fe6c-4ae8-8feb-10520e813a89')throw Error('Wrong site');
  const existing=manifest.site.customCode.find(s=>s.mountId===m.mountId);
- const args=['src/cli.mjs',existing?'update-snippet':'create-snippet','--manifest',manifestPath,'--site','atelier-harmonie','--html-file',m.file,'--route','/copy-of-accueil'];
+ const args=['src/cli.mjs',existing?'update-snippet':'create-snippet','--manifest',manifestPath,'--site','atelier-harmonie','--state-dir',stateDir,'--html-file',m.file,'--route','/copy-of-accueil'];
  if(existing){
   if(existing.mountOrder!==m.mountOrder||existing.routeGuard!=='/copy-of-accueil')throw Error('Mount drift');
   args.push('--snippet',existing.id,'--from-category','ESSENTIAL');
@@ -37,4 +39,4 @@ for(const m of modules.filter(m=>!only||only.split(',').includes(m.mountId))){
   const row={mount:m.mountId,order:m.mountOrder,status:receipt.status,id:saved.id,manifestConfirmed:true,receipt:result.receiptPath,...(receipt.recovery?{recovery:receipt.recovery}:{} )};summary.push(row);console.log(JSON.stringify(row));
  }
 }
-await writeFile(mode==='apply'?`.wix-bridge-state/reference-rebuild-release${only?'-'+only:''}.json`:`work/reference-dry-run${only?'-'+only:''}.json`,JSON.stringify(summary,null,2)+'\n',{mode:0o600});
+await writeFile(mode==='apply'?`${stateDir}/reference-rebuild-release${only?'-'+only:''}.json`:`sites/atelier-harmonie/.build/reference-dry-run${only?'-'+only:''}.json`,JSON.stringify(summary,null,2)+'\n',{mode:0o600});

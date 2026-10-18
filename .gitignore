@@ -13,3 +13,5 @@ sites/*/.env.*
 # Local assembly and temporary checkouts
 work/
 .wix/
+
+sites/*/.build/
