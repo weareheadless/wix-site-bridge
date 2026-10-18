@@ -8,7 +8,44 @@
       "/",
       "/copy-of-accueil"
     ],
-    "components": [],
+    "components": [
+      {
+        "name": "navbar",
+        "source": "sites/atelier-harmonie/production/custom-elements/atelier-navbar-v1.js",
+        "tagName": "atelier-navbar-v1",
+        "routes": [
+          "*"
+        ],
+        "wixElementIds": [
+          "customElement1"
+        ],
+        "datasetBindings": []
+      },
+      {
+        "name": "home",
+        "source": "sites/atelier-harmonie/production/custom-elements/atelier-home-v1.js",
+        "tagName": "atelier-home-v1",
+        "routes": [
+          "/"
+        ],
+        "wixElementIds": [
+          "customElement2"
+        ],
+        "datasetBindings": []
+      },
+      {
+        "name": "footer",
+        "source": "sites/atelier-harmonie/production/custom-elements/atelier-footer-v1.js",
+        "tagName": "atelier-footer-v1",
+        "routes": [
+          "*"
+        ],
+        "wixElementIds": [
+          "customElement3"
+        ],
+        "datasetBindings": []
+      }
+    ],
     "customCode": [
       {
         "id": "00b2da0f-23a8-4f8f-b400-2f8a29d9d8b2",
@@ -191,6 +228,78 @@
         "mountId": "contact",
         "mountOrder": 50,
         "htmlFile": "sites/atelier-harmonie/prototype/05-contact.html"
+      },
+      {
+        "id": "5d5dcf8d-801e-4029-a804-864e59d1ea36",
+        "name": "Atelier production early registration — initial",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": true,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-elements-global.html",
+        "purpose": "nonvisual-early-registration"
+      },
+      {
+        "id": "f0a7cc61-94e1-4f74-9e8d-8a7e0ad8db85",
+        "name": "Atelier production early registration — navigation",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-elements-global.html",
+        "purpose": "nonvisual-early-registration"
+      },
+      {
+        "id": "e5c3306c-5c12-4e47-a964-769f447fba92",
+        "name": "Atelier production early-packet-navbar-1.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": true,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-navbar-1.html",
+        "purpose": "nonvisual-early-registration"
+      },
+      {
+        "id": "f51d200b-5a72-42af-9888-343a96ad77c4",
+        "name": "Atelier production early-packet-home-1.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": true,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-home-1.html",
+        "purpose": "nonvisual-early-registration"
+      },
+      {
+        "id": "6a817d01-dde1-4c27-b881-0cd2334b1055",
+        "name": "Atelier production early-packet-home-2.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": true,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-home-2.html",
+        "purpose": "nonvisual-early-registration"
+      },
+      {
+        "id": "bc560b09-ea35-47ed-a623-65edf44f96c9",
+        "name": "Atelier production early-packet-footer-1.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": true,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-footer-1.html",
+        "purpose": "nonvisual-early-registration"
       }
     ],
     "connectedRepo": "weareheadless/atelier-harmonie",

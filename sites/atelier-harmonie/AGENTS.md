@@ -9,3 +9,11 @@
 - `weareheadless/atelier-harmonie-headless` is a separate Next.js/Payload project. Do not alter or deploy it for this Wix migration.
 - Existing historical receipts/snapshots remain in the root private `.wix-bridge-state/`; preserve their recovery path. New prototype releases explicitly use `sites/atelier-harmonie/.wix-bridge-state/`; local assembly files go in ignored `.build/`. Keep all credentials and state out of Git.
 - Run customer scripts from the repository root. Build commands require explicit `--site atelier-harmonie`; release helpers must reject any different alias/site ID. Review dry-runs and receipts.
+
+## Confirmed shared placement workflow
+
+- Do not interact with Wix Editor UI. The human owns placement and removal of native sections.
+- Human confirmed these Wix Custom Element IDs: shared header `customElement1` → `atelier-navbar-v1`; homepage section `customElement2` → `atelier-home-v1`; shared footer `customElement3` → `atelier-footer-v1`.
+- Build footer separately from homepage content. Never duplicate its markup inside the homepage component.
+- Source selection is Velo file in `src/public/custom-elements/`, with matching file basename and tag. Existing placements receive future source changes without recreation.
+- The checkout's old UI revision 740 predates the human's latest placement; never publish that snapshot over their work.

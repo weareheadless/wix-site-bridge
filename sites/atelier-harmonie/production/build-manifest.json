@@ -1,40 +1,54 @@
 {
   "siteAlias": "atelier-harmonie",
   "siteId": "376faa89-fe6c-4ae8-8feb-10520e813a89",
-  "release": "atelier-production-20261018-v1",
+  "release": "atelier-production-20261018-v2",
   "components": {
     "navbar": {
       "tag": "atelier-navbar-v1",
-      "sha256": "32214f2f1441ca71ac23d49d7dda9251650d20ce0b3993c73bca6f08188fd971"
+      "sha256": "c4c5c1e5b8b5d2eacb351cdba3685bddb6651d52068be7bf4f0954bdf7a825cf"
     },
     "home": {
       "tag": "atelier-home-v1",
-      "sha256": "8421168a895acb59439b8fe23f97f913aebd3aea48bc0d5153eeb584f631a506"
+      "sha256": "a7abc187eb0b8844ded240d471b30ea81a075bc776bd8e0c3d1a86b6773824ec"
+    },
+    "footer": {
+      "tag": "atelier-footer-v1",
+      "sha256": "231fd2e7f48180fa243ea52c9ae6d7e0d49bb2695e672b79775baa7570145e37"
     }
   },
   "packets": [
     {
       "key": "navbar",
       "file": "early-packet-navbar-1.html",
-      "characters": 5571
+      "characters": 5997
     },
     {
       "key": "home",
       "file": "early-packet-home-1.html",
-      "characters": 12153
+      "characters": 12159
     },
     {
       "key": "home",
       "file": "early-packet-home-2.html",
-      "characters": 7065
+      "characters": 5631
+    },
+    {
+      "key": "footer",
+      "file": "early-packet-footer-1.html",
+      "characters": 4245
     }
   ],
   "coverage": {
-    "sharedHeader": "all routes with Wix shared header; placement must be inventoried",
+    "sharedHeader": "navbar and footer on all routes using Wix shared containers; placement reported by user",
     "home": [
       "/",
       "/copy-of-accueil"
     ],
+    "elementIds": {
+      "navbar": "customElement1",
+      "home": "customElement2",
+      "footer": "customElement3"
+    },
     "otherPages": "native page UI preserved; shared navbar bundle only",
     "status": "pending full route inventory and Wix placement"
   },

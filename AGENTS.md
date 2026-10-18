@@ -26,3 +26,9 @@
 - Keep reusable bridge code in root `src/`; keep customer source, manifests, build scripts and placement notes under `sites/<alias>/`. Read that site's `AGENTS.md` before changing it. Never copy site IDs, credentials or source across customers.
 - Use the selected `sites/<alias>/site.manifest.json` and explicit `--site` for every operation. Record isolated private state via `--state-dir`; historical recovery directories remain valid until their receipts are deliberately migrated. Do not batch-deploy all customer folders.
 - Wix-connected deployment repositories remain site-specific. Sync only the selected customer's reviewed production artifacts, preserve its existing Wix code and UI configuration, and record both source/deployment revisions. Never treat a shared bridge folder or an unrelated headless project as an officially connected Wix checkout.
+
+## Shared placement workflow
+
+- The human handles Wix Editor placement, section removal, sizing and element settings. Agents must not operate the Wix Editor UI unless the human explicitly changes this workflow.
+- Agents build and push component source, Velo bindings and synchronized global startup packets. Give the human precise file names, tag names, element IDs and sizing instructions when placement is required.
+- Do not publish using a stale local UI snapshot after the human edits layout. The human's saved Editor layout is authoritative; synchronize it through a supported workflow before any CLI publish, or ask the human to publish from the Editor after release readiness is confirmed.
