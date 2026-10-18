@@ -31,10 +31,10 @@
     }
   },
   "startupCustomCodeInstalled": true,
-  "startupRelease": "atelier-production-20261018-v19",
+  "startupRelease": "atelier-production-20261018-v20",
   "layoutWarning": "Local UI version 740 predates human placement. Do not CLI-publish it.",
   "liveObservedRelease": "atelier-production-20261018-v2",
-  "pendingPublication": "Contact section/adapter removed from restoration embed; human publishes current saved Wix layout and retains native contact section.",
+  "pendingPublication": "Standalone presentational contact intro ready; human places customElement11 above native Wix form and publishes saved layout.",
   "fixes": [
     "Scope fragment lookups through componentRoot to avoid hero local root temporal-dead-zone error; restores hero/carousel initialization and deferred reviews",
     "Load shared prototype Google Fonts stylesheet in document head so shadow components can use Parisienne and other fonts",
@@ -120,5 +120,15 @@
     "contactIntegration": {
       "status": "Removed at user request; all contact UI and submissions remain native Wix"
     }
+  },
+  "contact": {
+    "route": "/tapisserie-restauration",
+    "tag": "atelier-contact-v1",
+    "requestedElementId": "customElement11",
+    "sourceCommit": "4dfcbc8",
+    "placement": "pending human; separate section above real Wix form",
+    "published": false,
+    "instructions": "CONTACT_PLACEMENT.md",
+    "startupEmbedId": "68db761f-4115-448c-9d8b-4306b1b84ec4"
   }
 }

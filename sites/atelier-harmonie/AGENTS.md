@@ -56,3 +56,5 @@
 - `/tapisserie-restauration`: source `atelier-restoration-v1.js`, tag `atelier-restoration-v1`, requested ID `customElement10`; human placement pending. See `production/RESTORATION_PLACEMENT.md`.
 - Preserve original complete copy and distinct images, combined before/after intact, service shortcuts and native accessible cushion details. No fabricated comparison slider or numbered labels.
 - User cancelled integrated contact mapping. Keep contact entirely in native Wix below the restoration embed; no embedded contact section, custom form or adapter. Do not restore the abandoned mapping configuration. See RESTORATION_PLACEMENT.md.
+
+- Separate presentational contact intro is now available on `/tapisserie-restauration`: `atelier-contact-v1.js`, tag `atelier-contact-v1`, requested ID `customElement11`, placed above real native Wix form. No custom submission fields/adapter; see `production/CONTACT_PLACEMENT.md`.

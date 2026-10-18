@@ -148,6 +148,20 @@
         "datasetBindings": [
           "Keep original native Wix contact form and submission bindings outside custom element"
         ]
+      },
+      {
+        "name": "contact",
+        "source": "sites/atelier-harmonie/production/custom-elements/atelier-contact-v1.js",
+        "tagName": "atelier-contact-v1",
+        "routes": [
+          "/tapisserie-restauration"
+        ],
+        "wixElementIds": [
+          "customElement11"
+        ],
+        "datasetBindings": [
+          "Presentational intro only. Native Wix form remains separate and owns submissions."
+        ]
       }
     ],
     "customCode": [
@@ -487,6 +501,18 @@
         "category": "ESSENTIAL",
         "loadOnce": true,
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-restoration-1.html",
+        "purpose": "nonvisual-early-registration"
+      },
+      {
+        "id": "68db761f-4115-448c-9d8b-4306b1b84ec4",
+        "name": "Atelier production early-packet-contact-1.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": true,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-contact-1.html",
         "purpose": "nonvisual-early-registration"
       }
     ],
