@@ -35,3 +35,8 @@
 - Latest creations reuse the existing live backend/cart service; name-based lighting filtering is presentation logic, not a parallel CMS or Wix collection membership.
 
 - Luminaires gallery uses measured masonry with unequal column widths and natural photo proportions. Do not restore numbered category labels or repeated “L’art de la lumière” text.
+
+## Seats page
+
+- `/sieges`: source `atelier-seats-v1.js`, tag `atelier-seats-v1`, requested ID `customElement6`; human placement pending. See `production/SEATS_PLACEMENT.md`.
+- Preserve original introduction/restoration copy, existing photos and Wix runtime catalog/cart. Use natural photo proportions and subtle ivory product boxes.

@@ -8,7 +8,8 @@
       "/",
       "/copy-of-accueil",
       "/shop",
-      "/lampes"
+      "/lampes",
+      "/sieges"
     ],
     "components": [
       {
@@ -73,6 +74,20 @@
         ],
         "datasetBindings": [
           "Live Stores/Products through existing backend/atelier-shop.web; native currentCart"
+        ]
+      },
+      {
+        "name": "seats",
+        "source": "sites/atelier-harmonie/production/custom-elements/atelier-seats-v1.js",
+        "tagName": "atelier-seats-v1",
+        "routes": [
+          "/sieges"
+        ],
+        "wixElementIds": [
+          "customElement6"
+        ],
+        "datasetBindings": [
+          "Live Stores/Products through backend/atelier-shop.web; native Wix currentCart"
         ]
       }
     ],
@@ -353,6 +368,18 @@
         "category": "ESSENTIAL",
         "loadOnce": true,
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-lamps-1.html",
+        "purpose": "nonvisual-early-registration"
+      },
+      {
+        "id": "0824f76d-abf7-482b-80b0-e8337a786d75",
+        "name": "Atelier production early-packet-seats-1.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": true,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-seats-1.html",
         "purpose": "nonvisual-early-registration"
       }
     ],
