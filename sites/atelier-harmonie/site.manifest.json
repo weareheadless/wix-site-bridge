@@ -11,7 +11,8 @@
       "/lampes",
       "/sieges",
       "/objets-deco",
-      "/gift-card"
+      "/gift-card",
+      "/tapisserie-restauration"
     ],
     "components": [
       {
@@ -132,6 +133,20 @@
         ],
         "datasetBindings": [
           "Native Wix Gift Cards widget preserved separately; no replacement payment or issuance logic"
+        ]
+      },
+      {
+        "name": "restoration",
+        "source": "sites/atelier-harmonie/production/custom-elements/atelier-restoration-v1.js",
+        "tagName": "atelier-restoration-v1",
+        "routes": [
+          "/tapisserie-restauration"
+        ],
+        "wixElementIds": [
+          "customElement10"
+        ],
+        "datasetBindings": [
+          "Keep original native Wix contact form and submission bindings outside custom element"
         ]
       }
     ],
@@ -460,6 +475,18 @@
         "category": "ESSENTIAL",
         "loadOnce": true,
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-giftguide-1.html",
+        "purpose": "nonvisual-early-registration"
+      },
+      {
+        "id": "da2e0e39-6ae0-40f8-ae59-6174aaed74fd",
+        "name": "Atelier production early-packet-restoration-1.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": true,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-restoration-1.html",
         "purpose": "nonvisual-early-registration"
       }
     ],

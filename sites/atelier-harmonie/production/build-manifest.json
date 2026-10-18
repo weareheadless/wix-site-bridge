@@ -1,7 +1,7 @@
 {
   "siteAlias": "atelier-harmonie",
   "siteId": "376faa89-fe6c-4ae8-8feb-10520e813a89",
-  "release": "atelier-production-20261018-v16",
+  "release": "atelier-production-20261018-v17",
   "components": {
     "navbar": {
       "tag": "atelier-navbar-v1",
@@ -38,6 +38,10 @@
     "giftguide": {
       "tag": "atelier-gift-guide-v1",
       "sha256": "8b98368144dc5296e8b419c709c236361f66f5a32d23a720b2372280178e67b1"
+    },
+    "restoration": {
+      "tag": "atelier-restoration-v1",
+      "sha256": "f1c2431d43b37f26c891255035403101980071af95c447dff763007a158c1530"
     }
   },
   "packets": [
@@ -90,6 +94,11 @@
       "key": "giftguide",
       "file": "early-packet-giftguide-1.html",
       "characters": 2787
+    },
+    {
+      "key": "restoration",
+      "file": "early-packet-restoration-1.html",
+      "characters": 6889
     }
   ],
   "coverage": {
@@ -113,6 +122,9 @@
     "gift": [
       "/gift-card"
     ],
+    "restoration": [
+      "/tapisserie-restauration"
+    ],
     "elementIds": {
       "navbar": "customElement1",
       "home": "customElement2",
@@ -122,7 +134,8 @@
       "seats": "customElement6",
       "deco": "customElement7",
       "giftintro": "customElement8",
-      "giftguide": "customElement9"
+      "giftguide": "customElement9",
+      "restoration": "customElement10"
     },
     "otherPages": "native page UI preserved; shared navbar bundle only",
     "status": "pending full route inventory and Wix placement"

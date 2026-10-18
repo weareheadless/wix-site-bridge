@@ -31,10 +31,10 @@
     }
   },
   "startupCustomCodeInstalled": true,
-  "startupRelease": "atelier-production-20261018-v16",
+  "startupRelease": "atelier-production-20261018-v17",
   "layoutWarning": "Local UI version 740 predates human placement. Do not CLI-publish it.",
   "liveObservedRelease": "atelier-production-20261018-v2",
-  "pendingPublication": "Gift editorial sections ready; human places customElement8 and customElement9 around retained native app, previews and publishes saved Wix layout.",
+  "pendingPublication": "Restoration source/startup ready; human places customElement10, preserves native contact form and previews/publishes current saved Wix layout.",
   "fixes": [
     "Scope fragment lookups through componentRoot to avoid hero local root temporal-dead-zone error; restores hero/carousel initialization and deferred reviews",
     "Load shared prototype Google Fonts stylesheet in document head so shadow components can use Parisienne and other fonts",
@@ -106,5 +106,16 @@
       "requestedElementId": "customElement9",
       "startupEmbedId": "115c3eb7-791d-4128-a46d-1f2c52d6e344"
     }
+  },
+  "restoration": {
+    "route": "/tapisserie-restauration",
+    "tag": "atelier-restoration-v1",
+    "requestedElementId": "customElement10",
+    "sourceCommit": "dbaba03",
+    "placement": "pending human; retain native contact form below custom element",
+    "published": false,
+    "instructions": "RESTORATION_PLACEMENT.md",
+    "startupInstalled": true,
+    "startupEmbedId": "da2e0e39-6ae0-40f8-ae59-6174aaed74fd"
   }
 }
