@@ -743,6 +743,18 @@
         "loadOnce": true,
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-journalbottom-1.html",
         "purpose": "nonvisual-early-registration"
+      },
+      {
+        "id": "d1343538-27ba-4069-8c5b-4d20db25e22a",
+        "name": "Atelier production early-packet-product-1.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": true,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-product-1.html",
+        "purpose": "nonvisual-early-registration"
       }
     ],
     "connectedRepo": "weareheadless/atelier-harmonie",

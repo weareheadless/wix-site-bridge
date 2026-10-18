@@ -4,7 +4,7 @@ Target `--site atelier-harmonie`, exact dynamic route family `/product-page/:slu
 
 ## Status
 
-Source pushed and build/dry-run complete. Planned startup release `atelier-production-20261018-v31` is NOT installed: automatic approval review rejected the apply because this production release needs explicit human authorization. Last installed startup release remains v30. No product receipt/ID exists yet; do not claim startup coverage deployed. Human placement and publication pending.
+Source pushed and startup release `atelier-production-20261018-v31` installed after explicit human approval. Product startup ID `d1343538-27ba-4069-8c5b-4d20db25e22a`; receipt hash, HEAD/load-once placement and manifest mapping inspected. Human placement, visual/live review and publication remain pending.
 
 ## Human placement
 
@@ -16,7 +16,7 @@ Source pushed and build/dry-run complete. Planned startup release `atelier-produ
 - Zero outer section padding, no restrictive max-width. Initial element AND containing-section height estimate: 1,500px desktop / 2,000px mobile. Actual height varies with product description, options and expanded details. Fit actual content on desktop/mobile; component height events do not resize Wix parent sections.
 - Preserve Wix Stores installation, Product Page route, existing canonical/SEO configuration, cart/checkout and system pages. Replace old visible product content and related-products gallery only after preview confirms the new element loads the selected product. No duplicate hidden product shell, app DOM selectors or overlay positioning are implemented by this release.
 - If Wix does not allow removing the old Product Page widget, stop and report that constraint before deleting the Store Page or hiding a duplicate widget. Wix's documented default-content hiding feature is a separate architecture decision, not assumed permission to retain duplicate layers.
-- Publish only the human's current saved Editor layout after startup approval/installation and Preview. Do not CLI-publish stale UI revision 740.
+- Publish only the human's current saved Editor layout after Preview. Do not CLI-publish stale UI revision 740.
 
 ## Design and data
 
@@ -30,12 +30,12 @@ Images are supported; product video presentation is not implemented. Preserve an
 
 ## Startup and readiness gate
 
-Planned v31 registry matches `/product-page/<one slug>` explicitly and includes shared navbar/footer. Product packet is under the 15,000-character limit, source fingerprint recorded in build-manifest. Normal Wix custom-element file remains fallback. Static gallery geometry and editorial shell render immediately; product-specific content arrives through Velo. Only the actual first selected product image receives a matching preload/high priority; no global catalog snapshot or bulk preload.
+Installed v31 registry matches `/product-page/<one slug>` explicitly and includes shared navbar/footer. Product packet is under the 15,000-character limit, source fingerprint recorded in build-manifest. Normal Wix custom-element file remains fallback. Static gallery geometry and editorial shell render immediately; product-specific content arrives through Velo. Only the actual first selected product image receives a matching preload/high priority; no global catalog snapshot or bulk preload.
 
 Visual inspection is pending: in-app browser control returned “Local browser use is disabled in Work settings.” No other browser was used. Human should preview multiple image orientations, long descriptions, options/variant prices, custom text, sold-out items, quantity limits, cart/checkout and product-to-product navigation. Live fresh/internal navigation, SEO and saved section geometry are release gates, not inferred from registration or a successful build. No tests or performance audit run.
 
 ## Recovery
 
-Once startup is authorized/applied, inspect its private receipt and ensure the returned product embed ID is recorded in the site manifest. Restore before-snapshot HTML or disable relevant startup entries on rollback; keep source fallback aligned. Source can be reverted in the dedicated repository; preserve current human layout rather than publishing stale local UI state.
+Product receipt and returned embed ID are recorded in the private state and site manifest. Restore before-snapshot HTML or disable relevant startup entries on rollback; keep source fallback aligned. Source can be reverted in the dedicated repository; preserve current human layout rather than publishing stale local UI state.
 
 API references read: Wix Stores Collections (Products / Variants), getProductVariants, Catalog V1 eCommerce Integration, addToCurrentCart, createCheckoutFromCurrentCart, navigateToCartPage, navigateToCheckoutPage and wix-location-frontend.onChange.
