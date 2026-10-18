@@ -17,7 +17,7 @@ function rich(value){
 class AtelierProduct extends HTMLElement{
  static get observedAttributes(){return ['product','product-loading','product-error','selection-result','cart-result','related'];}
  constructor(){super();this.attachShadow({mode:'open'});this.sequence=0;this.index=0;this.busy=false;this.product=null;}
- connectedCallback(){if(this.rendered)return;this.rendered=true;this.shadowRoot.innerHTML=__PRODUCT_HTML__;
+ connectedCallback(){if(this.rendered)return;this.rendered=true;this.dataset.atelierProductVersion='20261018-v35';this.shadowRoot.innerHTML=__PRODUCT_HTML__;
  const font='https://fonts.googleapis.com/css2?family=Parisienne&family=DM+Sans:wght@400;500;600&family=Libre+Caslon+Text:ital,wght@0,400;1,400&display=swap';
  if(![...document.querySelectorAll('link[data-atelier-fonts]')].some(l=>l.href===font)){const link=document.createElement('link');link.rel='stylesheet';link.href=font;link.dataset.atelierFonts='true';document.head.append(link);}
  const r=this.shadowRoot;
@@ -36,7 +36,10 @@ class AtelierProduct extends HTMLElement{
  readProduct(){const p=JSON.parse(this.getAttribute('product'));if(!p?.id)return;this.reset();this.product=p;const r=this.shadowRoot;
  r.querySelector('[data-loading]').hidden=true;r.querySelector('[data-content]').hidden=false;r.querySelector('[data-layout]').setAttribute('aria-busy','false');r.querySelector('[data-title]').textContent=p.name;r.querySelector('[data-crumb]').hidden=false;r.querySelector('[data-crumb]').textContent='/ '+p.name;
  const ribbon=r.querySelector('[data-ribbon]');ribbon.textContent=p.ribbon||'';ribbon.hidden=!p.ribbon;
- const description=rich(p.description),plain=[...description.childNodes].map(n=>n.textContent).join(' ').replace(/\s+/g,' ').trim();
+ const description=rich(p.description);
+ // Preserve word boundaries even when the catalog wraps paragraphs in a single div.
+ const excerptCopy=description.cloneNode(true);excerptCopy.querySelectorAll('p,div,li,br,h2,h3,h4').forEach(node=>node.append(document.createTextNode(' ')));
+ const plain=excerptCopy.textContent.replace(/\s+/g,' ').trim();
  const excerpt=plain.length>220?plain.slice(0,220).replace(/\s+\S*$/,'').trimEnd()+'…':plain;
  r.querySelector('[data-excerpt]').textContent=excerpt;r.querySelector('[data-excerpt]').hidden=!plain;
  const disclosure=r.querySelector('[data-description-wrap]');disclosure.open=false;disclosure.hidden=plain.length<=220;
