@@ -22,3 +22,7 @@ Target: `--site atelier-harmonie`, `/lampes` only. Source repository `weareheadl
 ## Mosaic update
 
 Five category photographs now use natural proportions in three desktop columns / two mobile columns, with descriptions immediately underneath. The project invitation is the sixth mosaic tile. Existing element ID and tag are unchanged. Reduce the formerly tall containing Wix section to fit the shorter content; the component cannot change saved Wix section geometry. Live browser inspection still showed v9 after source push, so publication of the current saved Editor layout is required before claiming the mosaic is live.
+
+## Masonry revision
+
+Source `e4f83ed`, startup `atelier-production-20261018-v11`: measured shortest-column packing with unequal desktop column widths, two mobile columns, and natural image proportions. Removed all numbered labels. Existing element/tag unchanged; saved Wix section size remains human-controlled. Preview/publish current layout before confirming live appearance.

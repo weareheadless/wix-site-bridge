@@ -1,7 +1,7 @@
 {
   "siteAlias": "atelier-harmonie",
   "siteId": "376faa89-fe6c-4ae8-8feb-10520e813a89",
-  "release": "atelier-production-20261018-v10",
+  "release": "atelier-production-20261018-v11",
   "components": {
     "navbar": {
       "tag": "atelier-navbar-v1",
@@ -21,7 +21,7 @@
     },
     "lamps": {
       "tag": "atelier-lamps-v1",
-      "sha256": "277a20046e7f7d15f9d515b3105775c785d01f192dab20b9f625d7fa8d19973e"
+      "sha256": "9be52a62094a929d943d2db3870937809e021cba9753830d49343524879283f6"
     }
   },
   "packets": [
@@ -53,7 +53,7 @@
     {
       "key": "lamps",
       "file": "early-packet-lamps-1.html",
-      "characters": 7599
+      "characters": 7907
     }
   ],
   "coverage": {

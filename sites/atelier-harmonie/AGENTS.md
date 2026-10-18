@@ -33,3 +33,5 @@
 - `/lampes`: `atelier-lamps-v1.js`, tag `atelier-lamps-v1`, requested ID `customElement5`. Human placement pending; see `production/LAMPS_PLACEMENT.md`.
 - Reuse the current live page’s five category descriptions and native `/lampes/<category>` destinations. Preserve dynamic Wix category pages and shared header/footer.
 - Latest creations reuse the existing live backend/cart service; name-based lighting filtering is presentation logic, not a parallel CMS or Wix collection membership.
+
+- Luminaires gallery uses measured masonry with unequal column widths and natural photo proportions. Do not restore numbered category labels or repeated “L’art de la lumière” text.
