@@ -5,13 +5,34 @@ import { seoMarkup as faqSeo } from 'public/atelier-productfaq-seo';
 import { getAtelierProducts } from 'backend/atelier-shop.web';
 
 $w.onReady(function(){
- const element=$w('#customElement20');
+ let native,element;
+ try{native=$w('#productPage1');}catch{}
+ try{element=$w('#customElement20');if(typeof element.on!=='function')return;}catch{return;}
+
  // FAQ is an independent placement; its absence must not block the product.
  try{$w('#customElement21').seoMarkup=faqSeo;}catch{}
- let generation=0,selection=0,current=null,pendingAdd=false;
+ let generation=0,selection=0,current=null,pendingAdd=false,readyTimer;
+ async function nativeFallback(version){
+  if(version!==generation)return;
+  clearTimeout(readyTimer);
+  try{await native?.expand();}catch{}
+  if(version===generation)try{await element.collapse();}catch{}
+ }
+ element.on('atelier-product-rendered',async event=>{
+  const version=event.detail?.renderToken;
+  if(version!==generation||event.detail?.productId!==current?.id)return;
+  clearTimeout(readyTimer);
+  try{await element.expand();if(version===generation)await native?.collapse();}catch{await nativeFallback(version);}
+ });
+ element.on('atelier-product-render-error',()=>nativeFallback(generation));
  const escape=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  async function load(){
   const version=++generation;current=null;++selection;
+  clearTimeout(readyTimer);
+  // Native widget remains the supported route host and visible fallback until paint is acknowledged.
+  try{await native?.expand();await element.expand();}catch{}
+  if(version!==generation)return;
+  readyTimer=setTimeout(()=>nativeFallback(version),12000);
   element.setAttribute('product-loading',String(version));
   try{
    const path=wixLocationFrontend.path;
@@ -19,11 +40,11 @@ $w.onReady(function(){
    let slug=path[1];try{slug=decodeURIComponent(slug);}catch{}
    const product=await getAtelierProduct(slug);
    if(version!==generation)return;
-   current=product;element.setAttribute('product',JSON.stringify(product));
+   current=product;element.setAttribute('product',JSON.stringify({...product,renderToken:version}));
    // Wix Stores retains its native canonical, structured Product data and SEO settings.
    element.seoMarkup='<article><h1>'+escape(product.name)+'</h1><p>'+escape(product.price)+' '+escape(product.currency)+'</p><p>'+escape(product.description.replace(/<[^>]*>/g,' '))+'</p></article>';
    getAtelierProducts(0).then(data=>{if(version===generation)element.setAttribute('related',JSON.stringify(data.items.filter(p=>p.id!==product.id).slice(0,4)));}).catch(()=>{});
-  }catch{if(version===generation){element.setAttribute('product-error',String(version));element.seoMarkup='';}}
+  }catch{if(version===generation){element.setAttribute('product-error',String(version));element.seoMarkup='';await nativeFallback(version);}}
  }
  element.on('atelier-product-select',async event=>{
   if(!current)return;const token=++selection,id=current.id,version=generation;

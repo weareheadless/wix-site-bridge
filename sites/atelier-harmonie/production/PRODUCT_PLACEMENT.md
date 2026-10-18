@@ -1,10 +1,10 @@
 # Product Page — one reusable custom element
 
-Target `--site atelier-harmonie`, exact dynamic route family `/product-page/:slug`, Wix page `Product Page.lj022.js`. Connected source `weareheadless/atelier-harmonie`, commit `fde0abb`.
+Target `--site atelier-harmonie`, exact dynamic route family `/product-page/:slug`, Wix page `Product Page.lj022.js`. Connected source `weareheadless/atelier-harmonie`, commit `4f402b7`.
 
 ## Status
 
-Source pushed and startup release `atelier-production-20261018-v32` installed after explicit human approval. Product startup ID `d1343538-27ba-4069-8c5b-4d20db25e22a`; receipt hash, HEAD/load-once placement and manifest mapping inspected. Human placement, visual/live review and publication remain pending.
+Source pushed and startup release `atelier-production-20261018-v33` installed after explicit human approval. Product startup ID `d1343538-27ba-4069-8c5b-4d20db25e22a`; receipt hash, HEAD/load-once placement and manifest mapping inspected. Human placement, visual/live review and publication remain pending.
 
 ## Human placement
 
@@ -14,8 +14,8 @@ Source pushed and startup release `atelier-production-20261018-v32` installed af
 - Tag: `atelier-product-v1`.
 - Element ID: `customElement20`.
 - Zero outer section padding, no restrictive max-width. Initial element AND containing-section height estimate: 1,500px desktop / 2,000px mobile. Actual height varies with product description, options and expanded details. Fit actual content on desktop/mobile; component height events do not resize Wix parent sections.
-- Preserve Wix Stores installation, Product Page route, existing canonical/SEO configuration, cart/checkout and system pages. Replace old visible product content and related-products gallery only after preview confirms the new element loads the selected product. No duplicate hidden product shell, app DOM selectors or overlay positioning are implemented by this release.
-- If Wix does not allow removing the old Product Page widget, stop and report that constraint before deleting the Store Page or hiding a duplicate widget. Wix's documented default-content hiding feature is a separate architecture decision, not assumed permission to retain duplicate layers.
+- Preserve Wix Stores installation, Product Page route, existing canonical/SEO configuration, cart/checkout and system pages. Retain `productPage1` as the native host and fallback; the approved supported collapse handles its visible product content. Remove only separately duplicated related-product sections after preview. No app DOM selectors or overlay positioning are used.
+- Human approved retaining the required native `productPage1` host. Keep it in the Editor with its existing ID. Supported Velo code collapses it after the current custom product acknowledges rendering; no manual hiding, DOM selectors or CSS masking. Errors/readiness timeout restore native display and collapse the failed custom element. Do not delete the Store Page/app.
 - Publish only the human's current saved Editor layout after Preview. Do not CLI-publish stale UI revision 740.
 
 ## Design and data
@@ -30,7 +30,7 @@ Images are supported; product video presentation is not implemented. Preserve an
 
 ## Startup and readiness gate
 
-Installed v32 registry matches `/product-page/<one slug>` explicitly and includes shared navbar/footer. Product packet is under the 15,000-character limit, source fingerprint recorded in build-manifest. Normal Wix custom-element file remains fallback. Static gallery geometry and editorial shell render immediately; product-specific content arrives through Velo. Only the actual first selected product image receives a matching preload/high priority; no global catalog snapshot or bulk preload.
+Installed v33 registry matches `/product-page/<one slug>` explicitly and includes shared navbar/footer. Product packet is under the 15,000-character limit, source fingerprint recorded in build-manifest. Normal Wix custom-element file remains fallback. Static gallery geometry and editorial shell render immediately; product-specific content arrives through Velo. Only the actual first selected product image receives a matching preload/high priority; no global catalog snapshot or bulk preload.
 
 Visual inspection is pending: in-app browser control returned “Local browser use is disabled in Work settings.” No other browser was used. Human should preview multiple image orientations, long descriptions, options/variant prices, custom text, sold-out items, quantity limits, cart/checkout and product-to-product navigation. Live fresh/internal navigation, SEO and saved section geometry are release gates, not inferred from registration or a successful build. No tests or performance audit run.
 
@@ -43,3 +43,7 @@ API references read: Wix Stores Collections (Products / Variants), getProductVar
 ## Product refinement / FAQ
 
 Requested image-fit and expandable-details corrections are in source `fde0abb`; v32 startup covers product and separate FAQ. See `PRODUCT_FAQ_PLACEMENT.md` for `customElement21`. Existing `customElement20` keeps its file/tag/ID. Visual confirmation remains pending; the in-app browser is disabled.
+
+## Approved native host fallback
+
+Source `4f402b7`, installed startup v33. No human visibility setting is necessary. The real custom element reports product ID/load token after two animation frames; page code collapses `productPage1` only for the matching load. Native view remains available during initial loading and is expanded on data/render failure or a 12-second readiness timeout; the failed custom element is collapsed. Native widget may appear briefly before custom readiness. This preserves a recoverable native fallback and is not evidence of faster paint. Human current-layout publication and fresh/internal navigation review remain pending.
