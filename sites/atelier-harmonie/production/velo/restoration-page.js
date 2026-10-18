@@ -6,10 +6,14 @@ $w.onReady(function(){
  element.seoMarkup=seoMarkup;
  const state=(status)=>element.setAttribute('contact-state',JSON.stringify({status,at:Date.now()}));
  state('unavailable');
- if(!config.enabled||!config.elementId||Object.values(config.fields).some(v=>!v))return;
+ if(!config.elementId)return;
  let form;
  try{form=$w(config.elementId);}catch{return;}
- if(typeof form?.setFieldValues!=='function'||typeof form?.getFieldValues!=='function'||typeof form?.submit!=='function')return;
+ if(typeof form?.setFieldValues!=='function'||typeof form?.getFieldValues!=='function'||typeof form?.submit!=='function'){element.setAttribute('contact-mapping',JSON.stringify({status:'new-form-required',elementId:config.elementId}));return;}
+ // Expose field identifiers only, never personal field values, for mapping.
+ const fieldKeys=Object.keys(form.getFieldValues()||{});
+ element.setAttribute('contact-mapping',JSON.stringify({status:'mapping-pending',elementId:config.elementId,fieldKeys}));
+ if(!config.enabled||Object.values(config.fields).some(v=>!v))return;
  let pending=false;
  const success=()=>{pending=false;state('success');};
  form.onSubmitSuccess(success);

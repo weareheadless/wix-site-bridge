@@ -111,17 +111,18 @@
     "route": "/tapisserie-restauration",
     "tag": "atelier-restoration-v1",
     "requestedElementId": "customElement10",
-    "sourceCommit": "497026d",
+    "sourceCommit": "6fe0c02",
     "placement": "pending human; retain native contact form below custom element",
     "published": false,
     "instructions": "RESTORATION_PLACEMENT.md",
     "startupInstalled": true,
     "startupEmbedId": "da2e0e39-6ae0-40f8-ae59-6174aaed74fd",
     "contactIntegration": {
-      "status": "prepared, disabled until human adds new WixFormsV2 form and exact keys are mapped",
+      "status": "Element ID configured; await saved layout publication to read exact new form field keys. Integration inactive.",
       "config": "velo/restoration-form-config.js",
       "notificationsVerified": false,
-      "submissionSent": false
+      "submissionSent": false,
+      "elementId": "#371Ee199389C4A93849Ee35B8A15B7Ca1"
     }
   }
 }

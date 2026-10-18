@@ -45,3 +45,5 @@ Official references:
 - https://dev.wix.com/docs/velo/velo-only-apis/$w/wix-forms/migrate-from-wix-forms
 - https://dev.wix.com/docs/velo/velo-only-apis/$w/wix-forms-v2/set-field-values
 - https://dev.wix.com/docs/velo/velo-only-apis/$w/wix-forms-v2/submit
+
+Human provided new form element `#371Ee199389C4A93849Ee35B8A15B7Ca1`; configured in source `6fe0c02`. Live page still exposes only the old form as of the read-only inspection. Await human saved-layout publish (or loaded preview) to inspect `contact-mapping` field identifiers through the supported Velo getFieldValues method. No values exposed; no submission sent. Keep integration disabled until exact field mapping is confirmed. This binding-only change does not alter component definitions/startup packets.
