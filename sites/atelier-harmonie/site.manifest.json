@@ -10,7 +10,8 @@
       "/shop",
       "/lampes",
       "/sieges",
-      "/objets-deco"
+      "/objets-deco",
+      "/gift-card"
     ],
     "components": [
       {
@@ -103,6 +104,34 @@
         ],
         "datasetBindings": [
           "Live Stores/Products via backend/atelier-shop.web; native currentCart"
+        ]
+      },
+      {
+        "name": "giftintro",
+        "source": "sites/atelier-harmonie/production/custom-elements/atelier-gift-intro-v1.js",
+        "tagName": "atelier-gift-intro-v1",
+        "routes": [
+          "/gift-card"
+        ],
+        "wixElementIds": [
+          "customElement8"
+        ],
+        "datasetBindings": [
+          "Native Wix Gift Cards widget preserved separately; no replacement payment or issuance logic"
+        ]
+      },
+      {
+        "name": "giftguide",
+        "source": "sites/atelier-harmonie/production/custom-elements/atelier-gift-guide-v1.js",
+        "tagName": "atelier-gift-guide-v1",
+        "routes": [
+          "/gift-card"
+        ],
+        "wixElementIds": [
+          "customElement9"
+        ],
+        "datasetBindings": [
+          "Native Wix Gift Cards widget preserved separately; no replacement payment or issuance logic"
         ]
       }
     ],
@@ -407,6 +436,30 @@
         "category": "ESSENTIAL",
         "loadOnce": true,
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-deco-1.html",
+        "purpose": "nonvisual-early-registration"
+      },
+      {
+        "id": "1340430c-7161-4222-a40a-bed40d93d610",
+        "name": "Atelier production early-packet-giftintro-1.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": true,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-giftintro-1.html",
+        "purpose": "nonvisual-early-registration"
+      },
+      {
+        "id": "115c3eb7-791d-4128-a46d-1f2c52d6e344",
+        "name": "Atelier production early-packet-giftguide-1.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": true,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-giftguide-1.html",
         "purpose": "nonvisual-early-registration"
       }
     ],

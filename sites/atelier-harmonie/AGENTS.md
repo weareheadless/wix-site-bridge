@@ -45,3 +45,8 @@
 
 - `/objets-deco`: `atelier-deco-v1.js`, tag `atelier-deco-v1`, requested ID `customElement7`; human placement pending. See `production/DECO_PLACEMENT.md`.
 - Preserve original cushion photo and original intro/cushion copy. Original page currently has no products: keep an honest empty state, never invent catalog entries.
+
+## Gift card page
+
+- `/gift-card` uses two editorial custom elements around the **retained real Wix Gift Cards app**. Intro: `atelier-gift-intro-v1.js`, tag `atelier-gift-intro-v1`, ID `customElement8`; guide: `atelier-gift-guide-v1.js`, tag `atelier-gift-guide-v1`, ID `customElement9`. Human placement pending; see `production/GIFT_PLACEMENT.md`.
+- Never replace native gift-card purchase/issuance with a fake product, copied session call or custom money form. Keep amounts, checkout, delivery and redemption managed by Wix. Native app styling uses human Settings/Design only, without selectors targeting its internals.

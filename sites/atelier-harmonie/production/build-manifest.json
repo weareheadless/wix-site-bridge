@@ -1,7 +1,7 @@
 {
   "siteAlias": "atelier-harmonie",
   "siteId": "376faa89-fe6c-4ae8-8feb-10520e813a89",
-  "release": "atelier-production-20261018-v15",
+  "release": "atelier-production-20261018-v16",
   "components": {
     "navbar": {
       "tag": "atelier-navbar-v1",
@@ -30,6 +30,14 @@
     "deco": {
       "tag": "atelier-deco-v1",
       "sha256": "646b99d52ebf7324cb8e963651497cc47f38ea98878258c0377350582f8b8acf"
+    },
+    "giftintro": {
+      "tag": "atelier-gift-intro-v1",
+      "sha256": "8d73c0c8b81bdcf5ceb2f0050225f1afebcd46f7935a35dc38a8d6ca651d7649"
+    },
+    "giftguide": {
+      "tag": "atelier-gift-guide-v1",
+      "sha256": "8b98368144dc5296e8b419c709c236361f66f5a32d23a720b2372280178e67b1"
     }
   },
   "packets": [
@@ -72,6 +80,16 @@
       "key": "deco",
       "file": "early-packet-deco-1.html",
       "characters": 5906
+    },
+    {
+      "key": "giftintro",
+      "file": "early-packet-giftintro-1.html",
+      "characters": 2879
+    },
+    {
+      "key": "giftguide",
+      "file": "early-packet-giftguide-1.html",
+      "characters": 2787
     }
   ],
   "coverage": {
@@ -92,6 +110,9 @@
     "deco": [
       "/objets-deco"
     ],
+    "gift": [
+      "/gift-card"
+    ],
     "elementIds": {
       "navbar": "customElement1",
       "home": "customElement2",
@@ -99,7 +120,9 @@
       "shop": "customElement4",
       "lamps": "customElement5",
       "seats": "customElement6",
-      "deco": "customElement7"
+      "deco": "customElement7",
+      "giftintro": "customElement8",
+      "giftguide": "customElement9"
     },
     "otherPages": "native page UI preserved; shared navbar bundle only",
     "status": "pending full route inventory and Wix placement"

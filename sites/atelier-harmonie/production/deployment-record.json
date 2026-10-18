@@ -31,10 +31,10 @@
     }
   },
   "startupCustomCodeInstalled": true,
-  "startupRelease": "atelier-production-20261018-v15",
+  "startupRelease": "atelier-production-20261018-v16",
   "layoutWarning": "Local UI version 740 predates human placement. Do not CLI-publish it.",
   "liveObservedRelease": "atelier-production-20261018-v2",
-  "pendingPublication": "Objets déco source/startup ready; human places customElement7 and previews/publishes current saved Wix layout.",
+  "pendingPublication": "Gift editorial sections ready; human places customElement8 and customElement9 around retained native app, previews and publishes saved Wix layout.",
   "fixes": [
     "Scope fragment lookups through componentRoot to avoid hero local root temporal-dead-zone error; restores hero/carousel initialization and deferred reviews",
     "Load shared prototype Google Fonts stylesheet in document head so shadow components can use Parisienne and other fonts",
@@ -88,5 +88,23 @@
     "instructions": "DECO_PLACEMENT.md",
     "startupInstalled": true,
     "startupEmbedId": "a15c64a9-afab-425b-963a-dcfe10a88c8b"
+  },
+  "gift": {
+    "route": "/gift-card",
+    "sourceCommit": "09f8946",
+    "placement": "pending human; retain native Gift Cards app between intro and guide",
+    "published": false,
+    "instructions": "GIFT_PLACEMENT.md",
+    "startupInstalled": true,
+    "intro": {
+      "tag": "atelier-gift-intro-v1",
+      "requestedElementId": "customElement8",
+      "startupEmbedId": "1340430c-7161-4222-a40a-bed40d93d610"
+    },
+    "guide": {
+      "tag": "atelier-gift-guide-v1",
+      "requestedElementId": "customElement9",
+      "startupEmbedId": "115c3eb7-791d-4128-a46d-1f2c52d6e344"
+    }
   }
 }
