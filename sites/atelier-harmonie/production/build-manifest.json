@@ -1,7 +1,7 @@
 {
   "siteAlias": "atelier-harmonie",
   "siteId": "376faa89-fe6c-4ae8-8feb-10520e813a89",
-  "release": "atelier-production-20261018-v23",
+  "release": "atelier-production-20261018-v24",
   "components": {
     "navbar": {
       "tag": "atelier-navbar-v1",
@@ -53,7 +53,7 @@
     },
     "b2b": {
       "tag": "atelier-b2b-v1",
-      "sha256": "743a7c6a5a92df9a63a4c79f01ea844a402f73368ed411cdb58e9262979772fc"
+      "sha256": "ad8d879fc620ae95b97793e18998494a194cc17443beb8de047ed6bec47c812c"
     }
   },
   "packets": [
@@ -125,7 +125,7 @@
     {
       "key": "b2b",
       "file": "early-packet-b2b-1.html",
-      "characters": 7197
+      "characters": 7357
     }
   ],
   "coverage": {

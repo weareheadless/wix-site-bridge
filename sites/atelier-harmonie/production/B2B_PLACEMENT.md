@@ -21,3 +21,7 @@ Target `--site atelier-harmonie`, `/b2b`; connected source `weareheadless/atelie
 - Immediate hero copy, first hero photo preload matching displayed URL on `/b2b` only, lazy below-fold media, explicit route coverage and normal Wix source fallback. Initial/per-navigation startup controllers and packets synchronized, below size guards.
 - Human placement/publication and live interaction/content inspection still pending. No tests/performance audits run or speed scores claimed.
 - Private receipts/before-snapshots stay in customer state directory. Recovery restores previous packet/controller HTML or disables relevant custom-code entries with normal source fallback synchronized.
+
+## Villa photo correction
+
+User confirmed all project photographs are for Villa du Clos Normand. Removed erroneous restaurant caption and corrected reused image alt text. Four project photographs now form one two-column staggered mosaic beside the project heading/logo; original description and deliverables sit below. Same `customElement13`; source `484e03c`, startup `atelier-production-20261018-v24`. Human previews current layout and adjusts section height if needed before publishing.
