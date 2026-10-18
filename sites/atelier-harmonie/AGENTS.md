@@ -58,3 +58,5 @@
 - User cancelled integrated contact mapping. Keep contact entirely in native Wix below the restoration embed; no embedded contact section, custom form or adapter. Do not restore the abandoned mapping configuration. See RESTORATION_PLACEMENT.md.
 
 - Separate presentational contact intro is now available on `/tapisserie-restauration`: `atelier-contact-v1.js`, tag `atelier-contact-v1`, requested ID `customElement11`, placed above real native Wix form. No custom submission fields/adapter; see `production/CONTACT_PLACEMENT.md`.
+
+- Restoration now uses shared-hero Sièges / Abat-jour / Coussins tabs, Sièges initially active; keyboard accessible, mobile no horizontal tab scrolling. Preserve original full copy/images, inactive-panel inert state and stable panel geometry. Contact remains separate below.

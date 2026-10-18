@@ -31,10 +31,10 @@
     }
   },
   "startupCustomCodeInstalled": true,
-  "startupRelease": "atelier-production-20261018-v20",
+  "startupRelease": "atelier-production-20261018-v21",
   "layoutWarning": "Local UI version 740 predates human placement. Do not CLI-publish it.",
   "liveObservedRelease": "atelier-production-20261018-v2",
-  "pendingPublication": "Standalone presentational contact intro ready; human places customElement11 above native Wix form and publishes saved layout.",
+  "pendingPublication": "Tabbed restoration source/startup synchronized; human previews/publishes current saved layout and shortens containing section to new content.",
   "fixes": [
     "Scope fragment lookups through componentRoot to avoid hero local root temporal-dead-zone error; restores hero/carousel initialization and deferred reviews",
     "Load shared prototype Google Fonts stylesheet in document head so shadow components can use Parisienne and other fonts",
@@ -111,7 +111,7 @@
     "route": "/tapisserie-restauration",
     "tag": "atelier-restoration-v1",
     "requestedElementId": "customElement10",
-    "sourceCommit": "0fb2f0c",
+    "sourceCommit": "a731216",
     "placement": "pending human; retain native contact form below custom element",
     "published": false,
     "instructions": "RESTORATION_PLACEMENT.md",
@@ -119,7 +119,8 @@
     "startupEmbedId": "da2e0e39-6ae0-40f8-ae59-6174aaed74fd",
     "contactIntegration": {
       "status": "Removed at user request; all contact UI and submissions remain native Wix"
-    }
+    },
+    "design": "Shared hero and accessible Sièges / Abat-jour / Coussins tabs; original content preserved; independent native contact workflow"
   },
   "contact": {
     "route": "/tapisserie-restauration",
