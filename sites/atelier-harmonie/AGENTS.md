@@ -82,3 +82,8 @@
 ## About Mathilde
 
 - `/a-propos`: `atelier-about-v1.js`, tag `atelier-about-v1`, requested ID `customElement15`; see `production/ABOUT_PLACEMENT.md`. Preserve original story, portrait/chairs photographs and social/Ecomaison links. Keep native contact section below; no custom form adapter.
+
+## Quote page
+
+- `/devis`: top `atelier-quote-top-v1.js` / tag `atelier-quote-top-v1` / ID `customElement16`; bottom `atelier-quote-bottom-v1.js` / tag `atelier-quote-bottom-v1` / ID `customElement17`. See `production/QUOTE_PLACEMENT.md`.
+- User explicitly requires the native form AND photograph unchanged between embeds. No field mapping, hidden form, replacement uploads or submission adapter. Preserve original intro/process/pricing copy; bottom uses process cards and native pricing details.

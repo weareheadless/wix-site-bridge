@@ -31,10 +31,10 @@
     }
   },
   "startupCustomCodeInstalled": true,
-  "startupRelease": "atelier-production-20261018-v28",
+  "startupRelease": "atelier-production-20261018-v29",
   "layoutWarning": "Local UI version 740 predates human placement. Do not CLI-publish it.",
   "liveObservedRelease": "atelier-production-20261018-v2",
-  "pendingPublication": "About page ready; human places customElement15, retains native contact and previews/publishes saved layout.",
+  "pendingPublication": "Quote top/bottom ready; human places customElement16/customElement17 around unchanged native form/photo and previews/publishes saved Wix layout.",
   "fixes": [
     "Scope fragment lookups through componentRoot to avoid hero local root temporal-dead-zone error; restores hero/carousel initialization and deferred reviews",
     "Load shared prototype Google Fonts stylesheet in document head so shadow components can use Parisienne and other fonts",
@@ -188,5 +188,22 @@
     "instructions": "ABOUT_PLACEMENT.md",
     "startupInstalled": true,
     "startupEmbedId": "3a7f985a-d818-4646-acef-0e4fa5069221"
+  },
+  "quote": {
+    "route": "/devis",
+    "sourceCommit": "7af6eb7",
+    "placement": "pending human; native form and picture unchanged",
+    "published": false,
+    "instructions": "QUOTE_PLACEMENT.md",
+    "top": {
+      "tag": "atelier-quote-top-v1",
+      "requestedElementId": "customElement16",
+      "startupEmbedId": "21798ef3-5ae2-4583-9a20-4d3fb13bfb1d"
+    },
+    "bottom": {
+      "tag": "atelier-quote-bottom-v1",
+      "requestedElementId": "customElement17",
+      "startupEmbedId": "017a8d7c-20df-4bcf-82c7-f04406a1f0c5"
+    }
   }
 }

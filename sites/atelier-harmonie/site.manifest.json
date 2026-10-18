@@ -16,7 +16,8 @@
       "/les-tissus",
       "/b2b",
       "/les-ateliers",
-      "/a-propos"
+      "/a-propos",
+      "/devis"
     ],
     "components": [
       {
@@ -221,6 +222,34 @@
         ],
         "datasetBindings": [
           "Editorial only; keep native Wix contact form separately"
+        ]
+      },
+      {
+        "name": "quotetop",
+        "source": "sites/atelier-harmonie/production/custom-elements/atelier-quote-top-v1.js",
+        "tagName": "atelier-quote-top-v1",
+        "routes": [
+          "/devis"
+        ],
+        "wixElementIds": [
+          "customElement16"
+        ],
+        "datasetBindings": [
+          "Preserve native Wix quote form, photo and upload/submission behavior unchanged"
+        ]
+      },
+      {
+        "name": "quotebottom",
+        "source": "sites/atelier-harmonie/production/custom-elements/atelier-quote-bottom-v1.js",
+        "tagName": "atelier-quote-bottom-v1",
+        "routes": [
+          "/devis"
+        ],
+        "wixElementIds": [
+          "customElement17"
+        ],
+        "datasetBindings": [
+          "Preserve native Wix quote form, photo and upload/submission behavior unchanged"
         ]
       }
     ],
@@ -621,6 +650,30 @@
         "category": "ESSENTIAL",
         "loadOnce": true,
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-about-1.html",
+        "purpose": "nonvisual-early-registration"
+      },
+      {
+        "id": "21798ef3-5ae2-4583-9a20-4d3fb13bfb1d",
+        "name": "Atelier production early-packet-quotetop-1.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": true,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-quotetop-1.html",
+        "purpose": "nonvisual-early-registration"
+      },
+      {
+        "id": "017a8d7c-20df-4bcf-82c7-f04406a1f0c5",
+        "name": "Atelier production early-packet-quotebottom-1.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": true,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-quotebottom-1.html",
         "purpose": "nonvisual-early-registration"
       }
     ],
