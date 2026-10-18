@@ -192,6 +192,8 @@
         "mountOrder": 50,
         "htmlFile": "sites/atelier-harmonie/prototype/05-contact.html"
       }
-    ]
+    ],
+    "connectedRepo": "weareheadless/atelier-harmonie",
+    "defaultBranch": "main"
   }
 }

@@ -1,0 +1,21 @@
+{
+  "siteAlias": "atelier-harmonie",
+  "siteId": "376faa89-fe6c-4ae8-8feb-10520e813a89",
+  "connectedRepository": "weareheadless/atelier-harmonie",
+  "branch": "main",
+  "initialCommit": "130c5c5",
+  "componentSourceCommit": "c7e6b55",
+  "sourceBuildManifest": "build-manifest.json",
+  "published": false,
+  "placement": {
+    "navbar": {
+      "elementId": "customElement1",
+      "container": "shared header",
+      "status": "source selected; tag persistence and geometry pending"
+    },
+    "home": {
+      "status": "not placed"
+    }
+  },
+  "startupCustomCodeInstalled": false
+}
