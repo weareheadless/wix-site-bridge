@@ -87,3 +87,8 @@
 
 - `/devis`: top `atelier-quote-top-v1.js` / tag `atelier-quote-top-v1` / ID `customElement16`; bottom `atelier-quote-bottom-v1.js` / tag `atelier-quote-bottom-v1` / ID `customElement17`. See `production/QUOTE_PLACEMENT.md`.
 - User explicitly requires the native form AND photograph unchanged between embeds. No field mapping, hidden form, replacement uploads or submission adapter. Preserve original intro/process/pricing copy; bottom uses process cards and native pricing details.
+
+## Journal
+
+- `/blog`: two editorial components around retained native Wix Blog feed. Top `atelier-journal-top-v1.js`, tag `atelier-journal-top-v1`, requested ID `customElement18`; bottom `atelier-journal-bottom-v1.js`, tag `atelier-journal-bottom-v1`, requested ID `customElement19`. See `production/JOURNAL_PLACEMENT.md`.
+- Preserve original introduction copy and native posts, categories, pagination, article URLs, membership and comments. No parallel post store or selectors styling app internals. Human owns native feed styling and placement.

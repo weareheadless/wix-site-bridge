@@ -31,10 +31,10 @@
     }
   },
   "startupCustomCodeInstalled": true,
-  "startupRelease": "atelier-production-20261018-v29",
+  "startupRelease": "atelier-production-20261018-v30",
   "layoutWarning": "Local UI version 740 predates human placement. Do not CLI-publish it.",
   "liveObservedRelease": "atelier-production-20261018-v2",
-  "pendingPublication": "Quote top/bottom ready; human places customElement16/customElement17 around unchanged native form/photo and previews/publishes saved Wix layout.",
+  "pendingPublication": "Journal top/bottom ready; human places customElement18/customElement19 around retained native Wix Blog feed, previews and publishes current saved layout.",
   "fixes": [
     "Scope fragment lookups through componentRoot to avoid hero local root temporal-dead-zone error; restores hero/carousel initialization and deferred reviews",
     "Load shared prototype Google Fonts stylesheet in document head so shadow components can use Parisienne and other fonts",
@@ -204,6 +204,24 @@
       "tag": "atelier-quote-bottom-v1",
       "requestedElementId": "customElement17",
       "startupEmbedId": "017a8d7c-20df-4bcf-82c7-f04406a1f0c5"
+    }
+  },
+  "journal": {
+    "route": "/blog",
+    "sourceCommit": "dfd2803",
+    "placement": "pending human; native Wix Blog feed retained",
+    "published": false,
+    "instructions": "JOURNAL_PLACEMENT.md",
+    "startupInstalled": true,
+    "top": {
+      "tag": "atelier-journal-top-v1",
+      "requestedElementId": "customElement18",
+      "startupEmbedId": "0800721b-4b36-479f-97ef-b50ae2044743"
+    },
+    "bottom": {
+      "tag": "atelier-journal-bottom-v1",
+      "requestedElementId": "customElement19",
+      "startupEmbedId": "44549894-ece3-466e-90ef-0375f9a3a02d"
     }
   }
 }

@@ -17,7 +17,8 @@
       "/b2b",
       "/les-ateliers",
       "/a-propos",
-      "/devis"
+      "/devis",
+      "/blog"
     ],
     "components": [
       {
@@ -250,6 +251,34 @@
         ],
         "datasetBindings": [
           "Preserve native Wix quote form, photo and upload/submission behavior unchanged"
+        ]
+      },
+      {
+        "name": "journaltop",
+        "source": "sites/atelier-harmonie/production/custom-elements/atelier-journal-top-v1.js",
+        "tagName": "atelier-journal-top-v1",
+        "routes": [
+          "/blog"
+        ],
+        "wixElementIds": [
+          "customElement18"
+        ],
+        "datasetBindings": [
+          "Retain real native Wix Blog feed, posts, categories, pagination and members behavior"
+        ]
+      },
+      {
+        "name": "journalbottom",
+        "source": "sites/atelier-harmonie/production/custom-elements/atelier-journal-bottom-v1.js",
+        "tagName": "atelier-journal-bottom-v1",
+        "routes": [
+          "/blog"
+        ],
+        "wixElementIds": [
+          "customElement19"
+        ],
+        "datasetBindings": [
+          "Retain real native Wix Blog feed, posts, categories, pagination and members behavior"
         ]
       }
     ],
@@ -674,6 +703,30 @@
         "category": "ESSENTIAL",
         "loadOnce": true,
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-quotebottom-1.html",
+        "purpose": "nonvisual-early-registration"
+      },
+      {
+        "id": "0800721b-4b36-479f-97ef-b50ae2044743",
+        "name": "Atelier production early-packet-journaltop-1.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": true,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-journaltop-1.html",
+        "purpose": "nonvisual-early-registration"
+      },
+      {
+        "id": "44549894-ece3-466e-90ef-0375f9a3a02d",
+        "name": "Atelier production early-packet-journalbottom-1.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": true,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-journalbottom-1.html",
         "purpose": "nonvisual-early-registration"
       }
     ],

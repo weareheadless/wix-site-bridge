@@ -1,7 +1,7 @@
 {
   "siteAlias": "atelier-harmonie",
   "siteId": "376faa89-fe6c-4ae8-8feb-10520e813a89",
-  "release": "atelier-production-20261018-v29",
+  "release": "atelier-production-20261018-v30",
   "components": {
     "navbar": {
       "tag": "atelier-navbar-v1",
@@ -70,6 +70,14 @@
     "quotebottom": {
       "tag": "atelier-quote-bottom-v1",
       "sha256": "851f91efbac6ac215b6c2af6a700fad9e9b2f5251943f7c22af9f988633d993c"
+    },
+    "journaltop": {
+      "tag": "atelier-journal-top-v1",
+      "sha256": "ea9470b348be9dba058b885797ac3fd45365d5251b3bc13d843dc6eeaecd0549"
+    },
+    "journalbottom": {
+      "tag": "atelier-journal-bottom-v1",
+      "sha256": "2856afffef4622f90e964b7020143aff756d3f2bfd999bcb09cf706e38ba536d"
     }
   },
   "packets": [
@@ -162,6 +170,16 @@
       "key": "quotebottom",
       "file": "early-packet-quotebottom-1.html",
       "characters": 3645
+    },
+    {
+      "key": "journaltop",
+      "file": "early-packet-journaltop-1.html",
+      "characters": 2624
+    },
+    {
+      "key": "journalbottom",
+      "file": "early-packet-journalbottom-1.html",
+      "characters": 2587
     }
   ],
   "coverage": {
@@ -203,6 +221,9 @@
     "quote": [
       "/devis"
     ],
+    "journal": [
+      "/blog"
+    ],
     "elementIds": {
       "navbar": "customElement1",
       "home": "customElement2",
@@ -220,7 +241,9 @@
       "workshops": "customElement14",
       "about": "customElement15",
       "quotetop": "customElement16",
-      "quotebottom": "customElement17"
+      "quotebottom": "customElement17",
+      "journaltop": "customElement18",
+      "journalbottom": "customElement19"
     },
     "otherPages": "native page UI preserved; shared navbar bundle only",
     "status": "pending full route inventory and Wix placement"
