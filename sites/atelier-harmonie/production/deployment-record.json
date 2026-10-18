@@ -162,13 +162,20 @@
     "pageId": "ntpl0",
     "tag": "atelier-workshops-v1",
     "requestedElementId": "customElement14",
-    "sourceCommit": "688ea46",
+    "sourceCommit": "2d90370",
     "placement": "human created page and fresh element; source settings pending",
     "published": false,
     "instructions": "WORKSHOPS_PLACEMENT.md",
     "startupInstalled": true,
     "startupEmbedId": "e4194673-654e-4e14-93f9-d1fb45198336",
     "booking": "Exact original external Wecandoo URLs from article embed",
-    "navigation": "Navbar desktop/mobile and homepage workshop links updated"
+    "navigation": "Navbar desktop/mobile and homepage workshop links updated",
+    "metadata": {
+      "status": "source pushed; pending human current-layout publish",
+      "title": "Ateliers DIY en Normandie | Atelier de l’harmonie",
+      "description": "Créez votre abat-jour ou restaurez une chaise avec Mathilde à Saint-Pierre-en-Port, en Normandie. Ateliers en petits groupes, débutants bienvenus.",
+      "method": "wix-seo-frontend setTitle/setMetaTags in page onReady",
+      "social": "Open Graph and Twitter large image; existing workshop photo"
+    }
   }
 }

@@ -30,3 +30,7 @@ Component and matching packets built; navbar/home source + SEO synchronized. Rou
 Local IAB desktop preview visually inspected, all four rendered images loaded at natural dimensions, screenshot `outputs/workshops-preview.png`. This is local evidence, not proof of live placement/publication, mobile behavior or external booking completion. No purchases/reservations submitted. Full live desktop/mobile, fresh/internal-navigation verification remains after human publication.
 
 Recovery uses private before-snapshots/receipts in customer state directory, restoring previous startup HTML or disabling appropriate entries with source fallback kept synchronized.
+
+## Page metadata
+
+Source `2d90370` adds title, description, Open Graph and Twitter sharing tags through documented `wix-seo-frontend` in page onReady. No component source changes, so startup packets unchanged. Canonical/robots/indexing controls and existing structured data left intact. Human publishes saved current Editor layout; live rendered metadata verification pending publication.
