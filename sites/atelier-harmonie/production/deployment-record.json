@@ -31,7 +31,7 @@
     }
   },
   "startupCustomCodeInstalled": true,
-  "startupRelease": "atelier-production-20261018-v25",
+  "startupRelease": "atelier-production-20261018-v26",
   "layoutWarning": "Local UI version 740 predates human placement. Do not CLI-publish it.",
   "liveObservedRelease": "atelier-production-20261018-v2",
   "pendingPublication": "B2B tabs/project/guarantees ready; human places customElement13, retains native contact and previews/publishes saved Wix layout.",
@@ -147,13 +147,14 @@
     "route": "/b2b",
     "tag": "atelier-b2b-v1",
     "requestedElementId": "customElement13",
-    "sourceCommit": "cfafce8",
+    "sourceCommit": "29c5d5a",
     "placement": "pending human; native contact section retained below",
     "published": false,
     "instructions": "B2B_PLACEMENT.md",
     "startupInstalled": true,
     "startupEmbedId": "669b0d3b-3a56-41f0-a84f-ae1fb22d9c49",
     "photoAttribution": "All project photographs are Villa du Clos Normand, not a separate restaurant project",
-    "layout": "Project heading with enlarged Villa illustration above stable 3:4 portrait gallery, manual arrows/thumbnails, full-width copy area below"
+    "layout": "Unified project card: gallery left, enlarged illustration/name/description/deliverables right; compact heading above",
+    "inspection": "Live old layout inspected in IAB; rebuilt local desktop preview visually reviewed at 1280px; next/previous gallery checked with stable 586.66px frame; live publication pending"
   }
 }

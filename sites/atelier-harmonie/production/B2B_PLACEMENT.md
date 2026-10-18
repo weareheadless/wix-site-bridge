@@ -29,3 +29,9 @@ User confirmed all project photographs are for Villa du Clos Normand. Removed er
 ## Gallery replaces mosaic
 
 User rejected the mosaic’s mixed proportions and cramped text. Current source `cfafce8`, startup `atelier-production-20261018-v25`: project heading/name with enlarged Villa illustration (280px desktop / 240px mobile), then a centred manual 3:4 portrait gallery (up to 480px wide) with stable frame, uncropped contained photos, arrows, count and thumbnails. No autoplay. Description/deliverables below, full-width on mobile. Old mosaic is superseded. Same ID/tag; preview current saved layout and publish when ready. No live verification or tests claimed.
+
+## Inspected project card (current)
+
+After live visual review, replaced the isolated centre gallery and detached text with one bordered ivory project card: gallery left, Villa illustration (up to 390px) and story/deliverables right. First slide now shows the lampshades so it does not immediately repeat the hero chair. Natural photographs preserved in stable 3:4 frame; manual controls and thumbnails retained. Mobile stacks within the same card. Source `29c5d5a`, startup `atelier-production-20261018-v26`.
+
+User-requested visual inspection: IAB live desktop old layout reviewed; local desktop preview at 1280px reviewed; gallery next/previous checked, frame height stayed 586.66px and story width 504.61px. Screenshot saved as user-facing output `outputs/villa-project-preview.png`. This is local preview evidence, not live publication or mobile/performance verification. Same customElement13; preview/publish human’s current saved Wix layout.
