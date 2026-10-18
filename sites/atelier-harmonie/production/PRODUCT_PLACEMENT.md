@@ -1,10 +1,10 @@
 # Product Page — one reusable custom element
 
-Target `--site atelier-harmonie`, exact dynamic route family `/product-page/:slug`, Wix page `Product Page.lj022.js`. Connected source `weareheadless/atelier-harmonie`, commit `116ec33`.
+Target `--site atelier-harmonie`, exact dynamic route family `/product-page/:slug`, Wix page `Product Page.lj022.js`. Connected source `weareheadless/atelier-harmonie`, commit `14580f7`.
 
 ## Status
 
-Source pushed and startup release `atelier-production-20261018-v37` installed after explicit human approval. Product startup ID `d1343538-27ba-4069-8c5b-4d20db25e22a`; receipt hash, HEAD/load-once placement and manifest mapping inspected. Human placement, visual/live review and publication remain pending.
+Source pushed and startup release `atelier-production-20261018-v38` installed after explicit human approval. Product startup ID `d1343538-27ba-4069-8c5b-4d20db25e22a`; receipt hash, HEAD/load-once placement and manifest mapping inspected. Human placement, visual/live review and publication remain pending.
 
 ## Human placement
 
@@ -30,7 +30,7 @@ Images are supported; product video presentation is not implemented. Preserve an
 
 ## Startup and readiness gate
 
-Installed v37 registry matches `/product-page/<one slug>` explicitly and includes shared navbar/footer. Product packet is under the 15,000-character limit, source fingerprint recorded in build-manifest. Normal Wix custom-element file remains fallback. Static gallery geometry and editorial shell render immediately; product-specific content arrives through Velo. Only the actual first selected product image receives a matching preload/high priority; no global catalog snapshot or bulk preload.
+Installed v38 registry matches `/product-page/<one slug>` explicitly and includes shared navbar/footer. Product packet is under the 15,000-character limit, source fingerprint recorded in build-manifest. Normal Wix custom-element file remains fallback. Static gallery geometry and editorial shell render immediately; product-specific content arrives through Velo. Only the actual first selected product image receives a matching preload/high priority; no global catalog snapshot or bulk preload.
 
 Visual inspection is pending: in-app browser control returned “Local browser use is disabled in Work settings.” No other browser was used. Human should preview multiple image orientations, long descriptions, options/variant prices, custom text, sold-out items, quantity limits, cart/checkout and product-to-product navigation. Live fresh/internal navigation, SEO and saved section geometry are release gates, not inferred from registration or a successful build. No tests or performance audit run.
 
@@ -65,3 +65,7 @@ For zero flash before Velo initializes, human should select `productPage1` → P
 ## Current behavior — supersedes readiness timeout notes
 
 Source `116ec33` removes the 12-second destructive timeout entirely. It could clear valid content if the readiness acknowledgement was lost. Same-product URL changes are idempotent; only a changed slug resets product data. SEO markup updates are isolated so SEO failure cannot route a successful product load into the error path. Duplicate attribute notifications and stale error/loading tokens cannot reset a painted current product. Native UI stays suppressed, without a fallback. Source/startup changes do not prove live behavior; human must publish saved layout/page code, then confirm the view stays visible beyond 12 seconds and through internal product navigation. No automated tests or browser runtime verification performed.
+
+## Compact gallery and one expanding description
+
+Source `14580f7` caps the photo frame at min(520px,58svh) desktop and min(400px,46svh) mobile, with contain fit so the full photo stays uncropped. Its frame remains stable across different photo proportions. Smaller thumbnails and explicit previous/next controls provide access to the complete gallery without scrolling through an oversized portrait. Description uses a native button with aria-expanded/aria-controls: expansion replaces the excerpt with the complete rich description at the same location; collapse restores the excerpt, with no duplicate paragraph. Other product-info disclosures remain independent. No new placement IDs or page-code changes required for this revision. Human current-layout publish keeps normal Wix source fallback synchronized. Live visual confirmation remains pending.

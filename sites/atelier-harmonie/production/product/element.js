@@ -17,7 +17,7 @@ function rich(value){
 class AtelierProduct extends HTMLElement{
  static get observedAttributes(){return ['product','product-loading','product-error','selection-result','cart-result','related'];}
  constructor(){super();this.attachShadow({mode:'open'});this.sequence=0;this.index=0;this.busy=false;this.product=null;}
- connectedCallback(){if(this.rendered)return;this.rendered=true;this.dataset.atelierProductVersion='20261018-v37';this.shadowRoot.innerHTML=__PRODUCT_HTML__;
+ connectedCallback(){if(this.rendered)return;this.rendered=true;this.dataset.atelierProductVersion='20261018-v38';this.shadowRoot.innerHTML=__PRODUCT_HTML__;
  const font='https://fonts.googleapis.com/css2?family=Parisienne&family=DM+Sans:wght@400;500;600&family=Libre+Caslon+Text:ital,wght@0,400;1,400&display=swap';
  if(![...document.querySelectorAll('link[data-atelier-fonts]')].some(l=>l.href===font)){const link=document.createElement('link');link.rel='stylesheet';link.href=font;link.dataset.atelierFonts='true';document.head.append(link);}
  const r=this.shadowRoot;
@@ -42,9 +42,9 @@ class AtelierProduct extends HTMLElement{
  const plain=excerptCopy.textContent.replace(/\s+/g,' ').trim();
  const excerpt=plain.length>220?plain.slice(0,220).replace(/\s+\S*$/,'').trimEnd()+'…':plain;
  r.querySelector('[data-excerpt]').textContent=excerpt;r.querySelector('[data-excerpt]').hidden=!plain;
- const disclosure=r.querySelector('[data-description-wrap]');disclosure.open=false;disclosure.hidden=plain.length<=220;
- disclosure.ontoggle=()=>{r.querySelector('[data-description-label]').textContent=disclosure.open?'Réduire la description':'Lire la suite';};
- r.querySelector('[data-description]').replaceChildren(description);
+ const full=r.querySelector('[data-description]'),toggle=r.querySelector('[data-description-toggle]'),preview=r.querySelector('[data-excerpt]');
+ full.replaceChildren(description);full.hidden=true;toggle.hidden=plain.length<=220;toggle.setAttribute('aria-expanded','false');toggle.textContent='Lire la suite +';
+ toggle.onclick=()=>{const expanded=toggle.getAttribute('aria-expanded')!=='true';toggle.setAttribute('aria-expanded',String(expanded));preview.hidden=expanded;full.hidden=!expanded;toggle.textContent=expanded?'Réduire −':'Lire la suite +';};
  r.querySelector('[data-email]').href='mailto:mathildevalle.atelier@gmail.com?subject='+encodeURIComponent('Une question sur '+p.name);
  r.querySelector('[data-details]').innerHTML=(p.additionalInfoSections||[]).map((s,i)=>'<details name="atelier-product-details"><summary>'+escape(s.title)+'</summary><div class="rich" data-section="'+i+'"></div></details>').join('');
  (p.additionalInfoSections||[]).forEach((s,i)=>r.querySelector('[data-section="'+i+'"]').append(rich(s.description)));
@@ -53,6 +53,7 @@ class AtelierProduct extends HTMLElement{
  r.querySelectorAll('[data-option]').forEach(el=>el.onchange=()=>this.choose());r.querySelector('[name=quantity]').value=1;r.querySelector('[data-cart]').hidden=true;r.querySelector('[data-status]').textContent='';
  r.querySelector('[data-thumbs]').innerHTML=(p.images||[]).map((m,i)=>'<button type="button" data-photo="'+i+'" aria-label="Photographie '+(i+1)+'" aria-pressed="'+(i===0)+'"><img src="'+escape(imageUrl(m.thumbnail||m.src))+'" alt="" loading="lazy"></button>').join('');
  r.querySelectorAll('[data-photo]').forEach(b=>b.onclick=()=>this.photo(Number(b.dataset.photo)));
+ for(const [key,delta] of [['prev',-1],['next',1]]){const button=r.querySelector('[data-'+key+']');button.hidden=p.images.length<2;button.onclick=()=>this.photo((this.index+delta+p.images.length)%p.images.length);}
  if(p.images?.length){const first=imageUrl(p.images[0].src);const previous=document.querySelector('link[data-atelier-product-critical]');if(previous?.href!==first){previous?.remove();const preload=document.createElement('link');preload.rel='preload';preload.as='image';preload.href=first;preload.fetchPriority='high';preload.dataset.atelierProductCritical='true';document.head.append(preload);}this.photo(0);}else{r.querySelector('[data-skeleton]').hidden=true;r.querySelector('[data-photo-count]').textContent='Photographie à venir';}
  this.price(p);this.available=p.inStock&&!p.manageVariants&&!p.options.length;this.button();if(p.manageVariants&&!p.options.length)this.choose();
  // Acknowledge rendered content, rather than merely successful data delivery.
