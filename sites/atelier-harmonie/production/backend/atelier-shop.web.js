@@ -31,3 +31,10 @@ export const addAtelierProduct=webMethod(Permissions.Anyone,async(productId)=>{
  await currentCart.addToCurrentCart({lineItems:[{catalogReference:{appId:'215238eb-22a5-4c36-9e7b-e7c08025e04e',catalogItemId:productId},quantity:1}]});
  return {ok:true};
 });
+
+export const getAtelierAvailability=webMethod(Permissions.Anyone,async(slugs)=>{
+ if(!Array.isArray(slugs)||slugs.length>50||slugs.some(s=>typeof s!=='string'||!s||s.length>300||/[\/\x00-\x1f]/.test(s)))throw Error('Invalid product slugs');
+ if(!slugs.length)return [];
+ const result=await wixData.query('Stores/Products').hasSome('slug',[...new Set(slugs)]).limit(50).find();
+ return result.items.map(p=>({slug:p.slug,inStock:p.inStock===true,price:p.discountedPrice??p.price,currency:p.currency||'EUR'}));
+});

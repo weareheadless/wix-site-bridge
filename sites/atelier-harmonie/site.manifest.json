@@ -44,7 +44,9 @@
         "wixElementIds": [
           "customElement2"
         ],
-        "datasetBindings": []
+        "datasetBindings": [
+          "Exact curated product slugs resolve live stock and card prices via backend/atelier-shop.web getAtelierAvailability; hero does not await catalog"
+        ]
       },
       {
         "name": "footer",

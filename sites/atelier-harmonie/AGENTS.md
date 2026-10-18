@@ -114,3 +114,8 @@
 - Product gallery compact refinement: main photo fits an uncropped contain frame capped at 520px/58svh desktop, 400px/46svh mobile; small thumbnails and previous/next controls remain below the stable frame. Description now uses one accessible expand/collapse control: preview hidden when full rich copy is visible, never duplicate the excerpt above full text.
 
 - Product details now use a native modal side panel instead of inline expansion (source `67359ae`). Desktop right panel, mobile full viewport, independently scrolling body. Keep excerpt visible in the purchase panel; description/additional-info buttons open the same modal at the relevant section. Native dialog handles focus/Escape/inert background; close restores document scroll styles and position. Reset/disconnect restores scroll styles without scrolling a new route back to the previous one. Do not restore inline expanding descriptions.
+
+## Availability across product cards
+
+- Always make sold-out status visible before navigation: ivory/rose “Épuisé” badge on product photos in shop, lamps/seats/deco rails, product recommendations and homepage curated product cards. Keep sold-out pieces viewable; no sold-out add-to-cart actions.
+- Homepage availability/prices resolve exact product URL slugs against live public Wix Stores/Products via bounded `getAtelierAvailability`; no static stock snapshot. Pending/unknown lookup must not imply availability. See `production/AVAILABILITY.md`. Keep the home request/readiness handshake and normal source/startup packets synchronized.

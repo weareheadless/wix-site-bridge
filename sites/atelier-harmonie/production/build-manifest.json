@@ -1,35 +1,35 @@
 {
   "siteAlias": "atelier-harmonie",
   "siteId": "376faa89-fe6c-4ae8-8feb-10520e813a89",
-  "release": "atelier-production-20261018-v39",
+  "release": "atelier-production-20261018-v40",
   "components": {
     "navbar": {
       "tag": "atelier-navbar-v1",
-      "sha256": "4fd1d9ef3c062850906c8d4708cef9f5b09e8676dd1cea81c17221409ede746f"
+      "sha256": "e6763407df39c36d981ccf5e6592eb24d63470ef74194ee0f8f6a575aa3e960b"
     },
     "home": {
       "tag": "atelier-home-v1",
-      "sha256": "ebaf7f2f0329197032b33af97d324b145b78e8198464fe1b30ee3e571a91f8a7"
+      "sha256": "d9fa422f20c4d3d3714859b141e96ad97b8914653712c80031047f9d2832592c"
     },
     "footer": {
       "tag": "atelier-footer-v1",
-      "sha256": "3ce2472b19b18f3e051ca710bd734435041bdc28f6d0de9b07e37dea43ab870a"
+      "sha256": "fe29326c588b482ad5d9b4cc6b50c5eed7fdb8ab8257954fe5fd11909554e78f"
     },
     "shop": {
       "tag": "atelier-shop-v1",
-      "sha256": "34fe26c717d8c9269e2e8ea7d117eadc750e495d3672dbb5185d3dc082e6fb07"
+      "sha256": "68722684fa8b99cdb7537f436022d8ee022d8d4c7b451b8de023110c114c37e8"
     },
     "lamps": {
       "tag": "atelier-lamps-v1",
-      "sha256": "dd197159c4f71bf505e6eb70a423922f510edec38bad0323e0d417798c9e3ad9"
+      "sha256": "a25fde6ddfa95403bb09ac519d91be71543b8a7e1b1ff84b4d2d79e737d0d2c0"
     },
     "seats": {
       "tag": "atelier-seats-v1",
-      "sha256": "3ed2c31641e6f229a2c38060ac53ad35411f195ebac48d6ca82171077148efb2"
+      "sha256": "4ed2bfb8f8047a01458bbed285be9832cd860f313a6def31d8006dd0bf4580c9"
     },
     "deco": {
       "tag": "atelier-deco-v1",
-      "sha256": "646b99d52ebf7324cb8e963651497cc47f38ea98878258c0377350582f8b8acf"
+      "sha256": "27b52f52e34a8b5a4c176f504ea88dc5d3c1a653e73cdd820922bc3b1a249501"
     },
     "giftintro": {
       "tag": "atelier-gift-intro-v1",
@@ -81,7 +81,7 @@
     },
     "product": {
       "tag": "atelier-product-v1",
-      "sha256": "29a1488efcaaf73b4e4d6ef5f3ebd475fdee253d9dee1cb3a77a35cf78363f9d"
+      "sha256": "9baeda2eaa5419df833d3f1f81170073977687ba575b4024e2fb056e714a419a"
     },
     "productfaq": {
       "tag": "atelier-product-faq-v1",
@@ -102,7 +102,7 @@
     {
       "key": "home",
       "file": "early-packet-home-2.html",
-      "characters": 5834
+      "characters": 7070
     },
     {
       "key": "footer",
@@ -112,22 +112,22 @@
     {
       "key": "shop",
       "file": "early-packet-shop-1.html",
-      "characters": 9186
+      "characters": 9182
     },
     {
       "key": "lamps",
       "file": "early-packet-lamps-1.html",
-      "characters": 8087
+      "characters": 8235
     },
     {
       "key": "seats",
       "file": "early-packet-seats-1.html",
-      "characters": 5887
+      "characters": 6067
     },
     {
       "key": "deco",
       "file": "early-packet-deco-1.html",
-      "characters": 5906
+      "characters": 6086
     },
     {
       "key": "giftintro",
@@ -197,7 +197,7 @@
     {
       "key": "product",
       "file": "early-packet-product-2.html",
-      "characters": 341
+      "characters": 473
     },
     {
       "key": "productfaq",
