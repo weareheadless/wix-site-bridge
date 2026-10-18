@@ -21,7 +21,8 @@
       "/blog",
       "/product-page/:slug",
       "/conditions-generales-de-vente",
-      "/conditions-generales"
+      "/conditions-generales",
+      "/politique-de-confidentialite"
     ],
     "components": [
       {
@@ -340,6 +341,20 @@
         ],
         "datasetBindings": [
           "Original CGU preamble, eight articles and existing effective date preserved; visual redesign only"
+        ]
+      },
+      {
+        "name": "privacy",
+        "source": "sites/atelier-harmonie/production/custom-elements/atelier-privacy-v1.js",
+        "tagName": "atelier-privacy-v1",
+        "routes": [
+          "/politique-de-confidentialite"
+        ],
+        "wixElementIds": [
+          "customElement24"
+        ],
+        "datasetBindings": [
+          "Five original privacy articles and subsections preserved; original issue/update dates and retention text unchanged; design only"
         ]
       }
     ],
@@ -860,6 +875,18 @@
         "category": "ESSENTIAL",
         "loadOnce": true,
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-generalterms-1.html",
+        "purpose": "nonvisual-early-registration"
+      },
+      {
+        "id": "f72d84b1-cb9f-4521-8e5d-9a05851988f1",
+        "name": "Atelier production early-packet-privacy-1.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": true,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-privacy-1.html",
         "purpose": "nonvisual-early-registration"
       }
     ],

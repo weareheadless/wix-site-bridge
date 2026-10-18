@@ -136,3 +136,8 @@
 
 - `/conditions-generales`, Wix page `vgud5`: `atelier-general-terms-v1.js`, tag `atelier-general-terms-v1`, requested ID `customElement23`. See `production/GENERAL_TERMS_PLACEMENT.md`.
 - Preserve original preamble, eight articles and the original “En vigueur au 30/10/2023” date from `production/general-terms/content.json`. Match CGV editorial navigation/design without legal rewriting or changing cookie consent behavior. All legal text stays visible/searchable.
+
+## Privacy policy
+
+- `/politique-de-confidentialite`, Wix page `u54cx`: `atelier-privacy-v1.js`, tag `atelier-privacy-v1`, requested ID `customElement24`. See `production/PRIVACY_PLACEMENT.md`.
+- Preserve all five original articles, subsections, dates, retention period and hosting details from `production/privacy/content.json`. Use the matching legal-page design and full searchable copy; do not silently rewrite policy or change consent, forms, newsletter, analytics or data processing behavior.
