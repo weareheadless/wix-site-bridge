@@ -4,7 +4,7 @@
   "connectedRepository": "weareheadless/atelier-harmonie",
   "branch": "main",
   "initialCommit": "130c5c5",
-  "componentSourceCommit": "a480041",
+  "componentSourceCommit": "27cac71",
   "sourceBuildManifest": "build-manifest.json",
   "published": false,
   "placement": {
@@ -31,10 +31,10 @@
     }
   },
   "startupCustomCodeInstalled": true,
-  "startupRelease": "atelier-production-20261018-v3",
+  "startupRelease": "atelier-production-20261018-v4",
   "layoutWarning": "Local UI version 740 predates human placement. Do not CLI-publish it.",
   "liveObservedRelease": "atelier-production-20261018-v2",
-  "pendingPublication": "Source and six startup entries updated; human must Publish current Editor layout. Live fresh-load inspection still shows v2.",
+  "pendingPublication": "Cart/project actions grouped at right with muted blue/rose outlines; source pushed and startup entries synchronized. Human publishes current saved Editor layout.",
   "fixes": [
     "Scope fragment lookups through componentRoot to avoid hero local root temporal-dead-zone error; restores hero/carousel initialization and deferred reviews",
     "Load shared prototype Google Fonts stylesheet in document head so shadow components can use Parisienne and other fonts",
