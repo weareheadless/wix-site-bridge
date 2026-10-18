@@ -45,7 +45,7 @@
           "customElement2"
         ],
         "datasetBindings": [
-          "Exact curated product slugs resolve live stock and card prices via backend/atelier-shop.web getAtelierAvailability; hero does not await catalog"
+          "Live stock/prices from existing paginated getAtelierProducts; exact normalized slug/canonical product URL matching; noncritical to hero paint"
         ]
       },
       {

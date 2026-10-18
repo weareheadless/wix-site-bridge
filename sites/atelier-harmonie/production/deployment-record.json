@@ -31,10 +31,10 @@
     }
   },
   "startupCustomCodeInstalled": true,
-  "startupRelease": "atelier-production-20261018-v40",
+  "startupRelease": "atelier-production-20261018-v41",
   "layoutWarning": "Local UI version 740 predates human placement. Do not CLI-publish it.",
   "liveObservedRelease": "atelier-production-20261018-v2",
-  "pendingPublication": "Sold-out labels across product rails and live homepage availability source/startup installed; human current-layout publish and visual confirmation pending.",
+  "pendingPublication": "Homepage explicit stock lookup correction source/startup installed; human current-layout publish and actual availability confirmation pending.",
   "fixes": [
     "Scope fragment lookups through componentRoot to avoid hero local root temporal-dead-zone error; restores hero/carousel initialization and deferred reviews",
     "Load shared prototype Google Fonts stylesheet in document head so shadow components can use Parisienne and other fonts",
@@ -262,8 +262,8 @@
     "published": false
   },
   "availability": {
-    "sourceCommit": "d626782",
-    "startupRelease": "atelier-production-20261018-v40",
+    "sourceCommit": "2e27a1f",
+    "startupRelease": "atelier-production-20261018-v41",
     "instructions": "AVAILABILITY.md",
     "routes": [
       "/",
@@ -273,7 +273,8 @@
       "/objets-deco",
       "/product-page/:slug"
     ],
-    "data": "Live Wix Stores/Products; bounded exact-slug homepage lookup; existing catalog for other rails",
-    "published": false
+    "data": "Established Wix getAtelierProducts feed with exact normalized slug/canonical URL matching; no separate slug-query method",
+    "published": false,
+    "homeLabels": "Disponible or Épuisé when resolved; unknown explicitly unknown"
   }
 }

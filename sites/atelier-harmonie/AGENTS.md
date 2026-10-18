@@ -118,4 +118,6 @@
 ## Availability across product cards
 
 - Always make sold-out status visible before navigation: ivory/rose “Épuisé” badge on product photos in shop, lamps/seats/deco rails, product recommendations and homepage curated product cards. Keep sold-out pieces viewable; no sold-out add-to-cart actions.
-- Homepage availability/prices resolve exact product URL slugs against live public Wix Stores/Products via bounded `getAtelierAvailability`; no static stock snapshot. Pending/unknown lookup must not imply availability. See `production/AVAILABILITY.md`. Keep the home request/readiness handshake and normal source/startup packets synchronized.
+- Homepage availability/prices resolve exact normalized slugs and canonical product URLs against the existing paginated `getAtelierProducts` live catalog feed; no static stock snapshot. Pending/unknown lookup must not imply availability. See `production/AVAILABILITY.md`. Keep the home request/readiness handshake and normal source/startup packets synchronized.
+
+- Homepage stock labels must explicitly show “Disponible” (muted blue) or “Épuisé” (muted rose) for resolved products. The earlier separate slug-query method is retired. Unknown catalog matches remain unknown; do not use “Voir la disponibilité” as a substitute for resolved stock.
