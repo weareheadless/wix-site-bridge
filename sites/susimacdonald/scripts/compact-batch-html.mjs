@@ -38,7 +38,20 @@ if (mode === 'prepare') {
     let at = 0;
     const compactSource = map.source.replace(/<[^>]+>/g, () => marker(at++));
     if (row.source !== compactSource) throw Error(`Compact source changed in row ${i}`);
-    const found = [...row.translation.matchAll(/§(\d+)§/g)].map(match => Number(match[1]));
+    let found = [...row.translation.matchAll(/§(\d+)§/g)].map(match => Number(match[1]));
+    // A model may drop a run of structural tags at the very edge of a field.
+    // Recover only an exact missing edge run; any interior or reordered tags fail.
+    const expected = map.tags.map((_, index) => index);
+    if (found.length < expected.length) {
+      const missing = expected.length - found.length;
+      const leading = expected.slice(missing).every((value, index) => value === found[index]);
+      const trailing = expected.slice(0, found.length).every((value, index) => value === found[index]);
+      const missingLeading = expected.slice(0, missing).map(marker).join('');
+      const missingTrailing = expected.slice(found.length).map(marker).join('');
+      if (leading && compactSource.startsWith(missingLeading)) row.translation = missingLeading + row.translation;
+      else if (trailing && compactSource.endsWith(missingTrailing)) row.translation += missingTrailing;
+      found = [...row.translation.matchAll(/§(\d+)§/g)].map(match => Number(match[1]));
+    }
     if (found.length !== map.tags.length || found.some((value, index) => value !== index)) {
       throw Error(`HTML markers changed in row ${i}`);
     }
