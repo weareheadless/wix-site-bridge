@@ -4,7 +4,7 @@ The queue uses the installed Susi bridge app and Wix Translation Content API. It
 
 For continuous processing, run `bash sites/susimacdonald/scripts/run-translation-queue.sh --apply` from the bridge repository. The script invokes `gpt-6-luna` with low reasoning for translation and a separate review, then runs the bridge dry-run and applied publish for each approved batch. It stops on the first failed review, validation, API write, or read-back check; run it again to resume from the remaining live fields. `MAX_BATCHES=1` limits it to a single checkpoint, and `BATCH_CHARS=6000` controls the normal text budget. The model subprocesses work in isolated temporary folders without bridge credentials. Only the parent runner contacts Wix.
 
-An individual Wix rich-text field can exceed the normal text budget. The runner splits such a field at paragraph boundaries, translates and reviews each chunk, then verifies that the exact source was preserved and the merged translation passes the same guards before publishing the single Wix field.
+An individual Wix rich-text field can exceed the normal text budget. The runner splits such a field at paragraph boundaries into chunks of up to 3,500 characters by default (`CHUNK_CHARS`), translates and reviews each chunk, then verifies that the exact source was preserved and the merged translation passes the same guards before publishing the single Wix field.
 
 The user authorized an hourly Codex heartbeat called **Continue Susi Spanish translations** on 19 October 2026. It runs up to 20 reviewed batches per wake-up and stays quiet during normal progress. Avoid starting a second copy of the runner while that heartbeat is active.
 

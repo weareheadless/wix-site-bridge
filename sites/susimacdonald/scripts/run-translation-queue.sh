@@ -17,6 +17,7 @@ export WIX_ALLOWED_SITE_IDS="$SITE_ID"
 
 MAX_BATCHES=${MAX_BATCHES:-0} # zero means continue until the queue is empty
 BATCH_CHARS=${BATCH_CHARS:-6000}
+CHUNK_CHARS=${CHUNK_CHARS:-3500}
 count=0
 
 translate_and_review() {
@@ -57,12 +58,12 @@ while [[ "$MAX_BATCHES" == 0 || "$count" -lt "$MAX_BATCHES" ]]; do
   # Model subprocesses see only isolated text files, never bridge credentials.
   oversized=$(node -e 'const b=require(process.argv[1]);console.log(b.rows.some(r=>r.source.length>Number(process.argv[2]))?"yes":"no")' "$work/batch.json" "$BATCH_CHARS")
   if [[ "$oversized" == yes ]]; then
-    node sites/susimacdonald/scripts/translation-chunks.mjs prepare "$work" "$BATCH_CHARS"
+    node sites/susimacdonald/scripts/translation-chunks.mjs prepare "$work" "$CHUNK_CHARS"
     for chunk in "$work"/chunks/chunk-*.json; do
       label=$(basename "$chunk" .json)
       translate_and_review "$work/chunks" "$(basename "$chunk")" "$label"
     done
-    node sites/susimacdonald/scripts/translation-chunks.mjs assemble "$work" "$BATCH_CHARS"
+    node sites/susimacdonald/scripts/translation-chunks.mjs assemble "$work" "$CHUNK_CHARS"
   else
     translate_and_review "$work" batch.json batch
   fi
