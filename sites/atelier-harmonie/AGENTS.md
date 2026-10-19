@@ -160,3 +160,8 @@
 
 - Existing shared `customElement1` displays total cart quantity in desktop Panier and mobile-menu Mon panier badges. Use Wix currentCart and onCartChange, not a local/parallel cart counter. Existing custom add flows must retain refreshCart so the count updates.
 - Badge value is the sum of quantities, including 0 when known; unknown read state must not show a stale/fake count. Keep count-only attributes, initialization handshake and startup/source synchronization. See `production/NAVBAR_CART.md`.
+
+## Navbar languages
+
+- Preserve the full French brand wordmark with `translate="no"` in both locales. Shared navbar uses a subtle FR / EN control, including mobile; see `production/NAVBAR_LANGUAGE.md`.
+- Use Wix `multilingual.siteLanguages` and `currentLanguage` through Velo, with configured-language validation. Never enable hidden English or guess language availability from URLs; omit switch when fewer than two display languages are exposed. Keep source and startup packets synchronized.
