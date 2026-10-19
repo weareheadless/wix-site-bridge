@@ -16,3 +16,5 @@
 - Keep source modifications on the selected Susi repository and synchronize ordinary custom-element source with existing early packets and both controllers before any authorized production release. No document-wide translation observer or parallel listing database.
 
 - Follow-up: app v2.0 now confirms both translation scopes; native translation query succeeds without wix-site-id. Verify own installation siteId before app-only requests. Do not repeat the obsolete permissions blocker. Inventory has 921 English-only records; confirm Mexican Spanish target locale before writes.
+
+- User now explicitly authorizes completing and publishing Spanish publicly (18 October 2026). Do not launch an incomplete language. Latest approved scope overrides the historical connection-only/hidden-until-approval notes; preserve English, current saved layout, CMS and ordinary-source/startup synchronization.
