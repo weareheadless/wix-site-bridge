@@ -7,3 +7,10 @@
 - This request authorizes bridge connection only, not page redesign, publishing, data changes or replacing existing startup code. Inventory live embeds and map exact IDs/scopes before any later mutation. Both existing initial and navigation controllers must remain synchronized with their packets and normal source when a future source release is authorized.
 - Human handles Wix Editor placement, sizing, section cleanup and publication. Agents do not operate Editor UI or publish stale layout snapshots.
 - New app needs only `SCOPE.EDITOR.MANAGE_CUSTOM_EMBEDS` (plus Wix's forced basic app-instance access). The human explicitly approved creation, this scope, installation and the final Wix terms agreement; installation and own-app API access are now verified. Do not inherit Atelier translation scopes.
+
+## Mexican Spanish
+
+- User authorized translating the Susi website into Mexican Spanish and explicitly approved adding Read Translation Content and Write Translation Content to this site's own bridge app. These scopes are not yet saved/installed; last actual translation-content probe returned HTTP 403.
+- Translate directly without using Wix machine-translation credits or buying credits. Use Mexican vocabulary (renta, recámaras, colonia, financiamiento), preserve Susi MacDonald, place names, prices, measurements, links and legal meaning. Do not change language visibility without explicit launch authorization.
+- Prepared `production/i18n/es-MX.json` contains 120 directly translated interface/FAQ strings. It is a draft dictionary, not a deployed component or proof of whole-site translation. Native CMS listing copy, native Wix text/SEO and remaining dynamic component content still need inventory and translation.
+- Keep source modifications on the selected Susi repository and synchronize ordinary custom-element source with existing early packets and both controllers before any authorized production release. No document-wide translation observer or parallel listing database.

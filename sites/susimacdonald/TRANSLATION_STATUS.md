@@ -1,0 +1,9 @@
+# Mexican Spanish translation status
+
+Requested 18 October 2026. Direct translation only; no Wix translation credits or purchases.
+
+Prepared: 120 Mexican Spanish UI/FAQ translations in `production/i18n/es-MX.json`, based on read-only copies of the existing Susi components. Existing source remains on the VPS at `/home/admin/susimacdonald-rentals`; no live content or source deployment changed.
+
+Pending: save and install the two explicitly approved translation scopes on Susi Embed Bridge; retrieve complete native translation inventory and verify Spanish target locale/visibility; translate native copy, CMS listing narratives and remaining component configuration; integrate locale selection using supported Wix language context; synchronize existing normal sources/startup packets; human publish saved layout and confirm rendered Spanish.
+
+Actual bridge translation-content read returned 403 before scope change. In-app browser controls repeatedly report disabled in Work settings, including after the human reported enabling them. This blocks the Developer Center permission save/install. Do not represent a connector's separate identity as this bridge's granted access, spend credits, or silently expand app permissions through another installation.
