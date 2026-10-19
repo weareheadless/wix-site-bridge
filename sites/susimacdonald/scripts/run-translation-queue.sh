@@ -25,8 +25,9 @@ translate_and_review() {
     codex exec -m gpt-6-luna -c model_reasoning_effort=low --ephemeral \
     --ignore-user-config --skip-git-repo-check -C "$directory" -s workspace-write \
     -o "$work/$label-translator-report.txt" \
-    "Edit $filename only. Translate every translation field to fluent, idiomatic Mexican Spanish for a luxury Riviera Maya real estate website. Translate complete ideas, not individual words. Use natural Mexican real estate terms only where the source meaning calls for them. Preserve facts, named places, legal claims, HTML tags and attributes, links, prices, dates and measurements. Keep currency figures in their original numeric form, including the currency symbol (for example, write \$1 millón when the source says \$1 million). Preserve all other JSON fields exactly. Review every visible sentence for English remnants before finishing. Do not access the network or other files. In your final message, say DONE or explain uncertainty." \
+    "Edit $filename only. Translate every translation field to fluent, idiomatic Mexican Spanish for a luxury Riviera Maya real estate website. Some source passages are already Spanish: preserve those passages in natural Spanish, copying them unchanged when already good. Translate complete ideas, not individual words. Use natural Mexican real estate terms only where the source meaning calls for them. Preserve facts, named places, legal claims, HTML tags and attributes, links, prices, dates and measurements. Keep currency figures in their original numeric form, including the currency symbol (for example, write \$1 millón when the source says \$1 million). Preserve all other JSON fields exactly. Write valid JSON, escaping every newline and quote inside the translation string; use JSON.stringify when saving. Review every visible sentence for English remnants before finishing. Do not access the network or other files. In your final message, say DONE or explain uncertainty." \
     >"$work/$label-translator-log.txt" 2>&1
+  node -e 'const fs=require("fs");const item=JSON.parse(fs.readFileSync(process.argv[1],"utf8"));const rows=item.rows??[item];if(rows.some(row=>typeof row.translation!=="string"||!row.translation.trim()))throw Error("Incomplete model translation")' "$directory/$filename"
   env -i PATH="$PATH" HOME="$HOME" TMPDIR="${TMPDIR:-/private/tmp}" \
     codex exec -m gpt-6-luna -c model_reasoning_effort=low --ephemeral \
     --ignore-user-config --skip-git-repo-check -C "$directory" -s workspace-write \
@@ -37,6 +38,7 @@ translate_and_review() {
     printf 'Reviewer rejected %s (%s); saved in %s\n' "$(basename "$batch")" "$label" "$work" >&2
     exit 1
   fi
+  node -e 'const fs=require("fs");const item=JSON.parse(fs.readFileSync(process.argv[1],"utf8"));const rows=item.rows??[item];if(rows.some(row=>typeof row.translation!=="string"||!row.translation.trim()))throw Error("Incomplete reviewed translation")' "$directory/$filename"
 }
 
 while [[ "$MAX_BATCHES" == 0 || "$count" -lt "$MAX_BATCHES" ]]; do
