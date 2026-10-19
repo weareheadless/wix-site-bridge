@@ -11,3 +11,7 @@ Actual bridge translation-content read returned 403 before scope change. In-app 
 ## Access corrected
 
 Own installed app version 2.0 confirmed with both approved translation scopes. Translation reads succeed (HTTP 200) when the redundant wix-site-id header is omitted; app installation identity is verified against the exact Susi site ID before reading. Full private inventory: 921 source records, English only. App-instance multilingual configuration currently exposes only primary English (en-US); a Spanish target has not yet been confirmed. Earlier 403 was caused by request context, not missing installed permissions after update. No native translations saved yet.
+
+## First native batch saved
+
+128 Spanish draft records / 242 directly translated fields saved through Susi own bridge: native page titles, buttons, forms, chat and consultation copy. First batch returned 64 successes and 36 missing-parent failures; preserved original parentEntityId, skipped successes and completed remaining 64 records in the corrected batch. Original English and hidden language setting unchanged. Full site inventory contains approximately 198,507 source words across 921 records; listing narratives, long editorial copy, embedded component integration and production release remain incomplete. No full-site completion claim.
