@@ -1,9 +1,32 @@
-# Connection status
+# Susi Macdonald bridge connection
 
-Selected SusiMacDonald dashboard identity confirmed 18 October 2026. Source repository inspected read-only on VPS: `/home/admin/susimacdonald-rentals`, remote `weareheadless/susimacdonald-rentals`. No uncommitted changes reported during inspection. Existing early registration covers city, unit, home, rentals and dynamic listing components; do not rebuild or replace during bridge onboarding.
+Connected 18 October 2026. Customer alias `susimacdonald`, verified Wix site `878460ca-c98c-402b-8a10-862023f67cce`, https://www.susimacdonald.com/.
 
-Pending: create dedicated least-privilege app, approve/install on selected site, store credentials privately, then use bridge `inspect` to establish API access and inventory live embed IDs. Manifest intentionally has no deployment mappings until the live inventory is retrieved. Official Wix-connected Git repository has not yet been established.
+## Verified access
 
-## App prepared
+Dedicated private app **Susi Embed Bridge** v1.0 is installed and enabled. Only Custom Embeds management plus Wix's mandatory basic app-instance details were granted. The human approved app creation, installation and the final Wix terms agreement. Own app credentials are stored locally in `sites/susimacdonald/.wix-bridge-state/app.env` (0600, ignored); no Atelier credentials are used.
 
-Dedicated self-managed app created: `Susi Embed Bridge`, ID `f8ac6e04-1e0e-4ba2-a556-406ef76fd2a8`, version 1.0. Developer permissions screen confirms only Custom Embeds management and Wix's forced basic app-instance read permission. SusiMacDonald selected explicitly in private installation. Final Agree & Add awaiting confirmation of Wix App Market terms; installation not yet complete. No live snippets changed. CLI env pull is unavailable for this self-managed app (404); obtain its own OAuth credentials through supported developer setup, never reuse Atelier credentials.
+The shared bridge CLI `snippets --site susimacdonald` successfully authenticated and listed **20 existing snippets**. `embed-inventory.json` and the manifest record their actual IDs, placement, page scope, category, load-once settings and hashes. Private `live-embeds.json` retains a read-only full snapshot. No snippet, content, dataset, layout or publication was changed. Browser access was subsequently disabled in Work settings, so no final screenshot was captured; API access is confirmed independently through the app.
+
+## Routine use
+
+From shared bridge repository root:
+
+```sh
+set -a
+source sites/susimacdonald/.wix-bridge-state/app.env
+set +a
+node src/cli.mjs snippets --manifest sites/susimacdonald/site.manifest.json --site susimacdonald --state-dir sites/susimacdonald/.wix-bridge-state
+```
+
+Refresh inventory (read-only Wix calls, updates local manifest):
+
+```sh
+node sites/susimacdonald/scripts/inventory.mjs --site susimacdonald
+```
+
+## Existing source and release boundary
+
+Existing source repository inspected read-only: `/home/admin/susimacdonald-rentals` on authorized VPS `admin@216.238.93.99`, remote `weareheadless/susimacdonald-rentals`; checkout was clean. Its official Wix Git Integration connection is not established by that remote alone. Manifest `connectedRepo` remains null until an actual Wix-connected checkout is verified. Do not CLI publish this repository as if it contains a saved Wix UI version.
+
+Existing startup covers cities, unit types, home, rentals and dynamic listings. Inventory also found unit-type-hub and disabled historic pilot/discovery entries. The initial/navigation controller hashes currently differ; preserve both during onboarding, compare against canonical source before a future authorized startup release, and never silently overwrite either. Human handles Editor placement and publication. Existing CMS dataset/filter/sort remains authoritative.
