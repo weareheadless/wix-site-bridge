@@ -1,17 +1,26 @@
-# Mexican Spanish translation status
+# Mexican Spanish translation
 
-Requested 18 October 2026. Direct translation only; no Wix translation credits or purchases.
+## Current state — 18 October 2026
 
-Prepared: 120 Mexican Spanish UI/FAQ translations in `production/i18n/es-MX.json`, based on read-only copies of the existing Susi components. Existing source remains on the VPS at `/home/admin/susimacdonald-rentals`; no live content or source deployment changed.
+- Own Susi Embed Bridge v2.0 has the explicitly approved translation read/write permissions. App-only translation requests succeed when the redundant `wix-site-id` header is omitted. Each helper verifies the installed app's actual site ID before using that context.
+- Human confirms Spanish (Mexico) is added and hidden. Preserve that visibility. Target translation records use language code `es`; Mexican wording is written directly. No machine-translation credits or purchases.
+- **405 Spanish draft records / 591 text fields saved in native Wix**: 128 records / 242 fields for titles, buttons, forms, chat and consultation; 241 rich-text page-copy records; 36 listing records / 108 fields for titles, summaries and meta descriptions.
+- Saved content remains unpublished drafts. Existing English, CMS records, datasets, layout and startup snippets were not changed.
+- Prepared separately: 120 custom-interface translations in `production/i18n/es-MX.json`. Component integration and ordinary source/startup release are not yet complete.
 
-Pending: save and install the two explicitly approved translation scopes on Susi Embed Bridge; retrieve complete native translation inventory and verify Spanish target locale/visibility; translate native copy, CMS listing narratives and remaining component configuration; integrate locale selection using supported Wix language context; synchronize existing normal sources/startup packets; human publish saved layout and confirm rendered Spanish.
+## Remaining work
 
-Actual bridge translation-content read returned 403 before scope change. In-app browser controls repeatedly report disabled in Work settings, including after the human reported enabling them. This blocks the Developer Center permission save/install. Do not represent a connector's separate identity as this bridge's granted access, spend credits, or silently expand app permissions through another installation.
+- Complete remaining listing titles/summaries/metadata (source listing indexes 36–216), full listing narratives, long editorial/legal copy, other native text and custom component/configuration translations.
+- Preserve HTML, links, prices, dates, measurements, factual and legal meaning. Do not treat translation as a rewrite or silently update old dated claims.
+- Source inventory: 921 English records, approximately 198,507 words including HTML/source content, across 22 schemas. This is substantially more than the interface dictionary. Do not claim the whole site is translated.
+- Wire locale through supported Wix context; synchronize ordinary custom-element source and both existing early controllers/packets before an authorized production release. Human publishes the current saved Editor layout. Native Spanish visibility remains a separate launch decision.
 
-## Access corrected
+## Recovery and resumability
 
-Own installed app version 2.0 confirmed with both approved translation scopes. Translation reads succeed (HTTP 200) when the redundant wix-site-id header is omitted; app installation identity is verified against the exact Susi site ID before reading. Full private inventory: 921 source records, English only. App-instance multilingual configuration currently exposes only primary English (en-US); a Spanish target has not yet been confirmed. Earlier 403 was caused by request context, not missing installed permissions after update. No native translations saved yet.
+Private ignored `.wix-bridge-state/translation-source-original.json` is the original English inventory. `translation-inventory.json` is the latest read-back. `spanish-drafts-receipt-*.json` holds returned IDs, successes and original snapshot references. First batch missed required parentEntityId on 36 items; those were corrected using original parent mappings, skipping all successful creates. Subsequent batches succeeded with zero failures.
 
-## First native batch saved
+`save-spanish-drafts.mjs --site susimacdonald` previews the reviewed private `native-spanish-plan.json`; `--apply` saves only explicit Spanish draft text. It refuses duplicate keys already present in Wix. Later additions to existing Spanish records need a documented update-by-key operation preserving all prior fields; never delete/recreate to append fields.
 
-128 Spanish draft records / 242 directly translated fields saved through Susi own bridge: native page titles, buttons, forms, chat and consultation copy. First batch returned 64 successes and 36 missing-parent failures; preserved original parentEntityId, skipped successes and completed remaining 64 records in the corrected batch. Original English and hidden language setting unchanged. Full site inventory contains approximately 198,507 source words across 921 records; listing narratives, long editorial copy, embedded component integration and production release remain incomplete. No full-site completion claim.
+Source dictionaries and reviewed listing translations are versioned under `production/i18n/`; these are editorial source artifacts, not a parallel runtime catalog. Runtime listing data remains in Wix.
+
+Read-back confirmed original English fields unchanged. Spanish configuration now appears in app-instance context with languageCode es and countryCode MEX, consistent with the human-selected target. Direct Spanish rich-text translations preserve original tags and link destinations; 31 split-span records were translated per text span. Most recent native draft batch completed with zero failures.
