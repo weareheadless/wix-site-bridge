@@ -21,9 +21,14 @@ const apply = args.includes('--apply');
 const digest = value => createHash('sha256').update(value).digest('hex');
 const keyOf = row => JSON.stringify([row.schemaId, row.entityId, row.locale]);
 const fieldKey = (row, id) => JSON.stringify([row.schemaId, row.entityId, id]);
+const equivalentContent = (left, right) => {
+  const normalize = value => value.split(/(<[^>]+>)/g).map(part =>
+    part.startsWith('<') ? part : part.replace(/\s+/g, ' ').trim());
+  return JSON.stringify(normalize(left)) === JSON.stringify(normalize(right));
+};
 
-if (!['next', 'next-quarantine', 'apply', 'status'].includes(command) || option('--site') !== alias || process.env.WIX_ALLOWED_SITE_IDS !== siteId) {
-  throw Error('Use next|next-quarantine|apply|status --site susimacdonald with the exact Susi site allowlist');
+if (!['next', 'next-quarantine', 'apply', 'verify', 'status'].includes(command) || option('--site') !== alias || process.env.WIX_ALLOWED_SITE_IDS !== siteId) {
+  throw Error('Use next|next-quarantine|apply|verify|status --site susimacdonald with the exact Susi site allowlist');
 }
 const manifest = JSON.parse(await readFile(manifestPath, 'utf8'));
 if (manifest.site?.alias !== alias || manifest.site?.siteId !== siteId) throw Error('Susi manifest target mismatch');
@@ -183,6 +188,16 @@ for (const row of batch.rows) {
 const headers = await client();
 const live = await inventory(headers);
 const liveMap = new Map(live.map(row => [keyOf(row), row]));
+if (command === 'verify') {
+  for (const row of batch.rows) {
+    const saved = liveMap.get(JSON.stringify([row.schemaId, row.entityId, 'es']))?.fields?.[row.fieldId];
+    if (saved?.published !== true || !equivalentContent(saved.textValue, row.translation)) {
+      throw Error(`Read-back mismatch for ${row.entityId}.${row.fieldId}`);
+    }
+  }
+  console.log(JSON.stringify({ site: alias, batch: path.basename(file), fields: batch.rows.length, status: 'verified' }));
+  process.exit(0);
+}
 for (const row of batch.rows) {
   const en = liveMap.get(JSON.stringify([row.schemaId, row.entityId, 'en']));
   const es = liveMap.get(JSON.stringify([row.schemaId, row.entityId, 'es']));
@@ -239,7 +254,7 @@ const verified = await inventory(headers);
 const after = new Map(verified.map(row => [keyOf(row), row]));
 for (const row of batch.rows) {
   const saved = after.get(JSON.stringify([row.schemaId, row.entityId, 'es']))?.fields?.[row.fieldId];
-  if (saved?.published !== true || saved.textValue.replace(/>\s+</g, '><') !== row.translation.replace(/>\s+</g, '><')) throw Error(`Read-back mismatch for ${row.entityId}.${row.fieldId}; inspect ${receiptFile}`);
+  if (saved?.published !== true || !equivalentContent(saved.textValue, row.translation)) throw Error(`Read-back mismatch for ${row.entityId}.${row.fieldId}; inspect ${receiptFile}`);
 }
 receipt.status = 'verified';
 await writeFile(receiptFile, `${JSON.stringify(receipt, null, 2)}\n`, { mode: 0o600 });
