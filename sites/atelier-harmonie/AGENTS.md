@@ -165,3 +165,5 @@
 
 - Preserve the full French brand wordmark with `translate="no"` in both locales. Shared navbar uses a subtle FR / EN control, including mobile; see `production/NAVBAR_LANGUAGE.md`.
 - Use Wix `multilingual.siteLanguages` and `currentLanguage` through Velo, with configured-language validation. Never enable hidden English or guess language availability from URLs; omit switch when fewer than two display languages are exposed. Keep source and startup packets synchronized.
+
+- Catalog translation setup must remain inside the English-only async boundary; never initialize optional SDK auth at module load in the shared public catalog backend. Translation failures must not prevent product rendering. Validate localized `/en/product-page/` URLs alongside French URLs and use canonical slugs for stable category matching. v50 awaits human publication and live confirmation; do not claim the prior `catalog-error` exception was proven without backend evidence.

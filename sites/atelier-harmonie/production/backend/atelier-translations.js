@@ -1,10 +1,9 @@
-import { translationPublishedContents } from '@wix/multilingual';
-import { auth } from '@wix/essentials';
-
 // Read Wix's authoritative published English copy. No local product snapshot or credentials.
-const queryPublished = auth.elevate(translationPublishedContents.queryPublishedContent);
 export async function englishProductCopy(ids, locale) {
  if (locale !== 'en' || !ids.length) return new Map();
+ // Translation setup must not prevent the public catalog module from loading.
+ const [{translationPublishedContents}, {auth}] = await Promise.all([import('@wix/multilingual'),import('@wix/essentials')]);
+ const queryPublished = auth.elevate(translationPublishedContents.queryPublishedContent);
  const response = await queryPublished({
   filter: {
    'schemaKey.appId': {$eq: '1380b703-ce81-ff05-f115-39571d94dfcd'},
@@ -19,5 +18,5 @@ export async function englishProductCopy(ids, locale) {
 }
 
 export function translatedField(fields, key) {
- return fields?.find(field => field.schemaFieldKey === key)?.textValue;
+ return Array.isArray(fields) ? fields.find(field => field.schemaFieldKey === key)?.textValue : undefined;
 }

@@ -1,7 +1,7 @@
 {
   "siteAlias": "atelier-harmonie",
   "siteId": "376faa89-fe6c-4ae8-8feb-10520e813a89",
-  "release": "atelier-production-20261018-v49",
+  "release": "atelier-production-20261018-v50",
   "components": {
     "navbar": {
       "tag": "atelier-navbar-v1",
@@ -9,7 +9,7 @@
     },
     "home": {
       "tag": "atelier-home-v1",
-      "sha256": "bb4711d6e751bf428ab2f80dc4417498fac2b54a19d36c42de5255075e200bac"
+      "sha256": "f0ea5a5b0a5034654bca4a7e315fb5bc08dc08f2385cab529f7687a550a012b5"
     },
     "footer": {
       "tag": "atelier-footer-v1",
@@ -17,7 +17,7 @@
     },
     "shop": {
       "tag": "atelier-shop-v1",
-      "sha256": "799b8004a43dc2b16d1a678ec6950754a236ecf4a2521bcd059405ee81fc13c7"
+      "sha256": "712bfe87cb19d21b2f1277b20081e5d87fb1edc2c0bcde3f8f98ef6b9526208a"
     },
     "lamps": {
       "tag": "atelier-lamps-v1",
@@ -123,7 +123,7 @@
     {
       "key": "home",
       "file": "early-packet-home-3.html",
-      "characters": 3366
+      "characters": 3406
     },
     {
       "key": "footer",
@@ -138,7 +138,7 @@
     {
       "key": "shop",
       "file": "early-packet-shop-2.html",
-      "characters": 714
+      "characters": 722
     },
     {
       "key": "lamps",

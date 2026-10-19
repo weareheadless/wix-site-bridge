@@ -31,3 +31,9 @@ English exists in Wix Multilingual and is hidden by the human's choice. Keep it 
 Current installed startup: v48. This is not evidence of English browser paint. English remains hidden.
 
 Reusable customer translation command: `node sites/atelier-harmonie/scripts/translations.mjs --site atelier-harmonie --operation snapshot` (private snapshot), or `--operation create|update --plan <private-plan.json>` (dry-run; `--apply` only for a reviewed authorized plan). It accepts English text only and never changes locale visibility.
+
+## Catalog loading follow-up — v50
+
+Public inspection reproduced `catalog-error` on both French and English shop URLs while translated chrome rendered correctly. Translation imports/elevation now initialize inside the English-only async operation, so setup failure is contained by the existing catalog translation catch instead of aborting the shared backend module before its methods run. Defensive translated-field reads reject malformed fields. The exact backend exception was not exposed by the previous frontend catch; this is a containment fix pending publication and live confirmation, not a confirmed diagnosis of that exception.
+
+Homepage product URL validation now accepts the `/en/product-page/` prefix, retaining same-origin constraints. Category matching includes canonical product slugs so translated display names cannot change the category. Source `e4c3190`, startup `atelier-production-20261018-v50`, all 37 receipt mappings checked. Human publishes current saved Editor layout; no CLI layout publish. Normal Wix source fallback and private recovery snapshots remain. No English visibility changes.

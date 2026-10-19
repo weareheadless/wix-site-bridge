@@ -4,7 +4,7 @@
   "connectedRepository": "weareheadless/atelier-harmonie",
   "branch": "main",
   "initialCommit": "130c5c5",
-  "componentSourceCommit": "601d7bd",
+  "componentSourceCommit": "e4c3190",
   "sourceBuildManifest": "build-manifest.json",
   "published": false,
   "placement": {
@@ -31,10 +31,10 @@
     }
   },
   "startupCustomCodeInstalled": true,
-  "startupRelease": "atelier-production-20261018-v49",
+  "startupRelease": "atelier-production-20261018-v50",
   "layoutWarning": "Local UI version 740 predates human placement. Do not CLI-publish it.",
   "liveObservedRelease": "atelier-production-20261018-v2",
-  "pendingPublication": "Subtle FR / EN navbar switch and protected French brand pushed; startup v49 installed. Human current saved-layout publish required; language visibility unchanged.",
+  "pendingPublication": "Catalog translation startup isolation and localized homepage product URLs pushed; startup v50 installed; current saved Editor layout publication required before live confirmation.",
   "fixes": [
     "Scope fragment lookups through componentRoot to avoid hero local root temporal-dead-zone error; restores hero/carousel initialization and deferred reviews",
     "Load shared prototype Google Fonts stylesheet in document head so shadow components can use Parisienne and other fonts",
@@ -380,5 +380,12 @@
     "instructions": "NAVBAR_LANGUAGE.md",
     "published": false,
     "receiptMappingsChecked": 37
+  },
+  "catalogLocaleFix": {
+    "sourceCommit": "e4c3190",
+    "startupRelease": "atelier-production-20261018-v50",
+    "receiptMappingsChecked": 37,
+    "published": false,
+    "observedBefore": "Public French and English shop both set catalog-error; translated chrome rendered; no product cards."
   }
 }
