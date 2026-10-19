@@ -19,6 +19,26 @@ MAX_BATCHES=${MAX_BATCHES:-0} # zero means continue until the queue is empty
 BATCH_CHARS=${BATCH_CHARS:-6000}
 count=0
 
+translate_and_review() {
+  local directory=$1 filename=$2 label=$3
+  env -i PATH="$PATH" HOME="$HOME" TMPDIR="${TMPDIR:-/private/tmp}" \
+    codex exec -m gpt-6-luna -c model_reasoning_effort=low --ephemeral \
+    --ignore-user-config --skip-git-repo-check -C "$directory" -s workspace-write \
+    -o "$work/$label-translator-report.txt" \
+    "Edit $filename only. Translate every translation field to fluent, idiomatic Mexican Spanish for a luxury Riviera Maya real estate website. Translate complete ideas, not individual words. Use natural Mexican real estate terms only where the source meaning calls for them. Preserve facts, named places, legal claims, HTML tags and attributes, links, prices, dates and measurements. Preserve all other JSON fields exactly. Review every visible sentence for English remnants before finishing. Do not access the network or other files. In your final message, say DONE or explain uncertainty." \
+    >"$work/$label-translator-log.txt" 2>&1
+  env -i PATH="$PATH" HOME="$HOME" TMPDIR="${TMPDIR:-/private/tmp}" \
+    codex exec -m gpt-6-luna -c model_reasoning_effort=low --ephemeral \
+    --ignore-user-config --skip-git-repo-check -C "$directory" -s workspace-write \
+    -o "$work/$label-reviewer-report.txt" \
+    "Independently review every translation in $filename against its English source. This is customer-facing luxury Mexican real estate copy. Correct literal, awkward, untranslated or misleading Spanish in the translation fields only. Preserve source facts, HTML, URLs, numbers and all non-translation fields. If you cannot confidently make every field natural and accurate, start your final message with REJECTED and list the reasons. Otherwise start your final message with APPROVED. Do not access the network or other files." \
+    >"$work/$label-reviewer-log.txt" 2>&1
+  if ! rg -qi '^\*{0,2}APPROVED\b' "$work/$label-reviewer-report.txt"; then
+    printf 'Reviewer rejected %s (%s); saved in %s\n' "$(basename "$batch")" "$label" "$work" >&2
+    exit 1
+  fi
+}
+
 while [[ "$MAX_BATCHES" == 0 || "$count" -lt "$MAX_BATCHES" ]]; do
   next=$(node sites/susimacdonald/scripts/translate-queue.mjs next --site "$SITE" --limit 12 --max-chars "$BATCH_CHARS")
   batch=$(printf '%s' "$next" | node -pe 'JSON.parse(require("fs").readFileSync(0,"utf8")).batch ?? ""')
@@ -32,24 +52,17 @@ while [[ "$MAX_BATCHES" == 0 || "$count" -lt "$MAX_BATCHES" ]]; do
   chmod 600 "$work/batch.json"
   printf 'Batch %s: translating %s\n' "$((count + 1))" "$(basename "$batch")"
 
-  # Keep bridge credentials out of both model subprocesses. They only see the
-  # isolated text batch; the parent shell alone performs Wix API calls.
-  env -i PATH="$PATH" HOME="$HOME" TMPDIR="${TMPDIR:-/private/tmp}" \
-    codex exec -m gpt-6-luna -c model_reasoning_effort=low --ephemeral \
-    --ignore-user-config --skip-git-repo-check -C "$work" -s workspace-write \
-    -o "$work/translator-report.txt" \
-    'Edit batch.json only. Translate every translation field to fluent, idiomatic Mexican Spanish for a luxury Riviera Maya real estate website. Translate complete ideas, not individual words. Use natural Mexican real estate terms such as departamento, preventa, plusvalía, amenidades, escrituración and rendimiento only where the source meaning calls for them. Preserve facts, named places, legal claims, HTML tags and attributes, links, prices, dates and measurements. Preserve all other JSON fields exactly. Existing Spanish draft is context, not a mandatory answer. Review every visible sentence for English remnants before finishing. Do not access the network or other files. In your final message, say DONE or explain uncertainty.' \
-    >"$work/translator-log.txt" 2>&1
-
-  env -i PATH="$PATH" HOME="$HOME" TMPDIR="${TMPDIR:-/private/tmp}" \
-    codex exec -m gpt-6-luna -c model_reasoning_effort=low --ephemeral \
-    --ignore-user-config --skip-git-repo-check -C "$work" -s workspace-write \
-    -o "$work/reviewer-report.txt" \
-    'Independently review every translation in batch.json against its English source. This is customer-facing luxury Mexican real estate copy. Correct literal, awkward, untranslated or misleading Spanish in the translation fields only. Preserve source facts, HTML, URLs, numbers and all non-translation fields. If you cannot confidently make every field natural and accurate, start your final message with REJECTED and list the row IDs and reasons. Otherwise start your final message with APPROVED. Do not access the network or other files.' \
-    >"$work/reviewer-log.txt" 2>&1
-  if ! rg -qi '^\*{0,2}APPROVED\b' "$work/reviewer-report.txt"; then
-    printf 'Reviewer rejected %s; saved in %s\n' "$(basename "$batch")" "$work" >&2
-    exit 1
+  # Model subprocesses see only isolated text files, never bridge credentials.
+  oversized=$(node -e 'const b=require(process.argv[1]);console.log(b.rows.some(r=>r.source.length>Number(process.argv[2]))?"yes":"no")' "$work/batch.json" "$BATCH_CHARS")
+  if [[ "$oversized" == yes ]]; then
+    node sites/susimacdonald/scripts/translation-chunks.mjs prepare "$work" "$BATCH_CHARS"
+    for chunk in "$work"/chunks/chunk-*.json; do
+      label=$(basename "$chunk" .json)
+      translate_and_review "$work/chunks" "$(basename "$chunk")" "$label"
+    done
+    node sites/susimacdonald/scripts/translation-chunks.mjs assemble "$work" "$BATCH_CHARS"
+  else
+    translate_and_review "$work" batch.json batch
   fi
   cp "$work/batch.json" "$batch"
   node sites/susimacdonald/scripts/translate-queue.mjs apply --site "$SITE" --batch "$(basename "$batch")"
