@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "site": {
+    "alias": "susimacdonald",
+    "siteId": "878460ca-c98c-402b-8a10-862023f67cce",
+    "liveUrl": "https://www.susimacdonald.com/",
+    "connectedRepo": null,
+    "defaultBranch": "main",
+    "wixConfigPath": "wix.config.json",
+    "routes": [],
+    "components": [],
+    "customCode": []
+  }
+}

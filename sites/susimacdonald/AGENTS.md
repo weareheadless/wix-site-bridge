@@ -1,0 +1,9 @@
+# Susi Macdonald bridge
+
+- Selected customer alias: `susimacdonald`; verified Wix dashboard site ID `878460ca-c98c-402b-8a10-862023f67cce`, name SusiMacDonald. Always use `--site susimacdonald`, this manifest and this site's isolated state/credentials.
+- Our installed bridge app and documented APIs are the deployment path; the Wix plugin is not required. Never reuse Atelier's app installation, credentials, IDs, tags, source or release state.
+- Existing source: `/home/admin/susimacdonald-rentals` on the authorized VPS; GitHub `weareheadless/susimacdonald-rentals`. This is an existing source repository, not yet verified as Wix Git Integration's officially connected deployment repository.
+- Read its AGENTS.md, README.md, ARCHITECTURE.md, PROJECT_PLAN.md, `docs/GLOBAL_EARLY_REGISTRATION_2026-10-16.md` and current rollout ledger before changes. Preserve existing Wix navbar/footer, custom elements, CMS datasets/filters/sort and approved design. Public page data stays read-only. No parallel CMS store or queries.
+- This request authorizes bridge connection only, not page redesign, publishing, data changes or replacing existing startup code. Inventory live embeds and map exact IDs/scopes before any later mutation. Both existing initial and navigation controllers must remain synchronized with their packets and normal source when a future source release is authorized.
+- Human handles Wix Editor placement, sizing, section cleanup and publication. Agents do not operate Editor UI or publish stale layout snapshots.
+- New app needs only `SCOPE.EDITOR.MANAGE_CUSTOM_EMBEDS` (plus Wix's forced basic app-instance access). Scope installation requires explicit approval at the access-grant step. Do not inherit Atelier translation scopes.
