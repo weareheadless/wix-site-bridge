@@ -22,12 +22,16 @@ const digest = value => createHash('sha256').update(value).digest('hex');
 const keyOf = row => JSON.stringify([row.schemaId, row.entityId, row.locale]);
 const fieldKey = (row, id) => JSON.stringify([row.schemaId, row.entityId, id]);
 
-if (!['next', 'apply', 'status'].includes(command) || option('--site') !== alias || process.env.WIX_ALLOWED_SITE_IDS !== siteId) {
-  throw Error('Use next|apply|status --site susimacdonald with the exact Susi site allowlist');
+if (!['next', 'next-quarantine', 'apply', 'status'].includes(command) || option('--site') !== alias || process.env.WIX_ALLOWED_SITE_IDS !== siteId) {
+  throw Error('Use next|next-quarantine|apply|status --site susimacdonald with the exact Susi site allowlist');
 }
 const manifest = JSON.parse(await readFile(manifestPath, 'utf8'));
 if (manifest.site?.alias !== alias || manifest.site?.siteId !== siteId) throw Error('Susi manifest target mismatch');
 await mkdir(stateDir, { recursive: true, mode: 0o700 });
+const quarantine = await readFile(path.join(stateDir, 'quarantine.json'), 'utf8').then(JSON.parse).catch(error => {
+  if (error.code === 'ENOENT') return {};
+  throw error;
+});
 
 async function client() {
   const token = await WixAppTokenProvider.fromEnv().getToken();
@@ -70,6 +74,7 @@ function remaining(rows) {
       if (placeholders.has(source.textValue.trim())) continue;
       const target = es?.fields?.[fieldId];
       if (target?.published === true) continue;
+      if (quarantine[fieldKey(en, fieldId)]?.sourceSha256 === digest(source.textValue)) continue;
       // Preserve existing drafts: they are candidates for human/model review,
       // not empty slots that a new translation may silently overwrite.
       queued.push({ schemaId: en.schemaId, entityId: en.entityId, parentEntityId: en.parentEntityId ?? null,
@@ -81,8 +86,49 @@ function remaining(rows) {
   // Main pages first; other page copy follows, then listings and long copy.
   const priority = row => mainPages.has(row.parentEntityId) || mainPages.has(row.entityId) ? 0
     : row.parentEntityId ? 1 : row.schemaId === '672796f0-1e24-49d3-918d-2e531f79dac4' ? 3 : 2;
+  const visibleWords = row => (row.source.replace(/<[^>]+>/g, ' ').match(/\b[\wÀ-ÿ]+\b/g) ?? []).length;
   return queued.sort((a, b) => priority(a) - priority(b) ||
+    visibleWords(b) - visibleWords(a) ||
     (a.parentEntityId ?? '').localeCompare(b.parentEntityId ?? '') ||
+    a.entityId.localeCompare(b.entityId) || a.fieldId.localeCompare(b.fieldId));
+}
+
+function activeQuarantineCount(rows) {
+  const spanish = new Map(rows.filter(row => row.locale === 'es').map(row => [keyOf(row), row]));
+  let count = 0;
+  for (const en of rows.filter(row => row.locale === 'en')) {
+    const es = spanish.get(JSON.stringify([en.schemaId, en.entityId, 'es']));
+    for (const [fieldId, source] of Object.entries(en.fields ?? {})) {
+      if (es?.fields?.[fieldId]?.published === true) continue;
+      if (typeof source.textValue === 'string' &&
+          quarantine[fieldKey(en, fieldId)]?.sourceSha256 === digest(source.textValue)) count++;
+    }
+  }
+  return count;
+}
+
+async function quarantinedRows(rows) {
+  const spanish = new Map(rows.filter(row => row.locale === 'es').map(row => [keyOf(row), row]));
+  const savedBatches = new Map();
+  const queued = [];
+  for (const en of rows.filter(row => row.locale === 'en')) {
+    const es = spanish.get(JSON.stringify([en.schemaId, en.entityId, 'es']));
+    for (const [fieldId, source] of Object.entries(en.fields ?? {})) {
+      const item = quarantine[fieldKey(en, fieldId)];
+      if (!item || (item.attempts ?? 1) >= 3 || es?.fields?.[fieldId]?.published === true ||
+          typeof source.textValue !== 'string' || item.sourceSha256 !== digest(source.textValue)) continue;
+      if (!/^batch-[a-zA-Z0-9_-]+\.json$/.test(item.batch)) throw Error('Invalid quarantine batch name');
+      if (!savedBatches.has(item.batch)) savedBatches.set(item.batch, (await readBatch(item.batch)).batch);
+      const previous = savedBatches.get(item.batch).rows.find(row =>
+        row.schemaId === en.schemaId && row.entityId === en.entityId && row.fieldId === fieldId);
+      if (!previous?.translation) throw Error(`Missing quarantined translation for ${en.entityId}.${fieldId}`);
+      queued.push({ schemaId: en.schemaId, entityId: en.entityId, parentEntityId: en.parentEntityId ?? null,
+        fieldId, source: source.textValue, sourceSha256: item.sourceSha256,
+        existingSpanish: typeof es?.fields?.[fieldId]?.textValue === 'string' ? es.fields[fieldId].textValue : null,
+        existingPublished: false, previousTranslation: previous.translation, reviewReason: item.reason });
+    }
+  }
+  return queued.sort((a, b) => (a.parentEntityId ?? '').localeCompare(b.parentEntityId ?? '') ||
     a.entityId.localeCompare(b.entityId) || a.fieldId.localeCompare(b.fieldId));
 }
 
@@ -91,11 +137,12 @@ async function readBatch(name) {
   return { file: path.join(stateDir, name), batch: JSON.parse(await readFile(path.join(stateDir, name), 'utf8')) };
 }
 
-if (command === 'next' || command === 'status') {
+if (command === 'next' || command === 'next-quarantine' || command === 'status') {
   const headers = await client();
   const rows = await inventory(headers);
-  const left = remaining(rows);
+  const left = command === 'next-quarantine' ? await quarantinedRows(rows) : remaining(rows);
   const summary = { site: alias, records: rows.length, remainingFields: left.length,
+    quarantinedFields: activeQuarantineCount(rows),
     existingDrafts: left.filter(row => row.existingSpanish !== null).length,
     noSpanishField: left.filter(row => row.existingSpanish === null).length };
   if (command === 'status') { console.log(JSON.stringify(summary)); process.exit(0); }
@@ -107,13 +154,15 @@ if (command === 'next' || command === 'status') {
   let chars = 0;
   for (const row of left) {
     if (batchRows.length >= limit) break;
-    if (chars + row.source.length > maxChars && batchRows.length) break;
+    // Fill spare capacity with later fields instead of ending a batch when
+    // one large field does not fit. The skipped field leads the next batch.
+    if (chars + row.source.length > maxChars && batchRows.length) continue;
     batchRows.push(row);
     chars += row.source.length;
   }
   if (!batchRows.length) { console.log(JSON.stringify({ ...summary, complete: true })); process.exit(0); }
   const stamp = new Date().toISOString().replace(/[^0-9]/g, '').slice(0, 14);
-  const name = `batch-${stamp}.json`;
+  const name = `batch-${command === 'next-quarantine' ? 'rework-' : ''}${stamp}.json`;
   const batch = { siteAlias: alias, siteId, locale: 'es-MX', instructions: 'Translate each source to natural Mexican Spanish. Preserve HTML tags, links, names, prices, dates, measurements, and legal meaning. Fill translation only. Existing Spanish drafts are context; correct them when needed.',
     rows: batchRows.map(row => ({ ...row, translation: '' })) };
   await writeFile(path.join(stateDir, name), `${JSON.stringify(batch, null, 2)}\n`, { mode: 0o600, flag: 'wx' });
