@@ -34,7 +34,8 @@ function atelierLocalized(Base, dictionary) {
    this.atelierAttributeOriginals ||= new WeakMap();
    const translate = value => {
     const key = normalize(value);
-    const text = dictionary[key] ?? (/^\d+ créations?( · sélection chargée)?$/.test(key) ? key.replace(/créations?/, Number(key.split(' ')[0]) === 1 ? 'creation' : 'creations').replace('sélection chargée', 'loaded selection') : /^Photographie \d+$/.test(key) ? key.replace('Photographie', 'Photograph') : /^Découvrir /.test(key) ? key.replace(/^Découvrir /, 'Discover ') : /^\d+ sur \d+$/.test(key) ? key.replace(' sur ', ' of ') : undefined);
+    const cart = key.match(/^Voir mon panier, (\d+) articles?$/);
+    const text = dictionary[key] ?? (cart ? 'View my basket, '+cart[1]+' '+(cart[1]==='1'?'item':'items') : undefined) ?? (/^\d+ créations?( · sélection chargée)?$/.test(key) ? key.replace(/créations?/, Number(key.split(' ')[0]) === 1 ? 'creation' : 'creations').replace('sélection chargée', 'loaded selection') : /^Photographie \d+$/.test(key) ? key.replace('Photographie', 'Photograph') : /^Découvrir /.test(key) ? key.replace(/^Découvrir /, 'Discover ') : /^\d+ sur \d+$/.test(key) ? key.replace(' sur ', ' of ') : undefined);
     return text === undefined ? value : value.replace(key, text);
    };
    const update = (node, value, records, key, setter, transform) => {

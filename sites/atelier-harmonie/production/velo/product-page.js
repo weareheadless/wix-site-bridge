@@ -1,4 +1,4 @@
-import { localizedSeo, bindAtelierLocale } from 'public/atelier-locale';
+import { localizedSeo, bindAtelierLocale, atelierLocale } from 'public/atelier-locale';
 import wixLocationFrontend from 'wix-location-frontend';
 import wixEcomFrontend from 'wix-ecom-frontend';
 import { getAtelierProduct, quoteAtelierProduct, addAtelierProductDetail } from 'backend/atelier-product.web';
@@ -34,12 +34,12 @@ $w.onReady(function(){
   if(version!==generation)return;
   element.setAttribute('product-loading',String(version));
   try{
-   const product=await getAtelierProduct(slug);
+   const product=await getAtelierProduct(slug,atelierLocale());
    if(version!==generation)return;
    current=product;element.setAttribute('product',JSON.stringify({...product,renderToken:version}));
    // Wix Stores retains its native canonical, structured Product data and SEO settings.
    try{element.seoMarkup='<article><h1>'+escape(product.name)+'</h1><p>'+escape(product.price)+' '+escape(product.currency)+'</p><p>'+escape(product.description.replace(/<[^>]*>/g,' '))+'</p></article>';}catch{}
-   getAtelierProducts(0).then(data=>{if(version===generation)element.setAttribute('related',JSON.stringify(data.items.filter(p=>p.id!==product.id).slice(0,4)));}).catch(()=>{});
+   getAtelierProducts(0,atelierLocale()).then(data=>{if(version===generation)element.setAttribute('related',JSON.stringify(data.items.filter(p=>p.id!==product.id).slice(0,4)));}).catch(()=>{});
   }catch{if(version===generation){element.setAttribute('product-error',String(version));try{element.seoMarkup='';}catch{}}}
  }
  element.on('atelier-product-select',async event=>{

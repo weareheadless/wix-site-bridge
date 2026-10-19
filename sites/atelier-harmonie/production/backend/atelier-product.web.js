@@ -1,3 +1,4 @@
+import { englishProductCopy, translatedField } from 'backend/atelier-translations';
 import wixData from 'wix-data';
 import wixStoresBackend from 'wix-stores-backend';
 import { Permissions, webMethod } from 'wix-web-module';
@@ -45,10 +46,11 @@ async function resolve(p,input,quantity=1){
  }else if(p.trackInventory){inStock=inStock&&p.quantityInStock>=quantity;}
  return {choices,variantId,price,originalPrice,currency:p.currency||'EUR',inStock};
 }
-export const getAtelierProduct=webMethod(Permissions.Anyone,async(slug)=>{
+export const getAtelierProduct=webMethod(Permissions.Anyone,async(slug,locale='fr')=>{
  if(typeof slug!=='string'||!slug||slug.length>300||/[\/\x00-\x1f]/.test(slug))throw Error('Invalid product route');
  const result=await wixData.query('Stores/Products').eq('slug',slug).limit(1).find();
  const p=result.items[0];if(!p)throw Error('Product unavailable');
+ const translated=(await englishProductCopy([p._id],locale).catch(()=>new Map())).get(p._id);
  // Some Wix catalogs keep the narrative in an additional product-info section.
  const sections=p.additionalInfoSections||[];
  const hasText=value=>typeof value==='string'&&value.replace(/<[^>]*>/g,' ').replace(/&nbsp;|&#160;/gi,' ').trim().length>0;
@@ -56,7 +58,7 @@ export const getAtelierProduct=webMethod(Permissions.Anyone,async(slug)=>{
  const description=hasText(p.description)?p.description:narrative?.description||'';
  const photos=[{src:p.mainMedia,title:p.name},...(p.mediaItems||[]).filter(m=>m.type==='Image')];
  const seen=new Set();const images=photos.map(m=>({src:mediaUrl(m.src),thumbnail:mediaUrl(m.src,160),alt:m.description||m.title||p.name})).filter(m=>m.src&&!seen.has(m.src)&&seen.add(m.src));
- return {id:p._id,name:p.name,url:p.productPageUrl,description,images,price:p.discountedPrice??p.price,originalPrice:p.price,currency:p.currency||'EUR',inStock:p.inStock===true,ribbon:p.ribbon||'',options:optionsOf(p),customTextFields:textOf(p),additionalInfoSections:sections.filter(section=>section!==narrative),manageVariants:p.manageVariants===true};
+ return {id:p._id,name:translatedField(translated,'product-name')||p.name,url:p.productPageUrl,description:translatedField(translated,'product-description')||description,images,price:p.discountedPrice??p.price,originalPrice:p.price,currency:p.currency||'EUR',inStock:p.inStock===true,ribbon:p.ribbon||'',options:optionsOf(p),customTextFields:textOf(p),additionalInfoSections:sections.filter(section=>section!==narrative).map(section=>sections.length===1&&translated?{...section,title:translatedField(translated,'product-additionalInfo()-title')||section.title,description:translatedField(translated,'product-additionalInfo()-description')||section.description}:section),manageVariants:p.manageVariants===true};
 });
 export const quoteAtelierProduct=webMethod(Permissions.Anyone,async(productId,choices)=>{
  const p=await publicProduct(productId);return {productId,...await resolve(p,choices)};

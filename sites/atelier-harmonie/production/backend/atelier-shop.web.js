@@ -1,3 +1,4 @@
+import { englishProductCopy, translatedField } from 'backend/atelier-translations';
 import wixData from 'wix-data';
 import { Permissions, webMethod } from 'wix-web-module';
 import { currentCart } from 'wix-ecom-backend';
@@ -16,11 +17,12 @@ function heroImageUrl(value){
  return match?'https://static.wixstatic.com/media/'+match[1]:'';
 }
 function requiresOptions(p){return Object.keys(p.productOptions||{}).length>0||(p.customTextFields||[]).length>0;}
-export const getAtelierProducts=webMethod(Permissions.Anyone,async(skip=0)=>{
+export const getAtelierProducts=webMethod(Permissions.Anyone,async(skip=0,locale='fr')=>{
  if(!Number.isSafeInteger(skip)||skip<0||skip>10000)throw Error('Invalid catalog page');
  // Query Wix's public app collection; never suppress permissions or include hidden products.
  const result=await wixData.query('Stores/Products').descending('_updatedDate').skip(skip).limit(PAGE_SIZE).find();
- return {items:result.items.map(p=>({id:p._id,slug:p.slug,name:p.name,url:p.productPageUrl,image:imageUrl(p.mainMedia),heroImage:heroImageUrl(p.mainMedia),secondaryImage:imageUrl((p.mediaItems||[]).filter(m=>m.type==='Image'&&m.src!==p.mainMedia)[0]?.src),price:p.discountedPrice??p.price,originalPrice:p.price,currency:p.currency||'EUR',inStock:p.inStock===true,ribbon:p.ribbon||'',requiresOptions:requiresOptions(p)})),hasMore:result.hasNext(),nextSkip:skip+result.items.length};
+ const translations=await englishProductCopy(result.items.map(p=>p._id),locale).catch(()=>new Map());
+ return {items:result.items.map(p=>({id:p._id,slug:p.slug,name:p.name,displayName:translatedField(translations.get(p._id),'product-name')||p.name,url:p.productPageUrl,image:imageUrl(p.mainMedia),heroImage:heroImageUrl(p.mainMedia),secondaryImage:imageUrl((p.mediaItems||[]).filter(m=>m.type==='Image'&&m.src!==p.mainMedia)[0]?.src),price:p.discountedPrice??p.price,originalPrice:p.price,currency:p.currency||'EUR',inStock:p.inStock===true,ribbon:p.ribbon||'',requiresOptions:requiresOptions(p)})),hasMore:result.hasNext(),nextSkip:skip+result.items.length};
 });
 export const addAtelierProduct=webMethod(Permissions.Anyone,async(productId)=>{
  if(typeof productId!=='string'||!/^[\w-]{1,100}$/.test(productId))throw Error('Invalid product');

@@ -19,9 +19,9 @@ function updateHomeAvailability(element){
   for(const p of selected){
    const card=document.createElement('a');card.className='ah-card';card.href=homeProductUrl(p.url);
    const photo=document.createElement('div');photo.className=sectionId==='collections'?'ah-collection-image':'ah-product-photo';
-   const image=document.createElement('img');image.src=p.heroImage||p.image;image.alt=p.name;image.loading='lazy';image.decoding='async';photo.append(image);
+   const image=document.createElement('img');image.src=p.heroImage||p.image;image.alt=p.displayName||p.name;image.loading='lazy';image.decoding='async';photo.append(image);
    const badge=document.createElement('span');badge.className='ah-availability-badge';badge.dataset.state=p.inStock?'available':'sold-out';badge.textContent=p.inStock?'Disponible':'Épuisé';photo.append(badge);
-   const title=document.createElement('h3');title.textContent=p.name;
+   const title=document.createElement('h3');title.textContent=p.displayName||p.name;
    const price=document.createElement('p');price.className='ah-price';price.textContent=new Intl.NumberFormat('fr-FR',{style:'currency',currency:p.currency||'EUR'}).format(p.price);
    card.append(photo,title,price);rail.append(card);
   }

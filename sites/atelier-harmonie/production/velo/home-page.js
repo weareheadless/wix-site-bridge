@@ -1,4 +1,4 @@
-import { localizedSeo, bindAtelierLocale } from 'public/atelier-locale';
+import { localizedSeo, bindAtelierLocale, atelierLocale } from 'public/atelier-locale';
 import { seoMarkup as seoMarkupFrench, seoMarkupEnglish as seoMarkupEnglish } from 'public/atelier-home-seo';
 import { getAtelierProducts } from 'backend/atelier-shop.web';
 
@@ -15,7 +15,7 @@ $w.onReady(function () {
   let items=[],skip=0;
   try{
    while(true){
-    const data=await getAtelierProducts(skip);
+    const data=await getAtelierProducts(skip,atelierLocale());
     items=items.concat(data.items);element.setAttribute('availability',JSON.stringify(items));
     if(!data.hasMore||data.nextSkip<=skip)break;
     skip=data.nextSkip;

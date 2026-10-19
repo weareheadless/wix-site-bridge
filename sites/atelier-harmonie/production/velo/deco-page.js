@@ -1,4 +1,4 @@
-import { localizedSeo, bindAtelierLocale } from 'public/atelier-locale';
+import { localizedSeo, bindAtelierLocale, atelierLocale } from 'public/atelier-locale';
 import { getAtelierProducts, addAtelierProduct } from 'backend/atelier-shop.web';
 import wixEcomFrontend from 'wix-ecom-frontend';
 import { seoMarkup as seoMarkupFrench, seoMarkupEnglish as seoMarkupEnglish } from 'public/atelier-deco-seo';
@@ -15,10 +15,10 @@ $w.onReady(function(){
  async function load(){
   if(loading)return;loading=true;
   try{
-   const data=await getAtelierProducts(nextSkip);
+   const data=await getAtelierProducts(nextSkip,atelierLocale());
    items=items.concat(data.items);nextSkip=data.nextSkip;loaded=true;
    element.setAttribute('catalog',JSON.stringify({items,hasMore:data.hasMore}));
-   element.seoMarkup=seoMarkup+'<section aria-label="Les créations">'+items.map(p=>'<article><h2><a href="'+escape(p.url)+'">'+escape(p.name)+'</a></h2><p>'+escape(new Intl.NumberFormat('fr-FR',{style:'currency',currency:p.currency}).format(p.price))+'</p></article>').join('')+'</section>';
+   element.seoMarkup=seoMarkup+'<section aria-label="Les créations">'+items.map(p=>'<article><h2><a href="'+escape(p.url)+'">'+escape(p.displayName||p.name)+'</a></h2><p>'+escape(new Intl.NumberFormat('fr-FR',{style:'currency',currency:p.currency}).format(p.price))+'</p></article>').join('')+'</section>';
   }catch{element.setAttribute('catalog-error',String(Date.now()));}
   finally{loading=false;}
  }

@@ -1,9 +1,11 @@
 # Wix Site Bridge instructions for coding agents
 
+- This project uses our own installed Wix bridge app and Wix CLI. The ChatGPT/Codex Wix plugin is not a deployment dependency. Never stop bridge work or ask the human to install that plugin merely because its connector tools are unavailable; use the existing bridge app identity and documented APIs. Check the app's actual permissions before reporting a capability blocker. Additional API capabilities require documented contracts and explicitly authorized site scope; never silently add app permissions.
+
 - Treat the site manifest and `WIX_ALLOWED_SITE_IDS` as a hard target boundary. Every site operation needs an explicit `--site` alias; never infer a target from a URL or repository name.
 - Mutations are dry-run by default. Only pass `--apply` after the human has selected and authorized that site/release.
 - The bridge repository is shared tooling. Edit a Wix site's separately connected source repository only when the user has selected that site and its local checkout.
-- Use only the documented Wix Custom Embeds API and Wix CLI for Sites. Do not use browser cookies, copied session tokens, editor internals, or undocumented endpoints.
+- Use the documented Wix Custom Embeds API and Wix CLI for Sites. Explicitly approved site capabilities, such as Multilingual translation-content reads/writes, may use their documented APIs through our bridge app within the approved scopes. Do not use browser cookies, copied session tokens, editor internals, or undocumented endpoints.
 - Wix Custom Embeds calls require a Wix app or Wix user identity with `SCOPE.EDITOR.MANAGE_CUSTOM_EMBEDS`. An account API key is not a substitute.
 - Do not change a snippet's placement or page scope through the bridge. The API exposes `pageFilter` as read-only; manifests declare expected scope so the bridge can fail closed if it changed.
 - For a page built from stacked Custom Embeds, give every section its own self-contained HTML file, unique manifest `mountId`, and stable `mountOrder`. Use the same exact `routeGuard` for every section. The bridge appends each section under the shared prototype root and sorts by `mountOrder`, so load timing does not change the visual order. Never let a section replace the shared root or depend on another section's markup; repeat small shared styles when necessary. Keep all embed API placement and page scope unchanged.

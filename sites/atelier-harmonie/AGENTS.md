@@ -2,6 +2,8 @@
 
 ## Multilingual
 
+- Use our own bridge app/CLI, not the Wix plugin. Connector availability does not determine bridge access. Probe the installed app's actual multilingual permissions using documented APIs; if missing, identify the exact scope and prepare the change without silently expanding access.
+
 - English is added but hidden. Keep it hidden until explicit launch authorization. See `production/MULTILINGUAL.md` for coverage and release status.
 - Translate directly; do not use further Wix machine-translation credits or purchase credits. Preserve brand/collection names and legal meaning, dates and figures.
 - Custom components use per-component dictionaries and the supported Wix current language property. Synchronize English/French SEO, ordinary source and both global startup controllers/packets.
