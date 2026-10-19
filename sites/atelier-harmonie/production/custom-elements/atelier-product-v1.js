@@ -1,3 +1,79 @@
+// Each component receives only its own copy dictionary. No Wix DOM is inspected.
+function atelierLocalized(Base, dictionary) {
+ const normalize = value => String(value).replace(/\s+/g, ' ').trim();
+ return class extends Base {
+  static get observedAttributes() { return [...new Set([...(Base.observedAttributes || []), 'locale'])]; }
+  connectedCallback() {
+   super.connectedCallback?.();
+   this.localizeAtelier();
+   this.observeAtelierTranslations();
+  }
+  observeAtelierTranslations() {
+   if (this.atelierIsEnglish() && !this.atelierTranslationObserver && this.shadowRoot) {
+    this.atelierTranslationObserver = new MutationObserver(() => this.localizeAtelier());
+    this.atelierTranslationObserver.observe(this.shadowRoot, {subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ['href', 'alt', 'aria-label', 'aria-roledescription', 'placeholder', 'title']});
+   }
+  }
+  attributeChangedCallback(name, oldValue, value) {
+   if (name !== 'locale') super.attributeChangedCallback?.(name, oldValue, value);
+   if (this.isConnected) { this.localizeAtelier(); this.observeAtelierTranslations(); }
+  }
+  disconnectedCallback() {
+   this.atelierTranslationObserver?.disconnect();
+   this.atelierTranslationObserver = null;
+   super.disconnectedCallback?.();
+  }
+  atelierIsEnglish() {
+   return (this.getAttribute('locale') || (/^\/en(?:\/|$)/.test(location.pathname) ? 'en' : document.documentElement.lang)).toLowerCase().startsWith('en');
+  }
+  localizeAtelier() {
+   const root = this.shadowRoot;
+   if (!root) return;
+   const english = this.atelierIsEnglish();
+   this.atelierTextOriginals ||= new WeakMap();
+   this.atelierAttributeOriginals ||= new WeakMap();
+   const translate = value => {
+    const key = normalize(value);
+    const text = dictionary[key] ?? (/^\d+ créations?( · sélection chargée)?$/.test(key) ? key.replace(/créations?/, Number(key.split(' ')[0]) === 1 ? 'creation' : 'creations').replace('sélection chargée', 'loaded selection') : /^Photographie \d+$/.test(key) ? key.replace('Photographie', 'Photograph') : /^Découvrir /.test(key) ? key.replace(/^Découvrir /, 'Discover ') : /^\d+ sur \d+$/.test(key) ? key.replace(' sur ', ' of ') : undefined);
+    return text === undefined ? value : value.replace(key, text);
+   };
+   const update = (node, value, records, key, setter, transform) => {
+    const record = records.get(key);
+    const original = record && value === record.last ? record.original : value;
+    const next = english ? transform(original) : original;
+    records.set(key, {original, last: next});
+    if (next !== value) setter(next);
+   };
+   const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+   for (let node; (node = walker.nextNode());) {
+    if (node.parentElement?.closest('style,script,svg,[translate="no"]')) continue;
+    let record = this.atelierTextOriginals.get(node);
+    const original = record && node.data === record.last ? record.original : node.data;
+    const next = english ? translate(original) : original;
+    this.atelierTextOriginals.set(node, {original, last: next});
+    if (node.data !== next) node.data = next;
+   }
+   for (const node of root.querySelectorAll('[href],[alt],[aria-label],[aria-roledescription],[placeholder],[title]')) {
+    if (node.closest('[translate="no"]')) continue;
+    let records = this.atelierAttributeOriginals.get(node);
+    if (!records) { records = new Map(); this.atelierAttributeOriginals.set(node, records); }
+    for (const key of ['alt', 'aria-label', 'aria-roledescription', 'placeholder', 'title']) {
+     if (node.hasAttribute(key)) update(node, node.getAttribute(key), records, key, v => node.setAttribute(key, v), translate);
+    }
+    if (node.hasAttribute('href')) update(node, node.getAttribute('href'), records, 'href', v => node.setAttribute('href', v), value => {
+     if (!value || value.startsWith('#')) return value;
+     try {
+      const url = new URL(value, location.origin);
+      if (![location.origin, 'https://www.atelier-harmonie.com'].includes(url.origin) || !/^https?:$/.test(url.protocol)) return value;
+      if (!/^\/en(?:\/|$)/.test(url.pathname)) url.pathname = '/en' + (url.pathname === '/' ? '' : url.pathname);
+      return url.pathname + url.search + url.hash;
+     } catch { return value; }
+    });
+   }
+  }
+ };
+}
+
 (()=>{const TAG='atelier-product-v1';if(customElements.get(TAG))return;
 const escape=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const imageUrl=value=>typeof value==='string'&&value.startsWith('https://static.wixstatic.com/media/')?value:'';
@@ -73,4 +149,4 @@ class AtelierProduct extends HTMLElement{
  cartResult(result){this.busy=false;this.button();const r=this.shadowRoot;r.querySelector('[data-status]').textContent=result.ok?'Cette création a été ajoutée à votre panier.':'L’ajout n’a pas abouti. Vérifiez la disponibilité et réessayez.';r.querySelector('[data-cart]').hidden=!result.ok;}
  related(){if(!this.product)return;const items=JSON.parse(this.getAttribute('related')||'[]'),r=this.shadowRoot;r.querySelector('[data-related]').hidden=!items.length;r.querySelector('[data-related-track]').innerHTML=items.map(p=>'<a class="related-card" href="'+escape(productUrl(p.url))+'"><span class="related-photo"><img src="'+escape(imageUrl(p.heroImage||p.image))+'" alt="'+escape(p.name)+'" loading="lazy">'+(!p.inStock?'<span class="availability-badge">Épuisé</span>':'')+'</span><h3>'+escape(p.name)+'</h3><p>'+escape(new Intl.NumberFormat('fr-FR',{style:'currency',currency:p.currency||'EUR'}).format(p.price))+'</p></a>').join('');}
 }
-customElements.define(TAG,AtelierProduct);})();
+customElements.define(TAG,atelierLocalized(AtelierProduct,{"de l’atelier":"from the workshop","déco":"decor","Toute la boutique":"The entire shop","La boutique":"The shop","La petite boutique de l’atelier":"The small shop in the workshop","A":"HAS","telier":"workshop","de l’harmonie":"de l’harmonie","Voir mon panier":"View my cart","Fil d’Ariane":"Breadcrumb","Accueil":"Home","mathildevalle.atelier@gmail.com":"mathildevalle.atelier@gmail.com","Atelier de l’harmonie":"Atelier de l’harmonie","ou":"or","Choisir une photographie":"Choose a photograph","La petite boutique":"The atelier’s","de":"little","l’atelier":"shop","À découvrir":"Discover","Atelier":"Atelier","Épuisé":"Sold out","Disponible":"Available","Ajouter au panier":"Add to basket","Ajout en cours…":"Adding…","Cette création ne peut pas être affichée pour le moment.":"This creation cannot be displayed right now.","Retrouver la boutique →":"Back to the shop →","Choisir…":"Choose…","Photographie à venir":"Photograph coming soon","Vérification…":"Checking…","Choisir les options":"Choose options","Cette création n’est plus disponible":"This creation is no longer available","Vérification de la disponibilité…":"Checking availability…","Disponible à la boutique":"Available in the shop","Sélectionnez vos options ci-dessous":"Select your options below","Cette création a été ajoutée à votre panier.":"This creation has been added to your basket.","L’ajout n’a pas abouti. Vérifiez la disponibilité et réessayez.":"Your item could not be added. Check availability and try again.","Quantité":"Quantity","Augmenter la quantité":"Increase quantity","Commander et payer":"Buy now","Frais de livraison calculés avant le paiement.":"Delivery charges calculated before payment.","Une question sur cette création ?":"A question about this creation?","Écrivons-nous ↗":"Email me ↗","Lire la description":"Read the description","Description":"Description","Fermer":"Close","Fermer les détails":"Close details","Agrandir ↗":"Enlarge ↗","Agrandir la photographie":"Enlarge photograph","Photographie précédente":"Previous photograph","Photographie suivante":"Next photograph","création":"creation","Photographies de la création":"Photographs of the creation","La création se dévoile…":"Discovering the creation…","Réduire la quantité":"Decrease quantity","Voir mon panier →":"View my basket →","Lire la description ↗":"Read the description ↗","À découvrir aussi":"You may also like","Nos Nouvelles Créations":"Our latest creations","Toute la boutique ↗":"Explore the shop ↗","Photographie agrandie":"Enlarged photograph","Fermer ✕":"Close ✕","Dans les détails":"A closer look"}));})();

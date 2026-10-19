@@ -1,3 +1,79 @@
+// Each component receives only its own copy dictionary. No Wix DOM is inspected.
+function atelierLocalized(Base, dictionary) {
+ const normalize = value => String(value).replace(/\s+/g, ' ').trim();
+ return class extends Base {
+  static get observedAttributes() { return [...new Set([...(Base.observedAttributes || []), 'locale'])]; }
+  connectedCallback() {
+   super.connectedCallback?.();
+   this.localizeAtelier();
+   this.observeAtelierTranslations();
+  }
+  observeAtelierTranslations() {
+   if (this.atelierIsEnglish() && !this.atelierTranslationObserver && this.shadowRoot) {
+    this.atelierTranslationObserver = new MutationObserver(() => this.localizeAtelier());
+    this.atelierTranslationObserver.observe(this.shadowRoot, {subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ['href', 'alt', 'aria-label', 'aria-roledescription', 'placeholder', 'title']});
+   }
+  }
+  attributeChangedCallback(name, oldValue, value) {
+   if (name !== 'locale') super.attributeChangedCallback?.(name, oldValue, value);
+   if (this.isConnected) { this.localizeAtelier(); this.observeAtelierTranslations(); }
+  }
+  disconnectedCallback() {
+   this.atelierTranslationObserver?.disconnect();
+   this.atelierTranslationObserver = null;
+   super.disconnectedCallback?.();
+  }
+  atelierIsEnglish() {
+   return (this.getAttribute('locale') || (/^\/en(?:\/|$)/.test(location.pathname) ? 'en' : document.documentElement.lang)).toLowerCase().startsWith('en');
+  }
+  localizeAtelier() {
+   const root = this.shadowRoot;
+   if (!root) return;
+   const english = this.atelierIsEnglish();
+   this.atelierTextOriginals ||= new WeakMap();
+   this.atelierAttributeOriginals ||= new WeakMap();
+   const translate = value => {
+    const key = normalize(value);
+    const text = dictionary[key] ?? (/^\d+ créations?( · sélection chargée)?$/.test(key) ? key.replace(/créations?/, Number(key.split(' ')[0]) === 1 ? 'creation' : 'creations').replace('sélection chargée', 'loaded selection') : /^Photographie \d+$/.test(key) ? key.replace('Photographie', 'Photograph') : /^Découvrir /.test(key) ? key.replace(/^Découvrir /, 'Discover ') : /^\d+ sur \d+$/.test(key) ? key.replace(' sur ', ' of ') : undefined);
+    return text === undefined ? value : value.replace(key, text);
+   };
+   const update = (node, value, records, key, setter, transform) => {
+    const record = records.get(key);
+    const original = record && value === record.last ? record.original : value;
+    const next = english ? transform(original) : original;
+    records.set(key, {original, last: next});
+    if (next !== value) setter(next);
+   };
+   const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+   for (let node; (node = walker.nextNode());) {
+    if (node.parentElement?.closest('style,script,svg,[translate="no"]')) continue;
+    let record = this.atelierTextOriginals.get(node);
+    const original = record && node.data === record.last ? record.original : node.data;
+    const next = english ? translate(original) : original;
+    this.atelierTextOriginals.set(node, {original, last: next});
+    if (node.data !== next) node.data = next;
+   }
+   for (const node of root.querySelectorAll('[href],[alt],[aria-label],[aria-roledescription],[placeholder],[title]')) {
+    if (node.closest('[translate="no"]')) continue;
+    let records = this.atelierAttributeOriginals.get(node);
+    if (!records) { records = new Map(); this.atelierAttributeOriginals.set(node, records); }
+    for (const key of ['alt', 'aria-label', 'aria-roledescription', 'placeholder', 'title']) {
+     if (node.hasAttribute(key)) update(node, node.getAttribute(key), records, key, v => node.setAttribute(key, v), translate);
+    }
+    if (node.hasAttribute('href')) update(node, node.getAttribute('href'), records, 'href', v => node.setAttribute('href', v), value => {
+     if (!value || value.startsWith('#')) return value;
+     try {
+      const url = new URL(value, location.origin);
+      if (![location.origin, 'https://www.atelier-harmonie.com'].includes(url.origin) || !/^https?:$/.test(url.protocol)) return value;
+      if (!/^\/en(?:\/|$)/.test(url.pathname)) url.pathname = '/en' + (url.pathname === '/' ? '' : url.pathname);
+      return url.pathname + url.search + url.hash;
+     } catch { return value; }
+    });
+   }
+  }
+ };
+}
+
 (()=>{const TAG='atelier-lamps-v1';if(customElements.get(TAG))return;
 class AtelierLamps extends HTMLElement{
  static get observedAttributes(){return ['catalog','catalog-error','cart-result'];}
@@ -16,4 +92,4 @@ class AtelierLamps extends HTMLElement{
  for(const p of lighting){const card=document.createElement('article');card.className='product';const photo=document.createElement('a');photo.className='product-photo';photo.href=this.link(p.url);const img=document.createElement('img');img.src=p.heroImage||p.image;img.alt=p.name;img.loading='lazy';img.decoding='async';photo.append(img);if(!p.inStock){const badge=document.createElement('span');badge.className='availability-badge';badge.textContent='Épuisé';photo.append(badge);}const h=document.createElement('h3'),a=document.createElement('a');a.href=this.link(p.url);a.textContent=p.name;h.append(a);const price=document.createElement('p');price.className='price';price.textContent=new Intl.NumberFormat('fr-FR',{style:'currency',currency:p.currency||'EUR'}).format(p.price);const action=document.createElement(p.inStock&&!p.requiresOptions?'button':'a');action.className='add';if(action.tagName==='BUTTON'){action.type='button';action.textContent='Ajouter au panier';action.onclick=()=>{action.disabled=true;action.textContent='Ajout en cours…';this.dispatchEvent(new CustomEvent('atelier-shop-add',{detail:{productId:p.id}}));};}else{action.href=this.link(p.url);action.textContent=p.inStock?'Choisir ma pièce':'Épuisé — voir la pièce';}const arrow=document.createElement('span');arrow.textContent='↗';arrow.setAttribute('aria-hidden','true');action.append(arrow);card.append(photo,h,price,action);track.append(card);}
  if(!lighting.length)track.textContent='Retrouvez toutes les créations dans la boutique.';this.updateArrows?.();
  }
-}customElements.define(TAG,AtelierLamps);})();
+}customElements.define(TAG,atelierLocalized(AtelierLamps,{"Abat-jour":"Lampshade","de l’atelier":"from the workshop","Mathilde":"Mathilde","Atelier de l’harmonie · Normandie":"Atelier de l’harmonie · Normandy","déco":"decor","Découvrir la boutique":"Discover the shop","Toute la boutique":"The entire shop","Votre projet, mon savoir-faire":"Your project, my expertise","Écrire à Mathilde":"Write to Mathilde","Les":"THE","Bienvenue":"Welcome","Votre projet,":"Your project,","mon savoir-faire":"my expertise","Votre projet":"Your project","de l’Atelier":"of the Workshop","Suspensions":"Suspensions","Lampes à poser":"Table lamps","Faites défiler":"Scroll down","A":"HAS","telier":"workshop","de l’harmonie":"de l’harmonie","Les luminaires":"The light fixtures","luminaires":"lighting fixtures","Bienvenue dans la boutique de luminaires de l'atelier!":"Welcome to the workshop's lighting shop!","Chaque création artisanale est une pièce unique pensée pour créer une ambiance chaleureuse et colorée dans votre intérieur.":"Each handcrafted creation is a unique piece designed to create a warm and colorful atmosphere in your home.","Découvrez une collection de lampes à poser, suspensions et baladeuses pour trouver la lumière faite pour vous!":"Discover a collection of table lamps, pendant lights and portable lamps to find the perfect light for you!","Lampe baladeuse artisanale de l’Atelier de l’harmonie":"Handcrafted portable lamp from the Atelier de l’harmonie","Collections de luminaires":"Lighting collections","Lampes baladeuses":"Portable lamps","Abat-jours":"Lampshades","Lampes Upcycling":"Upcycled Lamps","Les collections":"The collections","À chaque envie, sa lumière":"For every desire, its light","Cinq collections, une même passion du fait main.":"Five collections, one shared passion for handmade goods.","Découvrir Lampes à poser":"Discover Table Lamps","Lampes à poser — création artisanale de l’atelier":"Table lamps — handcrafted creation from the workshop","De jolies lampes artisanales uniques à poser où vous voulez!":"Beautiful, unique handcrafted lamps to place wherever you want!","Voir la collection":"View the collection","Découvrir Suspensions":"Discover Suspensions","Suspensions — création artisanale de l’atelier":"Hanging lamps — handcrafted creation from the workshop","Des suspensions colorées pour un intérieur résolument unique!":"Colorful pendant lights for a truly unique interior!","Découvrir Lampes baladeuses":"Discover Portable Lamps","Lampes baladeuses — création artisanale de l’atelier":"Portable lamps — handcrafted creation from the workshop","Accrochez-la, posez-la, emmenez-la partout avec vous ! Pour illuminer chaque recoin!":"Hang it up, set it down, take it everywhere with you! To brighten up every corner!","Découvrir Abat-jours":"Discover Lampshades","Abat-jours — création artisanale de l’atelier":"Lampshades — handcrafted creation from the workshop","Chaque création d’abat-jour est une pièce artisanale unique pour métamorphoser vos luminaires!":"Each lampshade creation is a unique handcrafted piece to transform your lighting fixtures!","Découvrir Lampes Upcycling":"Discover Upcycled Lamps","Lampes Upcycling — création artisanale de l’atelier":"Upcycled Lamps — handcrafted creation from the workshop","Opter pour un luminaire éco-responsable, c’est choisir une pièce unique qui a une âme !":"Choosing an eco-friendly light fixture means choosing a unique piece that has a soul!","Une envie, une couleur, une idée ?":"A desire, a color, an idea?","Parlons de la lumière qui trouvera sa place chez vous.":"Let's talk about the light that will find its place in your home.","Les dernières pièces de l’atelier":"The latest pieces from the atelier","Les nouveautés":"What's new","Créations précédentes":"Previous creations","Créations suivantes":"Next creations","Nouveautés luminaires":"New lighting products","Faites défiler pour découvrir les pièces":"Scroll down to discover the pieces","Fil d’Ariane":"Breadcrumb","Accueil":"Home","Atelier de l’harmonie":"Atelier de l’harmonie","ou":"or","de":"little","l’atelier":"shop","Atelier":"Atelier","Normandie":"Normandy","Épuisé":"Sold out","Ajouter au panier":"Add to basket","Ajout en cours…":"Adding…","Les créations sont à découvrir dans la boutique.":"Discover the creations in the shop.","Votre création a été ajoutée au panier.":"Your creation has been added to your basket.","Impossible d’ajouter cette pièce. Ouvrez sa fiche pour réessayer.":"This piece could not be added. Open its product page to try again.","Choisir ma pièce":"Choose my piece","Épuisé — voir la pièce":"Sold out — view the piece","Retrouvez toutes les créations dans la boutique.":"Find all the creations in the shop.","création":"creation","créations":"creations"}));})();

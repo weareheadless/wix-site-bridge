@@ -1,9 +1,16 @@
-import { seoMarkup as footerSeoMarkup } from 'public/atelier-footer-seo';
-import { seoMarkup } from 'public/atelier-navbar-seo';
+import { localizedSeo, bindAtelierLocale } from 'public/atelier-locale';
+import { seoMarkup as footerSeoMarkupFrench, seoMarkupEnglish as footerSeoMarkupEnglish } from 'public/atelier-footer-seo';
+import { seoMarkup as seoMarkupFrench, seoMarkupEnglish as seoMarkupEnglish } from 'public/atelier-navbar-seo';
 import wixEcomFrontend from 'wix-ecom-frontend';
 import { currentCart } from 'wix-ecom-backend';
 
+const footerSeoMarkup = localizedSeo(footerSeoMarkupFrench, footerSeoMarkupEnglish);
+const seoMarkup = localizedSeo(seoMarkupFrench, seoMarkupEnglish);
+
 $w.onReady(function () {
+ try{bindAtelierLocale($w('#customElement3'));}catch{}
+ try{bindAtelierLocale($w('#customElement1'));}catch{}
+
  try{$w('#customElement3').seoMarkup=footerSeoMarkup;}catch{}
  let navbar;try{navbar=$w('#customElement1');navbar.seoMarkup=seoMarkup;}catch{return;}
  navbar.on('atelier-cart',()=>wixEcomFrontend.navigateToCartPage());

@@ -1,8 +1,13 @@
+import { localizedSeo, bindAtelierLocale } from 'public/atelier-locale';
 import { getAtelierProducts, addAtelierProduct } from 'backend/atelier-shop.web';
 import wixEcomFrontend from 'wix-ecom-frontend';
-import { seoMarkup } from 'public/atelier-deco-seo';
+import { seoMarkup as seoMarkupFrench, seoMarkupEnglish as seoMarkupEnglish } from 'public/atelier-deco-seo';
+
+const seoMarkup = localizedSeo(seoMarkupFrench, seoMarkupEnglish);
 
 $w.onReady(function(){
+ try{bindAtelierLocale($w('#customElement7'));}catch{}
+
  const element=$w('#customElement7');
  let items=[],nextSkip=0,loading=false,loaded=false;
  element.seoMarkup=seoMarkup;

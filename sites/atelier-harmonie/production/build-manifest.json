@@ -1,114 +1,114 @@
 {
   "siteAlias": "atelier-harmonie",
   "siteId": "376faa89-fe6c-4ae8-8feb-10520e813a89",
-  "release": "atelier-production-20261018-v47",
+  "release": "atelier-production-20261018-v48",
   "components": {
     "navbar": {
       "tag": "atelier-navbar-v1",
-      "sha256": "7f8a782a529d459357037dd23a27ffcd4cd2d0021ca0633c1b16b33dbac0673f"
+      "sha256": "10934af2bf5092704c71d7f8a6ae6a16b252b7356b0e03c8f11d955e45c9c91e"
     },
     "home": {
       "tag": "atelier-home-v1",
-      "sha256": "5d6b3beef52abed1b74550a130ec50e4dc2f3777c10cf1f52b084dd91d7bf8a1"
+      "sha256": "fd0973b795925ae6028bb406610b0d7a24d98943ea4b34931a814202c3dbcf68"
     },
     "footer": {
       "tag": "atelier-footer-v1",
-      "sha256": "fe29326c588b482ad5d9b4cc6b50c5eed7fdb8ab8257954fe5fd11909554e78f"
+      "sha256": "f70ae41d10363b069304b8987db1a808089145d1da50afe1cef258808c7a0124"
     },
     "shop": {
       "tag": "atelier-shop-v1",
-      "sha256": "68722684fa8b99cdb7537f436022d8ee022d8d4c7b451b8de023110c114c37e8"
+      "sha256": "c732ffa1c76508d0f4b38ac21bd433c048c152da987bb109887b96f7ab963ae8"
     },
     "lamps": {
       "tag": "atelier-lamps-v1",
-      "sha256": "a25fde6ddfa95403bb09ac519d91be71543b8a7e1b1ff84b4d2d79e737d0d2c0"
+      "sha256": "d64acbe0e1259f95efb52434c49f668ac205d35977c28e15bce1fc8dde261e64"
     },
     "seats": {
       "tag": "atelier-seats-v1",
-      "sha256": "4ed2bfb8f8047a01458bbed285be9832cd860f313a6def31d8006dd0bf4580c9"
+      "sha256": "28cc8e3e7805815ee536596eb6d2917017046f990ffdc47aee799b17d0ff5e82"
     },
     "deco": {
       "tag": "atelier-deco-v1",
-      "sha256": "27b52f52e34a8b5a4c176f504ea88dc5d3c1a653e73cdd820922bc3b1a249501"
+      "sha256": "8bf7d0f53fe6976e7634cf2cf6b9b63b3b0dc909219f0c6c7b053ce85673ccba"
     },
     "giftintro": {
       "tag": "atelier-gift-intro-v1",
-      "sha256": "8d73c0c8b81bdcf5ceb2f0050225f1afebcd46f7935a35dc38a8d6ca651d7649"
+      "sha256": "04f8d63f80c5748c1846cef3adea605aa936ce13dab77cf7d22cb4deb65a4cce"
     },
     "giftguide": {
       "tag": "atelier-gift-guide-v1",
-      "sha256": "8b98368144dc5296e8b419c709c236361f66f5a32d23a720b2372280178e67b1"
+      "sha256": "b5d507fd8658868cf857d8676fa06d7997b65d8d3ea0e7d918c3c15fe930f209"
     },
     "restoration": {
       "tag": "atelier-restoration-v1",
-      "sha256": "575b595d3fa35314e83ebc71bde420008480c4e14fe37924e9a6302f27b1cb8d"
+      "sha256": "034dcf3966d117e0d64bdb977bae82226fa1bc294d1c65cb253523b452d03a84"
     },
     "contact": {
       "tag": "atelier-contact-v1",
-      "sha256": "ecfdacfeae403998278687f7c8ce58c91f2c24dc5a6af7473aa61c4890ff3c40"
+      "sha256": "d9d4d395d2fc740711240ac1c3a07fdd7ba5e51b38844a6dd0185761c06f34ff"
     },
     "fabrics": {
       "tag": "atelier-fabrics-v1",
-      "sha256": "733ce1d3f7c6710ecec54751845bd37513984311a2d693bd496ad139fe45bdf6"
+      "sha256": "48dbbbe749786a3e1e29de37a9538d5c3a4f276eb68af04af7dda669d63836a1"
     },
     "b2b": {
       "tag": "atelier-b2b-v1",
-      "sha256": "a2873ee032489140339fdf7fa9c2bf9860077244a99ae587f461dcc5b1bd07ee"
+      "sha256": "7dacdabef0014877db847811d289d801ea912a41dc3b19bfb739ad35b856d151"
     },
     "workshops": {
       "tag": "atelier-workshops-v1",
-      "sha256": "53d19ad6b29e5db98206ea2896e08fde11d813aca07b42dcf18e5e6b2e914777"
+      "sha256": "44ea13a8deb55ee40e1bafed7974299e51553df2a58ed203d187892977e254f3"
     },
     "about": {
       "tag": "atelier-about-v1",
-      "sha256": "c39de2743823ac454aa140e0ab3ff5498915e27892c11199d87fdcb0a8f09b89"
+      "sha256": "827a74b70174a7bdcc886cdf5c0e67b5d46d17921455c06563903e737c2e0805"
     },
     "quotetop": {
       "tag": "atelier-quote-top-v1",
-      "sha256": "d2f373b241ff998c79ded0cb16343134772b3b6b088c308b4cde0e8ca68dc9a6"
+      "sha256": "b7cfb751c46b0ebb98b1bcddb423c8d8e423e69c939fb069f6656ab3ba86a9c8"
     },
     "quotebottom": {
       "tag": "atelier-quote-bottom-v1",
-      "sha256": "851f91efbac6ac215b6c2af6a700fad9e9b2f5251943f7c22af9f988633d993c"
+      "sha256": "2c3ba8243f25c9cdac0f72d1fd7d1790e3f0f5426501819641ea8897a87d6bd9"
     },
     "journaltop": {
       "tag": "atelier-journal-top-v1",
-      "sha256": "ea9470b348be9dba058b885797ac3fd45365d5251b3bc13d843dc6eeaecd0549"
+      "sha256": "fe90fedd4be4b23b5a12febe07379d83160658bf5d4a9591152736b69beef1e8"
     },
     "journalbottom": {
       "tag": "atelier-journal-bottom-v1",
-      "sha256": "2856afffef4622f90e964b7020143aff756d3f2bfd999bcb09cf706e38ba536d"
+      "sha256": "a886a1708b1dd881b720380d53568ca2824d45e403e716e31d98152f4101c223"
     },
     "product": {
       "tag": "atelier-product-v1",
-      "sha256": "9baeda2eaa5419df833d3f1f81170073977687ba575b4024e2fb056e714a419a"
+      "sha256": "e1347ff75f41fcb88fa015883d46ea0e10b9dd198a139ce133d1ba3607fa19be"
     },
     "productfaq": {
       "tag": "atelier-product-faq-v1",
-      "sha256": "b5f6f6720a0c574223ba9dfb09c06814cc1591b9350f1ac025128d674790c35a"
+      "sha256": "46b147c0c04610e3a1fb77f8abbb06e341967c18e833f14910ba090f03a8c0cb"
     },
     "terms": {
       "tag": "atelier-terms-v1",
-      "sha256": "a39362f9edb52f05221eccfe4860d0ca9a341387c2cfd650e50c61f05340fbe4"
+      "sha256": "a1fbda47489a0ae2624f33a8344311eaa694d39a3e4a1db5f0a0578c809a81ba"
     },
     "generalterms": {
       "tag": "atelier-general-terms-v1",
-      "sha256": "0f033cb37832464356f9bf220f0884f6a2fe8fa5ada3fadf0e10e1a4cb57dcdd"
+      "sha256": "103088ee0da1a656d83600aa0d1a16535003ac549d895156a529350691c355be"
     },
     "privacy": {
       "tag": "atelier-privacy-v1",
-      "sha256": "720981c23983178c39e978d5c8eaf6433f5bdf58c74f8192a6d793debfff1b1e"
+      "sha256": "61349b82cbaaba9cadaa02f984f6c3f0edc317ac10718e178b9ef45b5b8f38b0"
     },
     "cookies": {
       "tag": "atelier-cookies-v1",
-      "sha256": "99553d08f84cdf64bda17dbc4dcc6f4f0f7ef77d635a4fa6e220b7241237fbbe"
+      "sha256": "8fd59f13d23d19b7343c919b3f4356d57db3336cecd2adb94720704c80719f53"
     }
   },
   "packets": [
     {
       "key": "navbar",
       "file": "early-packet-navbar-1.html",
-      "characters": 6968
+      "characters": 9256
     },
     {
       "key": "home",
@@ -118,92 +118,112 @@
     {
       "key": "home",
       "file": "early-packet-home-2.html",
-      "characters": 8706
+      "characters": 12162
+    },
+    {
+      "key": "home",
+      "file": "early-packet-home-3.html",
+      "characters": 3202
     },
     {
       "key": "footer",
       "file": "early-packet-footer-1.html",
-      "characters": 4404
+      "characters": 6848
     },
     {
       "key": "shop",
       "file": "early-packet-shop-1.html",
-      "characters": 9182
+      "characters": 12162
+    },
+    {
+      "key": "shop",
+      "file": "early-packet-shop-2.html",
+      "characters": 534
     },
     {
       "key": "lamps",
       "file": "early-packet-lamps-1.html",
-      "characters": 8235
+      "characters": 11575
     },
     {
       "key": "seats",
       "file": "early-packet-seats-1.html",
-      "characters": 6067
+      "characters": 9319
     },
     {
       "key": "deco",
       "file": "early-packet-deco-1.html",
-      "characters": 6086
+      "characters": 9110
     },
     {
       "key": "giftintro",
       "file": "early-packet-giftintro-1.html",
-      "characters": 2879
+      "characters": 5303
     },
     {
       "key": "giftguide",
       "file": "early-packet-giftguide-1.html",
-      "characters": 2787
+      "characters": 5215
     },
     {
       "key": "restoration",
       "file": "early-packet-restoration-1.html",
-      "characters": 7417
+      "characters": 11765
     },
     {
       "key": "contact",
       "file": "early-packet-contact-1.html",
-      "characters": 2445
+      "characters": 4657
     },
     {
       "key": "fabrics",
       "file": "early-packet-fabrics-1.html",
-      "characters": 7869
+      "characters": 12165
+    },
+    {
+      "key": "fabrics",
+      "file": "early-packet-fabrics-2.html",
+      "characters": 713
     },
     {
       "key": "b2b",
       "file": "early-packet-b2b-1.html",
-      "characters": 8345
+      "characters": 12161
+    },
+    {
+      "key": "b2b",
+      "file": "early-packet-b2b-2.html",
+      "characters": 589
     },
     {
       "key": "workshops",
       "file": "early-packet-workshops-1.html",
-      "characters": 7511
+      "characters": 11823
     },
     {
       "key": "about",
       "file": "early-packet-about-1.html",
-      "characters": 4563
+      "characters": 7943
     },
     {
       "key": "quotetop",
       "file": "early-packet-quotetop-1.html",
-      "characters": 2958
+      "characters": 5346
     },
     {
       "key": "quotebottom",
       "file": "early-packet-quotebottom-1.html",
-      "characters": 3645
+      "characters": 6685
     },
     {
       "key": "journaltop",
       "file": "early-packet-journaltop-1.html",
-      "characters": 2624
+      "characters": 5088
     },
     {
       "key": "journalbottom",
       "file": "early-packet-journalbottom-1.html",
-      "characters": 2587
+      "characters": 4975
     },
     {
       "key": "product",
@@ -213,12 +233,12 @@
     {
       "key": "product",
       "file": "early-packet-product-2.html",
-      "characters": 473
+      "characters": 3157
     },
     {
       "key": "productfaq",
       "file": "early-packet-productfaq-1.html",
-      "characters": 3516
+      "characters": 6744
     },
     {
       "key": "terms",
@@ -228,22 +248,37 @@
     {
       "key": "terms",
       "file": "early-packet-terms-2.html",
-      "characters": 2187
+      "characters": 12163
+    },
+    {
+      "key": "terms",
+      "file": "early-packet-terms-3.html",
+      "characters": 7711
     },
     {
       "key": "generalterms",
       "file": "early-packet-generalterms-1.html",
-      "characters": 7310
+      "characters": 12170
+    },
+    {
+      "key": "generalterms",
+      "file": "early-packet-generalterms-2.html",
+      "characters": 370
     },
     {
       "key": "privacy",
       "file": "early-packet-privacy-1.html",
-      "characters": 7437
+      "characters": 12165
+    },
+    {
+      "key": "privacy",
+      "file": "early-packet-privacy-2.html",
+      "characters": 725
     },
     {
       "key": "cookies",
       "file": "early-packet-cookies-1.html",
-      "characters": 5269
+      "characters": 8581
     }
   ],
   "coverage": {

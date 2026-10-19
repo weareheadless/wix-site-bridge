@@ -1,5 +1,12 @@
 # Atelier de l’harmonie
 
+## Multilingual
+
+- English is added but hidden. Keep it hidden until explicit launch authorization. See `production/MULTILINGUAL.md` for coverage and release status.
+- Translate directly; do not use further Wix machine-translation credits or purchase credits. Preserve brand/collection names and legal meaning, dates and figures.
+- Custom components use per-component dictionaries and the supported Wix current language property. Synchronize English/French SEO, ordinary source and both global startup controllers/packets.
+- Native catalog, forms, checkout, gift cards and blog translations belong in Wix. Never claim custom chrome translation covers native content or use a separate product translation database.
+
 - Exact target: `--site atelier-harmonie`, site ID `376faa89-fe6c-4ae8-8feb-10520e813a89`, manifest `sites/atelier-harmonie/site.manifest.json`.
 - Follow the root `AGENTS.md` and `docs/GLOBAL_EARLY_REGISTRATION.md`. The mandatory global startup gate applies before production promotion.
 - Preserve the approved new design, Atelier's original logo and copy, handwritten wordmark and Saint-Pierre-en-Port / Normandie signature, white/cream backgrounds, muted rose/blue details, six category illustrations, fixed-height hero slider and compact collection/product carousels. Prefer “tissus”, not “étoffes”.

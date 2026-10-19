@@ -1,3 +1,79 @@
+// Each component receives only its own copy dictionary. No Wix DOM is inspected.
+function atelierLocalized(Base, dictionary) {
+ const normalize = value => String(value).replace(/\s+/g, ' ').trim();
+ return class extends Base {
+  static get observedAttributes() { return [...new Set([...(Base.observedAttributes || []), 'locale'])]; }
+  connectedCallback() {
+   super.connectedCallback?.();
+   this.localizeAtelier();
+   this.observeAtelierTranslations();
+  }
+  observeAtelierTranslations() {
+   if (this.atelierIsEnglish() && !this.atelierTranslationObserver && this.shadowRoot) {
+    this.atelierTranslationObserver = new MutationObserver(() => this.localizeAtelier());
+    this.atelierTranslationObserver.observe(this.shadowRoot, {subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ['href', 'alt', 'aria-label', 'aria-roledescription', 'placeholder', 'title']});
+   }
+  }
+  attributeChangedCallback(name, oldValue, value) {
+   if (name !== 'locale') super.attributeChangedCallback?.(name, oldValue, value);
+   if (this.isConnected) { this.localizeAtelier(); this.observeAtelierTranslations(); }
+  }
+  disconnectedCallback() {
+   this.atelierTranslationObserver?.disconnect();
+   this.atelierTranslationObserver = null;
+   super.disconnectedCallback?.();
+  }
+  atelierIsEnglish() {
+   return (this.getAttribute('locale') || (/^\/en(?:\/|$)/.test(location.pathname) ? 'en' : document.documentElement.lang)).toLowerCase().startsWith('en');
+  }
+  localizeAtelier() {
+   const root = this.shadowRoot;
+   if (!root) return;
+   const english = this.atelierIsEnglish();
+   this.atelierTextOriginals ||= new WeakMap();
+   this.atelierAttributeOriginals ||= new WeakMap();
+   const translate = value => {
+    const key = normalize(value);
+    const text = dictionary[key] ?? (/^\d+ créations?( · sélection chargée)?$/.test(key) ? key.replace(/créations?/, Number(key.split(' ')[0]) === 1 ? 'creation' : 'creations').replace('sélection chargée', 'loaded selection') : /^Photographie \d+$/.test(key) ? key.replace('Photographie', 'Photograph') : /^Découvrir /.test(key) ? key.replace(/^Découvrir /, 'Discover ') : /^\d+ sur \d+$/.test(key) ? key.replace(' sur ', ' of ') : undefined);
+    return text === undefined ? value : value.replace(key, text);
+   };
+   const update = (node, value, records, key, setter, transform) => {
+    const record = records.get(key);
+    const original = record && value === record.last ? record.original : value;
+    const next = english ? transform(original) : original;
+    records.set(key, {original, last: next});
+    if (next !== value) setter(next);
+   };
+   const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+   for (let node; (node = walker.nextNode());) {
+    if (node.parentElement?.closest('style,script,svg,[translate="no"]')) continue;
+    let record = this.atelierTextOriginals.get(node);
+    const original = record && node.data === record.last ? record.original : node.data;
+    const next = english ? translate(original) : original;
+    this.atelierTextOriginals.set(node, {original, last: next});
+    if (node.data !== next) node.data = next;
+   }
+   for (const node of root.querySelectorAll('[href],[alt],[aria-label],[aria-roledescription],[placeholder],[title]')) {
+    if (node.closest('[translate="no"]')) continue;
+    let records = this.atelierAttributeOriginals.get(node);
+    if (!records) { records = new Map(); this.atelierAttributeOriginals.set(node, records); }
+    for (const key of ['alt', 'aria-label', 'aria-roledescription', 'placeholder', 'title']) {
+     if (node.hasAttribute(key)) update(node, node.getAttribute(key), records, key, v => node.setAttribute(key, v), translate);
+    }
+    if (node.hasAttribute('href')) update(node, node.getAttribute('href'), records, 'href', v => node.setAttribute('href', v), value => {
+     if (!value || value.startsWith('#')) return value;
+     try {
+      const url = new URL(value, location.origin);
+      if (![location.origin, 'https://www.atelier-harmonie.com'].includes(url.origin) || !/^https?:$/.test(url.protocol)) return value;
+      if (!/^\/en(?:\/|$)/.test(url.pathname)) url.pathname = '/en' + (url.pathname === '/' ? '' : url.pathname);
+      return url.pathname + url.search + url.hash;
+     } catch { return value; }
+    });
+   }
+  }
+ };
+}
+
 (()=>{const TAG='atelier-seats-v1';if(customElements.get(TAG))return;
 class AtelierSeats extends HTMLElement{
  static get observedAttributes(){return ['catalog','catalog-error','cart-result'];}
@@ -14,4 +90,4 @@ class AtelierSeats extends HTMLElement{
  for(const p of lighting){const card=document.createElement('article');card.className='product';const photo=document.createElement('a');photo.className='product-photo';photo.href=this.link(p.url);const img=document.createElement('img');img.src=p.heroImage||p.image;img.alt=p.name;img.loading='lazy';img.decoding='async';photo.append(img);if(!p.inStock){const badge=document.createElement('span');badge.className='availability-badge';badge.textContent='Épuisé';photo.append(badge);}const h=document.createElement('h3'),a=document.createElement('a');a.href=this.link(p.url);a.textContent=p.name;h.append(a);const price=document.createElement('p');price.className='price';price.textContent=new Intl.NumberFormat('fr-FR',{style:'currency',currency:p.currency||'EUR'}).format(p.price);const action=document.createElement(p.inStock&&!p.requiresOptions?'button':'a');action.className='add';if(action.tagName==='BUTTON'){action.type='button';action.textContent='Ajouter au panier';action.onclick=()=>{action.disabled=true;action.textContent='Ajout en cours…';this.dispatchEvent(new CustomEvent('atelier-shop-add',{detail:{productId:p.id}}));};}else{action.href=this.link(p.url);action.textContent=p.inStock?'Choisir ma pièce':'Épuisé — voir la pièce';}const arrow=document.createElement('span');arrow.textContent='↗';arrow.setAttribute('aria-hidden','true');action.append(arrow);card.append(photo,h,price,action);track.append(card);}
  if(!lighting.length)track.textContent='Les prochaines pièces se préparent à l’atelier. Découvrez la boutique ou parlons de votre projet.';
  }
-}customElements.define(TAG,AtelierSeats);})();
+}customElements.define(TAG,atelierLocalized(AtelierSeats,{"de l’atelier":"from the workshop","Mathilde":"Mathilde","Atelier de l’harmonie · Normandie":"Atelier de l’harmonie · Normandy","déco":"decor","Toute la boutique":"The entire shop","Votre projet, mon savoir-faire":"Your project, my expertise","Écrire à Mathilde":"Write to Mathilde","Les sièges":"The seats","Les":"THE","sièges":"seats","Découvrez ma sélection de sièges restaurés avec soin et prêts à rejoindre votre foyer. Chaque fauteuil a été chiné puis entièrement remis à neuf à l'atelier, avec des tissus choisis pour leur style et leur confort. Une pièce unique, avec une histoire retrouvée, pour apporter immédiatement du cachet et de la couleur à votre salon.":"Discover my selection of carefully restored chairs, ready to join your home. Each armchair has been sourced from antique shops and then completely refurbished in my workshop, using fabrics chosen for their style and comfort. A unique piece, with a story to tell, to instantly add character and color to your living room.","La tapisserie & restauration":"Upholstery & Restoration","Siège restauré à l’Atelier de l’harmonie":"Restored seat at the Atelier de l’harmonie","Les sièges de l’atelier":"The workshop seats","Des pièces uniques, prêtes à rejoindre votre foyer.":"Unique pieces, ready to join your home.","Les sièges disponibles":"Available seats","Détail d’un fauteuil restauré à l’atelier":"Detail of an armchair restored in the workshop","L'art de la restauration":"The art of restoration","Redonner de la vie":"Give life back","et des couleurs":"and colors","Tout commence par un coup de cœur pour une carcasse abandonnée.":"It all starts with falling in love with an abandoned car carcass.","Ensuite il faut dégarnir, recoller, consolider, puis garnir de nouveau en tapisserie traditionnelle (crin et ressorts) ou contemporaine (mousse).":"Next, it is necessary to strip, re-glue, consolidate, then re-upholster using traditional (horsehair and springs) or contemporary (foam) upholstery.","La rénovation du siège est une métamorphose. Le choix du tissu est crucial : c'est lui qui donnera le ton, le style, l'émotion. La pose est un travail de patience et de précision, un savoir-faire artisanal pour un résultat impeccable et durable. C'est notre passion pour le mobilier upcyclé et notre amour du travail bien fait que vous retrouverez dans chaque création.":"Upholstering a chair is a complete transformation. The choice of fabric is crucial: it sets the tone, the style, the emotion. Installation requires patience and precision, artisanal skill for an impeccable and lasting result. Our passion for upcycled furniture and our love of craftsmanship are reflected in every creation.","Découvrir le savoir-faire":"Discover the know-how","Un siège à faire revivre ?":"A seat to be revived?","Parlons de votre projet de restauration.":"Let's talk about your restoration project.","chaque création":"each creation","une histoire":"a story","Votre projet,":"Your project,","mon savoir-faire":"my expertise","Parlons de votre projet":"Let's talk about your project","Votre projet":"Your project","A":"HAS","telier":"workshop","de l’harmonie":"de l’harmonie","La tapisserie":"Upholstery","Fil d’Ariane":"Breadcrumb","Accueil":"Home","Atelier de l’harmonie":"Atelier de l’harmonie","ou":"or","de":"little","l’atelier":"shop","Atelier":"Atelier","Normandie":"Normandy","Épuisé":"Sold out","Ajouter au panier":"Add to basket","Ajout en cours…":"Adding…","Les créations sont à découvrir dans la boutique.":"Discover the creations in the shop.","Votre création a été ajoutée au panier.":"Your creation has been added to your basket.","Impossible d’ajouter cette pièce. Ouvrez sa fiche pour réessayer.":"This piece could not be added. Open its product page to try again.","Choisir ma pièce":"Choose my piece","Épuisé — voir la pièce":"Sold out — view the piece","Les prochaines pièces se préparent à l’atelier. Découvrez la boutique ou parlons de votre projet.":"New pieces are taking shape in the atelier. Browse the shop or tell me about your project.","création":"creation","créations":"creations"}));})();

@@ -1,10 +1,16 @@
+import { localizedSeo, bindAtelierLocale } from 'public/atelier-locale';
 import wixLocationFrontend from 'wix-location-frontend';
 import wixEcomFrontend from 'wix-ecom-frontend';
 import { getAtelierProduct, quoteAtelierProduct, addAtelierProductDetail } from 'backend/atelier-product.web';
-import { seoMarkup as faqSeo } from 'public/atelier-productfaq-seo';
+import { seoMarkup as faqSeoFrench, seoMarkupEnglish as faqSeoEnglish } from 'public/atelier-productfaq-seo';
 import { getAtelierProducts } from 'backend/atelier-shop.web';
 
+const faqSeo = localizedSeo(faqSeoFrench, faqSeoEnglish);
+
 $w.onReady(function(){
+ try{bindAtelierLocale($w('#customElement20'));}catch{}
+ try{bindAtelierLocale($w('#customElement21'));}catch{}
+
  let native,element;
  try{native=$w('#productPage1');native.hide();native.collapse();}catch{}
  // The retained native app host must never be displayed as a loading/error fallback.
@@ -15,7 +21,8 @@ $w.onReady(function(){
  let generation=0,selection=0,current=null,pendingAdd=false,activeSlug=null;
  const escape=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  async function load(){
-  const path=wixLocationFrontend.path;
+  const rawPath=wixLocationFrontend.path;
+  const path=rawPath[0]==='en'?rawPath.slice(1):rawPath;
   if(path.length!==2||path[0]!=='product-page')return;
   let slug=path[1];try{slug=decodeURIComponent(slug);}catch{}
   // Wix can emit URL changes for the same product; never reset a painted view for those.

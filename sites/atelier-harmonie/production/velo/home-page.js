@@ -1,7 +1,12 @@
-import { seoMarkup } from 'public/atelier-home-seo';
+import { localizedSeo, bindAtelierLocale } from 'public/atelier-locale';
+import { seoMarkup as seoMarkupFrench, seoMarkupEnglish as seoMarkupEnglish } from 'public/atelier-home-seo';
 import { getAtelierProducts } from 'backend/atelier-shop.web';
 
+const seoMarkup = localizedSeo(seoMarkupFrench, seoMarkupEnglish);
+
 $w.onReady(function () {
+ try{bindAtelierLocale($w('#customElement2'));}catch{}
+
  const element=$w('#customElement2');
  element.seoMarkup=seoMarkup;
  let loading=false,loaded=false;
