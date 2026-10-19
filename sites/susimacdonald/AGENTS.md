@@ -18,3 +18,5 @@
 - Follow-up: app v2.0 now confirms both translation scopes; native translation query succeeds without wix-site-id. Verify own installation siteId before app-only requests. Do not repeat the obsolete permissions blocker. Inventory has 921 English-only records; confirm Mexican Spanish target locale before writes.
 
 - User now explicitly authorizes completing and publishing Spanish publicly (18 October 2026). Do not launch an incomplete language. Latest approved scope overrides the historical connection-only/hidden-until-approval notes; preserve English, current saved layout, CMS and ordinary-source/startup synchronization.
+
+- First Wix Git setup is now complete: connected repo `weareheadless/susimacdonald-wix`, canonical VPS checkout `/home/admin/susimacdonald-wix`, initial generated UI version 3267. Exact siteId verified. Historical rentals repo is reference source only; production component/page-code edits now belong in the connected Wix repo. CLI dependencies and authentication work; no release has been published. Latest translation launch authorization remains in force once the whole translation is ready.

@@ -1,0 +1,2616 @@
+[
+  {
+    "entityId": "38a821c7-969e-4336-bfbe-9888d4569552",
+    "sourceIndex": 0,
+    "source": {
+      "type": "Presale",
+      "price": "From $176,500 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $176,500 USD"
+    }
+  },
+  {
+    "entityId": "00000000-0000-0000-0000-000000000003",
+    "sourceIndex": 1,
+    "source": {
+      "type": "Presale",
+      "price": "From $228,462 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $228,462 USD"
+    }
+  },
+  {
+    "entityId": "001c2b6b-a884-4203-b8fc-c1c80c496d0c",
+    "sourceIndex": 2,
+    "source": {
+      "type": "Rental",
+      "availability": "Available: July 2027",
+      "price": "$17,000 MXN / Month"
+    },
+    "es": {
+      "type": "Renta",
+      "availability": "Disponible: julio de 2027",
+      "price": "$17,000 MXN / mes"
+    }
+  },
+  {
+    "entityId": "008c0292-2bd1-43b0-8ca6-313a9bdf0245",
+    "sourceIndex": 3,
+    "source": {
+      "type": "Presale",
+      "price": "From $162,349 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $162,349 USD"
+    }
+  },
+  {
+    "entityId": "0148692b-94d1-488f-bbf6-a084874afeb5",
+    "sourceIndex": 4,
+    "source": {
+      "type": "Resale"
+    },
+    "es": {
+      "type": "Reventa"
+    }
+  },
+  {
+    "entityId": "eec6302f-ca69-471b-8422-af1b14cee939",
+    "sourceIndex": 5,
+    "source": {
+      "type": "For Sale",
+      "availability": "Available Now, Last Unit Available!!!"
+    },
+    "es": {
+      "type": "En venta",
+      "availability": "Disponible ahora. ¡Última unidad disponible!"
+    }
+  },
+  {
+    "entityId": "b5aa78fb-cf17-4d71-a8b3-7a19e6e8b3dc",
+    "sourceIndex": 6,
+    "source": {
+      "type": "Resale",
+      "category": "LUXURY"
+    },
+    "es": {
+      "type": "Reventa",
+      "category": "LUJO"
+    }
+  },
+  {
+    "entityId": "38de97fa-bb07-4cc1-874e-f21325a022f2",
+    "sourceIndex": 7,
+    "source": {
+      "type": "Presale"
+    },
+    "es": {
+      "type": "Preventa"
+    }
+  },
+  {
+    "entityId": "076f4fa0-2baf-4752-b559-a9de0e43befa",
+    "sourceIndex": 8,
+    "source": {
+      "type": "Presale",
+      "price": "From $395,507 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $395,507 USD"
+    }
+  },
+  {
+    "entityId": "3bf21b54-1404-466a-8cac-4ef307500185",
+    "sourceIndex": 9,
+    "source": {
+      "type": "Presale",
+      "price": "From $150,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $150,000 USD"
+    }
+  },
+  {
+    "entityId": "b9ccefdd-dd91-43dc-ab31-ddf6157564cf",
+    "sourceIndex": 10,
+    "source": {
+      "type": "Presale",
+      "price": "From $160,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $160,000 USD"
+    }
+  },
+  {
+    "entityId": "ef249129-095e-48f5-8a0e-fcaf14b690a0",
+    "sourceIndex": 11,
+    "source": {
+      "type": "For Sale",
+      "price": "From $158,177 USD"
+    },
+    "es": {
+      "type": "En venta",
+      "price": "Desde $158,177 USD"
+    }
+  },
+  {
+    "entityId": "bb8239e7-9073-40e8-ac7f-294674746500",
+    "sourceIndex": 12,
+    "source": {
+      "type": "Presale",
+      "price": "From $251,953 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $251,953 USD"
+    }
+  },
+  {
+    "entityId": "07e15ae7-771a-4010-b5d1-664c90d6ee09",
+    "sourceIndex": 13,
+    "source": {
+      "type": "Presale",
+      "availability": "Delivery Summer 2024",
+      "price": "From $380,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "availability": "Entrega en verano de 2024",
+      "price": "Desde $380,000 USD"
+    }
+  },
+  {
+    "entityId": "3c962281-74c0-4589-a6d2-abe3e80fbadd",
+    "sourceIndex": 14,
+    "source": {
+      "type": "Presale",
+      "price": "From $228,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $228,000 USD"
+    }
+  },
+  {
+    "entityId": "0a1d5bf2-efb4-45d6-b5c6-83bb3a1e4c09",
+    "sourceIndex": 15,
+    "source": {
+      "type": "Rental",
+      "availability": "Available",
+      "priceDetail": "Price Subject to Change",
+      "price": "$28,000 MXN / Month"
+    },
+    "es": {
+      "type": "Renta",
+      "availability": "Disponible",
+      "priceDetail": "Precio sujeto a cambios",
+      "price": "$28,000 MXN / mes"
+    }
+  },
+  {
+    "entityId": "715e471f-072d-40b4-8489-ca0d3f7725f1",
+    "sourceIndex": 16,
+    "source": {
+      "type": "Presale",
+      "availability": "Delivery Now",
+      "price": "From $146,944 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "availability": "Entrega inmediata",
+      "price": "Desde $146,944 USD"
+    }
+  },
+  {
+    "entityId": "3cc9270c-f0e0-4f08-8a12-1459a8bbbb41",
+    "sourceIndex": 17,
+    "source": {
+      "type": "Presale",
+      "availability": "Delivery March 2025",
+      "price": "From $366,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "availability": "Entrega en marzo de 2025",
+      "price": "Desde $366,000 USD"
+    }
+  },
+  {
+    "entityId": "0a3d03c7-7d07-4ae3-8241-83640d248333",
+    "sourceIndex": 18,
+    "source": {
+      "type": "Presale",
+      "category": "LUXURY"
+    },
+    "es": {
+      "type": "Preventa",
+      "category": "LUJO"
+    }
+  },
+  {
+    "entityId": "bbce7c93-5096-4c9d-914e-6d3e0bbadc84",
+    "sourceIndex": 19,
+    "source": {
+      "type": "Rental",
+      "availability": "Available: April 2027",
+      "price": "$1,600 USD / Month"
+    },
+    "es": {
+      "type": "Renta",
+      "availability": "Disponible: abril de 2027",
+      "price": "$1,600 USD / mes"
+    }
+  },
+  {
+    "entityId": "f0c81244-a23b-4e02-942c-5370bd7d6f3a",
+    "sourceIndex": 20,
+    "source": {
+      "type": "Lot",
+      "price": "From $88,350 USD"
+    },
+    "es": {
+      "type": "Terreno",
+      "price": "Desde $88,350 USD"
+    }
+  },
+  {
+    "entityId": "72dcf4bf-c25f-4ce2-8119-f1748633b676",
+    "sourceIndex": 21,
+    "source": {
+      "type": "Presale",
+      "category": "LUXURY",
+      "availability": "LAST UNIT AVAILABLE"
+    },
+    "es": {
+      "type": "Preventa",
+      "category": "LUJO",
+      "availability": "ÚLTIMA UNIDAD DISPONIBLE"
+    }
+  },
+  {
+    "entityId": "0b089c27-83c2-4862-ad48-5f052eee1268",
+    "sourceIndex": 22,
+    "source": {
+      "type": "Presale",
+      "category": "LUXURY",
+      "price": "From $544,160 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "category": "LUJO",
+      "price": "Desde $544,160 USD"
+    }
+  },
+  {
+    "entityId": "10f27d4c-5813-4162-9a3e-c338a515467d",
+    "sourceIndex": 23,
+    "source": {
+      "type": "Presale",
+      "availability": "Delivery December 2025",
+      "price": "From $320,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "availability": "Entrega en diciembre de 2025",
+      "price": "Desde $320,000 USD"
+    }
+  },
+  {
+    "entityId": "3cd3ffcc-e74b-4029-b438-18f4849cfdec",
+    "sourceIndex": 24,
+    "source": {
+      "type": "Resale"
+    },
+    "es": {
+      "type": "Reventa"
+    }
+  },
+  {
+    "entityId": "3d18e439-fa4a-4675-9c2c-898fdb5e0a3d",
+    "sourceIndex": 25,
+    "source": {
+      "type": "Presale"
+    },
+    "es": {
+      "type": "Preventa"
+    }
+  },
+  {
+    "entityId": "7323b59e-7e94-4aa2-be8f-a7bdc4860f3f",
+    "sourceIndex": 26,
+    "source": {
+      "type": "Presale",
+      "price": "From $360,450 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $360,450 USD"
+    }
+  },
+  {
+    "entityId": "bdfeb654-a670-4f0a-9950-74c416c5f7bb",
+    "sourceIndex": 27,
+    "source": {
+      "type": "Presale",
+      "price": "From $197,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $197,000 USD"
+    }
+  },
+  {
+    "entityId": "136efb64-c8c3-4294-bfa3-a97b570a18c6",
+    "sourceIndex": 28,
+    "source": {
+      "type": "Presale",
+      "price": "From $220,703 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $220,703 USD"
+    }
+  },
+  {
+    "entityId": "be410d76-4d9e-41ef-9854-6491e0943971",
+    "sourceIndex": 29,
+    "source": {
+      "type": "Presale",
+      "price": "From $240,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $240,000 USD"
+    }
+  },
+  {
+    "entityId": "bff1d4c4-94d2-4803-957d-c39e7d358e0f",
+    "sourceIndex": 30,
+    "source": {
+      "type": "Presale",
+      "price": "From $169,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $169,000 USD"
+    }
+  },
+  {
+    "entityId": "c0e7f465-5335-43cd-a778-c4c7651e3354",
+    "sourceIndex": 31,
+    "source": {
+      "type": "Presale",
+      "price": "From $355,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $355,000 USD"
+    }
+  },
+  {
+    "entityId": "15fc5349-46f9-4b3f-8248-209b0046efe4",
+    "sourceIndex": 32,
+    "source": {
+      "type": "Presale",
+      "price": "From $80,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $80,000 USD"
+    }
+  },
+  {
+    "entityId": "16f25755-710f-4d6a-b2c3-dcf4afbd6fdd",
+    "sourceIndex": 33,
+    "source": {
+      "type": "Resale",
+      "category": "LUXURY"
+    },
+    "es": {
+      "type": "Reventa",
+      "category": "LUJO"
+    }
+  },
+  {
+    "entityId": "1863e77f-9f6f-478f-8692-bc611ceb62df",
+    "sourceIndex": 34,
+    "source": {
+      "type": "Presale",
+      "price": "From $397,000 USD "
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $397,000 USD "
+    }
+  },
+  {
+    "entityId": "f2e56c88-930b-4f5d-a460-9433b06e456a",
+    "sourceIndex": 35,
+    "source": {
+      "type": "Rental",
+      "availability": "Available",
+      "price": "25,000 MXN / Month"
+    },
+    "es": {
+      "type": "Renta",
+      "availability": "Disponible",
+      "price": "25,000 MXN / mes"
+    }
+  },
+  {
+    "entityId": "19196608-f0d3-4dc7-94a6-ded2f9f07e19",
+    "sourceIndex": 36,
+    "source": {
+      "type": "Presale",
+      "category": "LUXURY",
+      "price": "From $995,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "category": "LUJO",
+      "price": "Desde $995,000 USD"
+    }
+  },
+  {
+    "entityId": "73329426-5022-41cd-b47b-732ab3829274",
+    "sourceIndex": 37,
+    "source": {
+      "type": "Resale"
+    },
+    "es": {
+      "type": "Reventa"
+    }
+  },
+  {
+    "entityId": "769ce498-cb37-40ea-af87-be445de0c527",
+    "sourceIndex": 38,
+    "source": {
+      "type": "Presale",
+      "price": "From $143,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $143,000 USD"
+    }
+  },
+  {
+    "entityId": "c1cae3b5-11b3-4544-912c-a501ffa0b296",
+    "sourceIndex": 39,
+    "source": {
+      "type": "Presale",
+      "price": "From $486,390 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $486,390 USD"
+    }
+  },
+  {
+    "entityId": "f45120b1-fb81-46c5-a8f6-52c5a9c2f105",
+    "sourceIndex": 40,
+    "source": {
+      "type": "Presale"
+    },
+    "es": {
+      "type": "Preventa"
+    }
+  },
+  {
+    "entityId": "3ea5884f-0edb-44bd-84b8-a41b370df69f",
+    "sourceIndex": 41,
+    "source": {
+      "type": "Presale",
+      "category": "LUXURY",
+      "price": "From $812,942 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "category": "LUJO",
+      "price": "Desde $812,942 USD"
+    }
+  },
+  {
+    "entityId": "77b18520-344d-4215-a342-e57defce65c4",
+    "sourceIndex": 42,
+    "source": {
+      "type": "Presale",
+      "category": "LUXURY"
+    },
+    "es": {
+      "type": "Preventa",
+      "category": "LUJO"
+    }
+  },
+  {
+    "entityId": "c31a5197-d892-4bb5-9f67-d59f30e393d3",
+    "sourceIndex": 43,
+    "source": {
+      "type": "Presale",
+      "price": "From $145,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $145,000 USD"
+    }
+  },
+  {
+    "entityId": "77d0bdcd-39ae-443d-9230-76ad4235a62a",
+    "sourceIndex": 44,
+    "source": {
+      "type": "Presale",
+      "price": "From $387,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $387,000 USD"
+    }
+  },
+  {
+    "entityId": "c3f80281-d81d-45e4-a0c8-2f168c443d57",
+    "sourceIndex": 45,
+    "source": {
+      "type": "Rental",
+      "availability": "Available",
+      "price": "$17,000 MXN / Month"
+    },
+    "es": {
+      "type": "Renta",
+      "availability": "Disponible",
+      "price": "$17,000 MXN / mes"
+    }
+  },
+  {
+    "entityId": "c5d1c9ec-2cfc-4008-ba65-7fc7207bfa25",
+    "sourceIndex": 46,
+    "source": {
+      "type": "Presale",
+      "availability": "Delivery July 2026",
+      "price": "From $160,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "availability": "Entrega en julio de 2026",
+      "price": "Desde $160,000 USD"
+    }
+  },
+  {
+    "entityId": "1d5ef56a-ed41-4f06-9582-8002acd40156",
+    "sourceIndex": 47,
+    "source": {
+      "type": "Presale",
+      "availability": "SOLD OUT",
+      "price": "From $297,700 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "availability": "AGOTADO",
+      "price": "Desde $297,700 USD"
+    }
+  },
+  {
+    "entityId": "c693c8a5-e2ea-4af9-b441-85c6d04e5745",
+    "sourceIndex": 48,
+    "source": {
+      "type": "Rental",
+      "availability": "Rented until August 2025",
+      "price": "$22,500 MXN / Month"
+    },
+    "es": {
+      "type": "Renta",
+      "availability": "Rentado hasta agosto de 2025",
+      "price": "$22,500 MXN / mes"
+    }
+  },
+  {
+    "entityId": "1e67f350-c48d-4f04-8700-4f74376b5612",
+    "sourceIndex": 49,
+    "source": {
+      "type": "Resale"
+    },
+    "es": {
+      "type": "Reventa"
+    }
+  },
+  {
+    "entityId": "7d9ce48a-bf0c-4b35-a6cd-e6d111352be0",
+    "sourceIndex": 50,
+    "source": {
+      "type": "Presale"
+    },
+    "es": {
+      "type": "Preventa"
+    }
+  },
+  {
+    "entityId": "7f428267-6d27-411b-a05f-55c0261cc940",
+    "sourceIndex": 51,
+    "source": {
+      "type": "Presale",
+      "category": "LUXURY",
+      "availability": "Delivery Now",
+      "price": "From $1,800,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "category": "LUJO",
+      "availability": "Entrega inmediata",
+      "price": "Desde $1,800,000 USD"
+    }
+  },
+  {
+    "entityId": "41cbdd58-487a-40d6-8c94-c1900a42b5fd",
+    "sourceIndex": 52,
+    "source": {
+      "type": "Presale",
+      "price": "From $286,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $286,000 USD"
+    }
+  },
+  {
+    "entityId": "1ebf305c-576a-410c-bb1f-d45bd8bae229",
+    "sourceIndex": 53,
+    "source": {
+      "type": "Presale",
+      "price": "From $276,474 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $276,474 USD"
+    }
+  },
+  {
+    "entityId": "44691a4d-68a1-4e07-9f38-3d24d3df46e6",
+    "sourceIndex": 54,
+    "source": {
+      "type": "Presale",
+      "price": "From $798,935 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $798,935 USD"
+    }
+  },
+  {
+    "entityId": "1ee30c56-5b0a-4261-b995-b3105c1cdd9f",
+    "sourceIndex": 55,
+    "source": {
+      "type": "Presale",
+      "availability": "Delivery Summer 2024",
+      "price": "From $258,824 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "availability": "Entrega en verano de 2024",
+      "price": "Desde $258,824 USD"
+    }
+  },
+  {
+    "entityId": "c9ced396-bf1a-490c-bc51-f4e1da35729f",
+    "sourceIndex": 56,
+    "source": {
+      "type": "Presale",
+      "availability": "Delivery Summer 2025",
+      "price": "From $152,435 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "availability": "Entrega en verano de 2025",
+      "price": "Desde $152,435 USD"
+    }
+  },
+  {
+    "entityId": "cbe471b2-b521-493a-97bd-076b329d12e9",
+    "sourceIndex": 57,
+    "source": {
+      "type": "Presale"
+    },
+    "es": {
+      "type": "Preventa"
+    }
+  },
+  {
+    "entityId": "809f3ab8-1e9c-40c5-a868-6efc0beaecf9",
+    "sourceIndex": 58,
+    "source": {
+      "type": "Presale"
+    },
+    "es": {
+      "type": "Preventa"
+    }
+  },
+  {
+    "entityId": "cf5845b2-4a29-4aad-bdff-e8aa7d1d1c9c",
+    "sourceIndex": 59,
+    "source": {
+      "type": "Presale"
+    },
+    "es": {
+      "type": "Preventa"
+    }
+  },
+  {
+    "entityId": "1f05c462-69c2-47d1-9efd-d8acbb5f788b",
+    "sourceIndex": 60,
+    "source": {
+      "type": "Presale",
+      "price": "From $164,653 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $164,653 USD"
+    }
+  },
+  {
+    "entityId": "447fa61f-b4f0-45c4-8bb7-f2d85016512e",
+    "sourceIndex": 61,
+    "source": {
+      "type": "Presale",
+      "price": "From $395,120 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $395,120 USD"
+    }
+  },
+  {
+    "entityId": "463bbbef-e87d-4eb1-9d0c-34e3f9aedb68",
+    "sourceIndex": 62,
+    "source": {
+      "type": "Presale"
+    },
+    "es": {
+      "type": "Preventa"
+    }
+  },
+  {
+    "entityId": "1ff16781-3e01-458d-9156-9a1b83862be5",
+    "sourceIndex": 63,
+    "source": {
+      "type": "Presale",
+      "price": "From $291,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $291,000 USD"
+    }
+  },
+  {
+    "entityId": "47bfdaee-3026-4451-b0fb-0fd73e8d2093",
+    "sourceIndex": 64,
+    "source": {
+      "type": "Presale",
+      "price": "From $152,695 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $152,695 USD"
+    }
+  },
+  {
+    "entityId": "80eaf39f-77ac-49e1-a14e-b41a83412f82",
+    "sourceIndex": 65,
+    "source": {
+      "type": "Rental",
+      "availability": "Available: 2027",
+      "price": "$95,000 MXN / month"
+    },
+    "es": {
+      "type": "Renta",
+      "availability": "Disponible: 2027",
+      "price": "$95,000 MXN / mes"
+    }
+  },
+  {
+    "entityId": "47c23556-374f-4cb2-9145-d1a13a9d2a5f",
+    "sourceIndex": 66,
+    "source": {
+      "type": "Presale",
+      "price": "From $699,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $699,000 USD"
+    }
+  },
+  {
+    "entityId": "47f4e92d-5fbd-4fdc-a95e-e36a0385ecd3",
+    "sourceIndex": 67,
+    "source": {
+      "type": "Rental",
+      "availability": "Available",
+      "price": "12,900–15,900 MXN / Month"
+    },
+    "es": {
+      "type": "Renta",
+      "availability": "Disponible",
+      "price": "12,900–15,900 MXN / mes"
+    }
+  },
+  {
+    "entityId": "cfd57eb6-0635-4a6c-9288-01d621296b47",
+    "sourceIndex": 68,
+    "source": {
+      "type": "Rental",
+      "availability": "Rented",
+      "price": "$27,000 MXN / month"
+    },
+    "es": {
+      "type": "Renta",
+      "availability": "Rentado",
+      "price": "$27,000 MXN / mes"
+    }
+  },
+  {
+    "entityId": "4a0c8f40-3b22-42d1-ad6d-a8da2f1224d8",
+    "sourceIndex": 69,
+    "source": {
+      "type": "Presale"
+    },
+    "es": {
+      "type": "Preventa"
+    }
+  },
+  {
+    "entityId": "81a6d6ff-182e-4282-985d-ae46e7db1af2",
+    "sourceIndex": 70,
+    "source": {
+      "type": "Resale",
+      "category": "LUXURY",
+      "availability": "Last Unit Available"
+    },
+    "es": {
+      "type": "Reventa",
+      "category": "LUJO",
+      "availability": "Última unidad disponible"
+    }
+  },
+  {
+    "entityId": "204ce909-1ea0-4ded-90c8-a313f344decc",
+    "sourceIndex": 71,
+    "source": {
+      "type": "Presale"
+    },
+    "es": {
+      "type": "Preventa"
+    }
+  },
+  {
+    "entityId": "4bda4e5c-34b5-43b1-bee0-d6a64524e205",
+    "sourceIndex": 72,
+    "source": {
+      "type": "Resale"
+    },
+    "es": {
+      "type": "Reventa"
+    }
+  },
+  {
+    "entityId": "209a7b05-7c86-44d5-af6d-b55f1c3b4600",
+    "sourceIndex": 73,
+    "source": {
+      "type": "Presale",
+      "price": "From $207,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $207,000 USD"
+    }
+  },
+  {
+    "entityId": "d1012d32-d0cd-41d7-a76d-ad2082541ddb",
+    "sourceIndex": 74,
+    "source": {
+      "type": "Rental",
+      "availability": "Available: 2027",
+      "price": "$23,000 MXN / Month"
+    },
+    "es": {
+      "type": "Renta",
+      "availability": "Disponible: 2027",
+      "price": "$23,000 MXN / mes"
+    }
+  },
+  {
+    "entityId": "83221569-d6cf-45ae-b505-7bf9a4d8969a",
+    "sourceIndex": 75,
+    "source": {
+      "type": "Presale",
+      "availability": "SOLD OUT",
+      "price": "From $217,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "availability": "AGOTADO",
+      "price": "Desde $217,000 USD"
+    }
+  },
+  {
+    "entityId": "84cf81f6-fead-47dc-b134-c145070d4e76",
+    "sourceIndex": 76,
+    "source": {
+      "type": "Presale"
+    },
+    "es": {
+      "type": "Preventa"
+    }
+  },
+  {
+    "entityId": "d47ce4b2-94bd-4b70-909a-51c0ebd18baa",
+    "sourceIndex": 77,
+    "source": {
+      "type": "Resale",
+      "category": "LUXURY"
+    },
+    "es": {
+      "type": "Reventa",
+      "category": "LUJO"
+    }
+  },
+  {
+    "entityId": "4caa75e7-aa1d-4e6f-b5e9-8c86731eac23",
+    "sourceIndex": 78,
+    "source": {
+      "type": "Presale"
+    },
+    "es": {
+      "type": "Preventa"
+    }
+  },
+  {
+    "entityId": "85bb6c4b-3e3e-4f19-b497-b18c4458a95b",
+    "sourceIndex": 79,
+    "source": {
+      "type": "Presale",
+      "price": "From $184,700 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $184,700 USD"
+    }
+  },
+  {
+    "entityId": "d4adbdbb-f9be-40e5-a63f-e27021223d70",
+    "sourceIndex": 80,
+    "source": {
+      "type": "Presale",
+      "price": "From $173,771 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $173,771 USD"
+    }
+  },
+  {
+    "entityId": "231a2b73-f4d0-4c38-9f44-503c9bdbe6ee",
+    "sourceIndex": 81,
+    "source": {
+      "type": "For Sale",
+      "availability": "Available Now",
+      "price": "From $225,000 USD"
+    },
+    "es": {
+      "type": "En venta",
+      "availability": "Disponible ahora",
+      "price": "Desde $225,000 USD"
+    }
+  },
+  {
+    "entityId": "268bb47a-b171-4aa7-b600-914b7e8c5f72",
+    "sourceIndex": 82,
+    "source": {
+      "type": "Rental",
+      "availability": "Available: July 2027",
+      "price": "$55,000 MXN / Month"
+    },
+    "es": {
+      "type": "Renta",
+      "availability": "Disponible: julio de 2027",
+      "price": "$55,000 MXN / mes"
+    }
+  },
+  {
+    "entityId": "d4faafa1-2bdd-4b91-82f8-29cb3fecb38c",
+    "sourceIndex": 83,
+    "source": {
+      "type": "Presale",
+      "price": "From $297,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $297,000 USD"
+    }
+  },
+  {
+    "entityId": "4ceebeb1-2905-4792-9651-1cbbf8e840e1",
+    "sourceIndex": 84,
+    "source": {
+      "type": "Resale"
+    },
+    "es": {
+      "type": "Reventa"
+    }
+  },
+  {
+    "entityId": "864084da-ac80-44ed-b5d7-d029dbf711e0",
+    "sourceIndex": 85,
+    "source": {
+      "type": "Presale",
+      "category": "LUXURY",
+      "price": "From $1,200,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "category": "LUJO",
+      "price": "Desde $1,200,000 USD"
+    }
+  },
+  {
+    "entityId": "f8cb966f-f569-4e62-964c-0fe46966513c",
+    "sourceIndex": 86,
+    "source": {
+      "type": "Presale"
+    },
+    "es": {
+      "type": "Preventa"
+    }
+  },
+  {
+    "entityId": "d67efedc-0b9c-4a74-8db1-bb6f8367b482",
+    "sourceIndex": 87,
+    "source": {
+      "type": "Presale"
+    },
+    "es": {
+      "type": "Preventa"
+    }
+  },
+  {
+    "entityId": "287ca8b1-14f2-4a74-ac69-a20fab2e793a",
+    "sourceIndex": 88,
+    "source": {
+      "type": "Rental",
+      "availability": "Available: April 2027",
+      "price": "$24,000 MXN / Month"
+    },
+    "es": {
+      "type": "Renta",
+      "availability": "Disponible: abril de 2027",
+      "price": "$24,000 MXN / mes"
+    }
+  },
+  {
+    "entityId": "4d471089-f46d-42e1-b0a4-2862619f9f66",
+    "sourceIndex": 89,
+    "source": {
+      "type": "Presale",
+      "price": "From $129,721 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $129,721 USD"
+    }
+  },
+  {
+    "entityId": "f9a16213-bfd8-473c-8eea-c5075d9382fa",
+    "sourceIndex": 90,
+    "source": {
+      "type": "Presale",
+      "price": "From $189,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $189,000 USD"
+    }
+  },
+  {
+    "entityId": "d6953088-4f84-458c-b323-cddd2e3d5c27",
+    "sourceIndex": 91,
+    "source": {
+      "type": "Presale"
+    },
+    "es": {
+      "type": "Preventa"
+    }
+  },
+  {
+    "entityId": "877ef281-d8d6-4a84-9bd2-8676100af9ed",
+    "sourceIndex": 92,
+    "source": {
+      "type": "Resale",
+      "price": "SOLD"
+    },
+    "es": {
+      "type": "Reventa",
+      "price": "VENDIDO"
+    }
+  },
+  {
+    "entityId": "87a37521-fbb6-4cb3-9976-c52157e8eea7",
+    "sourceIndex": 93,
+    "source": {
+      "type": "Presale",
+      "price": "From $269,350 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $269,350 USD"
+    }
+  },
+  {
+    "entityId": "28e3873c-063e-4692-8d8e-3ef005496335",
+    "sourceIndex": 94,
+    "source": {
+      "type": "Presale"
+    },
+    "es": {
+      "type": "Preventa"
+    }
+  },
+  {
+    "entityId": "881935a6-d7b4-4003-b0ba-c0b765b2d7ad",
+    "sourceIndex": 95,
+    "source": {
+      "type": "Presale",
+      "price": "From $168,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $168,000 USD"
+    }
+  },
+  {
+    "entityId": "8a43f7df-4d68-4556-b689-13709dc95ac1",
+    "sourceIndex": 96,
+    "source": {
+      "type": "Presale"
+    },
+    "es": {
+      "type": "Preventa"
+    }
+  },
+  {
+    "entityId": "d6aa354a-f514-44d5-96f6-a188be26b7c9",
+    "sourceIndex": 97,
+    "source": {
+      "type": "Presale",
+      "price": "From $243,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $243,000 USD"
+    }
+  },
+  {
+    "entityId": "4e29cc65-65a8-441e-a493-89a644358a6f",
+    "sourceIndex": 98,
+    "source": {
+      "type": "Presale"
+    },
+    "es": {
+      "type": "Preventa"
+    }
+  },
+  {
+    "entityId": "29d3405d-6e7c-46ce-854f-ed1463309d5e",
+    "sourceIndex": 99,
+    "source": {
+      "type": "Presale",
+      "price": "From $205,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $205,000 USD"
+    }
+  },
+  {
+    "entityId": "2a54aa4e-8488-438a-a610-bdae8cb6a148",
+    "sourceIndex": 100,
+    "source": {
+      "type": "Resale",
+      "category": "LUXURY"
+    },
+    "es": {
+      "type": "Reventa",
+      "category": "LUJO"
+    }
+  },
+  {
+    "entityId": "8a689620-ca21-4719-be04-93cef4fe23ce",
+    "sourceIndex": 101,
+    "source": {
+      "type": "Presale",
+      "price": "From $182,675 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $182,675 USD"
+    }
+  },
+  {
+    "entityId": "8b9abc0e-78c5-490b-a640-cd80db4a6344",
+    "sourceIndex": 102,
+    "source": {
+      "type": "Presale",
+      "price": "From $261,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $261,000 USD"
+    }
+  },
+  {
+    "entityId": "4f7bfcd3-6b87-4177-ae07-4cf6b80618bb",
+    "sourceIndex": 103,
+    "source": {
+      "type": "Presale"
+    },
+    "es": {
+      "type": "Preventa"
+    }
+  },
+  {
+    "entityId": "4f9a705f-f1c9-4805-aa33-d945db938012",
+    "sourceIndex": 104,
+    "source": {
+      "type": "Presale",
+      "price": "From $335,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $335,000 USD"
+    }
+  },
+  {
+    "entityId": "2a8b700e-5e37-47f4-93b6-87a3b423e374",
+    "sourceIndex": 105,
+    "source": {
+      "type": "Resale",
+      "category": "LUXURY"
+    },
+    "es": {
+      "type": "Reventa",
+      "category": "LUJO"
+    }
+  },
+  {
+    "entityId": "50e3cbd2-3603-4f17-9dbc-16fdd7a50e48",
+    "sourceIndex": 106,
+    "source": {
+      "type": "Presale"
+    },
+    "es": {
+      "type": "Preventa"
+    }
+  },
+  {
+    "entityId": "5235faf2-1570-482b-add4-3d465c1283f6",
+    "sourceIndex": 107,
+    "source": {
+      "type": "Presale",
+      "price": "From $360,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $360,000 USD"
+    }
+  },
+  {
+    "entityId": "8bf1cb55-77fe-42d5-8252-f8743110fdd5",
+    "sourceIndex": 108,
+    "source": {
+      "type": "Resale"
+    },
+    "es": {
+      "type": "Reventa"
+    }
+  },
+  {
+    "entityId": "d894d2e9-1632-47d2-a785-26029fb82987",
+    "sourceIndex": 109,
+    "source": {
+      "type": "Resale",
+      "price": "From $165,000 USD"
+    },
+    "es": {
+      "type": "Reventa",
+      "price": "Desde $165,000 USD"
+    }
+  },
+  {
+    "entityId": "d8a170b2-4e09-40dd-b26d-3cfb97f47022",
+    "sourceIndex": 110,
+    "source": {
+      "type": "Presale"
+    },
+    "es": {
+      "type": "Preventa"
+    }
+  },
+  {
+    "entityId": "d90fdbf6-61a3-4a92-8dd6-e24023ebb632",
+    "sourceIndex": 111,
+    "source": {
+      "type": "Presale"
+    },
+    "es": {
+      "type": "Preventa"
+    }
+  },
+  {
+    "entityId": "8d5c5cbb-9014-4b44-b96c-1fa14b6c806e",
+    "sourceIndex": 112,
+    "source": {
+      "type": "Presale",
+      "price": "From $310,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $310,000 USD"
+    }
+  },
+  {
+    "entityId": "d919a819-fd45-45a5-aa82-ae55698148bd",
+    "sourceIndex": 113,
+    "source": {
+      "type": "Rental",
+      "availability": "Available",
+      "price": "27,000 MXN / Month"
+    },
+    "es": {
+      "type": "Renta",
+      "availability": "Disponible",
+      "price": "27,000 MXN / mes"
+    }
+  },
+  {
+    "entityId": "8f610d39-3bb4-4a45-9745-5842cc4d1db5",
+    "sourceIndex": 114,
+    "source": {
+      "type": "Resale",
+      "price": "from 1,250,000 USD"
+    },
+    "es": {
+      "type": "Reventa",
+      "price": "Desde 1,250,000 USD"
+    }
+  },
+  {
+    "entityId": "52532bde-75cf-4216-ad52-18a67ad88ba0",
+    "sourceIndex": 115,
+    "source": {
+      "type": "Presale",
+      "price": "From $210,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $210,000 USD"
+    }
+  },
+  {
+    "entityId": "d97126ab-9532-4788-a025-f8d27a64090b",
+    "sourceIndex": 116,
+    "source": {
+      "type": "Presale",
+      "availability": "Delivery March 2025",
+      "price": "From $115,633 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "availability": "Entrega en marzo de 2025",
+      "price": "Desde $115,633 USD"
+    }
+  },
+  {
+    "entityId": "8fdd465f-a27b-4f11-a29b-4f4384b481ca",
+    "sourceIndex": 117,
+    "source": {
+      "type": "Presale"
+    },
+    "es": {
+      "type": "Preventa"
+    }
+  },
+  {
+    "entityId": "d9795142-16c3-47a7-b270-3b1e680bc1bd",
+    "sourceIndex": 118,
+    "source": {
+      "type": "Resale"
+    },
+    "es": {
+      "type": "Reventa"
+    }
+  },
+  {
+    "entityId": "2b19d012-ab39-4809-85fa-65ae3b821d42",
+    "sourceIndex": 119,
+    "source": {
+      "type": "Resale",
+      "category": "LUXURY"
+    },
+    "es": {
+      "type": "Reventa",
+      "category": "LUJO"
+    }
+  },
+  {
+    "entityId": "fae6fa19-1462-4a2b-896f-ead49699a1b6",
+    "sourceIndex": 120,
+    "source": {
+      "type": "Rental",
+      "availability": "Available",
+      "price": "40,000 MXN / Month"
+    },
+    "es": {
+      "type": "Renta",
+      "availability": "Disponible",
+      "price": "40,000 MXN / mes"
+    }
+  },
+  {
+    "entityId": "daf17dae-7a63-4f51-9771-b973dbef8055",
+    "sourceIndex": 121,
+    "source": {
+      "type": "Presale",
+      "availability": "ONLY 4 UNITS LEFT!"
+    },
+    "es": {
+      "type": "Preventa",
+      "availability": "¡SOLO QUEDAN 4 UNIDADES!"
+    }
+  },
+  {
+    "entityId": "dbc988e2-9892-4044-b67e-d815e9dcc473",
+    "sourceIndex": 122,
+    "source": {
+      "type": "Presale",
+      "price": "From $210,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $210,000 USD"
+    }
+  },
+  {
+    "entityId": "9809521f-72c9-47bb-8a46-468bd5969bc0",
+    "sourceIndex": 123,
+    "source": {
+      "type": "Resale",
+      "category": "LUXURY"
+    },
+    "es": {
+      "type": "Reventa",
+      "category": "LUJO"
+    }
+  },
+  {
+    "entityId": "53982b78-cb81-4ade-bc4d-eb7337989a52",
+    "sourceIndex": 124,
+    "source": {
+      "type": "Presale",
+      "price": "From $199,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $199,000 USD"
+    }
+  },
+  {
+    "entityId": "dcc323d8-2af7-4507-8c21-f8c1e70683d3",
+    "sourceIndex": 125,
+    "source": {
+      "type": "Resale",
+      "price": "SOLD"
+    },
+    "es": {
+      "type": "Reventa",
+      "price": "VENDIDO"
+    }
+  },
+  {
+    "entityId": "2c055e52-aa31-4928-8bd5-83697bf87728",
+    "sourceIndex": 126,
+    "source": {
+      "type": "Presale",
+      "price": "From $670,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $670,000 USD"
+    }
+  },
+  {
+    "entityId": "53d2e290-8c03-4544-ba5c-6c8ffde3030d",
+    "sourceIndex": 127,
+    "source": {
+      "type": "Presale"
+    },
+    "es": {
+      "type": "Preventa"
+    }
+  },
+  {
+    "entityId": "de4eee0d-e0d6-4113-8f18-1feb21a20beb",
+    "sourceIndex": 128,
+    "source": {
+      "type": "Resale",
+      "category": "LUXURY"
+    },
+    "es": {
+      "type": "Reventa",
+      "category": "LUJO"
+    }
+  },
+  {
+    "entityId": "fb0226c2-c61b-49fe-a13e-b426d29af8d8",
+    "sourceIndex": 129,
+    "source": {
+      "type": "Rental",
+      "availability": "Available",
+      "price": "22,500 MXN / Month"
+    },
+    "es": {
+      "type": "Renta",
+      "availability": "Disponible",
+      "price": "22,500 MXN / mes"
+    }
+  },
+  {
+    "entityId": "55690ffc-ae3d-4822-a6bf-ae5ab8d5f4ac",
+    "sourceIndex": 130,
+    "source": {
+      "type": "Resale",
+      "price": "from 319,000 USD"
+    },
+    "es": {
+      "type": "Reventa",
+      "price": "Desde 319,000 USD"
+    }
+  },
+  {
+    "entityId": "5767a73a-75b5-43c7-ab38-f88c93a3e2df",
+    "sourceIndex": 131,
+    "source": {
+      "type": "Presale",
+      "availability": "Delivery Fall 2025",
+      "price": "From $255,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "availability": "Entrega en otoño de 2025",
+      "price": "Desde $255,000 USD"
+    }
+  },
+  {
+    "entityId": "fb2f7a3d-0666-45f2-94d1-3d812075fc6f",
+    "sourceIndex": 132,
+    "source": {
+      "type": "Presale",
+      "price": "From $570,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $570,000 USD"
+    }
+  },
+  {
+    "entityId": "2c8ee07b-9d10-4bdc-a04b-4c9089d15e44",
+    "sourceIndex": 133,
+    "source": {
+      "type": "Presale",
+      "availability": "Delivery November 2024",
+      "price": "From $184,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "availability": "Entrega en noviembre de 2024",
+      "price": "Desde $184,000 USD"
+    }
+  },
+  {
+    "entityId": "9873303a-ff5d-44ed-91bf-2c6d027e5b27",
+    "sourceIndex": 134,
+    "source": {
+      "type": "Presale",
+      "price": "From $246,376 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $246,376 USD"
+    }
+  },
+  {
+    "entityId": "9920a103-bc63-4964-86dd-096e11e70c70",
+    "sourceIndex": 135,
+    "source": {
+      "type": "Presale",
+      "price": "From $195,000 USD "
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $195,000 USD "
+    }
+  },
+  {
+    "entityId": "2ce1c447-c32c-445d-8b58-4d017791e44a",
+    "sourceIndex": 136,
+    "source": {
+      "type": "Resale",
+      "category": "LUXURY"
+    },
+    "es": {
+      "type": "Reventa",
+      "category": "LUJO"
+    }
+  },
+  {
+    "entityId": "2d363c9f-78a0-4c72-988c-e9a0c0a7977f",
+    "sourceIndex": 137,
+    "source": {
+      "type": "Presale",
+      "availability": "Delivery December 2024",
+      "price": "From $490,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "availability": "Entrega en diciembre de 2024",
+      "price": "Desde $490,000 USD"
+    }
+  },
+  {
+    "entityId": "5a95f773-9652-483c-9c50-49d12cbdcde6",
+    "sourceIndex": 138,
+    "source": {
+      "type": "Resale"
+    },
+    "es": {
+      "type": "Reventa"
+    }
+  },
+  {
+    "entityId": "2ef4009e-cc5a-4d2f-899c-bea5d7077daa",
+    "sourceIndex": 139,
+    "source": {
+      "type": "Presale",
+      "availability": "Delivery Summer 2024",
+      "price": "From $165,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "availability": "Entrega en verano de 2024",
+      "price": "Desde $165,000 USD"
+    }
+  },
+  {
+    "entityId": "9a1e371d-c848-400c-acef-49e4db8bdbe8",
+    "sourceIndex": 140,
+    "source": {
+      "type": "Presale",
+      "category": "LUXURY"
+    },
+    "es": {
+      "type": "Preventa",
+      "category": "LUJO"
+    }
+  },
+  {
+    "entityId": "9aa8d325-0762-4a30-98e1-ca5efd077c94",
+    "sourceIndex": 141,
+    "source": {
+      "type": "Rental",
+      "availability": "Rented",
+      "price": "$60,000 MXN / Month"
+    },
+    "es": {
+      "type": "Renta",
+      "availability": "Rentado",
+      "price": "$60,000 MXN / mes"
+    }
+  },
+  {
+    "entityId": "2f21844b-e04e-4c3e-88b2-c9d376759fad",
+    "sourceIndex": 142,
+    "source": {
+      "type": "Presale"
+    },
+    "es": {
+      "type": "Preventa"
+    }
+  },
+  {
+    "entityId": "fbaa6326-cbf8-454a-b8ee-d1b1df836e43",
+    "sourceIndex": 143,
+    "source": {
+      "type": "Resale",
+      "category": "LUXURY"
+    },
+    "es": {
+      "type": "Reventa",
+      "category": "LUJO"
+    }
+  },
+  {
+    "entityId": "5b578ee7-cceb-4dc5-a503-f37660a32839",
+    "sourceIndex": 144,
+    "source": {
+      "type": "For Sale",
+      "availability": "Delivery Now, Last Units Available!!!",
+      "price": "From $162,000 USD"
+    },
+    "es": {
+      "type": "En venta",
+      "availability": "Entrega inmediata. ¡Últimas unidades disponibles!",
+      "price": "Desde $162,000 USD"
+    }
+  },
+  {
+    "entityId": "9b25d7e2-0fca-47f9-a171-43e5dc3927a7",
+    "sourceIndex": 145,
+    "source": {
+      "type": "Rental",
+      "availability": "Available: April 2027",
+      "price": "$30,000 MXN / Month"
+    },
+    "es": {
+      "type": "Renta",
+      "availability": "Disponible: abril de 2027",
+      "price": "$30,000 MXN / mes"
+    }
+  },
+  {
+    "entityId": "5bd0a7a4-3592-4187-9516-e1e21bfb1ea4",
+    "sourceIndex": 146,
+    "source": {
+      "type": "Presale",
+      "availability": "Delivery November 2025",
+      "price": "From $431,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "availability": "Entrega en noviembre de 2025",
+      "price": "Desde $431,000 USD"
+    }
+  },
+  {
+    "entityId": "df46711f-6345-477c-b0a8-4658abfbcf10",
+    "sourceIndex": 147,
+    "source": {
+      "type": "Presale",
+      "price": "From $198,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $198,000 USD"
+    }
+  },
+  {
+    "entityId": "9c235710-e34a-4616-b974-a02835d47123",
+    "sourceIndex": 148,
+    "source": {
+      "type": "Rental",
+      "availability": "Available: May 2027",
+      "price": "$70,000 MXN / Month"
+    },
+    "es": {
+      "type": "Renta",
+      "availability": "Disponible: mayo de 2027",
+      "price": "$70,000 MXN / mes"
+    }
+  },
+  {
+    "entityId": "9dd5f375-9ea9-4ede-8f72-840e9d9bb793",
+    "sourceIndex": 149,
+    "source": {
+      "type": "Resale",
+      "category": "LUXURY"
+    },
+    "es": {
+      "type": "Reventa",
+      "category": "LUJO"
+    }
+  },
+  {
+    "entityId": "df73ea50-836c-4806-b6cc-feeaccce1b3b",
+    "sourceIndex": 150,
+    "source": {
+      "type": "Presale",
+      "price": "From $191,000 USD "
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $191,000 USD "
+    }
+  },
+  {
+    "entityId": "9e90d11e-2340-44fa-a811-2a90c2944717",
+    "sourceIndex": 151,
+    "source": {
+      "type": "Presale",
+      "price": "From $296,900 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $296,900 USD"
+    }
+  },
+  {
+    "entityId": "31f5f493-2f6f-4759-b7c8-c143d3ecb80d",
+    "sourceIndex": 152,
+    "source": {
+      "type": "Presale",
+      "price": "From $400,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $400,000 USD"
+    }
+  },
+  {
+    "entityId": "e0e89769-5456-4b63-a032-6579f1c1839e",
+    "sourceIndex": 153,
+    "source": {
+      "type": "Presale",
+      "price": "From $180,900 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $180,900 USD"
+    }
+  },
+  {
+    "entityId": "9f3bebfe-1576-4c54-a5c7-34a152ee1c29",
+    "sourceIndex": 154,
+    "source": {
+      "type": "Presale",
+      "price": "From $694,445 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $694,445 USD"
+    }
+  },
+  {
+    "entityId": "5c3db4aa-1281-425d-a29c-7950d5260362",
+    "sourceIndex": 155,
+    "source": {
+      "type": "Presale",
+      "price": "From $380,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $380,000 USD"
+    }
+  },
+  {
+    "entityId": "a0d3726c-cfde-432a-b503-a01c9cf6bf76",
+    "sourceIndex": 156,
+    "source": {
+      "type": "Resale",
+      "category": "LUXURY"
+    },
+    "es": {
+      "type": "Reventa",
+      "category": "LUJO"
+    }
+  },
+  {
+    "entityId": "5dba8edd-ca88-439e-84ce-ff9c509ec285",
+    "sourceIndex": 157,
+    "source": {
+      "type": "Presale",
+      "price": "From $384,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $384,000 USD"
+    }
+  },
+  {
+    "entityId": "a107f156-9572-4b89-8cae-45addeaae5a8",
+    "sourceIndex": 158,
+    "source": {
+      "type": "Presale"
+    },
+    "es": {
+      "type": "Preventa"
+    }
+  },
+  {
+    "entityId": "a1758129-9f53-4903-9351-7e8b2665d15d",
+    "sourceIndex": 159,
+    "source": {
+      "type": "Rental",
+      "availability": "Rented",
+      "price": "$60,000 MXN / Month"
+    },
+    "es": {
+      "type": "Renta",
+      "availability": "Rentado",
+      "price": "$60,000 MXN / mes"
+    }
+  },
+  {
+    "entityId": "fc0246c9-0327-4eaf-b4c3-0806c1a27105",
+    "sourceIndex": 160,
+    "source": {
+      "type": "Presale"
+    },
+    "es": {
+      "type": "Preventa"
+    }
+  },
+  {
+    "entityId": "e19b3581-fbf0-4aad-8780-26623409466b",
+    "sourceIndex": 161,
+    "source": {
+      "type": "Presale",
+      "price": "From $274,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $274,000 USD"
+    }
+  },
+  {
+    "entityId": "326f2140-8589-4f95-b39b-2877774c8d1f",
+    "sourceIndex": 162,
+    "source": {
+      "type": "Rental",
+      "priceDetail": "Price Subject to Change",
+      "price": "Available from December 2023"
+    },
+    "es": {
+      "type": "Renta",
+      "priceDetail": "Precio sujeto a cambios",
+      "price": "Disponible a partir de diciembre de 2023"
+    }
+  },
+  {
+    "entityId": "e1cb1474-1b2d-43c7-b077-8de082a79796",
+    "sourceIndex": 163,
+    "source": {
+      "type": "Presale",
+      "availability": "Delivery March 2025",
+      "price": "From $475,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "availability": "Entrega en marzo de 2025",
+      "price": "Desde $475,000 USD"
+    }
+  },
+  {
+    "entityId": "3284b844-250d-473b-adb0-f60dd98af56e",
+    "sourceIndex": 164,
+    "source": {
+      "type": "Rental",
+      "availability": "Available",
+      "price": "$70,000 MXN / Month"
+    },
+    "es": {
+      "type": "Renta",
+      "availability": "Disponible",
+      "price": "$70,000 MXN / mes"
+    }
+  },
+  {
+    "entityId": "fc7970df-9b98-40e4-a524-24ea4c0e7756",
+    "sourceIndex": 165,
+    "source": {
+      "type": "Resale",
+      "category": "LUXURY"
+    },
+    "es": {
+      "type": "Reventa",
+      "category": "LUJO"
+    }
+  },
+  {
+    "entityId": "fd06f697-4e1b-4998-8702-34922ccc0fc9",
+    "sourceIndex": 166,
+    "source": {
+      "type": "Presale",
+      "price": "Starting from $16,729"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $16,729"
+    }
+  },
+  {
+    "entityId": "fdafd8c2-f3b2-451f-9d49-359350e31046",
+    "sourceIndex": 167,
+    "source": {
+      "type": "Presale",
+      "price": "From $289,900 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $289,900 USD"
+    }
+  },
+  {
+    "entityId": "5e8862e0-ccd4-47b1-bfa0-e827fd00f5b2",
+    "sourceIndex": 168,
+    "source": {
+      "type": "Presale",
+      "price": "From $289,640 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $289,640 USD"
+    }
+  },
+  {
+    "entityId": "32a7c17c-71a8-4fdd-9b5b-d37f058f3232",
+    "sourceIndex": 169,
+    "source": {
+      "type": "Presale",
+      "price": "From $190,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $190,000 USD"
+    }
+  },
+  {
+    "entityId": "5ea1874f-fcab-40c0-ba06-d83d0a80356c",
+    "sourceIndex": 170,
+    "source": {
+      "type": "Presale",
+      "category": "LUXURY"
+    },
+    "es": {
+      "type": "Preventa",
+      "category": "LUJO"
+    }
+  },
+  {
+    "entityId": "e1cd64c5-4e1d-473b-acbe-5b9a09fdc52e",
+    "sourceIndex": 171,
+    "source": {
+      "type": "Rental",
+      "availability": "Rented",
+      "priceDetail": "Price Subject to Change",
+      "price": "$20,000 MXN / Month"
+    },
+    "es": {
+      "type": "Renta",
+      "availability": "Rentado",
+      "priceDetail": "Precio sujeto a cambios",
+      "price": "$20,000 MXN / mes"
+    }
+  },
+  {
+    "entityId": "601465b6-cd80-441e-b908-12d7b8ce23de",
+    "sourceIndex": 172,
+    "source": {
+      "type": "Resale",
+      "category": "LUXURY"
+    },
+    "es": {
+      "type": "Reventa",
+      "category": "LUJO"
+    }
+  },
+  {
+    "entityId": "33fd9f38-65ac-400a-827a-5fb8a4789c1b",
+    "sourceIndex": 174,
+    "source": {
+      "type": "Resale",
+      "price": "From $198,500 USD"
+    },
+    "es": {
+      "type": "Reventa",
+      "price": "Desde $198,500 USD"
+    }
+  },
+  {
+    "entityId": "fe13bf91-8321-43eb-845d-4a73a0b7d349",
+    "sourceIndex": 175,
+    "source": {
+      "type": "Presale",
+      "price": "From $165,760 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $165,760 USD"
+    }
+  },
+  {
+    "entityId": "611ce8d4-b5cd-47e0-9e38-1a890dd711cd",
+    "sourceIndex": 176,
+    "source": {
+      "type": "Presale",
+      "price": "From $162,275 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $162,275 USD"
+    }
+  },
+  {
+    "entityId": "a35c9d10-1f5c-4343-b122-b7903663933d",
+    "sourceIndex": 177,
+    "source": {
+      "type": "Resale",
+      "category": "LUXURY",
+      "price": "From $1,700,000 USD"
+    },
+    "es": {
+      "type": "Reventa",
+      "category": "LUJO",
+      "price": "Desde $1,700,000 USD"
+    }
+  },
+  {
+    "entityId": "348b5fa9-c0e9-4c5a-a865-cf3a01b7b4e7",
+    "sourceIndex": 178,
+    "source": {
+      "type": "Presale"
+    },
+    "es": {
+      "type": "Preventa"
+    }
+  },
+  {
+    "entityId": "a50dd03e-4574-4397-9cea-ef495a34de84",
+    "sourceIndex": 179,
+    "source": {
+      "type": "Presale"
+    },
+    "es": {
+      "type": "Preventa"
+    }
+  },
+  {
+    "entityId": "a74dfbac-4c4a-4e6c-a868-03e06b1b9d48",
+    "sourceIndex": 180,
+    "source": {
+      "type": "Lot",
+      "availability": "Delivery Phase 1: December 2025",
+      "price": "From $43,636 USD"
+    },
+    "es": {
+      "type": "Terreno",
+      "availability": "Entrega de la fase 1: diciembre de 2025",
+      "price": "Desde $43,636 USD"
+    }
+  },
+  {
+    "entityId": "a9192fab-bc79-4803-9817-f37c806a7837",
+    "sourceIndex": 181,
+    "source": {
+      "type": "Lot",
+      "price": "From $194,000 USD"
+    },
+    "es": {
+      "type": "Terreno",
+      "price": "Desde $194,000 USD"
+    }
+  },
+  {
+    "entityId": "a9d53174-ec05-4c8a-963b-7885c1a9b898",
+    "sourceIndex": 182,
+    "source": {
+      "type": "Presale",
+      "availability": "Delivery December 2024",
+      "price": "From $142,325 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "availability": "Entrega en diciembre de 2024",
+      "price": "Desde $142,325 USD"
+    }
+  },
+  {
+    "entityId": "e242bc7c-155f-4cc3-82ec-f0b0f67a18e9",
+    "sourceIndex": 183,
+    "source": {
+      "type": "Resale",
+      "price": "SOLD"
+    },
+    "es": {
+      "type": "Reventa",
+      "price": "VENDIDO"
+    }
+  },
+  {
+    "entityId": "35ab784a-4578-44f3-acd7-f2b5873967bf",
+    "sourceIndex": 184,
+    "source": {
+      "type": "Presale",
+      "category": "LUXURY",
+      "price": "From $447,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "category": "LUJO",
+      "price": "Desde $447,000 USD"
+    }
+  },
+  {
+    "entityId": "3644599b-0e04-4224-a961-cfbc3570fa59",
+    "sourceIndex": 185,
+    "source": {
+      "type": "Presale",
+      "price": "From $111,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $111,000 USD"
+    }
+  },
+  {
+    "entityId": "e2a6f118-b305-443e-813c-624c5627a7be",
+    "sourceIndex": 187,
+    "source": {
+      "type": "Rental",
+      "priceDetail": "Price Subject to Change",
+      "price": "$1,700 USD / Month"
+    },
+    "es": {
+      "type": "Renta",
+      "priceDetail": "Precio sujeto a cambios",
+      "price": "$1,700 USD / mes"
+    }
+  },
+  {
+    "entityId": "366bffbf-47da-4b41-9656-71df52159e0b",
+    "sourceIndex": 188,
+    "source": {
+      "type": "Presale",
+      "price": "From $300,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $300,000 USD"
+    }
+  },
+  {
+    "entityId": "e4e0cd91-d533-4457-9f29-2233cc3c7f1b",
+    "sourceIndex": 189,
+    "source": {
+      "type": "Resale"
+    },
+    "es": {
+      "type": "Reventa"
+    }
+  },
+  {
+    "entityId": "61f15f01-ae88-480e-b9ba-a2d1167a27e7",
+    "sourceIndex": 190,
+    "source": {
+      "type": "Presale",
+      "price": "From $176,000 USD "
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $176,000 USD "
+    }
+  },
+  {
+    "entityId": "64f3eeca-3881-4923-9bd9-319d263fda8c",
+    "sourceIndex": 191,
+    "source": {
+      "type": "Resale",
+      "category": "LUXURY"
+    },
+    "es": {
+      "type": "Reventa",
+      "category": "LUJO"
+    }
+  },
+  {
+    "entityId": "6596d3ab-f1e2-4e37-b831-4184b8ee5311",
+    "sourceIndex": 192,
+    "source": {
+      "type": "Presale"
+    },
+    "es": {
+      "type": "Preventa"
+    }
+  },
+  {
+    "entityId": "65e42deb-c72a-40be-843d-fd3cde0d687b",
+    "sourceIndex": 193,
+    "source": {
+      "type": "Presale",
+      "availability": "Delivery Summer 2026",
+      "price": "From $481,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "availability": "Entrega en verano de 2026",
+      "price": "Desde $481,000 USD"
+    }
+  },
+  {
+    "entityId": "e67ef7fc-61e3-44a3-a009-f594ec321f60",
+    "sourceIndex": 194,
+    "source": {
+      "type": "Presale",
+      "availability": "Delivery December 2024",
+      "price": "From $300,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "availability": "Entrega en diciembre de 2024",
+      "price": "Desde $300,000 USD"
+    }
+  },
+  {
+    "entityId": "ab478648-91e6-4dc1-977a-2055f98922f7",
+    "sourceIndex": 195,
+    "source": {
+      "type": "Presale",
+      "availability": "Delivery Spring 2025",
+      "price": "From $235,887 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "availability": "Entrega en primavera de 2025",
+      "price": "Desde $235,887 USD"
+    }
+  },
+  {
+    "entityId": "368e1373-671b-4925-bea5-e32912d27fdd",
+    "sourceIndex": 196,
+    "source": {
+      "type": "Presale",
+      "availability": "Delivery expected by 2025",
+      "price": "From $243,702 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "availability": "Entrega prevista para 2025",
+      "price": "Desde $243,702 USD"
+    }
+  },
+  {
+    "entityId": "e6a9db47-d316-4153-8a19-12c74af13b9e",
+    "sourceIndex": 197,
+    "source": {
+      "type": "Presale",
+      "availability": "Delivery Summer 2025",
+      "price": "From $586,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "availability": "Entrega en verano de 2025",
+      "price": "Desde $586,000 USD"
+    }
+  },
+  {
+    "entityId": "ad1b1035-b34d-4e6f-aabf-c1c737c514b4",
+    "sourceIndex": 198,
+    "source": {
+      "type": "Presale"
+    },
+    "es": {
+      "type": "Preventa"
+    }
+  },
+  {
+    "entityId": "66e72025-f279-4391-882c-2fc18c480e53",
+    "sourceIndex": 199,
+    "source": {
+      "type": "Presale",
+      "availability": "Delivery November 2024",
+      "price": "From $227,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "availability": "Entrega en noviembre de 2024",
+      "price": "Desde $227,000 USD"
+    }
+  },
+  {
+    "entityId": "37ae325f-a488-4a98-94bd-b1c9c5c5ef3f",
+    "sourceIndex": 200,
+    "source": {
+      "type": "Presale",
+      "availability": "Delivery March 2025",
+      "price": "From $200,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "availability": "Entrega en marzo de 2025",
+      "price": "Desde $200,000 USD"
+    }
+  },
+  {
+    "entityId": "af956c90-712e-4033-a6b4-7b2bb1e6e080",
+    "sourceIndex": 201,
+    "source": {
+      "type": "Resale",
+      "category": "LUXURY"
+    },
+    "es": {
+      "type": "Reventa",
+      "category": "LUJO"
+    }
+  },
+  {
+    "entityId": "683839ec-0a0b-4617-8da4-8d7b458b3e27",
+    "sourceIndex": 202,
+    "source": {
+      "type": "Presale",
+      "category": "LUXURY",
+      "price": "From $662,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "category": "LUJO",
+      "price": "Desde $662,000 USD"
+    }
+  },
+  {
+    "entityId": "e775c459-0a2b-4cd8-a586-13d0fd95a40a",
+    "sourceIndex": 203,
+    "source": {
+      "type": "Presale",
+      "price": "From $56,900 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $56,900 USD"
+    }
+  },
+  {
+    "entityId": "b29a3009-b0f4-40ae-bd88-7d438dddfd8b",
+    "sourceIndex": 204,
+    "source": {
+      "type": "Resale",
+      "price": "From $299,000 USD"
+    },
+    "es": {
+      "type": "Reventa",
+      "price": "Desde $299,000 USD"
+    }
+  },
+  {
+    "entityId": "ea8f9e1e-5122-47d4-b2a0-436b54cbfc4f",
+    "sourceIndex": 205,
+    "source": {
+      "type": "Presale",
+      "price": "From $130,406 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $130,406 USD"
+    }
+  },
+  {
+    "entityId": "fe180b4d-7e5b-47c5-b96d-60ce01007dea",
+    "sourceIndex": 206,
+    "source": {
+      "type": "Presale",
+      "availability": "Delivery January 2025",
+      "price": "From $360,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "availability": "Entrega en enero de 2025",
+      "price": "Desde $360,000 USD"
+    }
+  },
+  {
+    "entityId": "6c93931b-18dd-4104-8000-c1dfeb8ba133",
+    "sourceIndex": 208,
+    "source": {
+      "type": "Presale"
+    },
+    "es": {
+      "type": "Preventa"
+    }
+  },
+  {
+    "entityId": "eb2db744-74f2-47d9-b6d4-a98738370141",
+    "sourceIndex": 209,
+    "source": {
+      "type": "Presale",
+      "category": "LUXURY",
+      "price": "From $600,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "category": "LUJO",
+      "price": "Desde $600,000 USD"
+    }
+  },
+  {
+    "entityId": "eb61a439-0b1d-492b-b308-d48d211933fe",
+    "sourceIndex": 210,
+    "source": {
+      "type": "Presale",
+      "category": "LUXURY"
+    },
+    "es": {
+      "type": "Preventa",
+      "category": "LUJO"
+    }
+  },
+  {
+    "entityId": "37e289b6-039f-4ba2-9f1b-73e1ed8baaf4",
+    "sourceIndex": 211,
+    "source": {
+      "type": "Presale"
+    },
+    "es": {
+      "type": "Preventa"
+    }
+  },
+  {
+    "entityId": "6e81706e-db77-40f5-b702-bb7c529ba934",
+    "sourceIndex": 212,
+    "source": {
+      "type": "Resale",
+      "price": "From $125,700 USD"
+    },
+    "es": {
+      "type": "Reventa",
+      "price": "Desde $125,700 USD"
+    }
+  },
+  {
+    "entityId": "ebb02896-920e-496e-8268-3e4ad965fb86",
+    "sourceIndex": 213,
+    "source": {
+      "type": "Presale",
+      "price": "From $162,349 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $162,349 USD"
+    }
+  },
+  {
+    "entityId": "37e31c14-0662-4430-9d07-acc7ab320abf",
+    "sourceIndex": 214,
+    "source": {
+      "type": "Presale",
+      "price": "Contact for Price"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Consulta el precio"
+    }
+  },
+  {
+    "entityId": "6eac0b1e-85e0-4777-b89b-07684d8432fa",
+    "sourceIndex": 215,
+    "source": {
+      "type": "Presale",
+      "price": "From $784,000 USD"
+    },
+    "es": {
+      "type": "Preventa",
+      "price": "Desde $784,000 USD"
+    }
+  },
+  {
+    "entityId": "b4779684-c002-4b52-9f25-97897964cf97",
+    "sourceIndex": 216,
+    "source": {
+      "type": "Rental",
+      "availability": "Available: May 2027",
+      "price": "$25,000 MXN / Month"
+    },
+    "es": {
+      "type": "Renta",
+      "availability": "Disponible: mayo de 2027",
+      "price": "$25,000 MXN / mes"
+    }
+  }
+]

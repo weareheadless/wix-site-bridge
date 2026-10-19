@@ -4,7 +4,7 @@
     "alias": "susimacdonald",
     "siteId": "878460ca-c98c-402b-8a10-862023f67cce",
     "liveUrl": "https://www.susimacdonald.com/",
-    "connectedRepo": null,
+    "connectedRepo": "https://github.com/weareheadless/susimacdonald-wix",
     "defaultBranch": "main",
     "wixConfigPath": "wix.config.json",
     "routes": [],
@@ -69,7 +69,7 @@
       },
       {
         "id": "febc8d2e-95d7-4349-b942-62034b9697aa",
-        "name": "Puerto Morelos — early hero registration pilot",
+        "name": "Puerto Morelos \u2014 early hero registration pilot",
         "position": "HEAD",
         "pageScope": {
           "type": "pages",
@@ -84,7 +84,7 @@
       },
       {
         "id": "6245ffcb-4cc7-4ca4-ae87-136c974eb381",
-        "name": "Susi — early custom element registration",
+        "name": "Susi \u2014 early custom element registration",
         "position": "HEAD",
         "pageScope": {
           "type": "all"
@@ -96,7 +96,7 @@
       },
       {
         "id": "f1609014-c6c1-4eaa-804e-d28c87713dd1",
-        "name": "Susi early packet — cities hero",
+        "name": "Susi early packet \u2014 cities hero",
         "position": "HEAD",
         "pageScope": {
           "type": "all"
@@ -108,7 +108,7 @@
       },
       {
         "id": "cf970d8b-e82e-41d5-a118-a9e0a7998d06",
-        "name": "Susi early packet — cities-listings",
+        "name": "Susi early packet \u2014 cities-listings",
         "position": "HEAD",
         "pageScope": {
           "type": "all"
@@ -120,7 +120,7 @@
       },
       {
         "id": "4358a4f4-b8a6-424e-b35f-42f11f0b54b7",
-        "name": "Susi early packet — cities-guide",
+        "name": "Susi early packet \u2014 cities-guide",
         "position": "HEAD",
         "pageScope": {
           "type": "all"
@@ -132,7 +132,7 @@
       },
       {
         "id": "67d39dc3-f840-4ee0-b897-94efaf0064fd",
-        "name": "Susi early packet — playa",
+        "name": "Susi early packet \u2014 playa",
         "position": "HEAD",
         "pageScope": {
           "type": "all"
@@ -144,7 +144,7 @@
       },
       {
         "id": "7acc2d1d-cb80-4086-8d6e-5e767f6002ef",
-        "name": "Susi early packet — units",
+        "name": "Susi early packet \u2014 units",
         "position": "HEAD",
         "pageScope": {
           "type": "all"
@@ -156,7 +156,7 @@
       },
       {
         "id": "87186364-afc7-4103-8428-f783be13e7c8",
-        "name": "Susi early packet — home",
+        "name": "Susi early packet \u2014 home",
         "position": "HEAD",
         "pageScope": {
           "type": "all"
@@ -168,7 +168,7 @@
       },
       {
         "id": "9410c467-b293-48f9-8bff-9e888063c9bf",
-        "name": "Susi early packet — rentals",
+        "name": "Susi early packet \u2014 rentals",
         "position": "HEAD",
         "pageScope": {
           "type": "all"
@@ -180,7 +180,7 @@
       },
       {
         "id": "0a8830a0-e744-4255-9893-d32aded70d6b",
-        "name": "Susi early packet — listing-detail",
+        "name": "Susi early packet \u2014 listing-detail",
         "position": "HEAD",
         "pageScope": {
           "type": "all"
@@ -192,7 +192,7 @@
       },
       {
         "id": "1800cbdf-3de2-4f4a-ac65-373af7a951bf",
-        "name": "Susi — critical image discovery",
+        "name": "Susi \u2014 critical image discovery",
         "position": "HEAD",
         "pageScope": {
           "type": "all"
@@ -204,7 +204,7 @@
       },
       {
         "id": "5b7edf14-687f-4961-a909-37ff76defa35",
-        "name": "Susi — initial document early bootstrap",
+        "name": "Susi \u2014 initial document early bootstrap",
         "position": "HEAD",
         "pageScope": {
           "type": "all"
@@ -216,7 +216,7 @@
       },
       {
         "id": "12c380f0-709c-4085-bd24-2eb93d170946",
-        "name": "Susi early packet — unit type hub",
+        "name": "Susi early packet \u2014 unit type hub",
         "position": "HEAD",
         "pageScope": {
           "type": "all"
@@ -240,7 +240,7 @@
       },
       {
         "id": "38e99671-774d-40e8-8c52-a8f1cd74364a",
-        "name": "Rental page visual polish — interactions",
+        "name": "Rental page visual polish \u2014 interactions",
         "position": "BODY_END",
         "pageScope": {
           "type": "pages",
