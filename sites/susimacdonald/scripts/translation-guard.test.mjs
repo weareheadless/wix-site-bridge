@@ -31,3 +31,10 @@ test('accepts localized square-foot wording with the same measurements', () => {
     translation: '<p>De 300 a 500 pies cuadrados por $90,000 USD.</p>',
   }));
 });
+
+test('ignores sentence punctuation after an unchanged currency figure', () => {
+  assert.doesNotThrow(() => validateTranslation({
+    source: '<p>Fees can reach $3,000.</p>',
+    translation: '<p>Los cargos pueden alcanzar $3,000</p>',
+  }));
+});
