@@ -90,15 +90,15 @@ function unpack(html,keys){
   if(found.length!==keys.length||found.some((item,i)=>item[1]!==keys[i]))fail('Packet structure or key order drifted');
   return found.map(item=>{let source=gunzipSync(Buffer.from(item[2],'base64')).toString('utf8');if(!dictionaryRange(source,false))source=localizeSource(source);const dict=dictionaryRange(source);return {key:item[1],source,dict,encoded:item[2]}});
 }
-function replacePacket(html,packet,updates){
+function replacePacket(html,packet,updates,allowOversize=false){
   let revised=html;
   for(const part of packet){const values={...part.dict.value,...updates[part.key]};const source=part.source.slice(0,part.dict.start)+JSON.stringify(values)+part.source.slice(part.dict.end);const encoded=gzipSync(Buffer.from(source),{level:9,mtime:0}).toString('base64');revised=revised.replace(part.encoded,encoded)}
-  if(revised.length>15000)fail('Rebuilt packet exceeds Wix 15 KB limit');
+  if(revised.length>15000&&!allowOversize)fail(`Rebuilt packet exceeds Wix 15 KB limit (${revised.length} characters)`);
   return revised;
 }
 if(audit){
   const report=[];
-  for(const item of config.groups){for(const spec of item.packets){const embed=live.find(x=>x.id===spec.id);if(!embed)fail(`Missing embed ${spec.id}`);try{const parts=unpack(embed.embedData?.html??'',spec.keys);const candidate=replacePacket(embed.embedData.html,parts,{});report.push({group:item.name,routes:item.routes.length,embedId:spec.id,components:parts.map(x=>({key:x.key,phrases:Object.keys(x.dict.value).length})),candidateHtmlBytes:Buffer.byteLength(candidate),liveHtmlBytes:Buffer.byteLength(embed.embedData.html),ready:true})}catch(error){report.push({group:item.name,embedId:spec.id,liveHtmlBytes:Buffer.byteLength(embed.embedData?.html??''),ready:false,error:error.message})}}}
+  for(const item of config.groups){for(const spec of item.packets){const embed=live.find(x=>x.id===spec.id);if(!embed)fail(`Missing embed ${spec.id}`);try{const parts=unpack(embed.embedData?.html??'',spec.keys);const candidate=replacePacket(embed.embedData.html,parts,{},true);report.push({group:item.name,routes:item.routes.length,embedId:spec.id,components:parts.map(x=>({key:x.key,phrases:Object.keys(x.dict.value).length})),candidateHtmlBytes:Buffer.byteLength(candidate),liveHtmlBytes:Buffer.byteLength(embed.embedData.html),ready:candidate.length<=15000})}catch(error){report.push({group:item.name,embedId:spec.id,liveHtmlBytes:Buffer.byteLength(embed.embedData?.html??''),ready:false,error:error.message})}}}
   console.log(JSON.stringify({site:alias,phase:'embeds',report,deferred:config.deferred}));process.exit(0)
 }
 function protect(source,target){
