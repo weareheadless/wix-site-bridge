@@ -79,13 +79,13 @@ function localizeSource(source){
   for(const edit of edits){if(edit.end>last)fail('Overlapping rendering writes require source review');modified=modified.slice(0,edit.start)+edit.text+modified.slice(edit.end);last=edit.start}
   if(!edits.length)fail('Packet has no safe rendering writes');
   const dictionary=Object.fromEntries(entries.map(([english,spanish])=>[english.replace(/&nbsp;/g,' ').replace(/&amp;/g,'&').replace(/\s+/g,' ').trim(),spanish.replace(/&nbsp;/g,' ')]));
-  const helper=`const __susiDictionary=${JSON.stringify(dictionary)};
+  const helper=`const __susiDictionary=__SUSI_DICTIONARY_JSON__;
 function __susiSpanish(){return /^es(?:-|$)/i.test(document.documentElement.lang||'')||/^\\/es(?:\\/|$)/.test(location.pathname)||new URLSearchParams(location.search).get('lang')==='es'}
 function __susiText(value){const raw=String(value??'');if(!__susiSpanish())return raw;const text=raw.trim().replace(/\\s+/g,' ');let translated=__susiDictionary[text];if(translated===undefined){translated=text.replace(/^Homes for sale in /,'Propiedades en venta en ').replace(/^Explore /,'Conoce ').replace(/^(\\d+) featured (?:property|properties)$/,'$1 propiedades destacadas').replace(/^(\\d+) properties?$/,'$1 propiedades').replace(/^From /,'Desde ').replace(/\\/ [Mm]onth\\b/,'/ mes');if(translated===text)return raw}return raw.slice(0,raw.length-raw.trimStart().length)+translated+raw.slice(raw.trimEnd().length)}
 function __susiHref(value){const raw=String(value??'');if(!__susiSpanish()||!raw||raw[0]==='#'||/^(?:mailto:|tel:|javascript:)/i.test(raw))return raw;try{const url=new URL(raw,location.origin);if(url.origin!==location.origin||!/^https?:$/.test(url.protocol))return raw;url.searchParams.set('lang','es');return url.pathname+url.search+url.hash}catch{return raw}}
 function __susiHtml(value){const raw=String(value??'');if(!__susiSpanish())return raw;const decode=s=>s.replace(/&nbsp;/g,' ').replace(/&amp;/g,'&').replace(/&quot;/g,'"').replace(/&#(?:0?39|x27);/gi,"'");const encode=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');return raw.replace(/>([^<>]+)</g,(all,text)=>{const decoded=decode(text),translated=__susiText(decoded);return translated===decoded?all:'>'+encode(translated)+'<'}).replace(/(aria-label|alt|title|placeholder)="([^"]*)"/g,(all,key,text)=>{const decoded=decode(text),translated=__susiText(decoded);return translated===decoded?all:key+'="'+encode(translated).replace(/"/g,'&quot;')+'"'}).replace(/href="([^"]*)"/g,(_,href)=>'href="'+__susiHref(href)+'"')}`;
   modified='{\n'+helper+'\n'+modified+'\n}\n';parse(modified,{sourceType:'unambiguous'});
-  const compact=transformSync(modified,{loader:'js',minifySyntax:true,minifyWhitespace:true,minifyIdentifiers:false,legalComments:'none'}).code;
+  const compact=transformSync(modified,{loader:'js',minifySyntax:true,minifyWhitespace:true,minifyIdentifiers:false,legalComments:'none'}).code.replace('__SUSI_DICTIONARY_JSON__',JSON.stringify(dictionary));
   if(!dictionaryRange(compact,false))fail('Minified packet lost its translatable dictionary');
   parse(compact,{sourceType:'unambiguous'});return compact;
 }
