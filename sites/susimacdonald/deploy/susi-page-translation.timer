@@ -1,9 +1,9 @@
 [Unit]
-Description=Review one Susi embed page every ten minutes
+Description=Review one Susi embed page at a time
 
 [Timer]
-OnBootSec=2min
-OnUnitInactiveSec=10min
+OnBootSec=30s
+OnUnitInactiveSec=30s
 Persistent=true
 Unit=susi-page-translation.service
 
