@@ -96,7 +96,7 @@ function unpack(html,keys){
 }
 function replacePacket(html,packet,updates,allowOversize=false){
   let revised=html;
-  for(const part of packet){const values={...part.dict.value,...updates[part.key]};const source=part.source.slice(0,part.dict.start)+JSON.stringify(values)+part.source.slice(part.dict.end);const encoded=gzipSync(Buffer.from(source),{level:9,mtime:0}).toString('base64');revised=revised.replace(part.encoded,encoded)}
+  for(const part of packet){const values={...part.dict.value,...updates[part.key]};let source=part.source.slice(0,part.dict.start)+JSON.stringify(values)+part.source.slice(part.dict.end);source=source.replace("url.pathname='/es'+(url.pathname==='/'?'/':url.pathname);return url.pathname+url.search+url.hash;","url.searchParams.set('lang','es');return url.pathname+url.search+url.hash;");const encoded=gzipSync(Buffer.from(source),{level:9,mtime:0}).toString('base64');revised=revised.replace(part.encoded,encoded)}
   if(revised.length>15000&&!allowOversize)fail(`Rebuilt packet exceeds Wix 15 KB limit (${revised.length} characters)`);
   return revised;
 }
