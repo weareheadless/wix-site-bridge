@@ -1,0 +1,16 @@
+{
+  "siteAlias": "susimacdonald",
+  "siteId": "878460ca-c98c-402b-8a10-862023f67cce",
+  "locale": "es-MX",
+  "baseUrl": "https://www.susimacdonald.com",
+  "phase": "embeds",
+  "groups": [
+    {"name":"home","purpose":"Homepage: luxury Riviera Maya real estate introduction, property discovery and featured homes","routes":["/"],"packets":[{"id":"87186364-afc7-4103-8428-f783be13e7c8","keys":["home-property-slider","home-featured-properties-v2"]}]},
+    {"name":"playa-city","purpose":"City landing page: local market and homes for sale; keep place names and property facts exact","routes":["/homes-for-sale-in-playa-del-carmen","/homes-for-sale-in-cozumel","/bacalar-real-estate"],"packets":[{"id":"67d39dc3-f840-4ee0-b897-94efaf0064fd","keys":["playa-city-properties-hero"]}]},
+    {"name":"other-cities","purpose":"City landing pages: local market, property cards and buying guide; review every city separately","routes":["/homes-for-sale-in-tulum","/puerto-morelos-real-estate","/homes-for-sale-in-puerto-aventuras","/homes-for-sale-in-akumal","/riviera-maya-real-estate"],"packets":[{"id":"f1609014-c6c1-4eaa-804e-d28c87713dd1","keys":["property-hero-v2"]},{"id":"cf970d8b-e82e-41d5-a118-a9e0a7998d06","keys":["property-listings-v2"]},{"id":"4358a4f4-b8a6-424e-b35f-42f11f0b54b7","keys":["property-guide-v2"]}]},
+    {"name":"property-types","purpose":"Property type collections; keep listing filters, prices and unit descriptions accurate","routes":["/riviera-maya-penthouses-sale","/riviera-maya-condos-sale","/riviera-maya-villas-sale","/riviera-maya-beachfront-sale","/riviera-maya-condos-sale-under-200k","/riviera-maya-luxury-real-estate"],"packets":[{"id":"7acc2d1d-cb80-4086-8d6e-5e767f6002ef","keys":["unit-type-collection-split"]}]},
+    {"name":"listings-hub","purpose":"Search and browse all Riviera Maya property listings","routes":["/real-estate-listings"],"packets":[{"id":"12c380f0-709c-4085-bd24-2eb93d170946","keys":["unit-type-hub"]}]},
+    {"name":"rentals","purpose":"Riviera Maya rentals landing page","routes":["/apartments-for-rent-in-playa-del-carmen"],"packets":[{"id":"9410c467-b293-48f9-8bff-9e888063c9bf","keys":["rental-experience-v2"]}]}
+  ],
+  "deferred": ["Listing detail embeds need an explicit representative URL and review of every dynamic route family before release.", "CMS collections follow only after the embed phase is complete."]
+}

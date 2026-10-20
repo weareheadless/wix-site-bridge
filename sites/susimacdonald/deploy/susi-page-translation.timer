@@ -1,0 +1,11 @@
+[Unit]
+Description=Review one Susi embed page every ten minutes
+
+[Timer]
+OnBootSec=2min
+OnUnitInactiveSec=10min
+Persistent=true
+Unit=susi-page-translation.service
+
+[Install]
+WantedBy=timers.target

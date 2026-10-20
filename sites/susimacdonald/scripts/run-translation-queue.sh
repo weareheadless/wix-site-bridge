@@ -2,8 +2,12 @@
 set -euo pipefail
 export PATH="/usr/local/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:${PATH:-/usr/bin:/bin}"
 MODE=${1:-}
+if [[ "$MODE" == '--apply' || "$MODE" == '--benchmark' || "$MODE" == '--rework' ]]; then
+  echo 'Stopped: the field queue ignores page context. Use the page-scoped OpenRouter worker; embeds are the first phase.' >&2
+  exit 2
+fi
 if [[ "$MODE" != '--apply' && "$MODE" != '--benchmark' && "$MODE" != '--rework' ]]; then
-  echo 'Dry-run is the default. Pass --benchmark for one unpublished batch, --apply for regular publishing, or --rework for held translations.'
+  echo 'This Codex field runner is retired. Use the page-scoped OpenRouter worker.'
   exit 0
 fi
 
