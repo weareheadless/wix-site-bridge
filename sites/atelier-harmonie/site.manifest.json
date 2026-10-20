@@ -1146,6 +1146,18 @@
         "purpose": "nonvisual-early-registration",
         "enabled": true,
         "release": "atelier-performance-20261020-v51-header76"
+      },
+      {
+        "id": "523191ed-77dc-478f-bc73-4dbd63c1110f",
+        "name": "Atelier production early-packet-shipping-1.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": true,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-shipping-1.html",
+        "purpose": "route-guarded-shipping"
       }
     ],
     "connectedRepo": "weareheadless/atelier-harmonie",
