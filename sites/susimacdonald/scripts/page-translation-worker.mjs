@@ -6,6 +6,7 @@ import {promisify} from 'node:util';
 import {createHash} from 'node:crypto';
 import {gunzipSync, gzipSync} from 'node:zlib';
 import path from 'node:path';
+import {parse} from '@babel/parser';
 import {WixAppTokenProvider, WixCustomEmbedsClient} from '../../../src/wix-client.mjs';
 import {runOperation} from '../../../src/bridge.mjs';
 
@@ -20,6 +21,7 @@ const statePath=path.join(stateDir,'progress.json');
 const budgetPath=path.join(stateDir,'openrouter-spend.json');
 const apply=process.argv.includes('--apply');
 const preview=process.argv.includes('--preview');
+const audit=process.argv.includes('--audit');
 const sha=value=>createHash('sha256').update(value).digest('hex');
 const fail=message=>{throw Error(message)};
 if(process.argv.includes('--site')===false||process.argv[process.argv.indexOf('--site')+1]!==alias)fail('Explicit --site susimacdonald required');
@@ -27,13 +29,14 @@ if(process.env.WIX_ALLOWED_SITE_IDS!==siteId)fail('Exact Susi site allowlist req
 const config=JSON.parse(await readFile(pagePath,'utf8'));
 const manifest=JSON.parse(await readFile(manifestPath,'utf8'));
 if(config.siteId!==siteId||config.siteAlias!==alias||manifest.site.siteId!==siteId||config.phase!=='embeds')fail('Site or phase boundary mismatch');
+const phraseBank={};for(const file of ['es-MX.json','native-es-MX.json','native-additional-es-MX.json','editorial-spans-es-MX.json','components-additional-es-MX.json'])Object.assign(phraseBank,JSON.parse(await readFile(path.join(base,'production/i18n',file),'utf8')));
 await mkdir(stateDir,{recursive:true,mode:0o700});
 const readState=async()=>{try{return JSON.parse(await readFile(statePath,'utf8'))}catch(error){if(error.code==='ENOENT')return {group:0,route:0,status:'new'};throw error}};
 const save=async state=>writeFile(statePath,JSON.stringify(state,null,2)+'\n',{mode:0o600});
 if(preview){const s=await readState();console.log(JSON.stringify({site:alias,phase:'embeds',nextGroup:config.groups[s.group]?.name??null,nextRoute:config.groups[s.group]?.routes[s.route]??null,state:s.status,apply:false}));process.exit(0)}
-if(!apply){console.log('Dry-run: pass --apply to process one page. No Wix writes occur until both independent reviews pass.');process.exit(0)}
-if(!process.env.OPENROUTER_API_KEY)fail('OPENROUTER_API_KEY is not configured; no page was processed');
-if(!process.env.CHROMIUM_PATH)fail('CHROMIUM_PATH is required for rendered page screenshots');
+if(!apply&&!audit){console.log('Dry-run: pass --apply to process one page, or --audit to inspect packet coverage.');process.exit(0)}
+if(apply&&!process.env.OPENROUTER_API_KEY)fail('OPENROUTER_API_KEY is not configured; no page was processed');
+if(apply&&!process.env.CHROMIUM_PATH)fail('CHROMIUM_PATH is required for rendered page screenshots');
 
 const client=new WixCustomEmbedsClient({siteId,tokenProvider:WixAppTokenProvider.fromEnv()});
 const live=await client.listAll();
@@ -44,23 +47,59 @@ if(!group){console.log(JSON.stringify({status:'listed-embed-groups-reviewed',def
 const route=group.routes[state.route];
 if(!route)fail('Invalid route index in private progress state');
 const packetPattern=/\["([^"\\]+)","([A-Za-z0-9+/=]+)"\]/g;
-function dictionaryRange(source){
+function dictionaryRange(source,required=true){
   const anchor='const __susiDictionary=';const start=source.indexOf(anchor);
-  if(start<0)fail('Packet lacks Spanish dictionary; needs source-level localization first');
+  if(start<0){if(!required)return null;fail('Packet lacks Spanish dictionary')}
   const at=start+anchor.length;let depth=0,quoted=false,escaped=false;
   for(let i=at;i<source.length;i++){const c=source[i];if(quoted){if(escaped)escaped=false;else if(c==='\\')escaped=true;else if(c==='"')quoted=false;continue}if(c==='"'){quoted=true;continue}if(c==='{')depth++;if(c==='}'&&--depth===0)return {start:at,end:i+1,value:JSON.parse(source.slice(at,i+1))}}
   fail('Unclosed Spanish dictionary');
 }
+function localizeSource(source){
+  const entries=Object.entries(phraseBank).filter(([english,spanish])=>english.length>2&&typeof spanish==='string'&&source.includes(english));
+  if(entries.length<5)fail('Packet has too few mapped visible phrases for safe localization');
+  const ast=parse(source,{sourceType:'unambiguous'}),edits=[];
+  const wrap=(node,fn)=>edits.push({start:node.start,end:node.end,text:fn+'('+source.slice(node.start,node.end)+')'});
+  function visit(node){
+    if(!node||typeof node!=='object')return;
+    if(node.type==='AssignmentExpression'&&node.operator==='='&&node.left.type==='MemberExpression'){
+      const property=node.left.computed?node.left.property.value:node.left.property.name;
+      if(['innerHTML','outerHTML'].includes(property))wrap(node.right,'__susiHtml');
+      else if(['textContent','innerText','placeholder','title','alt'].includes(property))wrap(node.right,'__susiText');
+      else if(property==='href')wrap(node.right,'__susiHref');
+    }
+    if(node.type==='CallExpression'&&node.callee.type==='MemberExpression'&&node.callee.property.name==='setAttribute'&&node.arguments.length===2){
+      const attribute=node.arguments[0]?.value;
+      if(['aria-label','title','alt','placeholder'].includes(attribute))wrap(node.arguments[1],'__susiText');
+      else if(attribute==='href')wrap(node.arguments[1],'__susiHref');
+    }
+    for(const [key,value] of Object.entries(node)){if(['start','end','loc'].includes(key))continue;if(Array.isArray(value))value.forEach(visit);else if(value&&typeof value==='object')visit(value)}
+  }
+  visit(ast);edits.sort((a,b)=>b.start-a.start);let modified=source,last=Infinity;
+  for(const edit of edits){if(edit.end>last)fail('Overlapping rendering writes require source review');modified=modified.slice(0,edit.start)+edit.text+modified.slice(edit.end);last=edit.start}
+  if(!edits.length)fail('Packet has no safe rendering writes');
+  const dictionary=Object.fromEntries(entries.map(([english,spanish])=>[english.replace(/&nbsp;/g,' ').replace(/&amp;/g,'&').replace(/\s+/g,' ').trim(),spanish.replace(/&nbsp;/g,' ')]));
+  const helper=`const __susiDictionary=${JSON.stringify(dictionary)};
+function __susiSpanish(){return /^es(?:-|$)/i.test(document.documentElement.lang||'')||/^\\/es(?:\\/|$)/.test(location.pathname)||new URLSearchParams(location.search).get('lang')==='es'}
+function __susiText(value){const raw=String(value??'');if(!__susiSpanish())return raw;const text=raw.trim().replace(/\\s+/g,' ');let translated=__susiDictionary[text];if(translated===undefined){translated=text.replace(/^Homes for sale in /,'Propiedades en venta en ').replace(/^Explore /,'Conoce ').replace(/^(\\d+) featured (?:property|properties)$/,'$1 propiedades destacadas').replace(/^(\\d+) properties?$/,'$1 propiedades').replace(/^From /,'Desde ').replace(/\\/ [Mm]onth\\b/,'/ mes');if(translated===text)return raw}return raw.slice(0,raw.length-raw.trimStart().length)+translated+raw.slice(raw.trimEnd().length)}
+function __susiHref(value){const raw=String(value??'');if(!__susiSpanish()||!raw||raw[0]==='#'||/^(?:mailto:|tel:|javascript:)/i.test(raw))return raw;try{const url=new URL(raw,location.origin);if(url.origin!==location.origin||!/^https?:$/.test(url.protocol))return raw;url.searchParams.set('lang','es');return url.pathname+url.search+url.hash}catch{return raw}}
+function __susiHtml(value){const raw=String(value??'');if(!__susiSpanish())return raw;const decode=s=>s.replace(/&nbsp;/g,' ').replace(/&amp;/g,'&').replace(/&quot;/g,'"').replace(/&#(?:0?39|x27);/gi,"'");const encode=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');return raw.replace(/>([^<>]+)</g,(all,text)=>{const decoded=decode(text),translated=__susiText(decoded);return translated===decoded?all:'>'+encode(translated)+'<'}).replace(/(aria-label|alt|title|placeholder)="([^"]*)"/g,(all,key,text)=>{const decoded=decode(text),translated=__susiText(decoded);return translated===decoded?all:key+'="'+encode(translated).replace(/"/g,'&quot;')+'"'}).replace(/href="([^"]*)"/g,(_,href)=>'href="'+__susiHref(href)+'"')}`;
+  modified='{\n'+helper+'\n'+modified+'\n}\n';parse(modified,{sourceType:'unambiguous'});return modified;
+}
 function unpack(html,keys){
   const found=[...html.matchAll(packetPattern)];
   if(found.length!==keys.length||found.some((item,i)=>item[1]!==keys[i]))fail('Packet structure or key order drifted');
-  return found.map(item=>{const source=gunzipSync(Buffer.from(item[2],'base64')).toString('utf8');const dict=dictionaryRange(source);return {key:item[1],source,dict,encoded:item[2]}});
+  return found.map(item=>{let source=gunzipSync(Buffer.from(item[2],'base64')).toString('utf8');if(!dictionaryRange(source,false))source=localizeSource(source);const dict=dictionaryRange(source);return {key:item[1],source,dict,encoded:item[2]}});
 }
 function replacePacket(html,packet,updates){
   let revised=html;
   for(const part of packet){const values={...part.dict.value,...updates[part.key]};const source=part.source.slice(0,part.dict.start)+JSON.stringify(values)+part.source.slice(part.dict.end);const encoded=gzipSync(Buffer.from(source),{level:9,mtime:0}).toString('base64');revised=revised.replace(part.encoded,encoded)}
   if(revised.length>15000)fail('Rebuilt packet exceeds Wix 15 KB limit');
   return revised;
+}
+if(audit){
+  const report=[];
+  for(const item of config.groups){for(const spec of item.packets){const embed=live.find(x=>x.id===spec.id);if(!embed)fail(`Missing embed ${spec.id}`);const parts=unpack(embed.embedData?.html??'',spec.keys);const candidate=replacePacket(embed.embedData.html,parts,{});report.push({group:item.name,routes:item.routes.length,embedId:spec.id,components:parts.map(x=>({key:x.key,phrases:Object.keys(x.dict.value).length})),candidateHtmlBytes:Buffer.byteLength(candidate),liveHtmlBytes:Buffer.byteLength(embed.embedData.html)})}}
+  console.log(JSON.stringify({site:alias,phase:'embeds',report,deferred:config.deferred}));process.exit(0)
 }
 function protect(source,target){
   if(typeof target!=='string'||!target.trim())fail('Empty translation');

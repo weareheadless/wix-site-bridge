@@ -5,8 +5,8 @@ SITE=susimacdonald
 SITE_ID=878460ca-c98c-402b-8a10-862023f67cce
 STATE=sites/susimacdonald/.wix-bridge-state
 KEY_FILE=${OPENROUTER_ENV_FILE:-/home/admin/.config/susi-translation/openrouter.env}
-if [[ "${1:-}" != --apply && "${1:-}" != --preview ]]; then
-  echo 'Use --preview for the next page or --apply for one reviewed page.'
+if [[ "${1:-}" != --apply && "${1:-}" != --preview && "${1:-}" != --audit ]]; then
+  echo 'Use --preview for the next page, --audit for packet coverage, or --apply for one reviewed page.'
   exit 0
 fi
 if [[ "${1:-}" == --apply && ! -s "$KEY_FILE" ]]; then
@@ -27,8 +27,8 @@ if [[ "${1:-}" == --apply && ! -x "${CHROMIUM_PATH:-}" ]]; then
   exit 2
 fi
 mkdir -p "$STATE/page-translations"
-if [[ "${1:-}" == --preview ]]; then
-  exec node sites/susimacdonald/scripts/page-translation-worker.mjs --site "$SITE" --preview
+if [[ "${1:-}" == --preview || "${1:-}" == --audit ]]; then
+  exec node sites/susimacdonald/scripts/page-translation-worker.mjs --site "$SITE" "$1"
 fi
 exec 9>"$STATE/page-translations/worker.lock"
 flock -n 9 || { echo 'A page review is already running.'; exit 0; }

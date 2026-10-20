@@ -8,7 +8,7 @@ The former Codex field queue is retired for mutations. It selected unrelated tra
 
 The live Susi site currently returns 404 for `/es/` but renders Spanish embeds at `?lang=es`. The worker uses the latter. It does not alter language visibility, page scope, load-once settings, Editor layout or Wix machine-translation credits.
 
-Only the listed packet dictionaries are in this first phase. Page-specific legacy embeds without dictionaries and dynamic listing-detail routes are deferred; the worker reports this explicitly and does not claim that all embeds or the site are translated. CMS collections are a later phase. The site-specific Git-connected source fallback still needs a separate synchronized production release before the full-site translation is called complete. Follow `docs/GLOBAL_EARLY_REGISTRATION.md` for that release.
+For listed packets without an existing Spanish dictionary, the worker uses the checked-in Susi phrase bank and a JavaScript parser to wrap rendering writes before building a candidate. It refuses packets without enough matched phrases or safe rendering writes. Page-specific legacy embeds outside the list and dynamic listing-detail routes are deferred; the worker reports this explicitly and does not claim that all embeds or the site are translated. CMS collections are a later phase. The site-specific Git-connected source fallback still needs a separate synchronized production release before the full-site translation is called complete. Follow `docs/GLOBAL_EARLY_REGISTRATION.md` for that release.
 
 ## VPS setup
 
