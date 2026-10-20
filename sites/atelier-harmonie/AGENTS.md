@@ -167,3 +167,7 @@
 - Use Wix `multilingual.siteLanguages` and `currentLanguage` through Velo, with configured-language validation. Never enable hidden English or guess language availability from URLs; omit switch when fewer than two display languages are exposed. Keep source and startup packets synchronized.
 
 - Catalog translation setup must remain inside the English-only async boundary; never initialize optional SDK auth at module load in the shared public catalog backend. Translation failures must not prevent product rendering. Validate localized `/en/product-page/` URLs alongside French URLs and use canonical slugs for stable category matching. v50 awaits human publication and live confirmation; do not claim the prior `catalog-error` exception was proven without backend evidence.
+
+## Performance startup v51
+
+Read production/PERFORMANCE_V51.md and the Wix-connected repository STARTUP.md before a startup release. Build from the exact connected component sources using scripts/build-startup.mjs; the old prototype-based build-production.mjs is superseded. Legal and obsolete prototype packets are deliberately disabled; preserve manifest enabled:false entries.

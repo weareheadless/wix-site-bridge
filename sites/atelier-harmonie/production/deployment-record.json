@@ -52,7 +52,8 @@
     "startupInstalled": true,
     "startupEmbedId": "79fcc94b-358e-4454-aff7-1c6192156fe5",
     "featuredProduct": "Most recently updated in-stock product with image; Wix public catalog order descending _updatedDate",
-    "heroImageFit": "Uncropped original Wix photo, object-fit contain, fixed frame, no hover zoom"
+    "heroImageFit": "4:5 portrait cover inside an offset hairline frame; max 430px desktop, full width mobile",
+    "visualReview": "Desktop 1440px and mobile 390px screenshots reviewed after 2026-10-20 embed update"
   },
   "lamps": {
     "route": "/lampes",
@@ -64,8 +65,10 @@
     "instructions": "LAMPS_PLACEMENT.md",
     "startupInstalled": true,
     "startupEmbedId": "c3341e82-ffc0-4d73-a3be-cc8de6915376",
-    "design": "Measured masonry tiles with ivory backgrounds, fine beige borders, padded captions and square corners; pending human publication",
-    "carouselImageFit": "Natural width/height; no fixed photo frame; pending human publication"
+    "design": "Measured masonry tiles with ivory backgrounds, fine beige borders, padded captions and square corners; hero photo in an offset hairline frame with a 3:4 cover crop",
+    "carouselImageFit": "Natural width/height; no fixed photo frame; pending human publication",
+    "heroImageFit": "3:4 cover inside an offset hairline frame; clamp(300px,32vw,430px) desktop, 300-340px tablet/mobile",
+    "visualReview": "Desktop 1440px and mobile 390px screenshots reviewed after 2026-10-20 embed update"
   },
   "seats": {
     "route": "/sieges",
@@ -125,12 +128,8 @@
   "contact": {
     "route": "/tapisserie-restauration",
     "tag": "atelier-contact-v1",
-    "requestedElementId": "customElement11",
-    "sourceCommit": "4dfcbc8",
-    "placement": "pending human; separate section above real Wix form",
-    "published": false,
-    "instructions": "CONTACT_PLACEMENT.md",
-    "startupEmbedId": "68db761f-4115-448c-9d8b-4306b1b84ec4"
+    "visualReview": "Desktop screenshot reviewed after 2026-10-20 update",
+    "design": "Square contact photo in offset hairline frame; heading rose; native form untouched"
   },
   "fabrics": {
     "route": "/les-tissus",
@@ -159,52 +158,24 @@
   },
   "workshops": {
     "route": "/les-ateliers",
-    "pageId": "ntpl0",
     "tag": "atelier-workshops-v1",
-    "requestedElementId": "customElement14",
-    "sourceCommit": "2d90370",
-    "placement": "human created page and fresh element; source settings pending",
-    "published": false,
-    "instructions": "WORKSHOPS_PLACEMENT.md",
-    "startupInstalled": true,
-    "startupEmbedId": "e4194673-654e-4e14-93f9-d1fb45198336",
-    "booking": "Exact original external Wecandoo URLs from article embed",
-    "navigation": "Navbar desktop/mobile and homepage workshop links updated",
-    "metadata": {
-      "status": "source pushed; pending human current-layout publish",
-      "title": "Ateliers DIY en Normandie | Atelier de l’harmonie",
-      "description": "Créez votre abat-jour ou restaurez une chaise avec Mathilde à Saint-Pierre-en-Port, en Normandie. Ateliers en petits groupes, débutants bienvenus.",
-      "method": "wix-seo-frontend setTitle/setMetaTags in page onReady",
-      "social": "Open Graph and Twitter large image; existing workshop photo"
-    }
+    "visualReview": "Desktop screenshots reviewed after 2026-10-20 update",
+    "design": "Hero and panel photos in offset hairline frames; program heading rose; about heading blue italic; contact heading rose"
   },
   "about": {
     "route": "/a-propos",
     "tag": "atelier-about-v1",
-    "requestedElementId": "customElement15",
-    "sourceCommit": "5a96b02",
-    "placement": "pending human; native contact retained",
-    "published": false,
-    "instructions": "ABOUT_PLACEMENT.md",
-    "startupInstalled": true,
-    "startupEmbedId": "3a7f985a-d818-4646-acef-0e4fa5069221"
+    "visualReview": "Desktop screenshots reviewed after 2026-10-20 update",
+    "design": "Portrait and chairs photos in offset hairline frames; story heading rose; values heading blue italic"
   },
   "quote": {
     "route": "/devis",
-    "sourceCommit": "7af6eb7",
-    "placement": "pending human; native form and picture unchanged",
-    "published": false,
-    "instructions": "QUOTE_PLACEMENT.md",
-    "top": {
-      "tag": "atelier-quote-top-v1",
-      "requestedElementId": "customElement16",
-      "startupEmbedId": "21798ef3-5ae2-4583-9a20-4d3fb13bfb1d"
-    },
-    "bottom": {
-      "tag": "atelier-quote-bottom-v1",
-      "requestedElementId": "customElement17",
-      "startupEmbedId": "017a8d7c-20df-4bcf-82c7-f04406a1f0c5"
-    }
+    "tags": [
+      "atelier-quote-top-v1",
+      "atelier-quote-bottom-v1"
+    ],
+    "visualReview": "Desktop screenshot reviewed after 2026-10-20 update",
+    "design": "Short rose section rules; process heading rose; pricing heading blue italic; step cards with small rose rule; native Wix form untouched"
   },
   "journal": {
     "route": "/blog",
@@ -235,11 +206,11 @@
     "startupInstalled": true,
     "plannedStartupRelease": "atelier-production-20261018-v40",
     "startupStatus": "Installed; receipt hashes and mappings inspected",
-    "visualReview": "pending; in-app browser disabled in Work settings",
+    "visualReview": "Desktop 1440px and mobile 390px screenshots reviewed after 2026-10-20 embed update; image now fills its frame",
     "dataSource": "Wix Stores/Products and Stores/Variants; documented variant and currentCart APIs",
     "startupEmbedId": "d1343538-27ba-4069-8c5b-4d20db25e22a",
     "startupRelease": "atelier-production-20261018-v40",
-    "design": "Natural image/frame proportions, no square/padding; description and info collapsed in one native accordion group",
+    "design": "Portrait 3:4 cover frame centered with an offset hairline; description and info collapsed in one native accordion group",
     "nativeHost": "Retained nonvisual host: immediate and per-navigation hide/collapse; never automatic expand/show; errors stay in custom view",
     "nativeHostConfirmation": "Human reported collapse works",
     "questionCta": "mailto:mathildevalle.atelier@gmail.com with product name in subject",
@@ -247,7 +218,7 @@
     "descriptionFollowup": "Narrative fallback from named product-info/description sections; nested paragraph boundaries preserved; actual loaded definition version observable",
     "screenshotEvidence": "Human screenshot confirms earlier excerpt above buttons, not missing",
     "renderStability": "No destructive timeout; deduplicated same-slug URL changes; SEO isolated; stale and duplicate loading/error attributes ignored after render",
-    "gallery": "Uncropped bounded stable frame: min(520px,58svh) desktop / min(400px,46svh) mobile; smaller thumbnails and prev/next controls",
+    "gallery": "3:4 portrait cover frame, max 520px wide desktop and full width mobile; offset hairline; thumbnails, prev/next and zoom retained",
     "secondStartupEmbedId": "d6615a9d-f7a2-46d1-b5b2-efc6651d4cc6"
   },
   "productfaq": {
@@ -387,5 +358,31 @@
     "receiptMappingsChecked": 37,
     "published": false,
     "observedBefore": "Public French and English shop both set catalog-error; translated chrome rendered; no product cards."
+  },
+  "motion": {
+    "home": "GSAP core 3.12.5 lazy-loaded after window load (500ms delay) from jsDelivr; hero image settle, below-fold headings/cards/sections reveal once via IntersectionObserver; prefers-reduced-motion disables load; scoped to home shadow root; ~28KB gzip, no ScrollTrigger"
+  },
+  "navbarLockup": {
+    "tag": "atelier-navbar-v1",
+    "release": "2026-10-20",
+    "desktop": "72px logo; 42px Parisienne Atelier; 14px de l’harmonie; 7px tagline",
+    "mobile": "38x46 logo; 26px Atelier; 9px de l’harmonie; tagline hidden",
+    "note": "Added as a final shadow style so it wins over earlier navbar rules"
+  },
+  "performance": {
+    "updatedAt": "2026-10-20T17:10:46.215Z",
+    "connectedRepoCommits": [
+      "a04bea8",
+      "edb17dd",
+      "c09530b"
+    ],
+    "changes": [
+      "All static component images now use Wix fit URLs, AVIF and quality settings",
+      "Catalog backend image and heroImage now return 600/900px fit URLs",
+      "All SEO markup images now use 600x800 fit URLs and lazy loading",
+      "Global route preloads now use valid fit URLs with both dimensions (previous width-only fill URLs returned HTTP 400)"
+    ],
+    "pendingPublish": "Publish connected repository commit c09530b from the Wix Editor",
+    "pageScoping": "Wix Custom Embeds API exposes pageFilter as read-only. Mapping prepared in PACKET_SCOPES.md; filters must be applied in Wix Custom Code UI."
   }
 }
