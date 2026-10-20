@@ -279,6 +279,16 @@
         "loadOnce": true,
         "enabled": true,
         "purpose": "Spanish listing-detail packet"
+      },
+      {
+        "id": "2c1820f9-05eb-42ef-927e-1d1e621fb0e6",
+        "name": "Susi early packet — playa translation continuation",
+        "position": "HEAD",
+        "pageScope": {"type":"all"},
+        "category": "ESSENTIAL",
+        "loadOnce": true,
+        "enabled": true,
+        "purpose": "Second half of route-guarded Playa packet when localized source exceeds the Wix embed limit"
       }
     ]
   }

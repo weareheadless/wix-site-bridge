@@ -100,9 +100,16 @@ function replacePacket(html,packet,updates,allowOversize=false){
   if(revised.length>15000&&!allowOversize)fail(`Rebuilt packet exceeds Wix 15 KB limit (${revised.length} characters)`);
   return revised;
 }
+function splitPacket(html,component){
+  const parts=[...html.matchAll(packetPattern)];if(parts.length!==1||parts[0][1]!==component)fail('Only one-component packets may be split');
+  const encoded=parts[0][2],half=Math.ceil(encoded.length/2),chunks=[encoded.slice(0,half),encoded.slice(half)];
+  const result=chunks.map((chunk,index)=>`<script>(()=>{const k=${JSON.stringify(component)},p=window.__susiPacketParts||(window.__susiPacketParts={}),s=p[k]||(p[k]=[]);s[${index}]=${JSON.stringify(chunk)};if(s[0]&&s[1]&&!s.done){s.done=true;(window.__susiEarlyPackets||(window.__susiEarlyPackets=[])).push([k,s[0]+s[1]]);window.__susiDrainEarly?.()}})();</script>`);
+  if(result.some(fragment=>fragment.length>15000))fail('Split packet still exceeds Wix embed limit');
+  return result;
+}
 if(audit){
   const report=[];
-  for(const item of config.groups){for(const spec of item.packets){const embed=live.find(x=>x.id===spec.id);if(!embed)fail(`Missing embed ${spec.id}`);try{const parts=unpack(embed.embedData?.html??'',spec.keys);const candidate=replacePacket(embed.embedData.html,parts,{},true);report.push({group:item.name,routes:item.routes.length,embedId:spec.id,components:parts.map(x=>({key:x.key,phrases:Object.keys(x.dict.value).length})),candidateHtmlBytes:Buffer.byteLength(candidate),liveHtmlBytes:Buffer.byteLength(embed.embedData.html),ready:candidate.length<=15000})}catch(error){report.push({group:item.name,embedId:spec.id,liveHtmlBytes:Buffer.byteLength(embed.embedData?.html??''),ready:false,error:error.message})}}}
+  for(const item of config.groups){for(const spec of item.packets){const embed=live.find(x=>x.id===spec.id);if(!embed)fail(`Missing embed ${spec.id}`);try{const parts=unpack(embed.embedData?.html??'',spec.keys);const candidate=replacePacket(embed.embedData.html,parts,{},true);const split=candidate.length>15000&&spec.continuationId?splitPacket(candidate,spec.keys[0]):null;report.push({group:item.name,routes:item.routes.length,embedId:spec.id,components:parts.map(x=>({key:x.key,phrases:Object.keys(x.dict.value).length})),candidateHtmlBytes:Buffer.byteLength(candidate),splitHtmlBytes:split?.map(x=>Buffer.byteLength(x)),liveHtmlBytes:Buffer.byteLength(embed.embedData.html),ready:candidate.length<=15000||Boolean(split)})}catch(error){report.push({group:item.name,embedId:spec.id,liveHtmlBytes:Buffer.byteLength(embed.embedData?.html??''),ready:false,error:error.message})}}}
   console.log(JSON.stringify({site:alias,phase:'embeds',report,deferred:config.deferred}));process.exit(0)
 }
 function protect(source,target){
@@ -145,17 +152,18 @@ function checkedResult(result,rows){
   for(const item of result.translations){if(!Number.isInteger(item.index)||item.index<0||item.index>=rows.length||indices.has(item.index))fail('Duplicate or missing phrase index');indices.add(item.index);const row=rows[item.index];protect(row.english,item.spanish);(outputs[row.packetId]??={})[row.component]??={};outputs[row.packetId][row.component][row.english]=item.spanish}
   return outputs;
 }
-const packets=group.packets.map(spec=>{const embed=live.find(x=>x.id===spec.id);if(!embed||!embed.enabled||embed.pageFilter?.pageIds?.length)fail(`Missing or changed global embed ${spec.id}`);const html=embed.embedData?.html;if(!html)fail(`Empty embed ${spec.id}`);return {id:spec.id,revision:String(embed.revision),html,parts:unpack(html,spec.keys)}});
+const packets=group.packets.map(spec=>{const embed=live.find(x=>x.id===spec.id);if(!embed||!embed.enabled||embed.pageFilter?.pageIds?.length)fail(`Missing or changed global embed ${spec.id}`);const html=embed.embedData?.html;if(!html)fail(`Empty embed ${spec.id}`);const continuation=spec.continuationId?live.find(x=>x.id===spec.continuationId):null;if(spec.continuationId&&(!continuation||!continuation.enabled||continuation.pageFilter?.pageIds?.length))fail(`Missing continuation ${spec.continuationId}`);return {id:spec.id,revision:String(embed.revision),html,parts:unpack(html,spec.keys),continuation:continuation?{id:continuation.id,revision:String(continuation.revision),html:continuation.embedData?.html}:null}});
 let candidate=state.candidate;
 if(!candidate){
   const rows=rowsFor(packets);
   const request=rows.map((row,index)=>({index,component:row.component,english:row.english,currentSpanish:row.current}));
   const translation=await openrouter(process.env.OPENROUTER_TRANSLATOR_MODEL||'google/gemini-3.1-flash-lite',[{role:'system',content:'Translate the COMPLETE page copy into natural Mexican Spanish for a luxury Riviera Maya real estate site. Review existing Spanish; retain good translations, correct awkward or inaccurate ones. Keep Susi MacDonald and all place names, property facts, prices, measurements, URLs and placeholders exact. Do not translate brand names. Return JSON object {translations:[{index,spanish}]} covering every index exactly once. No word-by-word rendering; make the page read coherently.'},{role:'user',content:JSON.stringify({route,group:group.name,purpose:group.purpose,phrases:request})}]);
   const values=checkedResult(translation.data,rows);
-  candidate={base:packets.map(({id,revision,html})=>({id,revision,sha256:sha(html)})),values,translatorUsage:translation.usage};
+  candidate={base:packets.flatMap(({id,revision,html,continuation})=>[{id,revision,sha256:sha(html)},...(continuation?[{id:continuation.id,revision:continuation.revision,sha256:sha(continuation.html)}]:[])]),values,translatorUsage:translation.usage};
   state.candidate=candidate;state.status='candidate';await save(state);
 }
 for(const item of packets){const prior=candidate.base.find(x=>x.id===item.id);if(!prior||prior.revision!==item.revision||prior.sha256!==sha(item.html))fail(`Live embed ${item.id} changed since candidate creation; manual review required`)}
+for(const item of packets){if(item.continuation){const prior=candidate.base.find(x=>x.id===item.continuation.id);if(!prior||prior.revision!==item.continuation.revision||prior.sha256!==sha(item.continuation.html))fail(`Continuation embed ${item.continuation.id} changed since candidate creation`)}}
 const englishShot=await screenshot(route,'en','english');
 const spanishShot=await screenshot(route,'es','spanish-before');
 const sourceRows=rowsFor(packets);
@@ -178,9 +186,10 @@ for(let attempt=0;attempt<2;attempt++){
 state.route++;state.status='reviewed';await save(state);
 if(state.route<group.routes.length){console.log(JSON.stringify({site:alias,status:'page-reviewed',route,next:group.routes[state.route],published:false}));process.exit(0)}
 // A shared packet is released only after every route using it has passed independent page review.
-for(const item of packets){const revised=replacePacket(item.html,item.parts,candidate.values[item.id]??{});const file=path.join(stateDir,`${group.name}-${item.id}.html`);await writeFile(file,revised,{mode:0o600});const args={manifest:manifestPath,site:alias,stateDir,snippet:item.id,htmlFile:file,allPages:true};const plan=await runOperation('update-snippet',args,process.env,{transport:'cli'});if(plan.status!=='dry-run')fail(`Bridge dry-run failed for ${item.id}`)}
+const releases=[];
+for(const item of packets){const revised=replacePacket(item.html,item.parts,candidate.values[item.id]??{},Boolean(item.continuation));const htmls=revised.length>15000?splitPacket(revised,item.parts[0].key):[revised];if(htmls.length===2&&!item.continuation)fail('Oversize packet has no declared continuation embed');const ids=htmls.length===2?[item.id,item.continuation.id]:[item.id];for(let index=0;index<ids.length;index++){const file=path.join(stateDir,`${group.name}-${ids[index]}.html`);await writeFile(file,htmls[index],{mode:0o600});const args={manifest:manifestPath,site:alias,stateDir,snippet:ids[index],htmlFile:file,allPages:true};const plan=await runOperation('update-snippet',args,process.env,{transport:'cli'});if(plan.status!=='dry-run')fail(`Bridge dry-run failed for ${ids[index]}`);releases.push({id:ids[index],file})}}
 state.status='releasing';await save(state);
-for(const item of packets){const file=path.join(stateDir,`${group.name}-${item.id}.html`);const args={manifest:manifestPath,site:alias,stateDir,snippet:item.id,htmlFile:file,allPages:true,apply:true};const receipt=await runOperation('update-snippet',args,process.env,{transport:'cli'});if(receipt.status!=='updated')fail(`Bridge update failed for ${item.id}; inspect receipts before retrying`);(state.receipts??=[]).push({group:group.name,id:item.id,receiptPath:receipt.receiptPath});await save(state)}
+for(const item of releases){const args={manifest:manifestPath,site:alias,stateDir,snippet:item.id,htmlFile:item.file,allPages:true,apply:true};const receipt=await runOperation('update-snippet',args,process.env,{transport:'cli'});if(receipt.status!=='updated')fail(`Bridge update failed for ${item.id}; inspect receipts before retrying`);(state.receipts??=[]).push({group:group.name,id:item.id,receiptPath:receipt.receiptPath});await save(state)}
 for(let i=0;i<group.routes.length;i++){
   state.route=i;await save(state);
   const after=await screenshot(group.routes[i],'es','spanish-after');
@@ -189,4 +198,4 @@ for(let i=0;i<group.routes.length;i++){
   if(result.data.approved!==true||!Array.isArray(result.data.issues)||result.data.issues.length){state.status='post-review-held';await save(state);fail(`Published page review held ${group.routes[i]}; inspect ${file} and bridge recovery receipts`)}
 }
 state.group++;state.route=0;state.candidate=null;state.status='released';await save(state);
-console.log(JSON.stringify({site:alias,status:'group-released',group:group.name,routes:group.routes,receipts:state.receipts?.slice(-packets.length)}));
+console.log(JSON.stringify({site:alias,status:'group-released',group:group.name,routes:group.routes,receipts:state.receipts?.slice(-releases.length)}));
