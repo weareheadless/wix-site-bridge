@@ -397,7 +397,7 @@
           "/livraison"
         ],
         "wixElementIds": [
-          "customElement26"
+          "livraison"
         ],
         "datasetBindings": [
           "Static shipping rate table supplied by the owner; Wix checkout remains authoritative"
