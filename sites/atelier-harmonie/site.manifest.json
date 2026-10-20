@@ -388,6 +388,20 @@
         "datasetBindings": [
           "Existing dynamicDataset storeCollection reference and Wix Stores catalog/cart"
         ]
+      },
+      {
+        "name": "shipping",
+        "source": "sites/atelier-harmonie/production/custom-elements/atelier-shipping-v1.js",
+        "tagName": "atelier-shipping-v1",
+        "routes": [
+          "/livraison"
+        ],
+        "wixElementIds": [
+          "customElement26"
+        ],
+        "datasetBindings": [
+          "Static shipping rate table supplied by the owner; Wix checkout remains authoritative"
+        ]
       }
     ],
     "customCode": [
