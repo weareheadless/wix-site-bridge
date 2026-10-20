@@ -32,4 +32,13 @@ if [[ "${1:-}" == --preview || "${1:-}" == --audit ]]; then
 fi
 exec 9>"$STATE/page-translations/worker.lock"
 flock -n 9 || { echo 'A page review is already running.'; exit 0; }
-node sites/susimacdonald/scripts/page-translation-worker.mjs --site "$SITE" "$1"
+on_exit() {
+  local status=$?
+  if [[ "$status" -ne 0 ]]; then systemctl --user stop susi-page-translation.timer 2>/dev/null || true; fi
+}
+trap on_exit EXIT
+result=$(node sites/susimacdonald/scripts/page-translation-worker.mjs --site "$SITE" "$1")
+printf '%s\n' "$result"
+if [[ "$result" == *'"status":"listed-embed-groups-reviewed"'* ]]; then
+  systemctl --user stop susi-page-translation.timer 2>/dev/null || true
+fi

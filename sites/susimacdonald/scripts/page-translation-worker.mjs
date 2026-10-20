@@ -30,6 +30,7 @@ if(process.env.WIX_ALLOWED_SITE_IDS!==siteId)fail('Exact Susi site allowlist req
 const config=JSON.parse(await readFile(pagePath,'utf8'));
 const manifest=JSON.parse(await readFile(manifestPath,'utf8'));
 if(config.siteId!==siteId||config.siteAlias!==alias||manifest.site.siteId!==siteId||config.phase!=='embeds')fail('Site or phase boundary mismatch');
+for(const group of config.groups){if(group.routesFile){if(!/^[a-z0-9-]+\.json$/.test(group.routesFile))fail('Unsafe routes file');const snapshot=JSON.parse(await readFile(path.join(base,group.routesFile),'utf8'));if(snapshot.siteAlias!==alias||snapshot.siteId!==siteId||!Array.isArray(snapshot.routes)||!snapshot.routes.length||snapshot.routes.some(route=>!/^\/real-estate-listings\/[a-z0-9-]+$/.test(route)))fail('Dynamic listing inventory is outside the selected site or route family');group.routes=snapshot.routes}}
 const phraseBank={};for(const file of ['es-MX.json','native-es-MX.json','native-additional-es-MX.json','editorial-spans-es-MX.json','components-additional-es-MX.json'])Object.assign(phraseBank,JSON.parse(await readFile(path.join(base,'production/i18n',file),'utf8')));
 await mkdir(stateDir,{recursive:true,mode:0o700});
 const readState=async()=>{try{return JSON.parse(await readFile(statePath,'utf8'))}catch(error){if(error.code==='ENOENT')return {group:0,route:0,status:'new'};throw error}};
@@ -120,7 +121,7 @@ function protect(source,target){
 async function openrouter(model,messages,maxTokens=12000){
   const day=new Date().toISOString().slice(0,10);
   let budget={day,estimatedUsd:0};try{budget=JSON.parse(await readFile(budgetPath,'utf8'));if(budget.day!==day)budget={day,estimatedUsd:0}}catch(error){if(error.code!=='ENOENT')throw error}
-  if(budget.estimatedUsd>=Number(process.env.OPENROUTER_DAILY_BUDGET_USD||5))fail('OpenRouter daily worker budget reached');
+  if(budget.estimatedUsd>=Number(process.env.OPENROUTER_DAILY_BUDGET_USD||5)){console.log(JSON.stringify({site:alias,status:'budget-wait',day,estimatedUsd:budget.estimatedUsd}));process.exit(0)}
   const response=await fetch('https://openrouter.ai/api/v1/chat/completions',{method:'POST',headers:{Authorization:`Bearer ${process.env.OPENROUTER_API_KEY}`,'Content-Type':'application/json','HTTP-Referer':'https://github.com/weareheadless/wix-site-bridge','X-Title':'Susi page translation worker'},body:JSON.stringify({model,messages,temperature:0,response_format:{type:'json_object'},max_tokens:maxTokens}),signal:AbortSignal.timeout(180000)});
   if(!response.ok)fail(`OpenRouter ${model} HTTP ${response.status}`);
   const json=await response.json();const content=json.choices?.[0]?.message?.content;
@@ -190,7 +191,8 @@ const releases=[];
 for(const item of packets){const revised=replacePacket(item.html,item.parts,candidate.values[item.id]??{},Boolean(item.continuation));const htmls=revised.length>15000?splitPacket(revised,item.parts[0].key):[revised];if(htmls.length===2&&!item.continuation)fail('Oversize packet has no declared continuation embed');const ids=htmls.length===2?[item.id,item.continuation.id]:[item.id];for(let index=0;index<ids.length;index++){const file=path.join(stateDir,`${group.name}-${ids[index]}.html`);await writeFile(file,htmls[index],{mode:0o600});const args={manifest:manifestPath,site:alias,stateDir,snippet:ids[index],htmlFile:file,allPages:true};const plan=await runOperation('update-snippet',args,process.env,{transport:'cli'});if(plan.status!=='dry-run')fail(`Bridge dry-run failed for ${ids[index]}`);releases.push({id:ids[index],file})}}
 state.status='releasing';await save(state);
 for(const item of releases){const args={manifest:manifestPath,site:alias,stateDir,snippet:item.id,htmlFile:item.file,allPages:true,apply:true};const receipt=await runOperation('update-snippet',args,process.env,{transport:'cli'});if(receipt.status!=='updated')fail(`Bridge update failed for ${item.id}; inspect receipts before retrying`);(state.receipts??=[]).push({group:group.name,id:item.id,receiptPath:receipt.receiptPath});await save(state)}
-for(let i=0;i<group.routes.length;i++){
+const postIndices=group.routes.length>12?[0,Math.floor(group.routes.length/2),group.routes.length-1]:group.routes.map((_,index)=>index);
+for(const i of postIndices){
   state.route=i;await save(state);
   const after=await screenshot(group.routes[i],'es','spanish-after');
   const result=await openrouter(process.env.OPENROUTER_REVIEW_MODEL||'google/gemini-3-flash-preview',[{role:'system',content:'Review the ACTUALLY RENDERED Spanish page screenshot after the embed release. Check whether the page has visible Spanish in its embed areas, no obvious untranslated embed headings/buttons, no broken or blank major content, and no layout failure. Some native Wix or CMS English can remain; do not judge those in this embed phase. Return JSON {approved:boolean,issues:[{reason:string}],summary:string}. Reject any uncertain or broken embed.'},{role:'user',content:[{type:'text',text:JSON.stringify({route:group.routes[i],purpose:group.purpose,expectedEmbedPhrases:proposed.map(x=>x.spanish)})},{type:'image_url',image_url:{url:after.image}}]}],2500);

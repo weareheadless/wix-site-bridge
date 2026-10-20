@@ -5,5 +5,6 @@ Wants=network-online.target
 
 [Service]
 Type=oneshot
+TimeoutStartSec=45min
 WorkingDirectory=/home/admin/wix-site-bridge
 ExecStart=/usr/bin/bash /home/admin/wix-site-bridge/sites/susimacdonald/scripts/run-page-translation-worker.sh --apply
