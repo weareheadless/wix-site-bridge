@@ -98,7 +98,7 @@ function replacePacket(html,packet,updates){
 }
 if(audit){
   const report=[];
-  for(const item of config.groups){for(const spec of item.packets){const embed=live.find(x=>x.id===spec.id);if(!embed)fail(`Missing embed ${spec.id}`);const parts=unpack(embed.embedData?.html??'',spec.keys);const candidate=replacePacket(embed.embedData.html,parts,{});report.push({group:item.name,routes:item.routes.length,embedId:spec.id,components:parts.map(x=>({key:x.key,phrases:Object.keys(x.dict.value).length})),candidateHtmlBytes:Buffer.byteLength(candidate),liveHtmlBytes:Buffer.byteLength(embed.embedData.html)})}}
+  for(const item of config.groups){for(const spec of item.packets){const embed=live.find(x=>x.id===spec.id);if(!embed)fail(`Missing embed ${spec.id}`);try{const parts=unpack(embed.embedData?.html??'',spec.keys);const candidate=replacePacket(embed.embedData.html,parts,{});report.push({group:item.name,routes:item.routes.length,embedId:spec.id,components:parts.map(x=>({key:x.key,phrases:Object.keys(x.dict.value).length})),candidateHtmlBytes:Buffer.byteLength(candidate),liveHtmlBytes:Buffer.byteLength(embed.embedData.html),ready:true})}catch(error){report.push({group:item.name,embedId:spec.id,liveHtmlBytes:Buffer.byteLength(embed.embedData?.html??''),ready:false,error:error.message})}}}
   console.log(JSON.stringify({site:alias,phase:'embeds',report,deferred:config.deferred}));process.exit(0)
 }
 function protect(source,target){
