@@ -84,15 +84,18 @@ export async function runOperation(command, args, env = process.env, options = {
     if (!["ESSENTIAL", "FUNCTIONAL", "ANALYTICS", "ADVERTISING", "DATA_TO_THIRD_PARTY"].includes(category)) {
       throw new Error("--category must be a documented Wix Custom Embed category.");
     }
-    if (!args.route) throw new Error("Pass --route for the exact prototype path. The API applies new embeds to all pages by default.");
-    const routePath = args.route.replace(/\/+$/, "") || "/";
+    if (args.allPages && args.route) throw new Error("Use either --route or --all-pages, not both.");
+    if (!args.route && !args.allPages) throw new Error("Pass --route for the exact prototype path, or --all-pages for a sitewide packet.");
+    const routePath = args.allPages ? null : (args.route.replace(/\/+$/, "") || "/");
     const sourcePath = path.resolve(args.htmlFile);
     const sourceHtml = await readFile(sourcePath, "utf8");
+    if (!sourceHtml.trim()) throw new Error("The Custom Embed HTML source file is empty.");
     const mountId = args.mountId?.trim();
     const mountOrder = args.mountOrder === undefined ? undefined : Number(args.mountOrder);
     if (Boolean(mountId) !== (mountOrder !== undefined)) throw new Error("Pass both --mount-id and --mount-order to stack embeds; omit both for a single-page embed.");
     const mount = mountId ? { id: mountId, order: mountOrder } : null;
-    const html = routeGuardedEmbed(sourceHtml, routePath, mount);
+    if (args.allPages && mount) throw new Error("Global startup embeds cannot use stacked-section mounts.");
+    const html = args.allPages ? sourceHtml : routeGuardedEmbed(sourceHtml, routePath, mount);
     const loadOnce = parseBooleanOption(args.loadOnce, false, "load-once");
     const enabled = parseBooleanOption(args.enabled, true, "enabled");
     const details = {
@@ -101,7 +104,7 @@ export async function runOperation(command, args, env = process.env, options = {
       loadOnce,
       position,
       category,
-      routeGuard: routePath,
+      routeGuard: args.allPages ? "all-pages (controller handles supported routes)" : routePath,
       ...(mount ? { mountId: mount.id, mountOrder: mount.order } : {}),
       apiPageScope: "all pages (pageFilter is read-only)",
       htmlBytes: Buffer.byteLength(html, "utf8"),
@@ -144,9 +147,11 @@ export async function runOperation(command, args, env = process.env, options = {
   if (command === "update-snippet") {
     if (!args.snippet) throw new Error("Pass --snippet with an ID declared in the selected site's manifest.");
     if (!args.htmlFile) throw new Error("Pass --html-file with the local HTML fragment for the custom embed.");
-    if (!args.route) throw new Error("Pass --route for the exact prototype path.");
     const snippet = site.customCode.find((item) => item.id === args.snippet);
     if (!snippet) throw new Error(`Snippet ${args.snippet} is not declared in the selected site's manifest.`);
+    if (args.allPages && args.route) throw new Error("Use either --route or --all-pages, not both.");
+    if (!args.allPages && !args.route) throw new Error("Pass --route for the exact prototype path, or --all-pages for an existing global embed.");
+    if (args.allPages && snippet.pageScope.type !== "all") throw new Error("--all-pages is only allowed for an embed already declared with all-pages scope.");
     const allowedCategories = ["ESSENTIAL", "FUNCTIONAL", "ANALYTICS", "ADVERTISING", "DATA_TO_THIRD_PARTY"];
     const category = args.category ?? snippet.category;
     const fromCategory = args.fromCategory ?? snippet.category;
@@ -154,13 +159,14 @@ export async function runOperation(command, args, env = process.env, options = {
       throw new Error("The requested category must be a documented Wix category and match the selected site's manifest.");
     }
     if (!allowedCategories.includes(fromCategory)) throw new Error("--from-category must be a documented Wix category.");
-    const routePath = args.route.replace(/\/+$/, "") || "/";
     const sourceHtml = await readFile(path.resolve(args.htmlFile), "utf8");
     const mount = snippet.mountId ? { id: snippet.mountId, order: snippet.mountOrder } : null;
-    const html = routeGuardedEmbed(sourceHtml, routePath, mount);
+    if (args.allPages && mount) throw new Error("Global startup embeds cannot use stacked-section mounts.");
+    const routePath = args.allPages ? null : (args.route.replace(/\/+$/, "") || "/");
+    const html = args.allPages ? sourceHtml : routeGuardedEmbed(sourceHtml, routePath, mount);
     const details = {
       snippetId: snippet.id,
-      routeGuard: routePath,
+      routeGuard: args.allPages ? "all-pages (controller handles supported routes)" : routePath,
       position: snippet.position,
       pageScope: snippet.pageScope,
       ...(mount ? { mountId: mount.id, mountOrder: mount.order } : {}),
