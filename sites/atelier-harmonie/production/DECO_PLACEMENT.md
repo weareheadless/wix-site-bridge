@@ -1,12 +1,14 @@
 # Objets déco — placement
 
+> Current sizing/startup policy: [PERFORMANCE_GEOMETRY.md](PERFORMANCE_GEOMETRY.md). Use synchronized early packets/controllers plus automatic content sizing. Do not manually recreate a Wix-native hero or fix page heights to old estimates as a performance workaround. Retain the native forms, feeds and commerce widgets required below. Verify the containing section follows the component; Editor intervention is needed only if an actual constraint is found. Release/preload statements below describe historical placement work; use the latest connected builder and release record for current assignments.
+
 Target: `--site atelier-harmonie`, `/objets-deco`. Source repository `weareheadless/atelier-harmonie`, source commit `49b23bb`. Startup release `atelier-production-20261018-v15`.
 
 1. Remove replaced body sections on **Objets Déco** only; retain shared header/footer.
 2. Add one full-width section with a Custom Element, zero inner padding and no restrictive maximum width.
 3. Velo file: `public/custom-elements/atelier-deco-v1.js`.
 4. Tag: `atelier-deco-v1`. Requested element ID: `customElement7`; tell the agent if Wix assigns another ID.
-5. Start around **2,000 px desktop / 2,600 px mobile** for element AND containing section, then fit to actual content in Preview. These are starting estimates, not verified saved geometry; component height does not resize the Wix section.
+5. Verify automatic sizing in desktop/mobile Preview.
 6. Preview desktop/mobile, fresh load and internal navigation, original copy, image and links. Publish the current saved Wix layout when ready. Never CLI-publish the checkout's stale UI snapshot.
 
 ## Content and data

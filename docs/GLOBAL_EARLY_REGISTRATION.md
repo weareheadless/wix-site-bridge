@@ -16,6 +16,13 @@ That repository is a reference, not an Atelier deployment target. Never copy its
 
 ## Mandatory global registration contract
 
+Use early registration plus pre-render geometry and content-driven sizing.
+Do not create a parallel Wix-native hero/title/image layer as a performance
+workaround, or require manually guessed total page heights. Native forms,
+commerce widgets and blog feeds remain native where the design requires them.
+If an actual saved section constraint prevents resizing, diagnose that specific
+constraint rather than replacing the custom hero or hiding duplicate content.
+
 1. Maintain one canonical Head controller source. Install it as Essential Custom Code in two synchronized entries: all pages / load once for initial document startup, and all pages / load on each new page for Wix internal navigation. Use explicit site manifests and supported setup; never pretend the bridge can change read-only placement/page scope.
 2. Maintain an explicit route-to-component registry covering **every production page**, including dynamic route families, and the shared header on every route where it belongs. An intentionally native-only route must be recorded as such, with no irrelevant page bundle executed. Coverage is mandatory; do not duplicate controllers per page.
 3. Build self-contained inline compressed packets from canonical component sources. Register only matching definitions, guard every `customElements.define` with `customElements.get`, and deduplicate concurrent registration. Preserve the ordinary Wix custom-element source as fallback if decompression or registration fails. Keep packet entries load-once and below 15,000 characters each, matching the reference build guard.

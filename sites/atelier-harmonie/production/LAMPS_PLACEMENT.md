@@ -1,12 +1,14 @@
 # Luminaires — human placement
 
+> Current sizing/startup policy: [PERFORMANCE_GEOMETRY.md](PERFORMANCE_GEOMETRY.md). Use synchronized early packets/controllers plus automatic content sizing. Do not manually recreate a Wix-native hero or fix page heights to old estimates as a performance workaround. Retain the native forms, feeds and commerce widgets required below. Verify the containing section follows the component; Editor intervention is needed only if an actual constraint is found. Release/preload statements below describe historical placement work; use the latest connected builder and release record for current assignments.
+
 Target: `--site atelier-harmonie`, `/lampes` only. Source repository `weareheadless/atelier-harmonie`, commit `b7b29b3`. No Editor layout or publication performed by the agent.
 
 1. On **Créations Lumineuses** (`/lampes`), remove the replaced body sections, including the native nouveautés gallery. Preserve shared header `customElement1` and footer `customElement3`.
 2. Add one full-width section and one Custom Element, with zero section padding/margins and no restrictive max-width.
 3. Choose **Velo file** → `public/custom-elements/atelier-lamps-v1.js`.
 4. Tag: `atelier-lamps-v1`. Element ID: `customElement5`. If Wix assigns a different default ID, tell the agent; do not change shared header/footer IDs.
-5. Start with element AND containing section height around **3,000 px** desktop and **3,300 px** mobile; use Preview to fit the complete content through the final project link, then remove excess bottom space. This is a starting estimate, not verified saved geometry. The component reports its own height but does not alter the Wix containing section.
+5. Verify automatic sizing in desktop/mobile Preview.
 6. Preview desktop/mobile, category destinations, product carousel arrows/swipe, add-to-cart and product choices. Check fresh loads and navigation from homepage/shop. Publish the current saved Editor layout when ready; never CLI-publish the stale local UI snapshot.
 
 ## Content and behavior

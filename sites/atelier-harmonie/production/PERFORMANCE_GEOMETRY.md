@@ -24,6 +24,18 @@ the host/wrapper became 639px and the footer moved to y=780 in the test viewport
 
 ## Working correction
 
+Early packets are gzip/base64 chunks of the exact canonical component source,
+each below 15,000 HTML characters and loaded once. The two identical Head
+controllers select route-matched definitions, assemble/decompress the chunks,
+guard registration and retain the normal Wix source fallback. Both controller
+entries also deliver the static geometry CSS before component rendering.
+Keep source, packets and both controllers synchronized on every relevant change.
+Only route-matched code executes; globally scoped packet transfer still occurs.
+
+Do not create Wix-native hero/title/image duplicates or manually set guessed
+full-page heights to work around loading. Historical prototype/placement notes
+do not override this policy. Preserve genuinely required native forms/widgets.
+
 Release: `atelier-performance-20261020-v53-geometry`.
 Canonical implementation in [weareheadless/atelier-harmonie](https://github.com/weareheadless/atelier-harmonie):
 

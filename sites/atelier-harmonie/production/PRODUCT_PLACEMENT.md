@@ -1,5 +1,7 @@
 # Product Page — one reusable custom element
 
+> Current sizing/startup policy: [PERFORMANCE_GEOMETRY.md](PERFORMANCE_GEOMETRY.md). Use synchronized early packets/controllers plus automatic content sizing. Do not manually recreate a Wix-native hero or fix page heights to old estimates as a performance workaround. Retain the native forms, feeds and commerce widgets required below. Verify the containing section follows the component; Editor intervention is needed only if an actual constraint is found. Release/preload statements below describe historical placement work; use the latest connected builder and release record for current assignments.
+
 Target `--site atelier-harmonie`, exact dynamic route family `/product-page/:slug`, Wix page `Product Page.lj022.js`. Connected source `weareheadless/atelier-harmonie`, commit `67359ae`.
 
 ## Status
@@ -13,7 +15,7 @@ Source pushed and startup release `atelier-production-20261018-v39` installed af
 - Source: Velo file `public/custom-elements/atelier-product-v1.js`.
 - Tag: `atelier-product-v1`.
 - Element ID: `customElement20`.
-- Zero outer section padding, no restrictive max-width. Initial element AND containing-section height estimate: 1,500px desktop / 2,000px mobile. Actual height varies with product description, options and expanded details. Fit actual content on desktop/mobile; component height events do not resize Wix parent sections.
+- Zero outer section padding, no restrictive max-width. Actual height varies with product description, options and expanded details. Verify automatic sizing on desktop/mobile.
 - Preserve Wix Stores installation, Product Page route, existing canonical/SEO configuration, cart/checkout and system pages. Retain `productPage1` as the native host and fallback; the approved supported collapse handles its visible product content. Remove only separately duplicated related-product sections after preview. No app DOM selectors or overlay positioning are used.
 - Human approved retaining the required native `productPage1` host. Keep it in the Editor with its existing ID. Supported Velo code collapses it after the current custom product acknowledges rendering; no manual hiding, DOM selectors or CSS masking. Errors/readiness timeout restore native display and collapse the failed custom element. Do not delete the Store Page/app.
 - Publish only the human's current saved Editor layout after Preview. Do not CLI-publish stale UI revision 740.

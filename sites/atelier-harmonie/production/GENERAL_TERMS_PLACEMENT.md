@@ -1,5 +1,7 @@
 # Conditions générales d’utilisation
 
+> Current sizing/startup policy: [PERFORMANCE_GEOMETRY.md](PERFORMANCE_GEOMETRY.md). Use synchronized early packets/controllers plus automatic content sizing. Do not manually recreate a Wix-native hero or fix page heights to old estimates as a performance workaround. Retain the native forms, feeds and commerce widgets required below. Verify the containing section follows the component; Editor intervention is needed only if an actual constraint is found. Release/preload statements below describe historical placement work; use the latest connected builder and release record for current assignments.
+
 Exact target `--site atelier-harmonie`, `/conditions-generales`, Wix page `conditions-generales-d-utilisation.vgud5.js`. Source commit `bcd2b20`; startup v44.
 
 Add one full-width custom element between the existing shared header and footer:
@@ -8,7 +10,7 @@ Add one full-width custom element between the existing shared header and footer:
 - Tag: `atelier-general-terms-v1`.
 - Element ID: `customElement23`.
 - No outer section padding or restrictive max-width. Component owns spacing.
-- Fit the element AND its containing section to all content in desktop/mobile Preview. Initial rough estimates: 4,500px desktop / 7,500px mobile; these are not measured saved Wix geometry. Component resize events do not resize the outer section.
+- Fit the element AND its containing section to all content in desktop/mobile Preview.
 
 Replace only the old CGU body/hero after confirming the complete replacement. Keep shared header/footer, existing legal links and page metadata. Human publishes the current saved Editor layout/source; never CLI-publish stale UI revision 740.
 

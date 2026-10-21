@@ -1,5 +1,7 @@
 # Shop redesign — prepared for human placement
 
+> Current sizing/startup policy: [PERFORMANCE_GEOMETRY.md](PERFORMANCE_GEOMETRY.md). Use synchronized early packets/controllers plus automatic content sizing. Do not manually recreate a Wix-native hero or fix page heights to old estimates as a performance workaround. Retain the native forms, feeds and commerce widgets required below. Verify the containing section follows the component; Editor intervention is needed only if an actual constraint is found. Release/preload statements below describe historical placement work; use the latest connected builder and release record for current assignments.
+
 Site: `--site atelier-harmonie`, `376faa89-fe6c-4ae8-8feb-10520e813a89`; route `/shop`.
 
 ## Wix setup (human)

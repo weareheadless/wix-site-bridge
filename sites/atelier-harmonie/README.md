@@ -1,4 +1,10 @@
-# Atelier de l’harmonie homepage prototype
+# Atelier de l’harmonie
+
+Current production performance/startup guidance: [PERFORMANCE_GEOMETRY.md](production/PERFORMANCE_GEOMETRY.md) and [GLOBAL_EARLY_REGISTRATION.md](../../docs/GLOBAL_EARLY_REGISTRATION.md). Use the latest Wix-connected source and synchronized packets/controllers.
+
+## Historical homepage prototype — retired deployment approach
+
+The material below is design history only. Do not deploy its root injection, header/footer hiding, remount observers or prototype snippets to production. The production site uses placed custom elements with early registration and automatic sizing.
 
 Target: `atelier-harmonie`, exact route `/copy-of-accueil`. The original homepage is not the deployment target. The page is hidden from the Wix menu and remains public by direct URL.
 
