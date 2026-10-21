@@ -1,5 +1,9 @@
 # Performance startup v51
 
+Historical release notes. See [Performance geometry recovery](PERFORMANCE_GEOMETRY.md)
+for the v53 fix and the owner's confirmation that performance returned to normal
+on 20 October 2026. Preserve that geometry policy on subsequent builds.
+
 Source commit: 7dc0a18. Bridge readback verified all 52 updates.
 
 Use the Wix-connected repository scripts/build-startup.mjs and scripts/verify-startup.mjs as the canonical build, following STARTUP.md. The prototype-based build-production.mjs is superseded for startup generation; running it would restore stale V50 content. Do not re-enable manifest entries marked enabled:false. Legal pages use normal Wix sources. The lamp category entry is now a compressed load-once packet in the central registry. Both controller entries use the same canonical HTML. No Editor layout was published.

@@ -28,6 +28,12 @@ That repository is a reference, not an Atelier deployment target. Never copy its
 
 ## Evidence limits
 
+Atelier's 20 October 2026 recovery is documented in
+[PERFORMANCE_GEOMETRY.md](../sites/atelier-harmonie/production/PERFORMANCE_GEOMETRY.md).
+Its key lesson is to verify **pre-render** host and containing-section geometry:
+post-render automatic resizing alone can still expose and then displace a footer.
+Recovery was confirmed by the owner; no new numeric Lighthouse score was recorded.
+
 The reference demonstrates working registration and some layout fixes, not a universal speed improvement. Its homepage mobile score did not improve; a successful Beachfront pilot does not establish results for all routes. Do not claim faster LCP or scores from registration timings or another site's measurements. Follow the user's verification instructions; run performance audits only when requested, comparing identical published routes/device conditions and recording all repeats.
 
 ## Clean Atelier structure

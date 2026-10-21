@@ -170,4 +170,9 @@
 
 ## Performance startup v51
 
+Before performance/startup changes, also read
+[production/PERFORMANCE_GEOMETRY.md](production/PERFORMANCE_GEOMETRY.md).
+The owner confirmed recovery after v53's early page geometry reservation;
+preserve the explicit component roles, source fallback minimums and automatic sizing.
+
 Read production/PERFORMANCE_V51.md and the Wix-connected repository STARTUP.md before a startup release. Build from the exact connected component sources using scripts/build-startup.mjs; the old prototype-based build-production.mjs is superseded. Legal and obsolete prototype packets are deliberately disabled; preserve manifest enabled:false entries.
