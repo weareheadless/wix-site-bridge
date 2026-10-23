@@ -1,14 +1,12 @@
 # Les ateliers landing page
 
-> Current sizing/startup policy: [PERFORMANCE_GEOMETRY.md](PERFORMANCE_GEOMETRY.md). Use synchronized early packets/controllers plus automatic content sizing. Do not manually recreate a Wix-native hero or fix page heights to old estimates as a performance workaround. Retain the native forms, feeds and commerce widgets required below. Verify the containing section follows the component; Editor intervention is needed only if an actual constraint is found. Release/preload statements below describe historical placement work; use the latest connected builder and release record for current assignments.
-
 Selected site `--site atelier-harmonie`, exact route `/les-ateliers` selected by human. Published page identity `ntpl0` observed in public page markup; dedicated page source `src/pages/Les Ateliers.ntpl0.js`. Connected repo `weareheadless/atelier-harmonie`, commit `688ea46`; startup `atelier-production-20261018-v27`.
 
 ## Human placement
 
 - On Les Ateliers, use the fresh full-width Custom Element already placed (or add one in a full-width section).
 - Velo file `public/custom-elements/atelier-workshops-v1.js`; tag `atelier-workshops-v1`; requested ID `customElement14`. Tell the agent if the default ID differs.
-- Keep shared header/footer. Zero section padding/no restrictive maximum width.
+- Keep shared header/footer. Zero section padding/no restrictive maximum width. Start approximately 2,300px desktop / 3,400px mobile for element AND Wix section; fit actual largest tab/expanded FAQ in Preview. Estimates, not verified saved geometry.
 - Preview desktop/mobile, workshop tab navigation/keyboard, exact Wecandoo destinations, FAQ, contact links and shared navigation. Publish the current saved Wix layout; never CLI-publish stale UI state.
 
 ## Content and booking

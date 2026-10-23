@@ -1,7 +1,5 @@
 # Sales terms — faithful editorial redesign
 
-> Current sizing/startup policy: [PERFORMANCE_GEOMETRY.md](PERFORMANCE_GEOMETRY.md). Use synchronized early packets/controllers plus automatic content sizing. Do not manually recreate a Wix-native hero or fix page heights to old estimates as a performance workaround. Retain the native forms, feeds and commerce widgets required below. Verify the containing section follows the component; Editor intervention is needed only if an actual constraint is found. Release/preload statements below describe historical placement work; use the latest connected builder and release record for current assignments.
-
 Exact target `--site atelier-harmonie`, `/conditions-generales-de-vente`, page `Conditions générales de vente.i8cyj.js`; source commit `c27eba3`; startup v43.
 
 ## Placement
@@ -12,7 +10,7 @@ Exact target `--site atelier-harmonie`, `/conditions-generales-de-vente`, page `
 - Tag: `atelier-terms-v1`.
 - Element ID: `customElement22`.
 - No outer section padding or restrictive max-width. The component supplies its own spacing.
-- This is a full legal document: allow the element AND containing Wix section to fit all 18 articles and the entire annex.
+- This is a full legal document: allow the element AND containing Wix section to fit all 18 articles and the entire annex. Initial rough estimates: 10,000px desktop / 18,000px mobile; actual content/geometry must be fitted in Preview. These are not saved measured Wix dimensions. Component resize events do not resize the parent section.
 - Human removes replaced text/image sections only after confirming the complete replacement. Do not delete the Store app or unrelated legal pages, footer links, metadata or checkout terms settings.
 - Human publishes current saved layout/source. Never CLI-publish stale UI revision 740.
 

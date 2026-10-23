@@ -24,7 +24,8 @@
       "/conditions-generales",
       "/politique-de-confidentialite",
       "/politique-de-cookies",
-      "/lampes/:slug"
+      "/lampes/:slug",
+      "/livraison"
     ],
     "components": [
       {
@@ -418,7 +419,7 @@
         "mountOrder": 5,
         "htmlFile": "sites/atelier-harmonie/prototype/00-navbar.html",
         "enabled": false,
-        "release": "atelier-performance-20261020-v51-header76"
+        "release": "atelier-performance-20261020-v53-geometry"
       },
       {
         "id": "0888c6ad-ed2b-477a-ade0-aea3f4c913b7",
@@ -433,7 +434,7 @@
         "mountOrder": 10,
         "htmlFile": "sites/atelier-harmonie/prototype/01-hero.html",
         "enabled": false,
-        "release": "atelier-performance-20261020-v51-header76"
+        "release": "atelier-performance-20261020-v53-geometry"
       },
       {
         "id": "0fd09e54-ee53-4fdb-be6b-6cf36e0e2bda",
@@ -448,7 +449,7 @@
         "mountOrder": 15,
         "htmlFile": "sites/atelier-harmonie/prototype/01b-introduction.html",
         "enabled": false,
-        "release": "atelier-performance-20261020-v51-header76"
+        "release": "atelier-performance-20261020-v53-geometry"
       },
       {
         "id": "8641c6b4-5169-4a52-9c79-29cc1a47de88",
@@ -463,7 +464,7 @@
         "mountOrder": 18,
         "htmlFile": "sites/atelier-harmonie/prototype/01c-categories.html",
         "enabled": false,
-        "release": "atelier-performance-20261020-v51-header76"
+        "release": "atelier-performance-20261020-v53-geometry"
       },
       {
         "id": "606cc89d-7f6a-4f0f-90b1-c9f16f319edc",
@@ -478,7 +479,7 @@
         "mountOrder": 20,
         "htmlFile": "sites/atelier-harmonie/prototype/02-savoir-faire.html",
         "enabled": false,
-        "release": "atelier-performance-20261020-v51-header76"
+        "release": "atelier-performance-20261020-v53-geometry"
       },
       {
         "id": "1c297f6d-1811-42b4-bc47-5ed4b0e3f347",
@@ -493,7 +494,7 @@
         "mountOrder": 23,
         "htmlFile": "sites/atelier-harmonie/prototype/02b-collections.html",
         "enabled": false,
-        "release": "atelier-performance-20261020-v51-header76"
+        "release": "atelier-performance-20261020-v53-geometry"
       },
       {
         "id": "e41647d5-b491-4250-b8c9-4fc494dce8db",
@@ -508,7 +509,7 @@
         "mountOrder": 25,
         "htmlFile": "sites/atelier-harmonie/prototype/02c-sur-mesure.html",
         "enabled": false,
-        "release": "atelier-performance-20261020-v51-header76"
+        "release": "atelier-performance-20261020-v53-geometry"
       },
       {
         "id": "7bbada7c-f7bb-4a42-ba13-5da6562c885b",
@@ -523,7 +524,7 @@
         "mountOrder": 30,
         "htmlFile": "sites/atelier-harmonie/prototype/03-boutique.html",
         "enabled": false,
-        "release": "atelier-performance-20261020-v51-header76"
+        "release": "atelier-performance-20261020-v53-geometry"
       },
       {
         "id": "444403e8-465c-47d4-9e7f-9d26c975593a",
@@ -538,7 +539,7 @@
         "mountOrder": 35,
         "htmlFile": "sites/atelier-harmonie/prototype/03b-inspiration.html",
         "enabled": false,
-        "release": "atelier-performance-20261020-v51-header76"
+        "release": "atelier-performance-20261020-v53-geometry"
       },
       {
         "id": "104fef32-a0a4-419e-8943-b4bb466c637a",
@@ -553,7 +554,7 @@
         "mountOrder": 37,
         "htmlFile": "sites/atelier-harmonie/prototype/03c-avis.html",
         "enabled": false,
-        "release": "atelier-performance-20261020-v51-header76"
+        "release": "atelier-performance-20261020-v53-geometry"
       },
       {
         "id": "2feaa5e8-e8ec-4818-9fc2-a33de6bf679c",
@@ -568,7 +569,7 @@
         "mountOrder": 40,
         "htmlFile": "sites/atelier-harmonie/prototype/04-atelier.html",
         "enabled": false,
-        "release": "atelier-performance-20261020-v51-header76"
+        "release": "atelier-performance-20261020-v53-geometry"
       },
       {
         "id": "6ea520f8-9838-4d9f-af4e-39cdc12520ae",
@@ -583,7 +584,7 @@
         "mountOrder": 45,
         "htmlFile": "sites/atelier-harmonie/prototype/04b-engagements.html",
         "enabled": false,
-        "release": "atelier-performance-20261020-v51-header76"
+        "release": "atelier-performance-20261020-v53-geometry"
       },
       {
         "id": "6de2a6af-1855-4dc0-a292-a6f1c0ff4e1d",
@@ -598,7 +599,7 @@
         "mountOrder": 47,
         "htmlFile": "sites/atelier-harmonie/prototype/04c-instagram.html",
         "enabled": false,
-        "release": "atelier-performance-20261020-v51-header76"
+        "release": "atelier-performance-20261020-v53-geometry"
       },
       {
         "id": "a80089fa-8f13-4e5d-9121-fe980ff955b5",
@@ -613,7 +614,7 @@
         "mountOrder": 50,
         "htmlFile": "sites/atelier-harmonie/prototype/05-contact.html",
         "enabled": false,
-        "release": "atelier-performance-20261020-v51-header76"
+        "release": "atelier-performance-20261020-v53-geometry"
       },
       {
         "id": "5d5dcf8d-801e-4029-a804-864e59d1ea36",
@@ -627,7 +628,7 @@
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-elements-global.html",
         "purpose": "nonvisual-early-registration",
         "enabled": true,
-        "release": "atelier-performance-20261020-v51-header76"
+        "release": "atelier-performance-20261020-v53-geometry"
       },
       {
         "id": "f0a7cc61-94e1-4f74-9e8d-8a7e0ad8db85",
@@ -641,7 +642,7 @@
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-elements-global.html",
         "purpose": "nonvisual-early-registration",
         "enabled": true,
-        "release": "atelier-performance-20261020-v51-header76"
+        "release": "atelier-performance-20261020-v53-geometry"
       },
       {
         "id": "e5c3306c-5c12-4e47-a964-769f447fba92",
@@ -655,7 +656,7 @@
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-navbar-1.html",
         "purpose": "nonvisual-early-registration",
         "enabled": true,
-        "release": "atelier-performance-20261020-v51-header76"
+        "release": "atelier-performance-20261020-v53-geometry"
       },
       {
         "id": "f51d200b-5a72-42af-9888-343a96ad77c4",
@@ -669,7 +670,7 @@
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-home-1.html",
         "purpose": "nonvisual-early-registration",
         "enabled": true,
-        "release": "atelier-performance-20261020-v51-header76"
+        "release": "atelier-performance-20261020-v53-geometry"
       },
       {
         "id": "6a817d01-dde1-4c27-b881-0cd2334b1055",
@@ -683,7 +684,7 @@
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-home-2.html",
         "purpose": "nonvisual-early-registration",
         "enabled": true,
-        "release": "atelier-performance-20261020-v51-header76"
+        "release": "atelier-performance-20261020-v53-geometry"
       },
       {
         "id": "bc560b09-ea35-47ed-a623-65edf44f96c9",
@@ -697,7 +698,7 @@
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-footer-1.html",
         "purpose": "nonvisual-early-registration",
         "enabled": true,
-        "release": "atelier-performance-20261020-v51-header76"
+        "release": "atelier-performance-20261020-v53-geometry"
       },
       {
         "id": "79fcc94b-358e-4454-aff7-1c6192156fe5",
@@ -711,7 +712,7 @@
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-shop-1.html",
         "purpose": "nonvisual-early-registration",
         "enabled": true,
-        "release": "atelier-performance-20261020-v51-header76"
+        "release": "atelier-performance-20261020-v53-geometry"
       },
       {
         "id": "c3341e82-ffc0-4d73-a3be-cc8de6915376",
@@ -725,7 +726,7 @@
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-lamps-1.html",
         "purpose": "nonvisual-early-registration",
         "enabled": true,
-        "release": "atelier-performance-20261020-v51-header76"
+        "release": "atelier-performance-20261020-v53-geometry"
       },
       {
         "id": "0824f76d-abf7-482b-80b0-e8337a786d75",
@@ -739,7 +740,7 @@
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-seats-1.html",
         "purpose": "nonvisual-early-registration",
         "enabled": true,
-        "release": "atelier-performance-20261020-v51-header76"
+        "release": "atelier-performance-20261020-v53-geometry"
       },
       {
         "id": "a15c64a9-afab-425b-963a-dcfe10a88c8b",
@@ -753,7 +754,7 @@
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-deco-1.html",
         "purpose": "nonvisual-early-registration",
         "enabled": true,
-        "release": "atelier-performance-20261020-v51-header76"
+        "release": "atelier-performance-20261020-v53-geometry"
       },
       {
         "id": "1340430c-7161-4222-a40a-bed40d93d610",
@@ -767,7 +768,7 @@
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-giftintro-1.html",
         "purpose": "nonvisual-early-registration",
         "enabled": true,
-        "release": "atelier-performance-20261020-v51-header76"
+        "release": "atelier-performance-20261020-v53-geometry"
       },
       {
         "id": "115c3eb7-791d-4128-a46d-1f2c52d6e344",
@@ -781,7 +782,7 @@
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-giftguide-1.html",
         "purpose": "nonvisual-early-registration",
         "enabled": true,
-        "release": "atelier-performance-20261020-v51-header76"
+        "release": "atelier-performance-20261020-v53-geometry"
       },
       {
         "id": "da2e0e39-6ae0-40f8-ae59-6174aaed74fd",
@@ -795,7 +796,7 @@
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-restoration-1.html",
         "purpose": "nonvisual-early-registration",
         "enabled": true,
-        "release": "atelier-performance-20261020-v51-header76"
+        "release": "atelier-performance-20261020-v53-geometry"
       },
       {
         "id": "68db761f-4115-448c-9d8b-4306b1b84ec4",
@@ -809,7 +810,7 @@
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-contact-1.html",
         "purpose": "nonvisual-early-registration",
         "enabled": true,
-        "release": "atelier-performance-20261020-v51-header76"
+        "release": "atelier-performance-20261020-v53-geometry"
       },
       {
         "id": "1af5b53c-30ec-4516-a034-d9bd64f47819",
@@ -823,7 +824,7 @@
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-fabrics-1.html",
         "purpose": "nonvisual-early-registration",
         "enabled": true,
-        "release": "atelier-performance-20261020-v51-header76"
+        "release": "atelier-performance-20261020-v53-geometry"
       },
       {
         "id": "669b0d3b-3a56-41f0-a84f-ae1fb22d9c49",
@@ -837,7 +838,7 @@
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-b2b-1.html",
         "purpose": "nonvisual-early-registration",
         "enabled": true,
-        "release": "atelier-performance-20261020-v51-header76"
+        "release": "atelier-performance-20261020-v53-geometry"
       },
       {
         "id": "e4194673-654e-4e14-93f9-d1fb45198336",
@@ -851,7 +852,7 @@
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-workshops-1.html",
         "purpose": "nonvisual-early-registration",
         "enabled": true,
-        "release": "atelier-performance-20261020-v51-header76"
+        "release": "atelier-performance-20261020-v53-geometry"
       },
       {
         "id": "3a7f985a-d818-4646-acef-0e4fa5069221",
@@ -865,7 +866,7 @@
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-about-1.html",
         "purpose": "nonvisual-early-registration",
         "enabled": true,
-        "release": "atelier-performance-20261020-v51-header76"
+        "release": "atelier-performance-20261020-v53-geometry"
       },
       {
         "id": "21798ef3-5ae2-4583-9a20-4d3fb13bfb1d",
@@ -879,7 +880,7 @@
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-quotetop-1.html",
         "purpose": "nonvisual-early-registration",
         "enabled": true,
-        "release": "atelier-performance-20261020-v51-header76"
+        "release": "atelier-performance-20261020-v53-geometry"
       },
       {
         "id": "017a8d7c-20df-4bcf-82c7-f04406a1f0c5",
@@ -893,7 +894,7 @@
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-quotebottom-1.html",
         "purpose": "nonvisual-early-registration",
         "enabled": true,
-        "release": "atelier-performance-20261020-v51-header76"
+        "release": "atelier-performance-20261020-v53-geometry"
       },
       {
         "id": "0800721b-4b36-479f-97ef-b50ae2044743",
@@ -907,7 +908,7 @@
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-journaltop-1.html",
         "purpose": "nonvisual-early-registration",
         "enabled": true,
-        "release": "atelier-performance-20261020-v51-header76"
+        "release": "atelier-performance-20261020-v53-geometry"
       },
       {
         "id": "44549894-ece3-466e-90ef-0375f9a3a02d",
@@ -921,7 +922,7 @@
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-journalbottom-1.html",
         "purpose": "nonvisual-early-registration",
         "enabled": true,
-        "release": "atelier-performance-20261020-v51-header76"
+        "release": "atelier-performance-20261020-v53-geometry"
       },
       {
         "id": "d1343538-27ba-4069-8c5b-4d20db25e22a",
@@ -935,7 +936,7 @@
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-product-1.html",
         "purpose": "nonvisual-early-registration",
         "enabled": true,
-        "release": "atelier-performance-20261020-v51-header76"
+        "release": "atelier-performance-20261020-v53-geometry"
       },
       {
         "id": "48172cc5-b758-4a53-86bd-f9536dbb16c6",
@@ -949,7 +950,7 @@
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-productfaq-1.html",
         "purpose": "nonvisual-early-registration",
         "enabled": true,
-        "release": "atelier-performance-20261020-v51-header76"
+        "release": "atelier-performance-20261020-v53-geometry"
       },
       {
         "id": "d6615a9d-f7a2-46d1-b5b2-efc6651d4cc6",
@@ -963,7 +964,7 @@
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-product-2.html",
         "purpose": "nonvisual-early-registration",
         "enabled": true,
-        "release": "atelier-performance-20261020-v51-header76"
+        "release": "atelier-performance-20261020-v53-geometry"
       },
       {
         "id": "2df3654a-bafe-4fdc-bb9f-a6e9dbec1147",
@@ -977,7 +978,7 @@
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-terms-1.html",
         "purpose": "nonvisual-early-registration",
         "enabled": false,
-        "release": "atelier-performance-20261020-v51-header76"
+        "release": "atelier-performance-20261020-v53-geometry"
       },
       {
         "id": "72053d34-0095-46a1-a93f-1e16c0407434",
@@ -991,7 +992,7 @@
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-terms-2.html",
         "purpose": "nonvisual-early-registration",
         "enabled": false,
-        "release": "atelier-performance-20261020-v51-header76"
+        "release": "atelier-performance-20261020-v53-geometry"
       },
       {
         "id": "2ee1ebe8-02e8-43e8-b45f-13a88f908888",
@@ -1005,7 +1006,7 @@
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-generalterms-1.html",
         "purpose": "nonvisual-early-registration",
         "enabled": false,
-        "release": "atelier-performance-20261020-v51-header76"
+        "release": "atelier-performance-20261020-v53-geometry"
       },
       {
         "id": "f72d84b1-cb9f-4521-8e5d-9a05851988f1",
@@ -1019,7 +1020,7 @@
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-privacy-1.html",
         "purpose": "nonvisual-early-registration",
         "enabled": false,
-        "release": "atelier-performance-20261020-v51-header76"
+        "release": "atelier-performance-20261020-v53-geometry"
       },
       {
         "id": "8f960fea-1796-4738-bde8-62b6dbabaf8a",
@@ -1033,7 +1034,7 @@
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-cookies-1.html",
         "purpose": "nonvisual-early-registration",
         "enabled": false,
-        "release": "atelier-performance-20261020-v51-header76"
+        "release": "atelier-performance-20261020-v53-geometry"
       },
       {
         "id": "de3fd457-5a06-4565-9aa4-62e3774ff478",
@@ -1047,7 +1048,7 @@
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-home-3.html",
         "purpose": "nonvisual-early-registration",
         "enabled": false,
-        "release": "atelier-performance-20261020-v51-header76"
+        "release": "atelier-performance-20261020-v53-geometry"
       },
       {
         "id": "f380bf40-1eaf-45b0-b6d3-75112c1dfe9c",
@@ -1061,7 +1062,7 @@
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-shop-2.html",
         "purpose": "nonvisual-early-registration",
         "enabled": false,
-        "release": "atelier-performance-20261020-v51-header76"
+        "release": "atelier-performance-20261020-v53-geometry"
       },
       {
         "id": "f2c2ee7f-53fa-473b-8a5f-c57028025b43",
@@ -1075,7 +1076,7 @@
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-fabrics-2.html",
         "purpose": "nonvisual-early-registration",
         "enabled": false,
-        "release": "atelier-performance-20261020-v51-header76"
+        "release": "atelier-performance-20261020-v53-geometry"
       },
       {
         "id": "e47023e7-db01-4253-a052-c487c341721a",
@@ -1089,7 +1090,7 @@
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-b2b-2.html",
         "purpose": "nonvisual-early-registration",
         "enabled": false,
-        "release": "atelier-performance-20261020-v51-header76"
+        "release": "atelier-performance-20261020-v53-geometry"
       },
       {
         "id": "06f65980-3e16-4dd1-8ca4-43e560020173",
@@ -1103,7 +1104,7 @@
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-terms-3.html",
         "purpose": "nonvisual-early-registration",
         "enabled": false,
-        "release": "atelier-performance-20261020-v51-header76"
+        "release": "atelier-performance-20261020-v53-geometry"
       },
       {
         "id": "78d528e2-1ba8-4547-9ad8-32ad138c2e86",
@@ -1117,7 +1118,7 @@
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-generalterms-2.html",
         "purpose": "nonvisual-early-registration",
         "enabled": false,
-        "release": "atelier-performance-20261020-v51-header76"
+        "release": "atelier-performance-20261020-v53-geometry"
       },
       {
         "id": "deabf405-88b2-46ec-8c22-3eb9dba37167",
@@ -1131,7 +1132,7 @@
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-privacy-2.html",
         "purpose": "nonvisual-early-registration",
         "enabled": false,
-        "release": "atelier-performance-20261020-v51-header76"
+        "release": "atelier-performance-20261020-v53-geometry"
       },
       {
         "id": "41e2873b-2a99-4747-b1b6-156878469855",
@@ -1145,7 +1146,7 @@
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-lampcategory-1.html",
         "purpose": "nonvisual-early-registration",
         "enabled": true,
-        "release": "atelier-performance-20261020-v51-header76"
+        "release": "atelier-performance-20261020-v53-geometry"
       },
       {
         "id": "523191ed-77dc-478f-bc73-4dbd63c1110f",
@@ -1157,7 +1158,9 @@
         "category": "ESSENTIAL",
         "loadOnce": true,
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-shipping-1.html",
-        "purpose": "route-guarded-shipping"
+        "purpose": "route-guarded-shipping",
+        "enabled": true,
+        "release": "atelier-performance-20261020-v53-geometry"
       }
     ],
     "connectedRepo": "weareheadless/atelier-harmonie",

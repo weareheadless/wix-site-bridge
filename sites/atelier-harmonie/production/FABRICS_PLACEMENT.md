@@ -1,14 +1,12 @@
 # Les tissus — masonry browser
 
-> Current sizing/startup policy: [PERFORMANCE_GEOMETRY.md](PERFORMANCE_GEOMETRY.md). Use synchronized early packets/controllers plus automatic content sizing. Do not manually recreate a Wix-native hero or fix page heights to old estimates as a performance workaround. Retain the native forms, feeds and commerce widgets required below. Verify the containing section follows the component; Editor intervention is needed only if an actual constraint is found. Release/preload statements below describe historical placement work; use the latest connected builder and release record for current assignments.
-
 Target `--site atelier-harmonie`, `/les-tissus`; connected source `weareheadless/atelier-harmonie`, commit `4d71377`; startup `atelier-production-20261018-v22`.
 
 ## Human placement
 
 1. Replace the original editorial introduction and six long fabric-house sections with one full-width Wix section + Custom Element. Keep the existing native contact section/form (including Mathilde photo, contact details, submission bindings and confirmation), shared header and footer.
 2. Velo source `public/custom-elements/atelier-fabrics-v1.js`; tag `atelier-fabrics-v1`; requested ID `customElement12`. Tell the agent if Wix assigns another ID.
-3. Zero section padding/no restrictive maximum width.
+3. Zero section padding/no restrictive maximum width. Start approximately **2,300 px desktop / 2,700 px mobile** for element AND section, then fit actual loaded image geometry in Preview. Estimates, not verified saved Wix sizes. Component height reporting does not resize the containing Wix section.
 4. Preview desktop/mobile, fresh loads and navigation: all six houses, masonry image layout, photo/Discover buttons, full descriptions, Close/Escape/focus return, external website links and `/devis` links. Native contact form remains separate and functional. No form submission sent.
 5. Publish the current saved Editor layout once ready; never CLI-publish stale local UI state.
 

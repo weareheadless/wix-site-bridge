@@ -1,7 +1,5 @@
 # Product FAQ — separate custom element
 
-> Current sizing/startup policy: [PERFORMANCE_GEOMETRY.md](PERFORMANCE_GEOMETRY.md). Use synchronized early packets/controllers plus automatic content sizing. Do not manually recreate a Wix-native hero or fix page heights to old estimates as a performance workaround. Retain the native forms, feeds and commerce widgets required below. Verify the containing section follows the component; Editor intervention is needed only if an actual constraint is found. Release/preload statements below describe historical placement work; use the latest connected builder and release record for current assignments.
-
 Exact target `--site atelier-harmonie`, `/product-page/:slug`, shared Wix Product Page template. Source commit `fde0abb`, installed startup v32.
 
 Place one new full-width section after the product component (which already includes “Nos Nouvelles Créations”) and above the existing native contact section/shared footer:
@@ -9,7 +7,7 @@ Place one new full-width section after the product component (which already incl
 - Velo file: `public/custom-elements/atelier-product-faq-v1.js`.
 - Tag: `atelier-product-faq-v1`.
 - Wix element ID: `customElement21`.
-- No outer padding; use the component's own cream spacing. Verify automatic sizing in Preview.
+- No outer padding; use the component's own cream spacing. Initial element AND containing-section height estimates: 550px desktop / 750px mobile, with enough room for the longest expanded answer. Fit actual content in Preview; these are not measured saved Wix dimensions. Component resize events do not resize the outer Wix section.
 
 Remove the old native FAQ after checking the replacement; preserve the separate native contact form and its behavior. Five original questions/answers are reused verbatim: bulbs, maintenance, delivery, uniqueness and contacting the atelier. All answers start closed, with native keyboard-accessible details/summary and a shared name allowing only one open at a time. No API or form adapter is added. FAQ SEO markup is bound separately; a missing FAQ placement does not block loading the product component.
 

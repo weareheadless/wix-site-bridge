@@ -1,7 +1,5 @@
 # Journal — editorial sections around native Wix Blog
 
-> Current sizing/startup policy: [PERFORMANCE_GEOMETRY.md](PERFORMANCE_GEOMETRY.md). Use synchronized early packets/controllers plus automatic content sizing. Do not manually recreate a Wix-native hero or fix page heights to old estimates as a performance workaround. Retain the native forms, feeds and commerce widgets required below. Verify the containing section follows the component; Editor intervention is needed only if an actual constraint is found. Release/preload statements below describe historical placement work; use the latest connected builder and release record for current assignments.
-
 Target `--site atelier-harmonie`, exact route `/blog`; connected source `weareheadless/atelier-harmonie`, commit `dfd2803`; startup `atelier-production-20261018-v30`.
 
 Page order:
@@ -11,7 +9,7 @@ Page order:
 4. Full-width closing: Velo file `public/custom-elements/atelier-journal-bottom-v1.js`, tag `atelier-journal-bottom-v1`, ID `customElement19`.
 5. Shared footer retained.
 
-Remove only replaced old introduction. Use zero outer section padding; no restrictive max-width. Fit actual text in Preview; Tell agent if IDs differ.
+Remove only replaced old introduction. Use zero outer section padding; no restrictive max-width. Initial element AND containing section height estimates: top 500px desktop / 700px mobile; bottom 450px desktop / 650px mobile. Fit actual text in Preview; these are not saved measured Wix geometry. Component height events do not resize the parent section. Tell agent if IDs differ.
 
 Original two introduction paragraphs retained. Cream/white editorial composition, restrained rose details and readable typography follow the homepage. Closing links to Les Ateliers, Devis and À propos. No parallel post store or private Blog selectors; native feed design changes remain human Editor settings.
 

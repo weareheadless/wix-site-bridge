@@ -1,14 +1,12 @@
 # Les sièges — placement
 
-> Current sizing/startup policy: [PERFORMANCE_GEOMETRY.md](PERFORMANCE_GEOMETRY.md). Use synchronized early packets/controllers plus automatic content sizing. Do not manually recreate a Wix-native hero or fix page heights to old estimates as a performance workaround. Retain the native forms, feeds and commerce widgets required below. Verify the containing section follows the component; Editor intervention is needed only if an actual constraint is found. Release/preload statements below describe historical placement work; use the latest connected builder and release record for current assignments.
-
 Selected target: `--site atelier-harmonie`, `/sieges`. Source repository `weareheadless/atelier-harmonie`, source commit `a015abe`. Startup release `atelier-production-20261018-v14`.
 
 1. Remove replaced body sections on **Sieges** only; keep the shared header and footer.
 2. Add one full-width section with a Custom Element, no inner padding or restrictive max-width.
 3. Velo file: `public/custom-elements/atelier-seats-v1.js`.
 4. Tag: `atelier-seats-v1`. Requested element ID: `customElement6`. Tell the agent if Wix assigns another ID.
-5. Use automatic sizing and verify the full content fits in Preview.
+5. Start with approximately **2,700 px desktop / 3,800 px mobile** for element AND section, then fit to actual content in Preview. Estimates are not measured saved Wix geometry. Component height reporting does not resize the containing Wix section.
 6. Preview desktop/mobile, fresh load and internal navigation, product links, option selection and add-to-cart. Publish the current saved Editor layout when ready. Never publish the checkout’s stale local UI snapshot.
 
 ## Design and preservation

@@ -1,7 +1,5 @@
 # Cookies policy — matching legal-page design
 
-> Current sizing/startup policy: [PERFORMANCE_GEOMETRY.md](PERFORMANCE_GEOMETRY.md). Use synchronized early packets/controllers plus automatic content sizing. Do not manually recreate a Wix-native hero or fix page heights to old estimates as a performance workaround. Retain the native forms, feeds and commerce widgets required below. Verify the containing section follows the component; Editor intervention is needed only if an actual constraint is found. Release/preload statements below describe historical placement work; use the latest connected builder and release record for current assignments.
-
 Exact target `--site atelier-harmonie`, `/politique-de-cookies`, Wix page `Politique de cookies.ignax.js`. Source `6793638`; startup v46.
 
 Add one full-width Custom Element between the existing shared header/footer:
@@ -10,7 +8,7 @@ Add one full-width Custom Element between the existing shared header/footer:
 - Tag: `atelier-cookies-v1`.
 - Element ID: `customElement25`.
 - No outer section padding or restrictive max-width. The component owns its spacing.
-- Fit the element AND parent section to all three original sections in desktop/mobile Preview.
+- Fit the element AND parent section to all three original sections in desktop/mobile Preview. Initial rough estimates: 2,000px desktop / 3,000px mobile; not measured saved Wix geometry. Component resize events do not resize the outer section.
 
 Replace only the old cookies-policy body/hero after confirming the complete replacement. Keep shared header/footer and native cookie-consent banner/settings. Human publishes saved current Editor layout/source; never CLI-publish stale UI revision 740.
 

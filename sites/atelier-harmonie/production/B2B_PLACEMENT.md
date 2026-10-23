@@ -1,7 +1,5 @@
 # B2B — professional portfolio
 
-> Current sizing/startup policy: [PERFORMANCE_GEOMETRY.md](PERFORMANCE_GEOMETRY.md). Use synchronized early packets/controllers plus automatic content sizing. Do not manually recreate a Wix-native hero or fix page heights to old estimates as a performance workaround. Retain the native forms, feeds and commerce widgets required below. Verify the containing section follows the component; Editor intervention is needed only if an actual constraint is found. Release/preload statements below describe historical placement work; use the latest connected builder and release record for current assignments.
-
 Target `--site atelier-harmonie`, `/b2b`; connected source `weareheadless/atelier-harmonie`, commit `148c7e1`; startup `atelier-production-20261018-v23`.
 
 ## Human placement
@@ -9,7 +7,7 @@ Target `--site atelier-harmonie`, `/b2b`; connected source `weareheadless/atelie
 1. Replace the existing editorial body sections (intro, audiences, guarantees, project) with one full-width Wix section + Custom Element.
 2. File `public/custom-elements/atelier-b2b-v1.js`; tag `atelier-b2b-v1`; requested ID `customElement13`. Tell the agent if Wix assigns another ID.
 3. Keep shared header/footer and the complete native contact section/form below: fields, notification/submission settings, success/error messages and original contact details.
-4. No section padding/restrictive maximum width.
+4. No section padding/restrictive maximum width. Start around **2,800 px desktop / 4,000 px mobile** for element AND containing Wix section; fit actual loaded content, largest tab and expanded guarantees in Preview. Estimates, not verified saved geometry. Component height reporting does not resize the saved Wix section.
 5. Preview desktop/mobile, fresh load/internal navigation, audience tabs (keyboard arrows/Home/End), all original photos/logos, project external website, guarantees accordions, quote links and native form visibility. No submission made by agent.
 6. Publish current saved Editor layout once ready; never CLI-publish the checkout’s stale UI snapshot.
 

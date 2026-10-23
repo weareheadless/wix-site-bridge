@@ -1,7 +1,5 @@
 # Privacy policy — matching legal-page design
 
-> Current sizing/startup policy: [PERFORMANCE_GEOMETRY.md](PERFORMANCE_GEOMETRY.md). Use synchronized early packets/controllers plus automatic content sizing. Do not manually recreate a Wix-native hero or fix page heights to old estimates as a performance workaround. Retain the native forms, feeds and commerce widgets required below. Verify the containing section follows the component; Editor intervention is needed only if an actual constraint is found. Release/preload statements below describe historical placement work; use the latest connected builder and release record for current assignments.
-
 Exact target `--site atelier-harmonie`, `/politique-de-confidentialite`, Wix page `Politique de confidentialité.u54cx.js`. Source `d9b0251`; startup v45.
 
 Add one full-width Custom Element between the existing shared header/footer:
@@ -10,7 +8,7 @@ Add one full-width Custom Element between the existing shared header/footer:
 - Tag: `atelier-privacy-v1`.
 - Element ID: `customElement24`.
 - No outer section padding or restrictive max-width; component owns spacing.
-- Fit the element AND its parent section to all five articles and subsections on desktop/mobile.
+- Fit the element AND its parent section to all five articles and subsections on desktop/mobile. Initial rough estimates: 4,500px desktop / 7,500px mobile; not measured saved Wix dimensions. Component resize events do not resize the parent section.
 
 Replace only the old privacy-policy body/hero after confirming full content. Preserve shared header/footer, legal links, metadata and native cookie-consent/form/newsletter behavior. Human publishes saved current layout/source; never CLI-publish stale UI revision 740.
 

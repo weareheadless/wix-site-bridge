@@ -1,7 +1,7 @@
 {
   "siteAlias": "atelier-harmonie",
   "siteId": "376faa89-fe6c-4ae8-8feb-10520e813a89",
-  "release": "atelier-performance-20261020-v51-header76",
+  "release": "atelier-performance-20261020-v53-geometry",
   "registry": {
     "navbar": {
       "tag": "atelier-navbar-v1",
@@ -185,41 +185,159 @@
         "/lampes/:slug"
       ],
       "mode": "early"
+    },
+    "shipping": {
+      "tag": "atelier-shipping-v1",
+      "routes": [
+        "/livraison"
+      ],
+      "mode": "early"
+    }
+  },
+  "geometry": {
+    "navbar": {
+      "tag": "atelier-navbar-v1",
+      "role": "header"
+    },
+    "home": {
+      "tag": "atelier-home-v1",
+      "role": "page"
+    },
+    "footer": {
+      "tag": "atelier-footer-v1",
+      "role": "footer"
+    },
+    "shop": {
+      "tag": "atelier-shop-v1",
+      "role": "page"
+    },
+    "lamps": {
+      "tag": "atelier-lamps-v1",
+      "role": "page"
+    },
+    "seats": {
+      "tag": "atelier-seats-v1",
+      "role": "page"
+    },
+    "deco": {
+      "tag": "atelier-deco-v1",
+      "role": "page"
+    },
+    "giftintro": {
+      "tag": "atelier-gift-intro-v1",
+      "role": "intro"
+    },
+    "giftguide": {
+      "tag": "atelier-gift-guide-v1",
+      "role": "secondary"
+    },
+    "restoration": {
+      "tag": "atelier-restoration-v1",
+      "role": "page"
+    },
+    "contact": {
+      "tag": "atelier-contact-v1",
+      "role": "secondary"
+    },
+    "fabrics": {
+      "tag": "atelier-fabrics-v1",
+      "role": "page"
+    },
+    "b2b": {
+      "tag": "atelier-b2b-v1",
+      "role": "page"
+    },
+    "workshops": {
+      "tag": "atelier-workshops-v1",
+      "role": "page"
+    },
+    "about": {
+      "tag": "atelier-about-v1",
+      "role": "page"
+    },
+    "quotetop": {
+      "tag": "atelier-quote-top-v1",
+      "role": "intro"
+    },
+    "quotebottom": {
+      "tag": "atelier-quote-bottom-v1",
+      "role": "secondary"
+    },
+    "journaltop": {
+      "tag": "atelier-journal-top-v1",
+      "role": "intro"
+    },
+    "journalbottom": {
+      "tag": "atelier-journal-bottom-v1",
+      "role": "secondary"
+    },
+    "product": {
+      "tag": "atelier-product-v1",
+      "role": "page"
+    },
+    "productfaq": {
+      "tag": "atelier-product-faq-v1",
+      "role": "secondary"
+    },
+    "terms": {
+      "tag": "atelier-terms-v1",
+      "role": "page"
+    },
+    "generalterms": {
+      "tag": "atelier-general-terms-v1",
+      "role": "page"
+    },
+    "privacy": {
+      "tag": "atelier-privacy-v1",
+      "role": "page"
+    },
+    "cookies": {
+      "tag": "atelier-cookies-v1",
+      "role": "page"
+    },
+    "lampcategory": {
+      "tag": "atelier-lamp-category-v1",
+      "role": "page"
+    },
+    "shipping": {
+      "tag": "atelier-shipping-v1",
+      "role": "page"
     }
   },
   "sourceHashes": {
-    "navbar": "bbf09f66bbbfd9dc544e1cc28422901d4acc93c48e3dba612dd02b64ca06e7f9",
-    "home": "42852fa637657e8373e4363f46d78047ed7913289a22bf4c39eecd8035e338c6",
-    "footer": "37c76d5da030439ee15044e8eb26d02a7101ffe2af3e9e948748f64f8ea06c7e",
-    "shop": "2f4f4f6bf79557b7a4b0b36671742d8160d31e27907ed08c792ff91e5c828200",
-    "lamps": "d4cc67da55e822765cd58cc75d68847c5eb669d1e51b15dc8cb7ae8b0f7fc7ca",
-    "seats": "26da7db35336f0265ea8aeaf6e112d4e273fe29b0df4aa360927e32452ee3cab",
-    "deco": "665162b284a30efdd287bfa00affee9a473874fea79e70ed694fd74c4eb1a8ce",
-    "giftintro": "16fdb99585fb1a790ee0be20d0a69a93bd8cdf7dfb0b26d084764dbc2dbde6bf",
+    "navbar": "0f8659c382ca9c68db5193a3e356f595afbaf562852e02090ab7aad837eadb87",
+    "home": "324fd4e437d8588d2a05513656b9aab3ade944d8bc53bee511cfa4d9bd970370",
+    "footer": "bbf1648e3a85770ff8aafee56c39d6a7d8f18cf6861bc30943538b022416f841",
+    "shop": "bbff8b919515c0cd58053f8b6b55bffe025d40afaaf6d3d1aa0f9877b2dc971f",
+    "lamps": "3d015f7dedee33deba7b3e05c812cf429be9908b93cf17bd20eedc21fb648f5e",
+    "seats": "96a6c2e631afdec714b268f485fd078d7665628d40d4db2587c1004ca345c653",
+    "deco": "27f8021f6b4915ceb3a65df671533995b095e4c4f43f5aadaf105b7bfc3a968e",
+    "giftintro": "55a75c966e33fa3c995b002ebfa6c162b4f5c885e50314a3988cb8f46b1f365e",
     "giftguide": "a969e3036579af353a34aa17859c1cab23744f75aca15c64dd90b567c64d49b2",
-    "restoration": "b412de585741b5738a2327212eae8ebf4f241fb7483a74da40faebf9de6e42a6",
-    "contact": "e8aa926523ce4dbc32e5958c0a3f5cc325fda0395f30b1503a314e30d9ed5bb5",
-    "fabrics": "769202ff2ad434dd150972238bdcbc5ba8417f6c6cc09257523f2eb0872eeb22",
-    "b2b": "551d0b9b13abd1de7fb758e5e1364c36115b2b117935d5b343255be019dfe86f",
-    "workshops": "8abe2a1c91325f73c2bdf9b8f42f3f38233c76ae9b6ecd1950032c1be1a79d2a",
-    "about": "d7a5710b95be78bef68dedef7707fba8c7c8336c082f78f266efe7b4c0e3af23",
-    "quotetop": "4d0df980e17dc573f3b1dbbcd6b61706c80d78b28904292fae4625241ba675b8",
+    "restoration": "ad80dc8a62f16c3c54b230e868e764a0e2ce3edea4fad0d2837dc8d1fdc2299d",
+    "contact": "850adeee2596bc37d6f88f4c92118bdb6e6fb6e9cd58a49e91ef923bfda94713",
+    "fabrics": "64406dbec9a02c0a260a5f5896c7499a650b12b502c0b30a74018a172fec5e93",
+    "b2b": "b80f9f4544e2157746f23967ae1f3cfc13a97559262670b77c58b0e731fa9f68",
+    "workshops": "b84f918fda410637d60034b7d0d0c3a3ab78b1d2fb1e1bbe0a8179b1333bcf9e",
+    "about": "c59dda55462dcbd531dbee0c6c768794809c1f847fb5facc754e8b2240e85758",
+    "quotetop": "949a0098fce4489a71cc19c8907971d84b8634001f1bf77081df85fb735aafac",
     "quotebottom": "44ececcfdf0e2c0ab39a060c89dfd0622671e69e3231db55beffeba0d05b4403",
-    "journaltop": "860a9e834a74ca5685878b16f02875f2d3f15d0aeea2c5ac904a5dbd8a0a892c",
+    "journaltop": "60c0f89243cbbe3a679c57dec556dcfbb2c298fea34fc5eea0a493637da64dbb",
     "journalbottom": "59f5c8208c8738b407f544a0fbaae939a47afddb74c15c4a88464552308e67c9",
-    "product": "cd95c0388119c210b9abf101c61269da84544a197ec41f4a657ceeb19e668657",
+    "product": "6e30f640c2dfc8f24cc2b79524fc540d3f928082581b94e96a36413a4e41586e",
     "productfaq": "ac8ef6d813e6f3126f945317f45cc4ebc7f04126146bd869e118c16c86390b2b",
-    "terms": "784fba85c445ce90bc4302df85a78aa0f6564df787edd4b907079e2c0986d9e7",
-    "generalterms": "04500076b22b2778952d340c8122a7f415b5c330dfb06cf458ff9de6b0bb5df0",
-    "privacy": "4cf5c8da970e0893046166c0e10a3190504190516a0ce730a583c289560df269",
-    "cookies": "5421db2e79766c668d6a643d79476ebd1f25d934097621236cc483541df38766",
-    "lampcategory": "0212e1ee2afaa77b0c2a50d07488af782281049314c2059d8427c1f0d69b654a"
+    "terms": "99632cd06c7353699082944c48be3da0666fd8c686abb94223e5f6eb8e3371fc",
+    "generalterms": "560d6b78a660de4e18aca82fd0e96a434e9c473b6e2ee3fa77e84afb8259c574",
+    "privacy": "d221fd94aa6d5a0049d6114947ae5e58ac610be92339dd0d4ae73a10d84761ff",
+    "cookies": "c705cc2618626b301524caed88ab1612b5054ee3acd2d6e1f25e591fd83422d4",
+    "lampcategory": "671eaf1db4b871c4b1ec14d5c77edc665e3ebd8b655504c3a0d6d159c23f637c",
+    "shipping": "6204f292b8a7ad53e285cac38e3c45c58871861fd976ab725e38a66dcb50760f"
   },
   "packets": [
     {
       "key": "navbar",
       "file": "early-packet-navbar-1.html",
-      "characters": 10480
+      "characters": 10832
     },
     {
       "key": "home",
@@ -229,37 +347,37 @@
     {
       "key": "home",
       "file": "early-packet-home-2.html",
-      "characters": 10958
+      "characters": 12166
     },
     {
       "key": "footer",
       "file": "early-packet-footer-1.html",
-      "characters": 6984
+      "characters": 7036
     },
     {
       "key": "shop",
       "file": "early-packet-shop-1.html",
-      "characters": 12662
+      "characters": 12830
     },
     {
       "key": "lamps",
       "file": "early-packet-lamps-1.html",
-      "characters": 11887
+      "characters": 11935
     },
     {
       "key": "seats",
       "file": "early-packet-seats-1.html",
-      "characters": 9583
+      "characters": 9819
     },
     {
       "key": "deco",
       "file": "early-packet-deco-1.html",
-      "characters": 9366
+      "characters": 9598
     },
     {
       "key": "giftintro",
       "file": "early-packet-giftintro-1.html",
-      "characters": 5439
+      "characters": 5467
     },
     {
       "key": "giftguide",
@@ -269,37 +387,37 @@
     {
       "key": "restoration",
       "file": "early-packet-restoration-1.html",
-      "characters": 11873
+      "characters": 11897
     },
     {
       "key": "contact",
       "file": "early-packet-contact-1.html",
-      "characters": 4845
+      "characters": 4961
     },
     {
       "key": "fabrics",
       "file": "early-packet-fabrics-1.html",
-      "characters": 12589
+      "characters": 12613
     },
     {
       "key": "b2b",
       "file": "early-packet-b2b-1.html",
-      "characters": 12801
+      "characters": 12825
     },
     {
       "key": "workshops",
       "file": "early-packet-workshops-1.html",
-      "characters": 11835
+      "characters": 11999
     },
     {
       "key": "about",
       "file": "early-packet-about-1.html",
-      "characters": 8139
+      "characters": 8323
     },
     {
       "key": "quotetop",
       "file": "early-packet-quotetop-1.html",
-      "characters": 5450
+      "characters": 5470
     },
     {
       "key": "quotebottom",
@@ -309,7 +427,7 @@
     {
       "key": "journaltop",
       "file": "early-packet-journaltop-1.html",
-      "characters": 5188
+      "characters": 5208
     },
     {
       "key": "journalbottom",
@@ -324,7 +442,7 @@
     {
       "key": "product",
       "file": "early-packet-product-2.html",
-      "characters": 2741
+      "characters": 3869
     },
     {
       "key": "productfaq",
@@ -334,41 +452,46 @@
     {
       "key": "lampcategory",
       "file": "early-packet-lampcategory-1.html",
-      "characters": 7990
+      "characters": 8234
+    },
+    {
+      "key": "shipping",
+      "file": "early-packet-shipping-1.html",
+      "characters": 4562
     }
   ],
   "components": {
     "navbar": {
       "tag": "atelier-navbar-v1",
-      "sha256": "bbf09f66bbbfd9dc544e1cc28422901d4acc93c48e3dba612dd02b64ca06e7f9"
+      "sha256": "0f8659c382ca9c68db5193a3e356f595afbaf562852e02090ab7aad837eadb87"
     },
     "home": {
       "tag": "atelier-home-v1",
-      "sha256": "42852fa637657e8373e4363f46d78047ed7913289a22bf4c39eecd8035e338c6"
+      "sha256": "324fd4e437d8588d2a05513656b9aab3ade944d8bc53bee511cfa4d9bd970370"
     },
     "footer": {
       "tag": "atelier-footer-v1",
-      "sha256": "37c76d5da030439ee15044e8eb26d02a7101ffe2af3e9e948748f64f8ea06c7e"
+      "sha256": "bbf1648e3a85770ff8aafee56c39d6a7d8f18cf6861bc30943538b022416f841"
     },
     "shop": {
       "tag": "atelier-shop-v1",
-      "sha256": "2f4f4f6bf79557b7a4b0b36671742d8160d31e27907ed08c792ff91e5c828200"
+      "sha256": "bbff8b919515c0cd58053f8b6b55bffe025d40afaaf6d3d1aa0f9877b2dc971f"
     },
     "lamps": {
       "tag": "atelier-lamps-v1",
-      "sha256": "d4cc67da55e822765cd58cc75d68847c5eb669d1e51b15dc8cb7ae8b0f7fc7ca"
+      "sha256": "3d015f7dedee33deba7b3e05c812cf429be9908b93cf17bd20eedc21fb648f5e"
     },
     "seats": {
       "tag": "atelier-seats-v1",
-      "sha256": "26da7db35336f0265ea8aeaf6e112d4e273fe29b0df4aa360927e32452ee3cab"
+      "sha256": "96a6c2e631afdec714b268f485fd078d7665628d40d4db2587c1004ca345c653"
     },
     "deco": {
       "tag": "atelier-deco-v1",
-      "sha256": "665162b284a30efdd287bfa00affee9a473874fea79e70ed694fd74c4eb1a8ce"
+      "sha256": "27f8021f6b4915ceb3a65df671533995b095e4c4f43f5aadaf105b7bfc3a968e"
     },
     "giftintro": {
       "tag": "atelier-gift-intro-v1",
-      "sha256": "16fdb99585fb1a790ee0be20d0a69a93bd8cdf7dfb0b26d084764dbc2dbde6bf"
+      "sha256": "55a75c966e33fa3c995b002ebfa6c162b4f5c885e50314a3988cb8f46b1f365e"
     },
     "giftguide": {
       "tag": "atelier-gift-guide-v1",
@@ -376,31 +499,31 @@
     },
     "restoration": {
       "tag": "atelier-restoration-v1",
-      "sha256": "b412de585741b5738a2327212eae8ebf4f241fb7483a74da40faebf9de6e42a6"
+      "sha256": "ad80dc8a62f16c3c54b230e868e764a0e2ce3edea4fad0d2837dc8d1fdc2299d"
     },
     "contact": {
       "tag": "atelier-contact-v1",
-      "sha256": "e8aa926523ce4dbc32e5958c0a3f5cc325fda0395f30b1503a314e30d9ed5bb5"
+      "sha256": "850adeee2596bc37d6f88f4c92118bdb6e6fb6e9cd58a49e91ef923bfda94713"
     },
     "fabrics": {
       "tag": "atelier-fabrics-v1",
-      "sha256": "769202ff2ad434dd150972238bdcbc5ba8417f6c6cc09257523f2eb0872eeb22"
+      "sha256": "64406dbec9a02c0a260a5f5896c7499a650b12b502c0b30a74018a172fec5e93"
     },
     "b2b": {
       "tag": "atelier-b2b-v1",
-      "sha256": "551d0b9b13abd1de7fb758e5e1364c36115b2b117935d5b343255be019dfe86f"
+      "sha256": "b80f9f4544e2157746f23967ae1f3cfc13a97559262670b77c58b0e731fa9f68"
     },
     "workshops": {
       "tag": "atelier-workshops-v1",
-      "sha256": "8abe2a1c91325f73c2bdf9b8f42f3f38233c76ae9b6ecd1950032c1be1a79d2a"
+      "sha256": "b84f918fda410637d60034b7d0d0c3a3ab78b1d2fb1e1bbe0a8179b1333bcf9e"
     },
     "about": {
       "tag": "atelier-about-v1",
-      "sha256": "d7a5710b95be78bef68dedef7707fba8c7c8336c082f78f266efe7b4c0e3af23"
+      "sha256": "c59dda55462dcbd531dbee0c6c768794809c1f847fb5facc754e8b2240e85758"
     },
     "quotetop": {
       "tag": "atelier-quote-top-v1",
-      "sha256": "4d0df980e17dc573f3b1dbbcd6b61706c80d78b28904292fae4625241ba675b8"
+      "sha256": "949a0098fce4489a71cc19c8907971d84b8634001f1bf77081df85fb735aafac"
     },
     "quotebottom": {
       "tag": "atelier-quote-bottom-v1",
@@ -408,7 +531,7 @@
     },
     "journaltop": {
       "tag": "atelier-journal-top-v1",
-      "sha256": "860a9e834a74ca5685878b16f02875f2d3f15d0aeea2c5ac904a5dbd8a0a892c"
+      "sha256": "60c0f89243cbbe3a679c57dec556dcfbb2c298fea34fc5eea0a493637da64dbb"
     },
     "journalbottom": {
       "tag": "atelier-journal-bottom-v1",
@@ -416,7 +539,7 @@
     },
     "product": {
       "tag": "atelier-product-v1",
-      "sha256": "cd95c0388119c210b9abf101c61269da84544a197ec41f4a657ceeb19e668657"
+      "sha256": "6e30f640c2dfc8f24cc2b79524fc540d3f928082581b94e96a36413a4e41586e"
     },
     "productfaq": {
       "tag": "atelier-product-faq-v1",
@@ -424,25 +547,29 @@
     },
     "terms": {
       "tag": "atelier-terms-v1",
-      "sha256": "784fba85c445ce90bc4302df85a78aa0f6564df787edd4b907079e2c0986d9e7"
+      "sha256": "99632cd06c7353699082944c48be3da0666fd8c686abb94223e5f6eb8e3371fc"
     },
     "generalterms": {
       "tag": "atelier-general-terms-v1",
-      "sha256": "04500076b22b2778952d340c8122a7f415b5c330dfb06cf458ff9de6b0bb5df0"
+      "sha256": "560d6b78a660de4e18aca82fd0e96a434e9c473b6e2ee3fa77e84afb8259c574"
     },
     "privacy": {
       "tag": "atelier-privacy-v1",
-      "sha256": "4cf5c8da970e0893046166c0e10a3190504190516a0ce730a583c289560df269"
+      "sha256": "d221fd94aa6d5a0049d6114947ae5e58ac610be92339dd0d4ae73a10d84761ff"
     },
     "cookies": {
       "tag": "atelier-cookies-v1",
-      "sha256": "5421db2e79766c668d6a643d79476ebd1f25d934097621236cc483541df38766"
+      "sha256": "c705cc2618626b301524caed88ab1612b5054ee3acd2d6e1f25e591fd83422d4"
     },
     "lampcategory": {
       "tag": "atelier-lamp-category-v1",
-      "sha256": "0212e1ee2afaa77b0c2a50d07488af782281049314c2059d8427c1f0d69b654a"
+      "sha256": "671eaf1db4b871c4b1ec14d5c77edc665e3ebd8b655504c3a0d6d159c23f637c"
+    },
+    "shipping": {
+      "tag": "atelier-shipping-v1",
+      "sha256": "6204f292b8a7ad53e285cac38e3c45c58871861fd976ab725e38a66dcb50760f"
     }
   },
   "deployed": true,
-  "sourceCommit": "7dc0a18"
+  "sourceCommit": "3869d354c83fa3a99b7043d7e8ff5714cb55643e"
 }

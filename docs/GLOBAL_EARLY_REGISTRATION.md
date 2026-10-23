@@ -16,13 +16,6 @@ That repository is a reference, not an Atelier deployment target. Never copy its
 
 ## Mandatory global registration contract
 
-Use early registration plus pre-render geometry and content-driven sizing.
-Do not create a parallel Wix-native hero/title/image layer as a performance
-workaround, or require manually guessed total page heights. Native forms,
-commerce widgets and blog feeds remain native where the design requires them.
-If an actual saved section constraint prevents resizing, diagnose that specific
-constraint rather than replacing the custom hero or hiding duplicate content.
-
 1. Maintain one canonical Head controller source. Install it as Essential Custom Code in two synchronized entries: all pages / load once for initial document startup, and all pages / load on each new page for Wix internal navigation. Use explicit site manifests and supported setup; never pretend the bridge can change read-only placement/page scope.
 2. Maintain an explicit route-to-component registry covering **every production page**, including dynamic route families, and the shared header on every route where it belongs. An intentionally native-only route must be recorded as such, with no irrelevant page bundle executed. Coverage is mandatory; do not duplicate controllers per page.
 3. Build self-contained inline compressed packets from canonical component sources. Register only matching definitions, guard every `customElements.define` with `customElements.get`, and deduplicate concurrent registration. Preserve the ordinary Wix custom-element source as fallback if decompression or registration fails. Keep packet entries load-once and below 15,000 characters each, matching the reference build guard.
@@ -34,12 +27,6 @@ constraint rather than replacing the custom hero or hiding duplicate content.
 9. Preserve a central disable switch and a per-document control such as `?earlyElements=off`. Rollback must leave the supported Wix source loader functional; disable packet entries as well when removing their transfer cost. Store rollback evidence privately.
 
 ## Evidence limits
-
-Atelier's 20 October 2026 recovery is documented in
-[PERFORMANCE_GEOMETRY.md](../sites/atelier-harmonie/production/PERFORMANCE_GEOMETRY.md).
-Its key lesson is to verify **pre-render** host and containing-section geometry:
-post-render automatic resizing alone can still expose and then displace a footer.
-Recovery was confirmed by the owner; no new numeric Lighthouse score was recorded.
 
 The reference demonstrates working registration and some layout fixes, not a universal speed improvement. Its homepage mobile score did not improve; a successful Beachfront pilot does not establish results for all routes. Do not claim faster LCP or scores from registration timings or another site's measurements. Follow the user's verification instructions; run performance audits only when requested, comparing identical published routes/device conditions and recording all repeats.
 

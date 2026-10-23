@@ -1,7 +1,5 @@
 # Tapisserie & restauration — placement
 
-> Current sizing/startup policy: [PERFORMANCE_GEOMETRY.md](PERFORMANCE_GEOMETRY.md). Use synchronized early packets/controllers plus automatic content sizing. Do not manually recreate a Wix-native hero or fix page heights to old estimates as a performance workaround. Retain the native forms, feeds and commerce widgets required below. Verify the containing section follows the component; Editor intervention is needed only if an actual constraint is found. Release/preload statements below describe historical placement work; use the latest connected builder and release record for current assignments.
-
 Target `--site atelier-harmonie`, `/tapisserie-restauration`. Source repo `weareheadless/atelier-harmonie`, source commit `a731216`. Startup release `atelier-production-20261018-v21`.
 
 ## Human Editor setup
@@ -9,7 +7,7 @@ Target `--site atelier-harmonie`, `/tapisserie-restauration`. Source repo `weare
 1. Keep shared header/footer and the **real existing Wix contact form** with its fields, submissions, confirmation message, notifications and consent/spam configuration. Do not delete the native form when removing old body sections.
 2. Replace old editorial body sections with one full-width section and real Custom Element. Velo file: `public/custom-elements/atelier-restoration-v1.js`; tag: `atelier-restoration-v1`; requested ID: `customElement10`. Tell the agent if Wix assigns a different ID.
 3. Keep the complete native Wix contact section directly below the embed, including its photo, heading, contact details and working form. The embed now ends after the cushion service.
-4. Zero section padding/no restrictive max-width. Component observes its content height. Verify that the saved Wix section follows it; investigate any actual constraint separately.
+4. Zero section padding/no restrictive max-width. Start around **2,200 px desktop / 3,200 px mobile** for element AND section, then fit actual content in Preview, including expanded cushion details. Estimates are not verified saved geometry. Component observes its own content height; it cannot resize saved parent Wix section geometry.
 5. Native form design: white background, espresso `#42170a` text, thin beige `#e5dace` field outlines, muted rose `#87475b` submit button with white text. Apply through human Editor design controls, preserving labels and focus/error states. No DOM selectors or code overriding Wix internals.
 6. Preview desktop/mobile, fresh loads and internal navigation: hero, all original photos/copy, intact before/after, all three service shortcuts, accordion opening/closing, `/devis` links, email/phone and retained form visibility. No form submission performed by the agent.
 7. Publish the current saved Editor layout once ready; never publish the checkout’s stale local UI snapshot.
@@ -26,6 +24,7 @@ Target `--site atelier-harmonie`, `/tapisserie-restauration`. Source repo `weare
 - Static text renders immediately; route-specific hero preload matches visible URL. Shared header/footer and source fallback preserved. Startup controllers/packets synchronized, within size limits.
 - Placement, final saved geometry, publication and live content/interaction verification remain pending human setup. No speed scores claimed.
 - Private receipts/snapshots under customer state directory. Recovery restores prior startup HTML or disables the affected entries, synchronizing normal Wix sources and packets.
+
 
 ## Current contact decision
 
