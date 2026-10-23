@@ -9,6 +9,7 @@ function parseArgs(tokens) {
     const token = tokens[i];
     if (token === "--apply") options.apply = true;
     else if (token === "--all-pages") options.allPages = true;
+    else if (token === "--preserve-scope") options.preserveScope = true;
     else if (token === "--help" || token === "-h") options.help = true;
     else if (token.startsWith("--")) {
       const key = token.slice(2).replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
@@ -27,7 +28,7 @@ Usage: npm run bridge -- <operation> --manifest <file> --site <alias> [options]
 
 Read-only/planning: inspect, doctor, snippets, snippet, build, plan, verify,
   create-snippet (requires --name and --html-file; use exact --route or --all-pages)
-  update-snippet (requires --snippet and --html-file; use exact --route or --all-pages for an existing global embed)
+  update-snippet (requires --snippet and --html-file; use exact --route, --all-pages, or --preserve-scope for a content packet)
 Mutations (dry-run by default): create-snippet --apply, build --apply, snapshot --apply, deploy --apply,
   publish --apply, release --apply, restore --snapshot <release-id> --apply
 
@@ -35,6 +36,7 @@ Options: --site-repo <Wix-connected repo> --state-dir <private local state dir>
          --snippet <configured embed id> --snapshot <release id> --out <artifact path>
          --name <new embed name> --html-file <HTML fragment> --route </prototype-path>
          --all-pages (existing global embed only; preserves its all-pages scope)
+         --preserve-scope (update content without adding a route guard; preserves live page scope)
          --position <HEAD|BODY_START|BODY_END> --category <Wix category>
          --enabled <true|false> --load-once <true|false> --category <Wix category>
          --mount-id <section-id> --mount-order <0..999> (append a stacked section)

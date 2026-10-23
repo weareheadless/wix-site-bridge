@@ -99,10 +99,19 @@
         "name": "Susi early packet — cities hero",
         "position": "HEAD",
         "pageScope": {
-          "type": "all"
+          "type": "pages",
+          "pageIds": [
+            "ch3wm",
+            "cva3h",
+            "e61h9",
+            "ejdrn",
+            "p20az",
+            "x6kem",
+            "xlqrv"
+          ]
         },
         "category": "ESSENTIAL",
-        "loadOnce": true,
+        "loadOnce": false,
         "enabled": true,
         "purpose": "existing-snippet-inventory"
       },
@@ -111,10 +120,19 @@
         "name": "Susi early packet — cities-listings",
         "position": "HEAD",
         "pageScope": {
-          "type": "all"
+          "type": "pages",
+          "pageIds": [
+            "ch3wm",
+            "cva3h",
+            "e61h9",
+            "ejdrn",
+            "p20az",
+            "x6kem",
+            "xlqrv"
+          ]
         },
         "category": "ESSENTIAL",
-        "loadOnce": true,
+        "loadOnce": false,
         "enabled": true,
         "purpose": "existing-snippet-inventory"
       },
@@ -123,10 +141,19 @@
         "name": "Susi early packet — cities-guide",
         "position": "HEAD",
         "pageScope": {
-          "type": "all"
+          "type": "pages",
+          "pageIds": [
+            "ch3wm",
+            "cva3h",
+            "e61h9",
+            "ejdrn",
+            "p20az",
+            "x6kem",
+            "xlqrv"
+          ]
         },
         "category": "ESSENTIAL",
-        "loadOnce": true,
+        "loadOnce": false,
         "enabled": true,
         "purpose": "existing-snippet-inventory"
       },
@@ -147,10 +174,18 @@
         "name": "Susi early packet — units",
         "position": "HEAD",
         "pageScope": {
-          "type": "all"
+          "type": "pages",
+          "pageIds": [
+            "d4oad",
+            "f2k5h",
+            "hlceo",
+            "hytmz",
+            "m83ag",
+            "sxnkz"
+          ]
         },
         "category": "ESSENTIAL",
-        "loadOnce": true,
+        "loadOnce": false,
         "enabled": true,
         "purpose": "existing-snippet-inventory"
       },
@@ -159,10 +194,13 @@
         "name": "Susi early packet — home",
         "position": "HEAD",
         "pageScope": {
-          "type": "all"
+          "type": "pages",
+          "pageIds": [
+            "h4hzq"
+          ]
         },
         "category": "ESSENTIAL",
-        "loadOnce": true,
+        "loadOnce": false,
         "enabled": true,
         "purpose": "existing-snippet-inventory"
       },
@@ -171,10 +209,13 @@
         "name": "Susi early packet — rentals",
         "position": "HEAD",
         "pageScope": {
-          "type": "all"
+          "type": "pages",
+          "pageIds": [
+            "gkrfz"
+          ]
         },
         "category": "ESSENTIAL",
-        "loadOnce": true,
+        "loadOnce": false,
         "enabled": true,
         "purpose": "existing-snippet-inventory"
       },
@@ -219,10 +260,13 @@
         "name": "Susi early packet — unit type hub",
         "position": "HEAD",
         "pageScope": {
-          "type": "all"
+          "type": "pages",
+          "pageIds": [
+            "t198b"
+          ]
         },
         "category": "ESSENTIAL",
-        "loadOnce": true,
+        "loadOnce": false,
         "enabled": true,
         "purpose": "existing-snippet-inventory"
       },
@@ -284,7 +328,9 @@
         "id": "2c1820f9-05eb-42ef-927e-1d1e621fb0e6",
         "name": "Susi early packet — playa translation continuation",
         "position": "HEAD",
-        "pageScope": {"type":"all"},
+        "pageScope": {
+          "type": "all"
+        },
         "category": "ESSENTIAL",
         "loadOnce": true,
         "enabled": true,
