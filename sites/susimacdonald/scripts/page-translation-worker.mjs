@@ -21,7 +21,8 @@ const pagePath=path.join(base,'translation-pages.json');
 const stateDir=path.join(base,'.wix-bridge-state/page-translations');
 const statePath=path.join(stateDir,'progress.json');
 const budgetPath=path.join(stateDir,'openrouter-spend.json');
-const apply=process.argv.includes('--apply');
+const resumePostReview=process.argv.includes('--resume-post-review');
+const apply=process.argv.includes('--apply')||resumePostReview;
 const preview=process.argv.includes('--preview');
 const audit=process.argv.includes('--audit');
 const sha=value=>createHash('sha256').update(value).digest('hex');
@@ -44,7 +45,7 @@ if(apply&&!process.env.CHROMIUM_PATH)fail('CHROMIUM_PATH is required for rendere
 const client=new WixCustomEmbedsClient({siteId,tokenProvider:WixAppTokenProvider.fromEnv()});
 const live=await client.listAll();
 const state=await readState();
-if(['releasing','post-review-held','held'].includes(state.status))fail(`Previous quality or release hold requires inspection before resuming: ${statePath}`);
+if(!resumePostReview&&['releasing','post-review-held','held'].includes(state.status))fail(`Previous quality or release hold requires inspection before resuming: ${statePath}`);
 const group=config.groups[state.group];
 if(!group){console.log(JSON.stringify({status:'listed-embed-groups-reviewed',deferred:config.deferred}));process.exit(0)}
 const route=group.routes[state.route];
@@ -116,7 +117,7 @@ if(audit){
 }
 function protect(source,target){
   if(typeof target!=='string'||!target.trim())fail('Empty translation');
-  const tokens=s=>[...s.matchAll(/https?:\/\/[^\s<>"']+|\{[^{}]+\}|\$\s?[\d.,]+|\b\d+(?:[.,]\d+)?\s?(?:%|m²|km|USD|MXN|years?)?\b/g)].map(x=>x[0]).sort();
+  const tokens=s=>[...s.matchAll(/https?:\/\/[^\s<>"']+|\{[^{}]+\}|\$\s?[\d.,]+\s*(?:[KkMm])?(?:\s*(?:USD|MXN))?|\b\d+(?:[.,]\d+)?\s?(?:%|m²|km|USD|MXN|years?)?\b/g)].map(x=>x[0].trim()).map(token=>{const money=token.match(/^\$\s?([\d.,]+)\s*([KkMm])?(?:\s*(?:USD|MXN))?$/);if(money){const number=Number(money[1].replace(/,/g,''));const multiplier=money[2]?({k:1e3,m:1e6}[money[2].toLowerCase()]):1;return '$'+String(number*multiplier)}const numeric=token.match(/^([\d.,]+)\s*(%|m²|km|USD|MXN|years?)?$/);if(numeric)return Number(numeric[1].replace(/,/g,''))+(numeric[2]||'');return token}).sort();
   if(JSON.stringify(tokens(source))!==JSON.stringify(tokens(target)))fail(`Protected URL, number or placeholder changed in ${JSON.stringify(source)}`);
 }
 async function openrouter(model,messages,maxTokens=12000){
@@ -142,24 +143,50 @@ async function screenshot(pageRoute,locale,label){
   const status=await fetch(url,{method:'GET',redirect:'follow',signal:AbortSignal.timeout(30000)});
   if(!status.ok)fail(`Public route ${url} returned HTTP ${status.status}`);
   await status.body?.cancel();
-  const output=path.join(stateDir,`${group.name}-${state.route}-${label}.png`);
-  await execFileAsync(process.env.CHROMIUM_PATH,['--headless=new','--no-sandbox','--disable-gpu','--hide-scrollbars','--window-size=1440,1100','--virtual-time-budget=12000',`--screenshot=${output}`,url],{timeout:60000,maxBuffer:200000});
-  const bytes=await readFile(output);if(bytes.length<15000)fail(`Rendered screenshot is empty for ${url}`);
-  return {url,path:output,image:`data:image/png;base64,${bytes.toString('base64')}`};
+  const output=path.join(stateDir,`${group.name}-${state.route}-${label}`);
+  const {stdout}=await execFileAsync(process.env.PYTHON_PATH||'python3',[path.join(base,'scripts/capture-page.py'),url,output],{timeout:120000,maxBuffer:2000000,env:process.env});
+  const info=JSON.parse(stdout.trim().split('\n').pop());
+  if(!Array.isArray(info.images)||!info.images.length)fail(`Rendered screenshot is empty for ${url}`);
+  const shots=[];
+  for(const file of info.images){const bytes=await readFile(file);if(bytes.length<15000)fail(`Rendered screenshot slice is empty for ${url}`);shots.push(`data:image/png;base64,${bytes.toString('base64')}`)}
+  return {url,path:info.full,images:shots};
 }
 function rowsFor(packets){return packets.flatMap(item=>item.parts.flatMap(part=>Object.entries(part.dict.value).map(([english,current])=>({packetId:item.id,component:part.key,english,current}))));}
 function checkedResult(result,rows){
   if(!Array.isArray(result.translations)||result.translations.length!==rows.length)fail('Model did not return every phrase');
   const outputs={};const indices=new Set();
-  for(const item of result.translations){if(!Number.isInteger(item.index)||item.index<0||item.index>=rows.length||indices.has(item.index))fail('Duplicate or missing phrase index');indices.add(item.index);const row=rows[item.index];protect(row.english,item.spanish);(outputs[row.packetId]??={})[row.component]??={};outputs[row.packetId][row.component][row.english]=item.spanish}
+  for(const item of result.translations){if(!Number.isInteger(item.index)||item.index<0||item.index>=rows.length||indices.has(item.index))fail('Duplicate or missing phrase index');indices.add(item.index);const row=rows[item.index];try{protect(row.english,item.spanish)}catch(error){fail(`${error.message}: ${JSON.stringify(row.english)} -> ${JSON.stringify(item.spanish)}`)}(outputs[row.packetId]??={})[row.component]??={};outputs[row.packetId][row.component][row.english]=item.spanish}
   return outputs;
 }
+const postIndices=group.routes.length>12?[0,Math.floor(group.routes.length/2),group.routes.length-1]:group.routes.map((_,index)=>index);
+async function reviewPublished(index,proposed){
+  state.route=index;await save(state);
+  const after=await screenshot(group.routes[index],'es','spanish-after');
+  const result=await openrouter(process.env.OPENROUTER_REVIEW_MODEL||'google/gemini-3-flash-preview',[{role:'system',content:'Review the ACTUALLY RENDERED full Spanish page after the embed release. The images are consecutive slices covering the whole page from top to bottom. ONLY custom-embed interface copy is in scope: hero lead/eyebrow, map labels and controls, search/filter/sort controls, result counts, card buttons, and guide UI (eyebrow, links). OUT OF SCOPE and never a reason to reject: native Wix header/navigation/footer, CMS city-guide headings/paragraphs, route collection titles derived from CMS/page config, and the entire property card (names, prices, availability, delivery, status, beds/baths). Property cards are CMS content and are translated in the CMS phase, not by this embed. Return JSON {approved:boolean,embedIssues:[{reason:string}],deferredOutOfScope:[{reason:string}],summary:string}. Set approved true whenever embedIssues is empty, even if out-of-scope English remains; list that English in deferredOutOfScope. Reject only untranslated in-scope embed UI or a broken/blank embed layout.'},{role:'user',content:[{type:'text',text:JSON.stringify({route:group.routes[index],purpose:group.purpose,expectedEmbedPhrases:proposed.map(x=>x.spanish)})},...after.images.map(image=>({type:'image_url',image_url:{url:image}}))]}],2500);
+  const file=path.join(stateDir,`${group.name}-${index}-post-review.json`);await writeFile(file,JSON.stringify({route:group.routes[index],review:result.data,usage:result.usage},null,2)+'\n',{mode:0o600});
+  if(!Array.isArray(result.data.embedIssues)){state.status='post-review-held';await save(state);fail(`Post-review returned no embedIssues array for ${group.routes[index]}; inspect ${file}`)}
+  if(result.data.embedIssues.length){state.status='post-review-held';await save(state);fail(`Published page review held ${group.routes[index]}; inspect ${file} and bridge recovery receipts`)}
+}
 const packets=group.packets.map(spec=>{const embed=live.find(x=>x.id===spec.id);if(!embed||!embed.enabled||embed.pageFilter?.pageIds?.length)fail(`Missing or changed global embed ${spec.id}`);const html=embed.embedData?.html;if(!html)fail(`Empty embed ${spec.id}`);const continuation=spec.continuationId?live.find(x=>x.id===spec.continuationId):null;if(spec.continuationId&&(!continuation||!continuation.enabled||continuation.pageFilter?.pageIds?.length))fail(`Missing continuation ${spec.continuationId}`);return {id:spec.id,revision:String(embed.revision),html,parts:unpack(html,spec.keys),continuation:continuation?{id:continuation.id,revision:String(continuation.revision),html:continuation.embedData?.html}:null}});
+if(resumePostReview){
+  if(state.status!=='post-review-held')fail(`Resume-post-review requires a post-review hold; current state is ${state.status}`);
+  if(!state.candidate)fail('No reviewed candidate exists to resume');
+  const start=postIndices.indexOf(state.route);
+  if(start<0)fail(`Progress route index ${state.route} is not one of this group's post-review checkpoints`);
+  state.candidate.base=packets.flatMap(({id,revision,html,continuation})=>[{id,revision,sha256:sha(html)},...(continuation?[{id:continuation.id,revision:continuation.revision,sha256:sha(continuation.html)}]:[])]);
+  await save(state);
+  const rows=rowsFor(packets);
+  const proposed=rows.map((row,index)=>({index,component:row.component,english:row.english,spanish:state.candidate.values[row.packetId]?.[row.component]?.[row.english]}));
+  for(const i of postIndices.slice(start))await reviewPublished(i,proposed);
+  state.group++;state.route=0;state.candidate=null;state.status='released';await save(state);
+  console.log(JSON.stringify({site:alias,status:'group-released',resumedPostReview:true,group:group.name,routes:group.routes.slice(start)}));
+  process.exit(0);
+}
 let candidate=state.candidate;
 if(!candidate){
   const rows=rowsFor(packets);
   const request=rows.map((row,index)=>({index,component:row.component,english:row.english,currentSpanish:row.current}));
-  const translation=await openrouter(process.env.OPENROUTER_TRANSLATOR_MODEL||'google/gemini-3.1-flash-lite',[{role:'system',content:'Translate the COMPLETE page copy into natural Mexican Spanish for a luxury Riviera Maya real estate site. Review existing Spanish; retain good translations, correct awkward or inaccurate ones. Keep Susi MacDonald and all place names, property facts, prices, measurements, URLs and placeholders exact. Do not translate brand names. Return JSON object {translations:[{index,spanish}]} covering every index exactly once. No word-by-word rendering; make the page read coherently.'},{role:'user',content:JSON.stringify({route,group:group.name,purpose:group.purpose,phrases:request})}]);
+  const translation=await openrouter(process.env.OPENROUTER_TRANSLATOR_MODEL||'google/gemini-3.1-flash-lite',[{role:'system',content:'Translate only the custom-embed interface copy on this page into natural Mexican Spanish for a luxury Riviera Maya real estate site. Property-card data (names, prices, beds/baths, availability, delivery, status) and other CMS-bound fields are handled in the later CMS phase; do not invent or force translations for them. Review existing Spanish; retain good translations, correct awkward or inaccurate ones. Keep Susi MacDonald and all place names, property facts, prices, measurements, URLs and placeholders exact. Preserve compact number forms exactly: do not expand $200K to $200,000 and do not add USD or MXN when the source lacks it. Do not translate brand names. Return JSON object {translations:[{index,spanish}]} covering every index exactly once. No word-by-word rendering; make the page read coherently.'},{role:'user',content:JSON.stringify({route,group:group.name,purpose:group.purpose,phrases:request})}]);
   const values=checkedResult(translation.data,rows);
   candidate={base:packets.flatMap(({id,revision,html,continuation})=>[{id,revision,sha256:sha(html)},...(continuation?[{id:continuation.id,revision:continuation.revision,sha256:sha(continuation.html)}]:[])]),values,translatorUsage:translation.usage};
   state.candidate=candidate;state.status='candidate';await save(state);
@@ -172,14 +199,14 @@ const sourceRows=rowsFor(packets);
 let proposed=sourceRows.map((row,index)=>({index,component:row.component,english:row.english,spanish:candidate.values[row.packetId]?.[row.component]?.[row.english]}));
 let review,reviewPath;
 for(let attempt=0;attempt<2;attempt++){
-  review=await openrouter(process.env.OPENROUTER_REVIEW_MODEL||'google/gemini-3-flash-preview',[{role:'system',content:'Independently review this ONE page of English and Mexican Spanish real-estate copy in context. The images show the currently published page and are context for tone, product and layout; the proposed Spanish text is in the JSON. Check every phrase for natural Mexican Spanish, factual fidelity, correct geography and clear terminology. Reject only a material translation error: missing or added meaning, changed facts, untranslated English, or Spanish that harms comprehension. Accept normal synonyms and CTA wording; for example Precio de venta, Precio solicitado and Precio de lista can all convey Asking price, while Ver propiedad or Explorar propiedad can convey Explore home. Do not reject a stylistic preference or reverse an earlier accepted synonym. Existing unrelated Wix or CMS English may remain. Return JSON {approved:boolean,issues:[{index:number,reason:string}],summary:string}. Approve when there are no material errors.'},{role:'user',content:[{type:'text',text:JSON.stringify({route,purpose:group.purpose,phrases:proposed})},{type:'image_url',image_url:{url:englishShot.image}},{type:'image_url',image_url:{url:spanishShot.image}}]}],5000);
+  review=await openrouter(process.env.OPENROUTER_REVIEW_MODEL||'google/gemini-3-flash-preview',[{role:'system',content:'Independently review this ONE page of English and Mexican Spanish real-estate copy in context. The images show the currently published page and are context for tone, product and layout; the proposed Spanish text is in the JSON. Check every phrase for natural Mexican Spanish, factual fidelity, correct geography and clear terminology. Reject only a material translation error: missing or added meaning, changed facts, untranslated English, or Spanish that harms comprehension. Accept normal synonyms and CTA wording; for example Precio de venta, Precio solicitado and Precio de lista can all convey Asking price, while Ver propiedad or Explorar propiedad can convey Explore home. Do not reject a stylistic preference or reverse an earlier accepted synonym. Existing unrelated Wix or CMS English may remain. Return JSON {approved:boolean,issues:[{index:number,reason:string}],summary:string}. Approve when there are no material errors.'},{role:'user',content:[{type:'text',text:JSON.stringify({route,purpose:group.purpose,phrases:proposed})},...englishShot.images.map(image=>({type:'image_url',image_url:{url:image}})),...spanishShot.images.map(image=>({type:'image_url',image_url:{url:image}}))]}],5000);
   reviewPath=path.join(stateDir,`${group.name}-${state.route}-review-${attempt}.json`);
   await writeFile(reviewPath,JSON.stringify({route,purpose:group.purpose,review:review.data,usage:review.usage},null,2)+'\n',{mode:0o600});
   if(review.data.approved===true&&Array.isArray(review.data.issues)&&!review.data.issues.length)break;
   if(!Array.isArray(review.data.issues)||!review.data.issues.length||attempt===1){state.status='held';await save(state);fail(`Page review held ${route}; inspect ${reviewPath}`)}
   const rejected=review.data.issues.map(issue=>({index:issue.index,reason:issue.reason,...proposed[issue.index]}));
   if(rejected.some(x=>!Number.isInteger(x.index)||!x.english||!x.reason)){state.status='held';await save(state);fail(`Reviewer returned invalid correction indices; inspect ${reviewPath}`)}
-  const correction=await openrouter(process.env.OPENROUTER_TRANSLATOR_MODEL||'google/gemini-3.1-flash-lite',[{role:'system',content:'Correct only the flagged Mexican Spanish real-estate translations. Preserve the English meaning, all names, facts, numbers, URLs and placeholders. Return JSON {translations:[{index,spanish}]} for every flagged index exactly once.'},{role:'user',content:JSON.stringify({route,purpose:group.purpose,reviewIssues:rejected,fullPage:proposed})}],4000);
+  const correction=await openrouter(process.env.OPENROUTER_TRANSLATOR_MODEL||'google/gemini-3.1-flash-lite',[{role:'system',content:'Correct only the flagged Mexican Spanish real-estate translations. Preserve the English meaning, all names, facts, numbers, URLs and placeholders. Keep compact number forms exactly as written in the source. Return JSON {translations:[{index,spanish}]} for every flagged index exactly once.'},{role:'user',content:JSON.stringify({route,purpose:group.purpose,reviewIssues:rejected,fullPage:proposed})}],4000);
   if(!Array.isArray(correction.data.translations)||correction.data.translations.length!==rejected.length){state.status='held';await save(state);fail('Correction response omitted flagged phrases')}
   const seen=new Set();for(const entry of correction.data.translations){if(seen.has(entry.index)||!rejected.some(x=>x.index===entry.index)){state.status='held';await save(state);fail('Correction response changed unflagged phrase')}seen.add(entry.index);const row=sourceRows[entry.index];protect(row.english,entry.spanish);candidate.values[row.packetId][row.component][row.english]=entry.spanish}
   state.candidate=candidate;await save(state);
@@ -192,13 +219,6 @@ const releases=[];
 for(const item of packets){const revised=replacePacket(item.html,item.parts,candidate.values[item.id]??{},Boolean(item.continuation));const htmls=revised.length>15000?splitPacket(revised,item.parts[0].key):[revised];if(htmls.length===2&&!item.continuation)fail('Oversize packet has no declared continuation embed');const ids=htmls.length===2?[item.id,item.continuation.id]:[item.id];for(let index=0;index<ids.length;index++){const file=path.join(stateDir,`${group.name}-${ids[index]}.html`);await writeFile(file,htmls[index],{mode:0o600});const args={manifest:manifestPath,site:alias,stateDir,snippet:ids[index],htmlFile:file,allPages:true};const plan=await runOperation('update-snippet',args,process.env,{transport:'cli'});if(plan.status!=='dry-run')fail(`Bridge dry-run failed for ${ids[index]}`);releases.push({id:ids[index],file})}}
 state.status='releasing';await save(state);
 for(const item of releases){const args={manifest:manifestPath,site:alias,stateDir,snippet:item.id,htmlFile:item.file,allPages:true,apply:true};const receipt=await runOperation('update-snippet',args,process.env,{transport:'cli'});if(receipt.status!=='updated')fail(`Bridge update failed for ${item.id}; inspect receipts before retrying`);(state.receipts??=[]).push({group:group.name,id:item.id,receiptPath:receipt.receiptPath});await save(state)}
-const postIndices=group.routes.length>12?[0,Math.floor(group.routes.length/2),group.routes.length-1]:group.routes.map((_,index)=>index);
-for(const i of postIndices){
-  state.route=i;await save(state);
-  const after=await screenshot(group.routes[i],'es','spanish-after');
-  const result=await openrouter(process.env.OPENROUTER_REVIEW_MODEL||'google/gemini-3-flash-preview',[{role:'system',content:'Review the ACTUALLY RENDERED Spanish page screenshot after the embed release. Check whether the page has visible Spanish in its embed areas, no obvious untranslated embed headings/buttons, no broken or blank major content, and no layout failure. Some native Wix or CMS English can remain; do not judge those in this embed phase. Return JSON {approved:boolean,issues:[{reason:string}],summary:string}. Reject any uncertain or broken embed.'},{role:'user',content:[{type:'text',text:JSON.stringify({route:group.routes[i],purpose:group.purpose,expectedEmbedPhrases:proposed.map(x=>x.spanish)})},{type:'image_url',image_url:{url:after.image}}]}],2500);
-  const file=path.join(stateDir,`${group.name}-${i}-post-review.json`);await writeFile(file,JSON.stringify({route:group.routes[i],review:result.data,usage:result.usage},null,2)+'\n',{mode:0o600});
-  if(result.data.approved!==true||!Array.isArray(result.data.issues)||result.data.issues.length){state.status='post-review-held';await save(state);fail(`Published page review held ${group.routes[i]}; inspect ${file} and bridge recovery receipts`)}
-}
+for(const i of postIndices)await reviewPublished(i,proposed);
 state.group++;state.route=0;state.candidate=null;state.status='released';await save(state);
 console.log(JSON.stringify({site:alias,status:'group-released',group:group.name,routes:group.routes,receipts:state.receipts?.slice(-releases.length)}));

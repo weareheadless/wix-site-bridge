@@ -91,3 +91,8 @@ private receipt for embed ID `41e2873b-2a99-4747-b1b6-156878469855`.
 - The human handles Wix Editor placement, section removal, sizing and element settings. Agents must not operate the Wix Editor UI unless the human explicitly changes this workflow.
 - Agents build and push component source, Velo bindings and synchronized global startup packets. Give the human precise file names, tag names, element IDs and sizing instructions when placement is required.
 - Do not publish using a stale local UI snapshot after the human edits layout. The human's saved Editor layout is authoritative; synchronize it through a supported workflow before any CLI publish, or ask the human to publish from the Editor after release readiness is confirmed.
+
+## ABSOLUTE PUBLISH RULE
+
+- Agents must never run `wix publish` or publish the site through the CLI/API. CLI publish publishes the Editor's current language/UI state and has repeatedly reverted the Spanish site to English. Only the human publishes from the Wix Editor, after switching to the Spanish language and saving that language. Agents may push code, components and early packets; they may not publish.
+

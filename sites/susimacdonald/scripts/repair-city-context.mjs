@@ -18,10 +18,14 @@ for(const id of ids){
   for(const match of [...html.matchAll(/\["([^"\\]+)","([A-Za-z0-9+/=]+)"\]/g)]){
     let source=gunzipSync(Buffer.from(match[2],'base64')).toString('utf8');
     const anchor='let translated=__susiDictionary[text];';
-    if(!source.includes(anchor))throw Error(`Missing city localization helper in ${id}`);
-    if(source.includes('const lead=text.match('))continue;
-    source=source.replace(anchor,anchor+cityContextRules);
-    html=html.replace(match[2],gzipSync(Buffer.from(source),{level:9,mtime:0}).toString('base64'));
+    const start=source.indexOf(anchor);
+    const fallbacks=['if(translated===undefined){translated=text.replace(','translated===void 0&&(translated=text.replace('];
+    const ends=start<0?[]:fallbacks.map(marker=>source.indexOf(marker,start+anchor.length)).filter(index=>index>=0);
+    const end=ends.length?Math.min(...ends):-1;
+    if(start<0||end<0)throw Error(`Missing city localization helper in ${id}`);
+    const revised=source.slice(0,start+anchor.length)+cityContextRules+source.slice(end);
+    if(revised===source)continue;
+    html=html.replace(match[2],gzipSync(Buffer.from(revised),{level:9,mtime:0}).toString('base64'));
     changed++;
   }
   if(!changed)throw Error(`No city packet changed in ${id}`);

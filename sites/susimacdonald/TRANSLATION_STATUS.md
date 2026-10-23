@@ -10,7 +10,7 @@
 
 ## Remaining work
 
-- Complete full listing narratives, long editorial/legal copy, remaining native text and page-specific custom component/configuration translations. Listing titles, summaries, metadata and translated status/price labels are now complete for all nonempty source fields.
+- Complete full listing narratives, long editorial/legal copy, remaining native text and page-specific custom component/configuration translations. Property cards (names, prices, beds/baths, availability, delivery, status) and city-guide bodies are CMS translations, not embed-page translations; they move to the CMS phase after the embed chrome is complete. Listing titles, summaries, metadata and translated status/price labels are now complete for all nonempty source fields.
 - Preserve HTML, links, prices, dates, measurements, factual and legal meaning. Do not treat translation as a rewrite or silently update old dated claims.
 - Source inventory: 921 English records, approximately 198,507 words including HTML/source content, across 22 schemas. This is substantially more than the interface dictionary. Do not claim the whole site is translated.
 - Wire locale through supported Wix context; synchronize ordinary custom-element source and both existing early controllers/packets before an authorized production release. Human publishes the current saved Editor layout. Native Spanish visibility remains a separate launch decision.
