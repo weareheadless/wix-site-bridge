@@ -279,7 +279,11 @@ export async function runOperation(command, args, env = process.env, options = {
     const target = await inspectPublishTarget(site, sourceRoot);
     if (!apply) return { status: "dry-run", action: "wix publish", target: { siteId: site.siteId, repo: site.connectedRepo, branch: target.branch, sourceCommit: target.sourceCommit, uiConfigSha256: target.uiConfigSha256, uiVersion: target.uiVersion } };
     if (options.transport === "mcp") return { status: "requires-local-terminal", command: `npm run bridge -- publish --manifest ${ctx.manifestPath} --site ${site.alias} --site-repo ${sourceRoot} --apply`, reason: "The supported Wix CLI publish flow is interactive. Run this command in a local terminal and confirm the Wix CLI prompt." };
-    const result = invokeWixPublish(sourceRoot, { env });
+    const result = invokeWixPublish(sourceRoot, {
+      env,
+      args: options.nonInteractive ? ["--source", "remote", "-y"] : [],
+      ...(options.nonInteractive ? { stdio: "pipe" } : {}),
+    });
     const receiptId = newId("publish");
     const receipt = { releaseId: receiptId, siteAlias: site.alias, siteId: site.siteId, createdAt: new Date().toISOString(), status: result.status, sourceCommit: target.sourceCommit, uiConfigSha256: target.uiConfigSha256 };
     await writePrivateJson(path.join(stateDir, "receipts", `${receiptId}.json`), receipt);
@@ -293,7 +297,18 @@ export async function runOperation(command, args, env = process.env, options = {
       const plan = await planRelease({ site, sourceRoot, client });
       return { ...plan, status: "requires-local-terminal", command: `npm run bridge -- release --manifest ${ctx.manifestPath} --site ${site.alias} --site-repo ${sourceRoot} --apply`, reason: "The release must run the supported, interactive Wix CLI publish flow before it updates Custom Embeds. Run the command in a local terminal." };
     }
-    return executeRelease({ site, sourceRoot, client, stateDir, apply: true });
+    return executeRelease({
+      site,
+      sourceRoot,
+      client,
+      stateDir,
+      apply: true,
+      publish: (repoPath) => invokeWixPublish(repoPath, {
+        env,
+        args: options.nonInteractive ? ["--source", "remote", "-y"] : [],
+        ...(options.nonInteractive ? { stdio: "pipe" } : {}),
+      }),
+    });
   }
   if (command === "verify") {
     if (!sourceRoot) throw new Error("Pass --site-repo with the separately connected Wix source repository.");

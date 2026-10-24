@@ -65,9 +65,9 @@ export function checkWixCliAuth(env = process.env, exec = spawnSync, executable 
   return { authenticated: true, method: "wix-cli-api-key" };
 }
 
-export function invokeWixPublish(repoPath, { exec = spawnSync, env = process.env, stdio = "inherit", executable = wixExecutable() } = {}) {
+export function invokeWixPublish(repoPath, { exec = spawnSync, env = process.env, stdio = "inherit", executable = wixExecutable(), args = [] } = {}) {
   checkWixCliAuth(env, exec, executable);
-  const result = exec(executable, ["publish"], { cwd: repoPath, env, stdio, encoding: "utf8" });
+  const result = exec(executable, ["publish", ...args], { cwd: repoPath, env, stdio, encoding: "utf8" });
   if (result.error) throw new Error("Could not start the Wix CLI publish command.");
   if (result.status !== 0) throw new Error(`Wix CLI publish exited with status ${result.status ?? "unknown"}. Custom Embed snippets were not updated.`);
   return { status: "published" };

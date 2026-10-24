@@ -10,6 +10,7 @@ function parseArgs(tokens) {
     if (token === "--apply") options.apply = true;
     else if (token === "--all-pages") options.allPages = true;
     else if (token === "--preserve-scope") options.preserveScope = true;
+    else if (token === "--non-interactive") options.nonInteractive = true;
     else if (token === "--help" || token === "-h") options.help = true;
     else if (token.startsWith("--")) {
       const key = token.slice(2).replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
