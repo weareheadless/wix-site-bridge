@@ -1,4 +1,4 @@
-import { inspectPublishTarget, invokeWixPublish } from "./publish.mjs";
+import { inspectPublishTarget } from "./publish.mjs";
 import { deploySnippets, planSnippetDeployment, saveCurrentSnapshot } from "./release.mjs";
 import { safeError, writePrivateJson } from "./security.mjs";
 import path from "node:path";
@@ -28,7 +28,7 @@ export async function planRelease({ site, sourceRoot, client }) {
   };
 }
 
-export async function executeRelease({ site, sourceRoot, client, stateDir, apply = false, publish = invokeWixPublish }) {
+export async function executeRelease({ site, sourceRoot, client, stateDir, apply = false, publish }) {
   const source = await inspectPublishTarget(site, sourceRoot);
   const plannedItems = await planSnippetDeployment({ site, sourceRoot, client });
   const plan = {
@@ -47,6 +47,7 @@ export async function executeRelease({ site, sourceRoot, client, stateDir, apply
     changedSnippets: plannedItems.filter((item) => item.changed).length
   };
   if (!apply) return { status: "dry-run", ...plan };
+  if (typeof publish !== "function") throw new Error("executeRelease requires the verified publish transaction callback");
 
   const snapshot = await saveCurrentSnapshot({
     site,
@@ -71,7 +72,7 @@ export async function executeRelease({ site, sourceRoot, client, stateDir, apply
     recovery: `Use restore --snapshot ${snapshot.snapshotId} --apply for Custom Embed snippets. Code rollback is a separate Git revert and Wix CLI publish operation.`
   };
   try {
-    await publish(source.repoPath);
+    receipt.publication = await publish(source.repoPath);
     receipt.codePublished = true;
   } catch (error) {
     receipt.status = "publish-failed";

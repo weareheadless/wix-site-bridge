@@ -27,8 +27,8 @@ const tools = [
   { name: "wix_bridge_plan", description: "Compare component-derived packet artifacts with the configured live Wix snippets without changing them.", inputSchema: baseSchema({}, ["siteRepo"]), operation: "plan" },
   { name: "wix_bridge_snapshot", description: "Save the current configured Custom Embed contents privately for recovery. Set apply=true to write the snapshot; default is dry-run.", inputSchema: baseSchema({ apply: { type: "boolean", default: false } }), operation: "snapshot" },
   { name: "wix_bridge_deploy", description: "Update configured Wix Custom Embeds using their current revisions. Updates may take effect on the next site render. Dry-run by default; set apply=true to mutate.", inputSchema: baseSchema({ apply: { type: "boolean", default: false } }, ["siteRepo"]), operation: "deploy" },
-  { name: "wix_bridge_publish", description: "Preflight/publish the Wix-connected site's committed code via the supported Wix CLI. Apply requests return the exact terminal command because Wix CLI publish requires an interactive confirmation.", inputSchema: baseSchema({ apply: { type: "boolean", default: false } }, ["siteRepo"]), operation: "publish" },
-  { name: "wix_bridge_release", description: "Plan or request a concise release: Wix CLI code publish first, then revision-checked Custom Embed updates. The apply path must be run in a local terminal because the documented Wix CLI prompts for publish confirmation.", inputSchema: baseSchema({ apply: { type: "boolean", default: false } }, ["siteRepo"]), operation: "release" },
+  { name: "wix_bridge_publish", description: "Preflight/publish the Wix-connected site's committed code using the verified publication transaction: sync the current Wix UI revision, publish remote code, and require a successful revision-safe result.", inputSchema: baseSchema({ apply: { type: "boolean", default: false } }, ["siteRepo"]), operation: "publish" },
+  { name: "wix_bridge_release", description: "Plan or run a concise release: verified Wix code publication first, then revision-checked Custom Embed updates.", inputSchema: baseSchema({ apply: { type: "boolean", default: false } }, ["siteRepo"]), operation: "release" },
   { name: "wix_bridge_verify", description: "Compare current configured Wix snippet hashes with generated source artifacts and check the configured live URL for an HTTP response. This does not replace fresh DOM and desktop/mobile visual checks.", inputSchema: baseSchema({}, ["siteRepo"]), operation: "verify" },
   { name: "wix_bridge_restore", description: "Restore only Custom Embed contents from a prior applied release, using current revisions and refusing to overwrite intervening edits. Dry-run by default; set apply=true to mutate.", inputSchema: baseSchema({ snapshot: { ...string, description: "Release or snapshot ID returned by a prior deployment." }, apply: { type: "boolean", default: false } }, ["snapshot"]), operation: "restore" }
 ];
@@ -65,7 +65,7 @@ export async function handleMessage(message, env = process.env, options = {}) {
       protocolVersion: negotiatedVersion,
       capabilities: { tools: { listChanged: false } },
       serverInfo: { name: "wix-site-bridge", version: "0.1.0" },
-      instructions: "All site actions require explicit manifest and site alias. Mutation tools are dry-run unless apply=true; Wix CLI publish/release apply requires the local terminal."
+      instructions: "All site actions require explicit manifest and site alias. Mutation tools are dry-run unless apply=true. Wix publish uses the verified UI-revision transaction and runs non-interactively."
     });
   }
   if (message.method === "ping") return response(message.id, {});

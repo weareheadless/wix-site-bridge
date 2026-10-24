@@ -4,7 +4,7 @@ import { spawnSync } from "node:child_process";
 import { deflateSync } from "node:zlib";
 import { generateArtifacts } from "./artifacts.mjs";
 import { loadManifest, selectSite } from "./manifest.mjs";
-import { inspectPublishTarget, invokeWixPublish, wixExecutable } from "./publish.mjs";
+import { inspectPublishTarget, publishWixSite, wixExecutable } from "./publish.mjs";
 import { executeRelease, planRelease } from "./release-operation.mjs";
 import { deploySnippets, inspectSnippets, planSnapshot, planSnippetDeployment, readConfiguredSnippet, restoreSnippets, saveCurrentSnapshot, snapshotSnippets } from "./release.mjs";
 import { assertAllowedTarget, newId, redact, sha256, targetAllowlist, writePrivateJson } from "./security.mjs";
@@ -277,15 +277,16 @@ export async function runOperation(command, args, env = process.env, options = {
   if (command === "publish") {
     if (!sourceRoot) throw new Error("Pass --site-repo with the separately connected Wix source repository.");
     const target = await inspectPublishTarget(site, sourceRoot);
-    if (!apply) return { status: "dry-run", action: "wix publish", target: { siteId: site.siteId, repo: site.connectedRepo, branch: target.branch, sourceCommit: target.sourceCommit, uiConfigSha256: target.uiConfigSha256, uiVersion: target.uiVersion } };
-    if (options.transport === "mcp") return { status: "requires-local-terminal", command: `npm run bridge -- publish --manifest ${ctx.manifestPath} --site ${site.alias} --site-repo ${sourceRoot} --apply`, reason: "The supported Wix CLI publish flow is interactive. Run this command in a local terminal and confirm the Wix CLI prompt." };
-    const result = invokeWixPublish(sourceRoot, {
+    if (!apply) return { status: "dry-run", action: "verified wix publish", target: { siteId: site.siteId, repo: site.connectedRepo, branch: target.branch, sourceCommit: target.sourceCommit, uiConfigSha256: target.uiConfigSha256, uiVersion: target.uiVersion } };
+    const publication = await publishWixSite({
+      repoPath: sourceRoot,
+      siteId: site.siteId,
+      gitSha: target.sourceCommit,
+      branch: target.branch,
       env,
-      args: options.nonInteractive ? ["--source", "remote", "-y"] : [],
-      ...(options.nonInteractive ? { stdio: "pipe" } : {}),
     });
     const receiptId = newId("publish");
-    const receipt = { releaseId: receiptId, siteAlias: site.alias, siteId: site.siteId, createdAt: new Date().toISOString(), status: result.status, sourceCommit: target.sourceCommit, uiConfigSha256: target.uiConfigSha256 };
+    const receipt = { releaseId: receiptId, siteAlias: site.alias, siteId: site.siteId, createdAt: new Date().toISOString(), status: "published", sourceCommit: target.sourceCommit, uiConfigSha256: target.uiConfigSha256, publication };
     await writePrivateJson(path.join(stateDir, "receipts", `${receiptId}.json`), receipt);
     return { ...receipt, receiptPath: path.join(stateDir, "receipts", `${receiptId}.json`) };
   }
@@ -293,21 +294,22 @@ export async function runOperation(command, args, env = process.env, options = {
     if (!sourceRoot) throw new Error("Pass --site-repo with the separately connected Wix source repository.");
     const client = clientFor(site, env);
     if (!apply) return planRelease({ site, sourceRoot, client });
-    if (options.transport === "mcp") {
-      const plan = await planRelease({ site, sourceRoot, client });
-      return { ...plan, status: "requires-local-terminal", command: `npm run bridge -- release --manifest ${ctx.manifestPath} --site ${site.alias} --site-repo ${sourceRoot} --apply`, reason: "The release must run the supported, interactive Wix CLI publish flow before it updates Custom Embeds. Run the command in a local terminal." };
-    }
     return executeRelease({
       site,
       sourceRoot,
       client,
       stateDir,
       apply: true,
-      publish: (repoPath) => invokeWixPublish(repoPath, {
-        env,
-        args: options.nonInteractive ? ["--source", "remote", "-y"] : [],
-        ...(options.nonInteractive ? { stdio: "pipe" } : {}),
-      }),
+      publish: async (repoPath) => {
+        const source = await inspectPublishTarget(site, repoPath);
+        return publishWixSite({
+          repoPath,
+          siteId: site.siteId,
+          gitSha: source.sourceCommit,
+          branch: source.branch,
+          env,
+        });
+      },
     });
   }
   if (command === "verify") {
