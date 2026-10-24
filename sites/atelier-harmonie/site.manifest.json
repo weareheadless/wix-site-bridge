@@ -624,7 +624,7 @@
           "type": "all"
         },
         "category": "ESSENTIAL",
-        "loadOnce": true,
+        "loadOnce": false,
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-elements-global.html",
         "purpose": "nonvisual-early-registration",
         "enabled": true,
@@ -663,10 +663,13 @@
         "name": "Atelier production early-packet-home-1.html",
         "position": "HEAD",
         "pageScope": {
-          "type": "all"
+          "type": "pages",
+          "pageIds": [
+            "lf68i"
+          ]
         },
         "category": "ESSENTIAL",
-        "loadOnce": true,
+        "loadOnce": false,
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-home-1.html",
         "purpose": "nonvisual-early-registration",
         "enabled": true,
@@ -677,10 +680,13 @@
         "name": "Atelier production early-packet-home-2.html",
         "position": "HEAD",
         "pageScope": {
-          "type": "all"
+          "type": "pages",
+          "pageIds": [
+            "lf68i"
+          ]
         },
         "category": "ESSENTIAL",
-        "loadOnce": true,
+        "loadOnce": false,
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-home-2.html",
         "purpose": "nonvisual-early-registration",
         "enabled": true,
@@ -705,10 +711,13 @@
         "name": "Atelier production early-packet-shop-1.html",
         "position": "HEAD",
         "pageScope": {
-          "type": "all"
+          "type": "pages",
+          "pageIds": [
+            "uafgz"
+          ]
         },
         "category": "ESSENTIAL",
-        "loadOnce": true,
+        "loadOnce": false,
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-shop-1.html",
         "purpose": "nonvisual-early-registration",
         "enabled": true,
@@ -719,10 +728,13 @@
         "name": "Atelier production early-packet-lamps-1.html",
         "position": "HEAD",
         "pageScope": {
-          "type": "all"
+          "type": "pages",
+          "pageIds": [
+            "eiusq"
+          ]
         },
         "category": "ESSENTIAL",
-        "loadOnce": true,
+        "loadOnce": false,
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-lamps-1.html",
         "purpose": "nonvisual-early-registration",
         "enabled": true,
@@ -733,10 +745,13 @@
         "name": "Atelier production early-packet-seats-1.html",
         "position": "HEAD",
         "pageScope": {
-          "type": "all"
+          "type": "pages",
+          "pageIds": [
+            "halt3"
+          ]
         },
         "category": "ESSENTIAL",
-        "loadOnce": true,
+        "loadOnce": false,
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-seats-1.html",
         "purpose": "nonvisual-early-registration",
         "enabled": true,
@@ -747,10 +762,13 @@
         "name": "Atelier production early-packet-deco-1.html",
         "position": "HEAD",
         "pageScope": {
-          "type": "all"
+          "type": "pages",
+          "pageIds": [
+            "y2f9r"
+          ]
         },
         "category": "ESSENTIAL",
-        "loadOnce": true,
+        "loadOnce": false,
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-deco-1.html",
         "purpose": "nonvisual-early-registration",
         "enabled": true,
@@ -761,10 +779,13 @@
         "name": "Atelier production early-packet-giftintro-1.html",
         "position": "HEAD",
         "pageScope": {
-          "type": "all"
+          "type": "pages",
+          "pageIds": [
+            "dqttd"
+          ]
         },
         "category": "ESSENTIAL",
-        "loadOnce": true,
+        "loadOnce": false,
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-giftintro-1.html",
         "purpose": "nonvisual-early-registration",
         "enabled": true,
@@ -775,10 +796,13 @@
         "name": "Atelier production early-packet-giftguide-1.html",
         "position": "HEAD",
         "pageScope": {
-          "type": "all"
+          "type": "pages",
+          "pageIds": [
+            "dqttd"
+          ]
         },
         "category": "ESSENTIAL",
-        "loadOnce": true,
+        "loadOnce": false,
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-giftguide-1.html",
         "purpose": "nonvisual-early-registration",
         "enabled": true,
@@ -789,10 +813,13 @@
         "name": "Atelier production early-packet-restoration-1.html",
         "position": "HEAD",
         "pageScope": {
-          "type": "all"
+          "type": "pages",
+          "pageIds": [
+            "bcg5b"
+          ]
         },
         "category": "ESSENTIAL",
-        "loadOnce": true,
+        "loadOnce": false,
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-restoration-1.html",
         "purpose": "nonvisual-early-registration",
         "enabled": true,
@@ -817,10 +844,13 @@
         "name": "Atelier production early-packet-fabrics-1.html",
         "position": "HEAD",
         "pageScope": {
-          "type": "all"
+          "type": "pages",
+          "pageIds": [
+            "enr9k"
+          ]
         },
         "category": "ESSENTIAL",
-        "loadOnce": true,
+        "loadOnce": false,
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-fabrics-1.html",
         "purpose": "nonvisual-early-registration",
         "enabled": true,
@@ -831,10 +861,13 @@
         "name": "Atelier production early-packet-b2b-1.html",
         "position": "HEAD",
         "pageScope": {
-          "type": "all"
+          "type": "pages",
+          "pageIds": [
+            "t2es8"
+          ]
         },
         "category": "ESSENTIAL",
-        "loadOnce": true,
+        "loadOnce": false,
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-b2b-1.html",
         "purpose": "nonvisual-early-registration",
         "enabled": true,
@@ -845,10 +878,13 @@
         "name": "Atelier production early-packet-workshops-1.html",
         "position": "HEAD",
         "pageScope": {
-          "type": "all"
+          "type": "pages",
+          "pageIds": [
+            "ntpl0"
+          ]
         },
         "category": "ESSENTIAL",
-        "loadOnce": true,
+        "loadOnce": false,
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-workshops-1.html",
         "purpose": "nonvisual-early-registration",
         "enabled": true,
@@ -859,10 +895,13 @@
         "name": "Atelier production early-packet-about-1.html",
         "position": "HEAD",
         "pageScope": {
-          "type": "all"
+          "type": "pages",
+          "pageIds": [
+            "yn9k9"
+          ]
         },
         "category": "ESSENTIAL",
-        "loadOnce": true,
+        "loadOnce": false,
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-about-1.html",
         "purpose": "nonvisual-early-registration",
         "enabled": true,
@@ -873,10 +912,13 @@
         "name": "Atelier production early-packet-quotetop-1.html",
         "position": "HEAD",
         "pageScope": {
-          "type": "all"
+          "type": "pages",
+          "pageIds": [
+            "zehpb"
+          ]
         },
         "category": "ESSENTIAL",
-        "loadOnce": true,
+        "loadOnce": false,
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-quotetop-1.html",
         "purpose": "nonvisual-early-registration",
         "enabled": true,
@@ -887,10 +929,13 @@
         "name": "Atelier production early-packet-quotebottom-1.html",
         "position": "HEAD",
         "pageScope": {
-          "type": "all"
+          "type": "pages",
+          "pageIds": [
+            "zehpb"
+          ]
         },
         "category": "ESSENTIAL",
-        "loadOnce": true,
+        "loadOnce": false,
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-quotebottom-1.html",
         "purpose": "nonvisual-early-registration",
         "enabled": true,
@@ -901,10 +946,13 @@
         "name": "Atelier production early-packet-journaltop-1.html",
         "position": "HEAD",
         "pageScope": {
-          "type": "all"
+          "type": "pages",
+          "pageIds": [
+            "gibju"
+          ]
         },
         "category": "ESSENTIAL",
-        "loadOnce": true,
+        "loadOnce": false,
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-journaltop-1.html",
         "purpose": "nonvisual-early-registration",
         "enabled": true,
@@ -915,10 +963,13 @@
         "name": "Atelier production early-packet-journalbottom-1.html",
         "position": "HEAD",
         "pageScope": {
-          "type": "all"
+          "type": "pages",
+          "pageIds": [
+            "gibju"
+          ]
         },
         "category": "ESSENTIAL",
-        "loadOnce": true,
+        "loadOnce": false,
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-journalbottom-1.html",
         "purpose": "nonvisual-early-registration",
         "enabled": true,
@@ -929,10 +980,13 @@
         "name": "Atelier production early-packet-product-1.html",
         "position": "HEAD",
         "pageScope": {
-          "type": "all"
+          "type": "pages",
+          "pageIds": [
+            "lj022"
+          ]
         },
         "category": "ESSENTIAL",
-        "loadOnce": true,
+        "loadOnce": false,
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-product-1.html",
         "purpose": "nonvisual-early-registration",
         "enabled": true,
@@ -943,10 +997,13 @@
         "name": "Atelier production early-packet-productfaq-1.html",
         "position": "HEAD",
         "pageScope": {
-          "type": "all"
+          "type": "pages",
+          "pageIds": [
+            "lj022"
+          ]
         },
         "category": "ESSENTIAL",
-        "loadOnce": true,
+        "loadOnce": false,
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-productfaq-1.html",
         "purpose": "nonvisual-early-registration",
         "enabled": true,
@@ -957,10 +1014,13 @@
         "name": "Atelier production early-packet-product-2.html",
         "position": "HEAD",
         "pageScope": {
-          "type": "all"
+          "type": "pages",
+          "pageIds": [
+            "lj022"
+          ]
         },
         "category": "ESSENTIAL",
-        "loadOnce": true,
+        "loadOnce": false,
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-product-2.html",
         "purpose": "nonvisual-early-registration",
         "enabled": true,
@@ -974,7 +1034,7 @@
           "type": "all"
         },
         "category": "ESSENTIAL",
-        "loadOnce": true,
+        "loadOnce": false,
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-terms-1.html",
         "purpose": "nonvisual-early-registration",
         "enabled": false,
@@ -988,7 +1048,7 @@
           "type": "all"
         },
         "category": "ESSENTIAL",
-        "loadOnce": true,
+        "loadOnce": false,
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-terms-2.html",
         "purpose": "nonvisual-early-registration",
         "enabled": false,
@@ -999,10 +1059,13 @@
         "name": "Atelier production early-packet-generalterms-1.html",
         "position": "HEAD",
         "pageScope": {
-          "type": "all"
+          "type": "pages",
+          "pageIds": [
+            "i8cyj"
+          ]
         },
         "category": "ESSENTIAL",
-        "loadOnce": true,
+        "loadOnce": false,
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-generalterms-1.html",
         "purpose": "nonvisual-early-registration",
         "enabled": false,
@@ -1013,13 +1076,16 @@
         "name": "Atelier production early-packet-privacy-1.html",
         "position": "HEAD",
         "pageScope": {
-          "type": "all"
+          "type": "pages",
+          "pageIds": [
+            "u54cx"
+          ]
         },
         "category": "ESSENTIAL",
-        "loadOnce": true,
+        "loadOnce": false,
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-privacy-1.html",
         "purpose": "nonvisual-early-registration",
-        "enabled": false,
+        "enabled": true,
         "release": "atelier-performance-20261020-v53-geometry"
       },
       {
@@ -1027,13 +1093,16 @@
         "name": "Atelier production early-packet-cookies-1.html",
         "position": "HEAD",
         "pageScope": {
-          "type": "all"
+          "type": "pages",
+          "pageIds": [
+            "ignax"
+          ]
         },
         "category": "ESSENTIAL",
-        "loadOnce": true,
+        "loadOnce": false,
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-cookies-1.html",
         "purpose": "nonvisual-early-registration",
-        "enabled": false,
+        "enabled": true,
         "release": "atelier-performance-20261020-v53-geometry"
       },
       {
@@ -1041,13 +1110,16 @@
         "name": "Atelier production early-packet-home-3.html",
         "position": "HEAD",
         "pageScope": {
-          "type": "all"
+          "type": "pages",
+          "pageIds": [
+            "lf68i"
+          ]
         },
         "category": "ESSENTIAL",
-        "loadOnce": true,
+        "loadOnce": false,
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-home-3.html",
         "purpose": "nonvisual-early-registration",
-        "enabled": false,
+        "enabled": true,
         "release": "atelier-performance-20261020-v53-geometry"
       },
       {
@@ -1055,13 +1127,16 @@
         "name": "Atelier production early-packet-shop-2.html",
         "position": "HEAD",
         "pageScope": {
-          "type": "all"
+          "type": "pages",
+          "pageIds": [
+            "uafgz"
+          ]
         },
         "category": "ESSENTIAL",
-        "loadOnce": true,
+        "loadOnce": false,
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-shop-2.html",
         "purpose": "nonvisual-early-registration",
-        "enabled": false,
+        "enabled": true,
         "release": "atelier-performance-20261020-v53-geometry"
       },
       {
@@ -1069,13 +1144,16 @@
         "name": "Atelier production early-packet-fabrics-2.html",
         "position": "HEAD",
         "pageScope": {
-          "type": "all"
+          "type": "pages",
+          "pageIds": [
+            "enr9k"
+          ]
         },
         "category": "ESSENTIAL",
-        "loadOnce": true,
+        "loadOnce": false,
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-fabrics-2.html",
         "purpose": "nonvisual-early-registration",
-        "enabled": false,
+        "enabled": true,
         "release": "atelier-performance-20261020-v53-geometry"
       },
       {
@@ -1083,13 +1161,16 @@
         "name": "Atelier production early-packet-b2b-2.html",
         "position": "HEAD",
         "pageScope": {
-          "type": "all"
+          "type": "pages",
+          "pageIds": [
+            "t2es8"
+          ]
         },
         "category": "ESSENTIAL",
-        "loadOnce": true,
+        "loadOnce": false,
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-b2b-2.html",
         "purpose": "nonvisual-early-registration",
-        "enabled": false,
+        "enabled": true,
         "release": "atelier-performance-20261020-v53-geometry"
       },
       {
@@ -1111,10 +1192,13 @@
         "name": "Atelier production early-packet-generalterms-2.html",
         "position": "HEAD",
         "pageScope": {
-          "type": "all"
+          "type": "pages",
+          "pageIds": [
+            "i8cyj"
+          ]
         },
         "category": "ESSENTIAL",
-        "loadOnce": true,
+        "loadOnce": false,
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-generalterms-2.html",
         "purpose": "nonvisual-early-registration",
         "enabled": false,
@@ -1125,13 +1209,16 @@
         "name": "Atelier production early-packet-privacy-2.html",
         "position": "HEAD",
         "pageScope": {
-          "type": "all"
+          "type": "pages",
+          "pageIds": [
+            "u54cx"
+          ]
         },
         "category": "ESSENTIAL",
-        "loadOnce": true,
+        "loadOnce": false,
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-privacy-2.html",
         "purpose": "nonvisual-early-registration",
-        "enabled": false,
+        "enabled": true,
         "release": "atelier-performance-20261020-v53-geometry"
       },
       {
@@ -1139,10 +1226,13 @@
         "name": "Atelier production early registration — lamp categories",
         "position": "HEAD",
         "pageScope": {
-          "type": "all"
+          "type": "pages",
+          "pageIds": [
+            "pyd4k"
+          ]
         },
         "category": "ESSENTIAL",
-        "loadOnce": true,
+        "loadOnce": false,
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-lampcategory-1.html",
         "purpose": "nonvisual-early-registration",
         "enabled": true,
@@ -1153,14 +1243,41 @@
         "name": "Atelier production early-packet-shipping-1.html",
         "position": "HEAD",
         "pageScope": {
-          "type": "all"
+          "type": "pages",
+          "pageIds": [
+            "yx5sd"
+          ]
         },
         "category": "ESSENTIAL",
-        "loadOnce": true,
+        "loadOnce": false,
         "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-shipping-1.html",
         "purpose": "route-guarded-shipping",
         "enabled": true,
         "release": "atelier-performance-20261020-v53-geometry"
+      },
+      {
+        "id": "9605b5ef-04c6-47b2-9994-7acb4b01990e",
+        "name": "StoresChannels Google Site Verification",
+        "purpose": "live-sync",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "enabled": true,
+        "loadOnce": false
+      },
+      {
+        "id": "3b6ddcef-061e-4cc6-9652-42524fd350d7",
+        "name": "Topbar",
+        "purpose": "live-sync",
+        "position": "BODY_START",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "enabled": false,
+        "loadOnce": false
       }
     ],
     "connectedRepo": "weareheadless/atelier-harmonie",
