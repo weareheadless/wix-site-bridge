@@ -220,6 +220,18 @@
         "purpose": "existing-snippet-inventory"
       },
       {
+        "id": "3f87ecac-b108-48b6-90f2-2fee2cf1203a",
+        "name": "Susi early packet — Rentals: CTA + FAQ",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": true,
+        "enabled": true,
+        "purpose": "Rentals CTA + FAQ early packet"
+      },
+      {
         "id": "0a8830a0-e744-4255-9893-d32aded70d6b",
         "name": "Susi early packet — listing-detail",
         "position": "HEAD",
