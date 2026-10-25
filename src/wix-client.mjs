@@ -179,13 +179,16 @@ export class WixCustomEmbedsClient {
     return result.customEmbed;
   }
 
-  async updateHtml(embed, html, category = embed.embedData.category) {
+  async updateHtml(embed, html, category = embed.embedData.category, loadOnce = embed.loadOnce) {
     const result = await this.request(`${API}/${encodeURIComponent(embed.id)}`, {
       method: "PATCH",
       body: JSON.stringify({
         customEmbed: {
           id: embed.id,
           revision: String(embed.revision),
+          enabled: embed.enabled,
+          loadOnce,
+          position: embed.position,
           embedData: { category, html }
         }
       })

@@ -203,7 +203,7 @@ export async function runOperation(command, args, env = process.env, options = {
     const receiptPath = path.join(stateDir, "receipts", `${operationId}.json`);
     let updated = false;
     try {
-      await client.updateHtml(current, html, category);
+      await client.updateHtml(current, html, category, snippet.loadOnce);
       updated = true;
       const confirmed = await readConfiguredSnippet({ site, snippetId: snippet.id, client });
       if (sha256(confirmed.embedData?.html ?? "") !== afterSha256) throw new Error("Wix returned content that does not match the planned hash.");
