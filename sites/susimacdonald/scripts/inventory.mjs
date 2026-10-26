@@ -1,0 +1,15 @@
+import {readFile,writeFile,mkdir} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
+import {WixAppTokenProvider,WixCustomEmbedsClient} from '../../../src/wix-client.mjs';
+if(process.argv[2]!=='--site'||process.argv[3]!=='susimacdonald')throw Error('Explicit --site susimacdonald required');
+const base='sites/susimacdonald',manifest=JSON.parse(await readFile(base+'/site.manifest.json','utf8'));
+if(manifest.site.siteId!=='878460ca-c98c-402b-8a10-862023f67cce'||process.env.WIX_ALLOWED_SITE_IDS!==manifest.site.siteId)throw Error('Susi target boundary mismatch');
+const client=new WixCustomEmbedsClient({siteId:manifest.site.siteId,tokenProvider:WixAppTokenProvider.fromEnv()});
+const embeds=await client.listAll();
+const state=base+'/.wix-bridge-state';await mkdir(state,{recursive:true,mode:0o700});
+await writeFile(state+'/live-embeds.json',JSON.stringify(embeds,null,2)+'\n',{mode:0o600});
+const inventory=embeds.map(e=>({id:e.id,name:e.name,position:e.position,pageScope:e.pageFilter?.pageIds?.length?{type:'pages',pageIds:e.pageFilter.pageIds}:{type:'all'},category:e.embedData?.category,loadOnce:e.loadOnce,enabled:e.enabled,revision:String(e.revision),sha256:createHash('sha256').update(e.embedData?.html||'').digest('hex')}));
+await writeFile(base+'/embed-inventory.json',JSON.stringify({siteAlias:'susimacdonald',siteId:manifest.site.siteId,readAt:new Date().toISOString(),snippets:inventory},null,2)+'\n');
+manifest.site.customCode=inventory.map(({revision,sha256,...entry})=>({...entry,purpose:'existing-snippet-inventory'}));
+await writeFile(base+'/site.manifest.json',JSON.stringify(manifest,null,2)+'\n');
+console.log(JSON.stringify({site:'susimacdonald',access:'verified',snippets:inventory.length,liveMutations:0}));

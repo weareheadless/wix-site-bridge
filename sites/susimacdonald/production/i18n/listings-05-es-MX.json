@@ -1,0 +1,470 @@
+[
+  {
+    "entityId": "c693c8a5-e2ea-4af9-b441-85c6d04e5745",
+    "source": {
+      "title2": "Long Term Rental in Playa Del Carmen: Hacienda Guadalupe 2BR Apartment"
+    },
+    "spanish": {
+      "title2": "Renta a largo plazo en Playa del Carmen: departamento de 2 recámaras en Hacienda Guadalupe"
+    }
+  },
+  {
+    "entityId": "1e67f350-c48d-4f04-8700-4f74376b5612",
+    "source": {
+      "title2": "Playa del Carmen Real Estate: iPlaya Penthouse for Sale"
+    },
+    "spanish": {
+      "title2": "Bienes raíces en Playa del Carmen: penthouse iPlaya en venta"
+    }
+  },
+  {
+    "entityId": "7d9ce48a-bf0c-4b35-a6cd-e6d111352be0",
+    "source": {
+      "title2": "Triángulo: Condos in Tulum"
+    },
+    "spanish": {
+      "title2": "Triángulo: departamentos en Tulum"
+    }
+  },
+  {
+    "entityId": "7f428267-6d27-411b-a05f-55c0261cc940",
+    "source": {
+      "title2": "Cielo Maya - Luxurious Beachfront Condos for Sale in Puerto Aventuras"
+    },
+    "spanish": {
+      "title2": "Cielo Maya: departamentos de lujo frente al mar en venta en Puerto Aventuras"
+    }
+  },
+  {
+    "entityId": "41cbdd58-487a-40d6-8c94-c1900a42b5fd",
+    "source": {
+      "title2": "Tamarindos Bacalar - Luxurious Real Estate Opportunity in Bacalar House For Sale"
+    },
+    "spanish": {
+      "title2": "Tamarindos Bacalar: casa en venta y una lujosa oportunidad inmobiliaria en Bacalar"
+    }
+  },
+  {
+    "entityId": "1ebf305c-576a-410c-bb1f-d45bd8bae229",
+    "source": {
+      "title2": "Xalet: Luxury Condos in Tulum"
+    },
+    "spanish": {
+      "title2": "Xalet: departamentos de lujo en Tulum"
+    }
+  },
+  {
+    "entityId": "44691a4d-68a1-4e07-9f38-3d24d3df46e6",
+    "source": {
+      "title2": "Unsui Homes, Your Beachfront House For Sale In Tulum, Mexico"
+    },
+    "spanish": {
+      "title2": "Unsui Homes: tu casa frente al mar en venta en Tulum, México"
+    }
+  },
+  {
+    "entityId": "1ee30c56-5b0a-4261-b995-b3105c1cdd9f",
+    "source": {
+      "title2": "Eden Tohoku Condos, Luxury Condos For Sale In Playa Del Carmen"
+    },
+    "spanish": {
+      "title2": "Eden Tohoku Condos: departamentos de lujo en venta en Playa del Carmen"
+    }
+  },
+  {
+    "entityId": "c9ced396-bf1a-490c-bc51-f4e1da35729f",
+    "source": {
+      "title2": "Nativo Condos - Luxurious Playa del Carmen Real Estate"
+    },
+    "spanish": {
+      "title2": "Nativo Condos: propiedades de lujo en Playa del Carmen"
+    }
+  },
+  {
+    "entityId": "cbe471b2-b521-493a-97bd-076b329d12e9",
+    "source": {
+      "title2": "The Village: Luxury Condos in Playa del Carmen"
+    },
+    "spanish": {
+      "title2": "The Village: departamentos de lujo en Playa del Carmen"
+    }
+  },
+  {
+    "entityId": "809f3ab8-1e9c-40c5-a868-6efc0beaecf9",
+    "source": {
+      "title2": "Valenia: Secure Land in Playa del Carmen"
+    },
+    "spanish": {
+      "title2": "Valenia: terrenos en un entorno seguro en Playa del Carmen"
+    }
+  },
+  {
+    "entityId": "cf5845b2-4a29-4aad-bdff-e8aa7d1d1c9c",
+    "source": {
+      "title2": "Fabula: Sustainable Beach Houses in Tulum"
+    },
+    "spanish": {
+      "title2": "Fabula: casas de playa sustentables en Tulum"
+    }
+  },
+  {
+    "entityId": "1f05c462-69c2-47d1-9efd-d8acbb5f788b",
+    "source": {
+      "title2": "DK 44 Fase 2: Rooftop Infinity Pool Condos"
+    },
+    "spanish": {
+      "title2": "DK 44 Fase 2: departamentos con alberca infinita en la azotea"
+    }
+  },
+  {
+    "entityId": "447fa61f-b4f0-45c4-8bb7-f2d85016512e",
+    "source": {
+      "title2": "Gran Tulum: Luxury Jungle Oasis"
+    },
+    "spanish": {
+      "title2": "Gran Tulum: un oasis de lujo en la selva"
+    }
+  },
+  {
+    "entityId": "463bbbef-e87d-4eb1-9d0c-34e3f9aedb68",
+    "source": {
+      "title2": "Afra Jungle: Luxe Townhouses in Tulum"
+    },
+    "spanish": {
+      "title2": "Afra Jungle: casas adosadas de lujo en Tulum"
+    }
+  },
+  {
+    "entityId": "1ff16781-3e01-458d-9156-9a1b83862be5",
+    "source": {
+      "title2": "Ixuh Playa Del Carmen Real Estate - Beachfront Condos & Homes for Sale"
+    },
+    "spanish": {
+      "title2": "Ixuh Playa del Carmen: casas y departamentos frente al mar en venta"
+    }
+  },
+  {
+    "entityId": "47bfdaee-3026-4451-b0fb-0fd73e8d2093",
+    "source": {
+      "title2": "Akua Signature,  a luxury real estate project located in the Aldea Zamá area of Tulum, Mexico. "
+    },
+    "spanish": {
+      "title2": "Akua Signature: un proyecto inmobiliario de lujo en Aldea Zamá, Tulum, México"
+    }
+  },
+  {
+    "entityId": "80eaf39f-77ac-49e1-a14e-b41a83412f82",
+    "source": {
+      "title2": "Playa Del Carmen Long Term Rental: AWA Playacar 303B Penthouse"
+    },
+    "spanish": {
+      "title2": "Renta a largo plazo en Playa del Carmen: penthouse AWA Playacar 303B"
+    }
+  },
+  {
+    "entityId": "47c23556-374f-4cb2-9145-d1a13a9d2a5f",
+    "source": {
+      "title2": "Bespoke: Beachfront Condos in Tulum"
+    },
+    "spanish": {
+      "title2": "Bespoke: departamentos frente al mar en Tulum"
+    }
+  },
+  {
+    "entityId": "47f4e92d-5fbd-4fdc-a95e-e36a0385ecd3",
+    "source": {
+      "title2": "Nalu Condominiums for Rent"
+    },
+    "spanish": {
+      "title2": "Departamentos Nalu en renta"
+    }
+  },
+  {
+    "entityId": "cfd57eb6-0635-4a6c-9288-01d621296b47",
+    "source": {
+      "title2": "Luxury Apartment for Rent in Playa del Carmen - IPANA P315"
+    },
+    "spanish": {
+      "title2": "Departamento de lujo en renta en Playa del Carmen: IPANA P315"
+    }
+  },
+  {
+    "entityId": "4a0c8f40-3b22-42d1-ad6d-a8da2f1224d8",
+    "source": {
+      "title2": "Costa Celeste: Oceanfront Haven in Playa"
+    },
+    "spanish": {
+      "title2": "Costa Celeste: un refugio frente al mar en Playa"
+    }
+  },
+  {
+    "entityId": "81a6d6ff-182e-4282-985d-ae46e7db1af2",
+    "source": {
+      "title2": "Club Aqua: Luxury Homes and Condos for Sale in Puerto Aventuras"
+    },
+    "spanish": {
+      "title2": "Club Aqua: casas y departamentos de lujo en venta en Puerto Aventuras"
+    }
+  },
+  {
+    "entityId": "204ce909-1ea0-4ded-90c8-a313f344decc",
+    "source": {
+      "title2": "Serenata: Boutique Condos in Playa del Carmen"
+    },
+    "spanish": {
+      "title2": "Serenata: departamentos boutique en Playa del Carmen"
+    }
+  },
+  {
+    "entityId": "4bda4e5c-34b5-43b1-bee0-d6a64524e205",
+    "source": {
+      "title2": "Polo 88 - Luxurious 2-Bedroom Condo for Sale in Playa Del Carmen"
+    },
+    "spanish": {
+      "title2": "Polo 88: departamento de lujo de 2 recámaras en venta en Playa del Carmen"
+    }
+  },
+  {
+    "entityId": "209a7b05-7c86-44d5-af6d-b55f1c3b4600",
+    "source": {
+      "title2": "Poc Ta Poc for Sale - Invest in Tulum Real Estate Today"
+    },
+    "spanish": {
+      "title2": "Poc Ta Poc en venta: invierte hoy en bienes raíces en Tulum"
+    }
+  },
+  {
+    "entityId": "d1012d32-d0cd-41d7-a76d-ad2082541ddb",
+    "source": {
+      "title2": "Starlight Towers A202: Luxury Long Term Rental in Playa del Carmen"
+    },
+    "spanish": {
+      "title2": "Starlight Towers A202: renta de lujo a largo plazo en Playa del Carmen"
+    }
+  },
+  {
+    "entityId": "83221569-d6cf-45ae-b505-7bf9a4d8969a",
+    "source": {
+      "title2": "Explore KIINO Condos in Cozumel, offering luxurious living with top amenities and high ROI. Ideal for North American investors seeking Cozumel real estate opportunities."
+    },
+    "spanish": {
+      "title2": "Conoce KIINO Condos en Cozumel: una vida de lujo con excelentes amenidades y alto retorno de inversión. Ideal para inversionistas norteamericanos que buscan oportunidades inmobiliarias en Cozumel."
+    }
+  },
+  {
+    "entityId": "84cf81f6-fead-47dc-b134-c145070d4e76",
+    "source": {
+      "title2": "Neren: Boutique Studios in Playa del Carmen"
+    },
+    "spanish": {
+      "title2": "Neren: estudios boutique en Playa del Carmen"
+    }
+  },
+  {
+    "entityId": "d47ce4b2-94bd-4b70-909a-51c0ebd18baa",
+    "source": {
+      "title2": "Beachfront Villa for Sale in Tulum | Tankah Bay Luxury"
+    },
+    "spanish": {
+      "title2": "Villa frente al mar en venta en Tulum | Lujo en Bahía Tankah"
+    }
+  },
+  {
+    "entityId": "4caa75e7-aa1d-4e6f-b5e9-8c86731eac23",
+    "source": {
+      "title2": "Torre 25: Luxe Condos in Playa del Carmen"
+    },
+    "spanish": {
+      "title2": "Torre 25: departamentos de lujo en Playa del Carmen"
+    }
+  },
+  {
+    "entityId": "85bb6c4b-3e3e-4f19-b497-b18c4458a95b",
+    "source": {
+      "title2": "Sonni Playa del Carmen | Studios and Apartments for Sale - From $185,000/USD"
+    },
+    "spanish": {
+      "title2": "Sonni Playa del Carmen: estudios y departamentos en venta desde $185,000 USD"
+    }
+  },
+  {
+    "entityId": "d4adbdbb-f9be-40e5-a63f-e27021223d70",
+    "source": {
+      "title2": "Uxmal: Jungle Condos in Tulum"
+    },
+    "spanish": {
+      "title2": "Uxmal: departamentos en la selva de Tulum"
+    }
+  },
+  {
+    "entityId": "231a2b73-f4d0-4c38-9f44-503c9bdbe6ee",
+    "source": {
+      "title2": "Acanto Playa del Carmen Condos for Sale | Luxury Living in Mexico"
+    },
+    "spanish": {
+      "title2": "Departamentos Acanto Playa del Carmen en venta | Vida de lujo en México"
+    }
+  },
+  {
+    "entityId": "268bb47a-b171-4aa7-b600-914b7e8c5f72",
+    "source": {
+      "title2": "Playa Del Carmen Real Estate: The Leaf Condo Long Term Rental in Playacar"
+    },
+    "spanish": {
+      "title2": "Bienes raíces en Playa del Carmen: departamento The Leaf en renta a largo plazo en Playacar"
+    }
+  },
+  {
+    "entityId": "d4faafa1-2bdd-4b91-82f8-29cb3fecb38c",
+    "source": {
+      "title2": "Palmara Residencial for Sale in Playa Del Carmen - Luxury Homes for Investment"
+    },
+    "spanish": {
+      "title2": "Palmara Residencial en venta en Playa del Carmen: casas de lujo para invertir"
+    }
+  },
+  {
+    "entityId": "4ceebeb1-2905-4792-9651-1cbbf8e840e1",
+    "source": {
+      "title2": "Mun Tulum - Tulum Real Estate & Sustainable Luxury Townhouses for Sale"
+    },
+    "spanish": {
+      "title2": "Mun Tulum: casas adosadas de lujo sustentable en venta en Tulum"
+    }
+  },
+  {
+    "entityId": "864084da-ac80-44ed-b5d7-d029dbf711e0",
+    "source": {
+      "title2": "Brhiza, Luxury BeachFront Homes For Sale in Puerto Aventuras, Mexico"
+    },
+    "spanish": {
+      "title2": "Brhiza: casas de lujo frente al mar en venta en Puerto Aventuras, México"
+    }
+  },
+  {
+    "entityId": "f8cb966f-f569-4e62-964c-0fe46966513c",
+    "source": {
+      "title2": "Zamaya Villas - Tulum"
+    },
+    "spanish": {
+      "title2": "Zamaya Villas: Tulum"
+    }
+  },
+  {
+    "entityId": "d67efedc-0b9c-4a74-8db1-bb6f8367b482",
+    "source": {
+      "title2": "Quartier 75: Lock-Off Condos in Playa"
+    },
+    "spanish": {
+      "title2": "Quartier 75: departamentos con sistema lock-off en Playa"
+    }
+  },
+  {
+    "entityId": "287ca8b1-14f2-4a74-ac69-a20fab2e793a",
+    "source": {
+      "title2": "Volta 101, A Beautiful Rental Located In The Heart Of Playa Del Carmen."
+    },
+    "spanish": {
+      "title2": "Volta 101: una hermosa propiedad en renta en el corazón de Playa del Carmen"
+    }
+  },
+  {
+    "entityId": "4d471089-f46d-42e1-b0a4-2862619f9f66",
+    "source": {
+      "title2": "Mila Condos: Lock-Off Units in Playa"
+    },
+    "spanish": {
+      "title2": "Mila Condos: unidades con sistema lock-off en Playa"
+    }
+  },
+  {
+    "entityId": "f9a16213-bfd8-473c-8eea-c5075d9382fa",
+    "source": {
+      "title2": "Wabi, The First Wellness Condo Resort In Tulum"
+    },
+    "spanish": {
+      "title2": "Wabi: el primer resort de departamentos enfocado en el bienestar en Tulum"
+    }
+  },
+  {
+    "entityId": "d6953088-4f84-458c-b323-cddd2e3d5c27",
+    "source": {
+      "title2": "Spirit 1978: Stylish Condos in Playa"
+    },
+    "spanish": {
+      "title2": "Spirit 1978: departamentos con estilo en Playa"
+    }
+  },
+  {
+    "entityId": "877ef281-d8d6-4a84-9bd2-8676100af9ed",
+    "source": {
+      "title2": "Akumal Real Estate - Stunning Beachfront Condo for Sale in Akumal Bay"
+    },
+    "spanish": {
+      "title2": "Bienes raíces en Akumal: espectacular departamento frente al mar en venta en Bahía Akumal"
+    }
+  },
+  {
+    "entityId": "87a37521-fbb6-4cb3-9976-c52157e8eea7",
+    "source": {
+      "title2": "Altra Beach - Luxury Beachfront Homes for Sale in Mexico"
+    },
+    "spanish": {
+      "title2": "Altra Beach: casas de lujo frente al mar en venta en México"
+    }
+  },
+  {
+    "entityId": "28e3873c-063e-4692-8d8e-3ef005496335",
+    "source": {
+      "title2": "Spirit 1990: Modern Ethno Condos"
+    },
+    "spanish": {
+      "title2": "Spirit 1990: departamentos modernos de estilo étnico"
+    }
+  },
+  {
+    "entityId": "881935a6-d7b4-4003-b0ba-c0b765b2d7ad",
+    "source": {
+      "title2": "Amira District Tulum | Luxury Condos for Sale "
+    },
+    "spanish": {
+      "title2": "Amira District Tulum: departamentos de lujo en venta"
+    }
+  },
+  {
+    "entityId": "8a43f7df-4d68-4556-b689-13709dc95ac1",
+    "source": {
+      "title2": "Kalani 25: Turnkey Condos in Playa"
+    },
+    "spanish": {
+      "title2": "Kalani 25: departamentos listos para habitar en Playa"
+    }
+  },
+  {
+    "entityId": "d6aa354a-f514-44d5-96f6-a188be26b7c9",
+    "source": {
+      "title2": "Distrito Xcalacoco: Beachfront Condos"
+    },
+    "spanish": {
+      "title2": "Distrito Xcalacoco: departamentos frente al mar"
+    }
+  },
+  {
+    "entityId": "4e29cc65-65a8-441e-a493-89a644358a6f",
+    "source": {
+      "title2": "Tao Tulum: Luxe Condos in Aldea Zama"
+    },
+    "spanish": {
+      "title2": "Tao Tulum: departamentos de lujo en Aldea Zama"
+    }
+  },
+  {
+    "entityId": "29d3405d-6e7c-46ce-854f-ed1463309d5e",
+    "source": {
+      "title2": "Le Parc Cancun | Exclusive Cancun Home for Sale Near Laguna Nichupté"
+    },
+    "spanish": {
+      "title2": "Le Parc Cancún: propiedad exclusiva en venta cerca de la Laguna Nichupté"
+    }
+  }
+]

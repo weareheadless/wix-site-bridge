@@ -1,0 +1,148 @@
+{
+  "siteAlias": "susimacdonald",
+  "siteId": "878460ca-c98c-402b-8a10-862023f67cce",
+  "connectedRepo": "weareheadless/susimacdonald-wix",
+  "uiVersion": "3267",
+  "files": [
+    {
+      "file": "src/public/playa-city-properties.js",
+      "renderingWrites": 6,
+      "phrases": 40,
+      "beforeSha256": "e5d398351ad35f4c9f7ab1a742b0acbe37116046ca3411551163d499197e0272",
+      "afterSha256": "c3d4eab2a1f2d81ca01a266eb64ca8c020ffc271ac985fc6fb6856e7feaf9fc5"
+    },
+    {
+      "file": "src/public/property-guide-v2.js",
+      "renderingWrites": 1,
+      "phrases": 2,
+      "beforeSha256": "a2371bd3cb660d7ce56e5d8a17155e376f60ed7d226eddfa1e02944177c3e379",
+      "afterSha256": "1cc386754850cf4df5b540546b7a69ae8ebe3019056e54f3bc491851d90bcaf7"
+    },
+    {
+      "file": "src/public/property-hero-v2.js",
+      "renderingWrites": 14,
+      "phrases": 14,
+      "beforeSha256": "f75d56f193a018a27ea60e9bbd65f41dd3a564c4866fba82aef8cc33a4e8af21",
+      "afterSha256": "a4b36036ea8fc5c86b7b31243d4222dd69279682b4c8ac3aa17be10e0e2b19fd"
+    },
+    {
+      "file": "src/public/property-listings-v2.js",
+      "renderingWrites": 6,
+      "phrases": 28,
+      "beforeSha256": "196760546d1110b546c0680b29d152b41c7aa09cff683b48bb3ae946f3abf1cc",
+      "afterSha256": "34630b2df35bf3c8a594c2a98d316fef3d3cb914c119c8c245cbc842fb61fea9"
+    },
+    {
+      "file": "src/public/unit-type-collection-split.js",
+      "renderingWrites": 10,
+      "phrases": 42,
+      "beforeSha256": "6b246f9c9c92982fe6dab8a8d52617e37b32dd08e970227b83a8a4be21fd9e8b",
+      "afterSha256": "fa5bb1b782d7900982ec067f61a6ce4c3a49a0acc5445c9dab24e31e1466e0f5"
+    },
+    {
+      "file": "src/public/unit-type-collection.js",
+      "renderingWrites": 7,
+      "phrases": 40,
+      "beforeSha256": "720066e69642de6a9f45fbf42a2a1e8aafcfb2f00a36ccc61c8f15267b3bee42",
+      "afterSha256": "80a7d7930813404ec0199e04ac828b2311cbbcbcce10a6c6de58bda62e3582df"
+    },
+    {
+      "file": "src/public/custom-elements/home-featured-properties-v2.js",
+      "renderingWrites": 3,
+      "phrases": 20,
+      "beforeSha256": "d1dbb75385910bb9751d5f70319e56745dbc1741c7d4815eccccc00d1fcd9b16",
+      "afterSha256": "680eb7fda6c701b80224813b5ec8c898c68ae7bd3fd49a6ac692f859bab96249"
+    },
+    {
+      "file": "src/public/custom-elements/home-property-slider.js",
+      "renderingWrites": 9,
+      "phrases": 11,
+      "beforeSha256": "a920ce857bae25aee2ed3458b3edd1a851ecf1d428a6d8539d2a51bcda0ef391",
+      "afterSha256": "0ac0d984291d4d85a7cc0243c3a3118f165f64b2800a5cf01daa89d06264497c"
+    },
+    {
+      "file": "src/public/custom-elements/listing-detail-v1.js",
+      "renderingWrites": 12,
+      "phrases": 67,
+      "beforeSha256": "d249952410f0175b4f93c129a88c5d542f42a4d61def131221e41129ab8b901f",
+      "afterSha256": "4083faf92b108bdad5224c80b375777cef43e4636a680e52c9fc62c260ba5732"
+    },
+    {
+      "file": "src/public/custom-elements/playa-city-properties-hero.js",
+      "renderingWrites": 21,
+      "phrases": 38,
+      "beforeSha256": "67442865e6e20e4b56c161557e241e6932d3ff93226de0176f75bd5b8de2ed3b",
+      "afterSha256": "4d3c03d3580191257129c59d203a46b7e44bb9d01373fb0bf0573b645123bd3a"
+    },
+    {
+      "file": "src/public/custom-elements/playa-city-properties.js",
+      "renderingWrites": 6,
+      "phrases": 39,
+      "beforeSha256": "8beb97e3d49e2b44ad21aa67894bb92cca98eb83cc3452fec9ca071e2cbf7875",
+      "afterSha256": "3dc890a83bdbefa5a9bd06f6fa5418aed8bd5043071268be1de2b7c147384746"
+    },
+    {
+      "file": "src/public/custom-elements/property-guide-v2.js",
+      "renderingWrites": 1,
+      "phrases": 2,
+      "beforeSha256": "ab19b151336cefddb59179753ad9a5c45c8318bf6d7cc12c910074b166a50f4b",
+      "afterSha256": "2106cfd599c1855b76865be688fda4bc67e8460cb275214749983410756dc633"
+    },
+    {
+      "file": "src/public/custom-elements/property-hero-puerto-v3.js",
+      "renderingWrites": 14,
+      "phrases": 10,
+      "beforeSha256": "67a7bfea67f5df01957591daefa84665bf1d473ea76aa7072f88240b08b6375c",
+      "afterSha256": "c263497814eb4081e28b1c704241061d358709f7250a8a9e1834e92b4490fefa"
+    },
+    {
+      "file": "src/public/custom-elements/property-hero-v2.js",
+      "renderingWrites": 14,
+      "phrases": 14,
+      "beforeSha256": "f75d56f193a018a27ea60e9bbd65f41dd3a564c4866fba82aef8cc33a4e8af21",
+      "afterSha256": "a4b36036ea8fc5c86b7b31243d4222dd69279682b4c8ac3aa17be10e0e2b19fd"
+    },
+    {
+      "file": "src/public/custom-elements/property-listings-v2.js",
+      "renderingWrites": 6,
+      "phrases": 28,
+      "beforeSha256": "196760546d1110b546c0680b29d152b41c7aa09cff683b48bb3ae946f3abf1cc",
+      "afterSha256": "34630b2df35bf3c8a594c2a98d316fef3d3cb914c119c8c245cbc842fb61fea9"
+    },
+    {
+      "file": "src/public/custom-elements/rental-experience-v2.js",
+      "renderingWrites": 15,
+      "phrases": 46,
+      "beforeSha256": "4f8495b7f0c25b2ba10e0cd8328c3247f0bc452da4e5da28dc4b48b56719acf4",
+      "afterSha256": "08746865aa99110fba3ff4a1a28f66c3c8346d0a1307240a8a057e63b2abd12f"
+    },
+    {
+      "file": "src/public/custom-elements/unit-type-collection-split.js",
+      "renderingWrites": 10,
+      "phrases": 56,
+      "beforeSha256": "274dadfa31bb58502dc2b07d1a3587bb2a7c38eaba5817e30f8a1e257c767e1c",
+      "afterSha256": "3e38e900de7529f229844bf3522b824d7ec047ae5f5c8dd59817c640e13de8f2"
+    },
+    {
+      "file": "src/public/custom-elements/unit-type-collection.js",
+      "renderingWrites": 8,
+      "phrases": 42,
+      "beforeSha256": "cd11cb3aff1b54e5380f6c0f2b1f87fa3068b07d6853c0d9fe38b60115580683",
+      "afterSha256": "5e9deace38bbc46d9aa75bb235cdf3c8e5596dd727d85a969f3a527ddae21e4f"
+    },
+    {
+      "file": "src/public/custom-elements/unit-type-hub.js",
+      "renderingWrites": 1,
+      "phrases": 20,
+      "beforeSha256": "61a697b7510884a141dc4e509a831300ac5701a292124a7d720481107d3c9415",
+      "afterSha256": "f95b72c370254698bb18a3396e9aad4bd72a8405899038ce68d6a140b0247894"
+    },
+    {
+      "file": "src/public/custom-elements/wix-default-custom-element.js",
+      "renderingWrites": 18,
+      "phrases": 61,
+      "beforeSha256": "49883c751a1a79ab00e9335f0a41b1c83a54dbebb930f56ee0aca1b21e8c4f1d",
+      "afterSha256": "f50b1b52e49340d31d6f115e7420f7e83487e6c4012fc07ca81cce2e5275c7ab"
+    }
+  ]
+}

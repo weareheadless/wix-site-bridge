@@ -1,0 +1,11 @@
+[Unit]
+Description=Review one Susi embed page at a time
+
+[Timer]
+OnBootSec=30s
+OnUnitInactiveSec=30s
+Persistent=true
+Unit=susi-page-translation.service
+
+[Install]
+WantedBy=timers.target

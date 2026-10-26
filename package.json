@@ -13,5 +13,9 @@
     "bridge": "node src/cli.mjs",
     "mcp": "node src/mcp.mjs"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@babel/parser": "^7.29.9",
+    "esbuild": "^0.25.12"
+  }
 }

@@ -1,0 +1,353 @@
+{
+  "version": 1,
+  "site": {
+    "alias": "susimacdonald",
+    "siteId": "878460ca-c98c-402b-8a10-862023f67cce",
+    "liveUrl": "https://www.susimacdonald.com/",
+    "connectedRepo": "weareheadless/susimacdonald-wix",
+    "defaultBranch": "main",
+    "wixConfigPath": "wix.config.json",
+    "routes": [],
+    "components": [],
+    "customCode": [
+      {
+        "id": "b7e6eda4-b81e-4aeb-9556-dd0269aeb8c4",
+        "name": "Custom",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "pages",
+          "pageIds": [
+            "h4hzq"
+          ]
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "enabled": true,
+        "purpose": "existing-snippet-inventory"
+      },
+      {
+        "id": "1a4487ef-aa5a-4efe-8584-c2acb2eaf7d6",
+        "name": "smartlook",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "pages",
+          "pageIds": [
+            "h4hzq"
+          ]
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "enabled": true,
+        "purpose": "existing-snippet-inventory"
+      },
+      {
+        "id": "2ebd0658-c315-4e90-a532-0960b6e61acd",
+        "name": "chainlit styling",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": true,
+        "enabled": true,
+        "purpose": "existing-snippet-inventory"
+      },
+      {
+        "id": "fc54303b-b84e-4af4-b8b0-8d41355cc04f",
+        "name": "Rental page FAQ and news styles",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "pages",
+          "pageIds": [
+            "gkrfz"
+          ]
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "enabled": true,
+        "purpose": "existing-snippet-inventory"
+      },
+      {
+        "id": "febc8d2e-95d7-4349-b942-62034b9697aa",
+        "name": "Puerto Morelos — early hero registration pilot",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "pages",
+          "pageIds": [
+            "e61h9"
+          ]
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "enabled": false,
+        "purpose": "existing-snippet-inventory"
+      },
+      {
+        "id": "6245ffcb-4cc7-4ca4-ae87-136c974eb381",
+        "name": "Susi — early custom element registration",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "enabled": true,
+        "purpose": "existing-snippet-inventory"
+      },
+      {
+        "id": "f1609014-c6c1-4eaa-804e-d28c87713dd1",
+        "name": "Susi early packet — cities hero",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "pages",
+          "pageIds": [
+            "ch3wm",
+            "cva3h",
+            "e61h9",
+            "ejdrn",
+            "p20az",
+            "x6kem",
+            "xlqrv"
+          ]
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "enabled": true,
+        "purpose": "existing-snippet-inventory"
+      },
+      {
+        "id": "cf970d8b-e82e-41d5-a118-a9e0a7998d06",
+        "name": "Susi early packet — cities-listings",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "pages",
+          "pageIds": [
+            "ch3wm",
+            "cva3h",
+            "e61h9",
+            "ejdrn",
+            "p20az",
+            "x6kem",
+            "xlqrv"
+          ]
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "enabled": true,
+        "purpose": "existing-snippet-inventory"
+      },
+      {
+        "id": "4358a4f4-b8a6-424e-b35f-42f11f0b54b7",
+        "name": "Susi early packet — cities-guide",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "pages",
+          "pageIds": [
+            "ch3wm",
+            "cva3h",
+            "e61h9",
+            "ejdrn",
+            "p20az",
+            "x6kem",
+            "xlqrv"
+          ]
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "enabled": true,
+        "purpose": "existing-snippet-inventory"
+      },
+      {
+        "id": "67d39dc3-f840-4ee0-b897-94efaf0064fd",
+        "name": "Susi early packet — playa",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": true,
+        "enabled": true,
+        "purpose": "existing-snippet-inventory"
+      },
+      {
+        "id": "7acc2d1d-cb80-4086-8d6e-5e767f6002ef",
+        "name": "Susi early packet — units",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "pages",
+          "pageIds": [
+            "d4oad",
+            "f2k5h",
+            "hlceo",
+            "hytmz",
+            "m83ag",
+            "sxnkz"
+          ]
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "enabled": true,
+        "purpose": "existing-snippet-inventory"
+      },
+      {
+        "id": "87186364-afc7-4103-8428-f783be13e7c8",
+        "name": "Susi early packet — home",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "pages",
+          "pageIds": [
+            "h4hzq"
+          ]
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "enabled": true,
+        "purpose": "existing-snippet-inventory"
+      },
+      {
+        "id": "9410c467-b293-48f9-8bff-9e888063c9bf",
+        "name": "Susi early packet — rentals",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "pages",
+          "pageIds": [
+            "gkrfz"
+          ]
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "enabled": true,
+        "purpose": "existing-snippet-inventory"
+      },
+      {
+        "id": "3f87ecac-b108-48b6-90f2-2fee2cf1203a",
+        "name": "Susi early packet — Rentals: CTA + FAQ",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": true,
+        "enabled": true,
+        "purpose": "Rentals CTA + FAQ early packet"
+      },
+      {
+        "id": "0a8830a0-e744-4255-9893-d32aded70d6b",
+        "name": "Susi early packet — listing-detail",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": true,
+        "enabled": true,
+        "purpose": "existing-snippet-inventory"
+      },
+      {
+        "id": "1800cbdf-3de2-4f4a-ac65-373af7a951bf",
+        "name": "Susi — critical image discovery",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": true,
+        "enabled": false,
+        "purpose": "existing-snippet-inventory"
+      },
+      {
+        "id": "5b7edf14-687f-4961-a909-37ff76defa35",
+        "name": "Susi — initial document early bootstrap",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": true,
+        "enabled": true,
+        "purpose": "existing-snippet-inventory"
+      },
+      {
+        "id": "12c380f0-709c-4085-bd24-2eb93d170946",
+        "name": "Susi early packet — unit type hub",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "pages",
+          "pageIds": [
+            "t198b"
+          ]
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "enabled": true,
+        "purpose": "existing-snippet-inventory"
+      },
+      {
+        "id": "e1f6e9f7-37eb-4a0e-952e-8608666b5168",
+        "name": "whatsapp",
+        "position": "BODY_END",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": true,
+        "enabled": true,
+        "purpose": "existing-snippet-inventory"
+      },
+      {
+        "id": "38e99671-774d-40e8-8c52-a8f1cd74364a",
+        "name": "Rental page visual polish — interactions",
+        "position": "BODY_END",
+        "pageScope": {
+          "type": "pages",
+          "pageIds": [
+            "gkrfz"
+          ]
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "enabled": true,
+        "purpose": "existing-snippet-inventory"
+      },
+      {
+        "id": "28dc93da-3276-47da-8b4f-55dab2da1d04",
+        "name": "Rentals page standalone CTA",
+        "position": "BODY_END",
+        "pageScope": {
+          "type": "pages",
+          "pageIds": [
+            "gkrfz"
+          ]
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "enabled": false,
+        "purpose": "existing-snippet-inventory"
+      },
+      {
+        "id": "b307fcfb-399a-4730-869b-a32ceaa80664",
+        "name": "Susi early packet — listing related",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": true,
+        "enabled": true,
+        "purpose": "Spanish listing-detail packet"
+      },
+      {
+        "id": "2c1820f9-05eb-42ef-927e-1d1e621fb0e6",
+        "name": "Susi early packet — playa translation continuation",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": true,
+        "enabled": true,
+        "purpose": "Second half of route-guarded Playa packet when localized source exceeds the Wix embed limit"
+      }
+    ]
+  }
+}

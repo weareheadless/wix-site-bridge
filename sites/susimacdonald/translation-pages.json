@@ -1,0 +1,148 @@
+{
+  "siteAlias": "susimacdonald",
+  "siteId": "878460ca-c98c-402b-8a10-862023f67cce",
+  "locale": "es-MX",
+  "baseUrl": "https://www.susimacdonald.com",
+  "phase": "embeds",
+  "groups": [
+    {
+      "name": "home",
+      "purpose": "Homepage: luxury Riviera Maya real estate introduction, property discovery and featured homes",
+      "routes": [
+        "/"
+      ],
+      "packets": [
+        {
+          "id": "87186364-afc7-4103-8428-f783be13e7c8",
+          "keys": [
+            "home-property-slider",
+            "home-featured-properties-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "other-cities",
+      "purpose": "City landing pages: local market, property cards and buying guide; review every city separately",
+      "routes": [
+        "/homes-for-sale-in-tulum",
+        "/puerto-morelos-real-estate",
+        "/homes-for-sale-in-puerto-aventuras",
+        "/homes-for-sale-in-akumal",
+        "/riviera-maya-real-estate"
+      ],
+      "packets": [
+        {
+          "id": "f1609014-c6c1-4eaa-804e-d28c87713dd1",
+          "keys": [
+            "property-hero-v2"
+          ]
+        },
+        {
+          "id": "cf970d8b-e82e-41d5-a118-a9e0a7998d06",
+          "keys": [
+            "property-listings-v2"
+          ]
+        },
+        {
+          "id": "4358a4f4-b8a6-424e-b35f-42f11f0b54b7",
+          "keys": [
+            "property-guide-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "property-types",
+      "purpose": "Property type collections; keep listing filters, prices and unit descriptions accurate",
+      "routes": [
+        "/riviera-maya-penthouses-sale",
+        "/riviera-maya-condos-sale",
+        "/riviera-maya-villas-sale",
+        "/riviera-maya-beachfront-sale",
+        "/riviera-maya-condos-sale-under-200k",
+        "/riviera-maya-luxury-real-estate"
+      ],
+      "packets": [
+        {
+          "id": "7acc2d1d-cb80-4086-8d6e-5e767f6002ef",
+          "keys": [
+            "unit-type-collection-split"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "listings-hub",
+      "purpose": "Search and browse all Riviera Maya property listings",
+      "routes": [
+        "/real-estate-listings"
+      ],
+      "packets": [
+        {
+          "id": "12c380f0-709c-4085-bd24-2eb93d170946",
+          "keys": [
+            "unit-type-hub"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "rentals",
+      "purpose": "Riviera Maya rentals landing page",
+      "routes": [
+        "/apartments-for-rent-in-playa-del-carmen"
+      ],
+      "packets": [
+        {
+          "id": "9410c467-b293-48f9-8bff-9e888063c9bf",
+          "keys": [
+            "rental-experience-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "playa-city",
+      "purpose": "City landing page: local market and homes for sale; keep place names and property facts exact",
+      "routes": [
+        "/homes-for-sale-in-playa-del-carmen",
+        "/homes-for-sale-in-cozumel",
+        "/bacalar-real-estate"
+      ],
+      "packets": [
+        {
+          "id": "67d39dc3-f840-4ee0-b897-94efaf0064fd",
+          "continuationId": "2c1820f9-05eb-42ef-927e-1d1e621fb0e6",
+          "keys": [
+            "playa-city-properties-hero"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "listing-details",
+      "purpose": "Individual property pages. Review each listing's shared custom-element UI against its actual sale or rental context; leave the listing's CMS facts untouched for the later CMS phase.",
+      "routesFile": "listing-routes.json",
+      "packets": [
+        {
+          "id": "0a8830a0-e744-4255-9893-d32aded70d6b",
+          "keys": [
+            "listing-detail-v1"
+          ]
+        },
+        {
+          "id": "b307fcfb-399a-4730-869b-a32ceaa80664",
+          "keys": [
+            "listing-related-v1"
+          ]
+        }
+      ]
+    }
+  ],
+  "deferred": [
+    "Native Wix-only routes have no packet dictionary in this embed phase.",
+    "CMS collections follow only after the embed phase is complete.",
+    "Unit type hub chrome is deferred: its live Wix custom-element source is not the bridge packet or the canonical rentals checkout, so the packet update does not reach the page. Resolve the native source deployment before returning to this group."
+  ]
+}

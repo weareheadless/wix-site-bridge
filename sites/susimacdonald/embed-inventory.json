@@ -1,0 +1,285 @@
+{
+  "siteAlias": "susimacdonald",
+  "siteId": "878460ca-c98c-402b-8a10-862023f67cce",
+  "readAt": "2026-10-19T02:15:11.746Z",
+  "snippets": [
+    {
+      "id": "b7e6eda4-b81e-4aeb-9556-dd0269aeb8c4",
+      "name": "Custom",
+      "position": "HEAD",
+      "pageScope": {
+        "type": "pages",
+        "pageIds": [
+          "h4hzq"
+        ]
+      },
+      "category": "ESSENTIAL",
+      "loadOnce": false,
+      "enabled": true,
+      "revision": "1",
+      "sha256": "62605407bd5aa6201f17de8da31c0c68e122bbd854b3aa0b387099d81b4483d1"
+    },
+    {
+      "id": "1a4487ef-aa5a-4efe-8584-c2acb2eaf7d6",
+      "name": "smartlook",
+      "position": "HEAD",
+      "pageScope": {
+        "type": "pages",
+        "pageIds": [
+          "h4hzq"
+        ]
+      },
+      "category": "ESSENTIAL",
+      "loadOnce": false,
+      "enabled": true,
+      "revision": "2",
+      "sha256": "c012e3831dd1c79fe94e50ca52816065729bd78bef5bc73c16852414efd83c22"
+    },
+    {
+      "id": "2ebd0658-c315-4e90-a532-0960b6e61acd",
+      "name": "chainlit styling",
+      "position": "HEAD",
+      "pageScope": {
+        "type": "all"
+      },
+      "category": "ESSENTIAL",
+      "loadOnce": true,
+      "enabled": true,
+      "revision": "7",
+      "sha256": "81759e56c6c425cb853cc57bb7df64c3f190961d6fdf04edf400a79e4e0aa0aa"
+    },
+    {
+      "id": "fc54303b-b84e-4af4-b8b0-8d41355cc04f",
+      "name": "Rental page FAQ and news styles",
+      "position": "HEAD",
+      "pageScope": {
+        "type": "pages",
+        "pageIds": [
+          "gkrfz"
+        ]
+      },
+      "category": "ESSENTIAL",
+      "loadOnce": false,
+      "enabled": true,
+      "revision": "15",
+      "sha256": "516650b367f67d9fc67ad13c9873a240533399fce5ecff767eb17759b943a03e"
+    },
+    {
+      "id": "febc8d2e-95d7-4349-b942-62034b9697aa",
+      "name": "Puerto Morelos — early hero registration pilot",
+      "position": "HEAD",
+      "pageScope": {
+        "type": "pages",
+        "pageIds": [
+          "e61h9"
+        ]
+      },
+      "category": "ESSENTIAL",
+      "loadOnce": false,
+      "enabled": false,
+      "revision": "2",
+      "sha256": "d97ab297d5f1e7ddb35d28fb8c71862d68b7003fcb39d0a2f7bbbac296747f58"
+    },
+    {
+      "id": "6245ffcb-4cc7-4ca4-ae87-136c974eb381",
+      "name": "Susi — early custom element registration",
+      "position": "HEAD",
+      "pageScope": {
+        "type": "all"
+      },
+      "category": "ESSENTIAL",
+      "loadOnce": false,
+      "enabled": true,
+      "revision": "7",
+      "sha256": "0455dd1c9bd6b742bffae8dd00525a9e3bf6b1bbdc96131164d9dd94aee63b94"
+    },
+    {
+      "id": "f1609014-c6c1-4eaa-804e-d28c87713dd1",
+      "name": "Susi early packet — cities hero",
+      "position": "HEAD",
+      "pageScope": {
+        "type": "all"
+      },
+      "category": "ESSENTIAL",
+      "loadOnce": true,
+      "enabled": true,
+      "revision": "1",
+      "sha256": "afccf6c454555ccbec0c4d21b85640bf4c4b5fc2d2fca659309196fb106e22cc"
+    },
+    {
+      "id": "cf970d8b-e82e-41d5-a118-a9e0a7998d06",
+      "name": "Susi early packet — cities-listings",
+      "position": "HEAD",
+      "pageScope": {
+        "type": "all"
+      },
+      "category": "ESSENTIAL",
+      "loadOnce": true,
+      "enabled": true,
+      "revision": "1",
+      "sha256": "58f0abcc4c9df8cf02450c378f934efd494c6ce99d6c1821bc37ee6bba5eb836"
+    },
+    {
+      "id": "4358a4f4-b8a6-424e-b35f-42f11f0b54b7",
+      "name": "Susi early packet — cities-guide",
+      "position": "HEAD",
+      "pageScope": {
+        "type": "all"
+      },
+      "category": "ESSENTIAL",
+      "loadOnce": true,
+      "enabled": true,
+      "revision": "1",
+      "sha256": "d8e3fd3daf93890e7001f97b7ec73c2822b4944e052fcebd7c0b9ce5384308d0"
+    },
+    {
+      "id": "67d39dc3-f840-4ee0-b897-94efaf0064fd",
+      "name": "Susi early packet — playa",
+      "position": "HEAD",
+      "pageScope": {
+        "type": "all"
+      },
+      "category": "ESSENTIAL",
+      "loadOnce": true,
+      "enabled": true,
+      "revision": "1",
+      "sha256": "b13bdeb9c20a4a03ba8b135424a4fa730e6ca96acdf38ad291eb6f91c12a3213"
+    },
+    {
+      "id": "7acc2d1d-cb80-4086-8d6e-5e767f6002ef",
+      "name": "Susi early packet — units",
+      "position": "HEAD",
+      "pageScope": {
+        "type": "all"
+      },
+      "category": "ESSENTIAL",
+      "loadOnce": true,
+      "enabled": true,
+      "revision": "2",
+      "sha256": "a966033ae3ab646089d08b94a5885bcc26cdf2d32ee4d94f42fb33de0348a12b"
+    },
+    {
+      "id": "87186364-afc7-4103-8428-f783be13e7c8",
+      "name": "Susi early packet — home",
+      "position": "HEAD",
+      "pageScope": {
+        "type": "all"
+      },
+      "category": "ESSENTIAL",
+      "loadOnce": true,
+      "enabled": true,
+      "revision": "4",
+      "sha256": "1b6aef411dba2f07fb22c69a57b07d3a0a854f3371c9cbf1f93ea184557100c6"
+    },
+    {
+      "id": "9410c467-b293-48f9-8bff-9e888063c9bf",
+      "name": "Susi early packet — rentals",
+      "position": "HEAD",
+      "pageScope": {
+        "type": "all"
+      },
+      "category": "ESSENTIAL",
+      "loadOnce": true,
+      "enabled": true,
+      "revision": "1",
+      "sha256": "9b107522c3bbb03da87c6bc8964bc5e8973f885b25077e3db33fc9527c9c39c8"
+    },
+    {
+      "id": "0a8830a0-e744-4255-9893-d32aded70d6b",
+      "name": "Susi early packet — listing-detail",
+      "position": "HEAD",
+      "pageScope": {
+        "type": "all"
+      },
+      "category": "ESSENTIAL",
+      "loadOnce": true,
+      "enabled": true,
+      "revision": "2",
+      "sha256": "ca7709d03f7f610716fed4f7e0525a29ec4e45839ed9022924eb58674a9ccacb"
+    },
+    {
+      "id": "1800cbdf-3de2-4f4a-ac65-373af7a951bf",
+      "name": "Susi — critical image discovery",
+      "position": "HEAD",
+      "pageScope": {
+        "type": "all"
+      },
+      "category": "ESSENTIAL",
+      "loadOnce": true,
+      "enabled": false,
+      "revision": "2",
+      "sha256": "3ebff771278587f85398e22b7eddf823d0957f10ce57feffbdac587d5e9235b4"
+    },
+    {
+      "id": "5b7edf14-687f-4961-a909-37ff76defa35",
+      "name": "Susi — initial document early bootstrap",
+      "position": "HEAD",
+      "pageScope": {
+        "type": "all"
+      },
+      "category": "ESSENTIAL",
+      "loadOnce": true,
+      "enabled": true,
+      "revision": "1",
+      "sha256": "14eba369a5bbfdd30b5621e2741adc209a33600a99bc44cdc0f2f7eb77d31acf"
+    },
+    {
+      "id": "12c380f0-709c-4085-bd24-2eb93d170946",
+      "name": "Susi early packet — unit type hub",
+      "position": "HEAD",
+      "pageScope": {
+        "type": "all"
+      },
+      "category": "ESSENTIAL",
+      "loadOnce": true,
+      "enabled": true,
+      "revision": "2",
+      "sha256": "10948d4dbf3c49dd33b6c1120bb26148caa1c9d1a407e509c471e055aec2f632"
+    },
+    {
+      "id": "e1f6e9f7-37eb-4a0e-952e-8608666b5168",
+      "name": "whatsapp",
+      "position": "BODY_END",
+      "pageScope": {
+        "type": "all"
+      },
+      "category": "ESSENTIAL",
+      "loadOnce": true,
+      "enabled": true,
+      "revision": "2",
+      "sha256": "d557f93ed32882ae3226ab7fec65979aa127042ec46be9ebee3498fc578359bf"
+    },
+    {
+      "id": "38e99671-774d-40e8-8c52-a8f1cd74364a",
+      "name": "Rental page visual polish — interactions",
+      "position": "BODY_END",
+      "pageScope": {
+        "type": "pages",
+        "pageIds": [
+          "gkrfz"
+        ]
+      },
+      "category": "ESSENTIAL",
+      "loadOnce": false,
+      "enabled": true,
+      "revision": "25",
+      "sha256": "ea9be790f652eb47021283df31720a899c002ffb3894c1cadebcd39c3e9d0a51"
+    },
+    {
+      "id": "28dc93da-3276-47da-8b4f-55dab2da1d04",
+      "name": "Rentals page standalone CTA",
+      "position": "BODY_END",
+      "pageScope": {
+        "type": "pages",
+        "pageIds": [
+          "gkrfz"
+        ]
+      },
+      "category": "ESSENTIAL",
+      "loadOnce": false,
+      "enabled": false,
+      "revision": "2",
+      "sha256": "57a9f175c9846103e240a29038c2df598afe6a6638b6befa36f24df0c10cd058"
+    }
+  ]
+}

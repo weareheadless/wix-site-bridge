@@ -1,0 +1,173 @@
+# Atelier de l’harmonie
+
+## Multilingual
+
+- Use our own bridge app/CLI, not the Wix plugin. Connector availability does not determine bridge access. Probe the installed app's actual multilingual permissions using documented APIs; if missing, identify the exact scope and prepare the change without silently expanding access.
+
+- English is added but hidden. Keep it hidden until explicit launch authorization. See `production/MULTILINGUAL.md` for coverage and release status.
+- Translate directly; do not use further Wix machine-translation credits or purchase credits. Preserve brand/collection names and legal meaning, dates and figures.
+- Custom components use per-component dictionaries and the supported Wix current language property. Synchronize English/French SEO, ordinary source and both global startup controllers/packets.
+- Native catalog, forms, checkout, gift cards and blog translations belong in Wix. Never claim custom chrome translation covers native content or use a separate product translation database.
+
+- Exact target: `--site atelier-harmonie`, site ID `376faa89-fe6c-4ae8-8feb-10520e813a89`, manifest `sites/atelier-harmonie/site.manifest.json`.
+- Follow the root `AGENTS.md` and `docs/GLOBAL_EARLY_REGISTRATION.md`. The mandatory global startup gate applies before production promotion.
+- Preserve the approved new design, Atelier's original logo and copy, handwritten wordmark and Saint-Pierre-en-Port / Normandie signature, white/cream backgrounds, muted rose/blue details, six category illustrations, fixed-height hero slider and compact collection/product carousels. Prefer “tissus”, not “étoffes”.
+- The live hidden test route is `/copy-of-accueil`; prototype snippets remain exact-route guarded. Production promotion to `/` and shared navbar replacement are authorized, but must satisfy the startup/placement/behavior gate before publication and removal of legacy content.
+- Read `production/PLACEMENT.md` and `production/build-manifest.json` for current staging status. Files being generated does not mean they were installed or published.
+- One real custom navbar element belongs in Wix's shared header; one homepage content element goes below. Remove replaced legacy visual children after preserving original navigation destinations, cart, mobile behavior, forms, SEO, and dependencies. Never ship the prototype's hidden duplicate shell or broad document observers as production architecture.
+- `weareheadless/atelier-harmonie-headless` is a separate Next.js/Payload project. Do not alter or deploy it for this Wix migration.
+- Existing historical receipts/snapshots remain in the root private `.wix-bridge-state/`; preserve their recovery path. New prototype releases explicitly use `sites/atelier-harmonie/.wix-bridge-state/`; local assembly files go in ignored `.build/`. Keep all credentials and state out of Git.
+- Run customer scripts from the repository root. Build commands require explicit `--site atelier-harmonie`; release helpers must reject any different alias/site ID. Review dry-runs and receipts.
+
+## Confirmed shared placement workflow
+
+- Do not interact with Wix Editor UI. The human owns placement and removal of native sections.
+- Human confirmed these Wix Custom Element IDs: shared header `customElement1` → `atelier-navbar-v1`; homepage section `customElement2` → `atelier-home-v1`; shared footer `customElement3` → `atelier-footer-v1`.
+- Build footer separately from homepage content. Never duplicate its markup inside the homepage component.
+- Source selection is Velo file in `src/public/custom-elements/`, with matching file basename and tag. Existing placements receive future source changes without recreation.
+- The checkout's old UI revision 740 predates the human's latest placement; never publish that snapshot over their work.
+
+- Fragment scripts may declare their own `root`; production conversion must use the distinct `componentRoot` name for shadow-root lookup. A collision prevents all following interactions and review loading.
+- Load prototype webfont stylesheets once in the document head from the component source. Font-face definitions inside shadow-root imports do not provide the same font availability as the prototype.
+
+## Shop component
+
+- `/shop`: `atelier-shop-v1.js`, tag `atelier-shop-v1`, requested Wix ID `customElement4` (human must confirm placement). Shared header/footer stay separate.
+- Original shop introduction and philosophy copy must stay intact. Products, stock, prices and discounts come from public Wix `Stores/Products` through `backend/atelier-shop.web.js`; never embed a parallel catalog snapshot in production.
+- Native Wix currentCart handles add-to-cart. Products requiring options/custom text open their existing product page. Never accept client-provided prices, arbitrary catalog apps or quantities in the cart endpoint.
+- `production/SHOP_PLACEMENT.md` is the human setup checklist. Do not operate Wix Editor or publish the stale local layout.
+
+## Luminaires page
+
+- `/lampes`: `atelier-lamps-v1.js`, tag `atelier-lamps-v1`, requested ID `customElement5`. Human placement pending; see `production/LAMPS_PLACEMENT.md`.
+- Reuse the current live page’s five category descriptions and native `/lampes/<category>` destinations. Preserve dynamic Wix category pages and shared header/footer.
+- Latest creations reuse the existing live backend/cart service; name-based lighting filtering is presentation logic, not a parallel CMS or Wix collection membership.
+
+- Luminaires gallery uses measured masonry with unequal column widths and natural photo proportions. Do not restore numbered category labels or repeated “L’art de la lumière” text.
+
+## Seats page
+
+- `/sieges`: source `atelier-seats-v1.js`, tag `atelier-seats-v1`, requested ID `customElement6`; human placement pending. See `production/SEATS_PLACEMENT.md`.
+- Preserve original introduction/restoration copy, existing photos and Wix runtime catalog/cart. Use natural photo proportions and subtle ivory product boxes.
+
+## Objets déco page
+
+- `/objets-deco`: `atelier-deco-v1.js`, tag `atelier-deco-v1`, requested ID `customElement7`; human placement pending. See `production/DECO_PLACEMENT.md`.
+- Preserve original cushion photo and original intro/cushion copy. Original page currently has no products: keep an honest empty state, never invent catalog entries.
+
+## Gift card page
+
+- `/gift-card` uses two editorial custom elements around the **retained real Wix Gift Cards app**. Intro: `atelier-gift-intro-v1.js`, tag `atelier-gift-intro-v1`, ID `customElement8`; guide: `atelier-gift-guide-v1.js`, tag `atelier-gift-guide-v1`, ID `customElement9`. Human placement pending; see `production/GIFT_PLACEMENT.md`.
+- Never replace native gift-card purchase/issuance with a fake product, copied session call or custom money form. Keep amounts, checkout, delivery and redemption managed by Wix. Native app styling uses human Settings/Design only, without selectors targeting its internals.
+
+## Restoration / bespoke services
+
+- `/tapisserie-restauration`: source `atelier-restoration-v1.js`, tag `atelier-restoration-v1`, requested ID `customElement10`; human placement pending. See `production/RESTORATION_PLACEMENT.md`.
+- Preserve original complete copy and distinct images, combined before/after intact, service shortcuts and native accessible cushion details. No fabricated comparison slider or numbered labels.
+- User cancelled integrated contact mapping. Keep contact entirely in native Wix below the restoration embed; no embedded contact section, custom form or adapter. Do not restore the abandoned mapping configuration. See RESTORATION_PLACEMENT.md.
+
+- Separate presentational contact intro is now available on `/tapisserie-restauration`: `atelier-contact-v1.js`, tag `atelier-contact-v1`, requested ID `customElement11`, placed above real native Wix form. No custom submission fields/adapter; see `production/CONTACT_PLACEMENT.md`.
+
+- Restoration now uses shared-hero Sièges / Abat-jour / Coussins tabs, Sièges initially active; keyboard accessible, mobile no horizontal tab scrolling. Preserve original full copy/images, inactive-panel inert state and stable panel geometry. Contact remains separate below.
+
+## Fabrics
+
+- `/les-tissus`: `atelier-fabrics-v1.js`, tag `atelier-fabrics-v1`, requested ID `customElement12`; see `production/FABRICS_PLACEMENT.md`.
+- Six original fabric houses use shortest-column photo masonry and accessible native detail dialogs instead of long stacked paragraphs. Preserve original full descriptions/photos/external links, natural image proportions and keyboard focus return. No invented brand classifications or duplicate contact form. Keep native contact section below.
+
+## Professional projects
+
+- `/b2b`: `atelier-b2b-v1.js`, tag `atelier-b2b-v1`, requested ID `customElement13`; see `production/B2B_PLACEMENT.md`.
+- Original audience text uses accessible tabs; Villa du Clos Normand project precedes compact expandable guarantees. Preserve original photos, logos, project deliverables/external link and RSE/technical copy without adding new claims. Keep native contact section/form below; no custom submission adapter.
+
+- B2B photo attribution correction: all professional project photographs show Villa du Clos Normand. Never label the lampshade series as a separate restaurant project. Current project layout is one contained card: stable portrait gallery on the left, enlarged Villa illustration and readable story/deliverables on the right, heading above. Desktop preview visually reviewed. Do not restore the scattered centred gallery or crowded mosaic.
+
+## Workshops
+
+- `/les-ateliers`, published page ID `ntpl0`: `atelier-workshops-v1.js`, tag `atelier-workshops-v1`, requested ID `customElement14`; see `production/WORKSHOPS_PLACEMENT.md`.
+- Three workshop tabs reuse original article photographs/descriptions. Reservations use the exact three external Wecandoo URLs recovered from original article embed; never replace booking buttons with email or invent dates/prices/availability.
+- Shared desktop/mobile navbar and homepage workshop destinations point to `/les-ateliers`. Keep original article intact; promotional bar is a separate implementation.
+
+## About Mathilde
+
+- `/a-propos`: `atelier-about-v1.js`, tag `atelier-about-v1`, requested ID `customElement15`; see `production/ABOUT_PLACEMENT.md`. Preserve original story, portrait/chairs photographs and social/Ecomaison links. Keep native contact section below; no custom form adapter.
+
+## Quote page
+
+- `/devis`: top `atelier-quote-top-v1.js` / tag `atelier-quote-top-v1` / ID `customElement16`; bottom `atelier-quote-bottom-v1.js` / tag `atelier-quote-bottom-v1` / ID `customElement17`. See `production/QUOTE_PLACEMENT.md`.
+- User explicitly requires the native form AND photograph unchanged between embeds. No field mapping, hidden form, replacement uploads or submission adapter. Preserve original intro/process/pricing copy; bottom uses process cards and native pricing details.
+
+## Journal
+
+- `/blog`: two editorial components around retained native Wix Blog feed. Top `atelier-journal-top-v1.js`, tag `atelier-journal-top-v1`, requested ID `customElement18`; bottom `atelier-journal-bottom-v1.js`, tag `atelier-journal-bottom-v1`, requested ID `customElement19`. See `production/JOURNAL_PLACEMENT.md`.
+- Preserve original introduction copy and native posts, categories, pagination, article URLs, membership and comments. No parallel post store or selectors styling app internals. Human owns native feed styling and placement.
+
+## Product template
+
+- `/product-page/:slug`, Wix `Product Page.lj022.js`: `atelier-product-v1.js`, tag `atelier-product-v1`, requested ID `customElement20`. See `production/PRODUCT_PLACEMENT.md`.
+- Live Wix Products/Variants are authoritative. Preserve original descriptions/images/options and existing product URLs. Backend validates choices/text/quantity/stock and uses fixed Wix Stores catalog references; never client prices or a parallel catalog. Native cart/checkout owns payments and inventory enforcement.
+- Startup v33 was installed after explicit human approval; product embed ID `d1343538-27ba-4069-8c5b-4d20db25e22a`, receipt hash and manifest mapping inspected. Source commit `4f402b7` is pushed; visual inspection, human placement and publication pending.
+- Human explicitly approved keeping `productPage1` as the required native host while collapsing its display through supported Velo `collapse()` after custom product render acknowledgement. This is a specific exception to duplicate-layer restrictions, not permission for CSS hiding, app DOM selectors or other retained duplicate UI. Preserve Store Page/app and product URLs. User subsequently requested fully suppressing its visual UI: hide and collapse it immediately and on product navigation; never expand/show it on failure or timeout. Errors belong in the custom component. Product video, app reviews/wishlist/back-in-stock features are not rebuilt; preserve their native experience until separately handled.
+
+- Product refinement: description and additional details start closed in one native accordion group; preserve complete copy. Main photo/frame use natural selected-image dimensions, no fixed square or inner padding/cropping. Separate FAQ `atelier-product-faq-v1.js`, tag `atelier-product-faq-v1`, requested ID `customElement21`, goes after product/recommendations and before native contact/footer. Reuse all five original answers; see `production/PRODUCT_FAQ_PLACEMENT.md`.
+
+
+- Human confirmed native product collapse works. Product question CTA must email `mathildevalle.atelier@gmail.com` (mailto with current product in subject), not link to the quote page. Show a plain-text excerpt of the original Wix description (up to 220 characters, ending at a word boundary); retain full rich description in “Lire la description” disclosure. Short complete descriptions need no duplicate disclosure.
+
+- Missing-excerpt follow-up: public live HTML confirmed v34 startup contained the excerpt code, but that does not establish which definition won registration in the browser. Component now exposes `data-atelier-product-version` for diagnosis. Catalog narrative fallback supports named description/product-info sections when the main description is empty; do not use delivery/returns sections as excerpts. Backend/source publication is still required through the current saved Editor layout. Never claim browser paint verified from packet presence.
+
+- Screenshot clarified the excerpt was already visible above the purchase controls. It now sits directly above “Lire la suite” below the contact row. Native `productPage1` hide/collapse is permanent for this design; prior automatic fallback/expand behavior is retired. Human should set Hidden on load and Collapsed on load in Properties & Events to prevent any pre-Velo initial flash. Keep the host installed; do not delete the Store Page/app.
+
+- Disappearing-product fix (`116ec33`): never use a readiness timer to send `product-error` or clear painted UI. Ignore same-product URL notifications; only a different product slug starts a new load. Keep SEO failures isolated from rendering. Component ignores duplicate attribute writes and stale loading/error tokens after that product has rendered. Native host remains hide/collapsed; no visual fallback.
+
+- Product gallery compact refinement: main photo fits an uncropped contain frame capped at 520px/58svh desktop, 400px/46svh mobile; small thumbnails and previous/next controls remain below the stable frame. Description now uses one accessible expand/collapse control: preview hidden when full rich copy is visible, never duplicate the excerpt above full text.
+
+- Product details now use a native modal side panel instead of inline expansion (source `67359ae`). Desktop right panel, mobile full viewport, independently scrolling body. Keep excerpt visible in the purchase panel; description/additional-info buttons open the same modal at the relevant section. Native dialog handles focus/Escape/inert background; close restores document scroll styles and position. Reset/disconnect restores scroll styles without scrolling a new route back to the previous one. Do not restore inline expanding descriptions.
+
+## Availability across product cards
+
+- Always make sold-out status visible before navigation: ivory/rose “Épuisé” badge on product photos in shop, lamps/seats/deco rails, product recommendations and homepage curated product cards. Keep sold-out pieces viewable; no sold-out add-to-cart actions.
+- Homepage availability/prices resolve exact normalized slugs and canonical product URLs against the existing paginated `getAtelierProducts` live catalog feed; no static stock snapshot. Pending/unknown lookup must not imply availability. See `production/AVAILABILITY.md`. Keep the home request/readiness handshake and normal source/startup packets synchronized.
+
+- Homepage stock labels must explicitly show “Disponible” (muted blue) or “Épuisé” (muted rose) for resolved products. The earlier separate slug-query method is retired. Unknown catalog matches remain unknown; do not use “Voir la disponibilité” as a substitute for resolved stock.
+
+## Homepage carousel filters
+
+- Two product rails must use distinct category sets: Collections = Abat-jour/Suspensions/Baladeuses; Boutique = Lampes à poser/Sièges/Déco/DIY. Defaults are Abat-jour and Lampes à poser, respectively. Do not return both rails to near-identical curated product lists.
+- Both render live getAtelierProducts results with availability and prices; filters are presentation rules based on normalized names, not a parallel CMS category store. Preserve accessible pressed states, honest empty states, rail controls and immediate hero rendering. See `production/HOME_FILTERS.md`.
+
+## Sales terms
+
+- `/conditions-generales-de-vente`, Wix page `i8cyj`: `atelier-terms-v1.js`, tag `atelier-terms-v1`, requested ID `customElement22`. See `production/TERMS_PLACEMENT.md`.
+- Preserve all 18 original articles and the complete withdrawal annex from `production/terms/content.json`. This is a visual/structural redesign, not a legal rewrite: do not silently alter clauses, dates, amounts, identifiers or form wording. All text stays visible/searchable, with desktop contents sidebar and collapsible mobile navigation. No legal approval claims or invented update dates.
+
+## Usage terms
+
+- `/conditions-generales`, Wix page `vgud5`: `atelier-general-terms-v1.js`, tag `atelier-general-terms-v1`, requested ID `customElement23`. See `production/GENERAL_TERMS_PLACEMENT.md`.
+- Preserve original preamble, eight articles and the original “En vigueur au 30/10/2023” date from `production/general-terms/content.json`. Match CGV editorial navigation/design without legal rewriting or changing cookie consent behavior. All legal text stays visible/searchable.
+
+## Privacy policy
+
+- `/politique-de-confidentialite`, Wix page `u54cx`: `atelier-privacy-v1.js`, tag `atelier-privacy-v1`, requested ID `customElement24`. See `production/PRIVACY_PLACEMENT.md`.
+- Preserve all five original articles, subsections, dates, retention period and hosting details from `production/privacy/content.json`. Use the matching legal-page design and full searchable copy; do not silently rewrite policy or change consent, forms, newsletter, analytics or data processing behavior.
+
+## Cookies policy
+
+- `/politique-de-cookies`, Wix page `ignax`: `atelier-cookies-v1.js`, tag `atelier-cookies-v1`, requested ID `customElement25`. See `production/COOKIES_PLACEMENT.md`.
+- Preserve all three original sections/paragraphs and external guidance URLs from `production/cookies/content.json`. Matching legal-page design only: do not change native cookie-consent settings, tracking behavior or policy wording, and do not invent an updated date.
+
+## Navbar basket count
+
+- Existing shared `customElement1` displays total cart quantity in desktop Panier and mobile-menu Mon panier badges. Use Wix currentCart and onCartChange, not a local/parallel cart counter. Existing custom add flows must retain refreshCart so the count updates.
+- Badge value is the sum of quantities, including 0 when known; unknown read state must not show a stale/fake count. Keep count-only attributes, initialization handshake and startup/source synchronization. See `production/NAVBAR_CART.md`.
+
+## Navbar languages
+
+- Preserve the full French brand wordmark with `translate="no"` in both locales. Shared navbar uses a subtle FR / EN control, including mobile; see `production/NAVBAR_LANGUAGE.md`.
+- Use Wix `multilingual.siteLanguages` and `currentLanguage` through Velo, with configured-language validation. Never enable hidden English or guess language availability from URLs; omit switch when fewer than two display languages are exposed. Keep source and startup packets synchronized.
+
+- Catalog translation setup must remain inside the English-only async boundary; never initialize optional SDK auth at module load in the shared public catalog backend. Translation failures must not prevent product rendering. Validate localized `/en/product-page/` URLs alongside French URLs and use canonical slugs for stable category matching. v50 awaits human publication and live confirmation; do not claim the prior `catalog-error` exception was proven without backend evidence.
+
+## Performance startup v51
+
+Read production/PERFORMANCE_V51.md and the Wix-connected repository STARTUP.md before a startup release. Build from the exact connected component sources using scripts/build-startup.mjs; the old prototype-based build-production.mjs is superseded. Legal and obsolete prototype packets are deliberately disabled; preserve manifest enabled:false entries.

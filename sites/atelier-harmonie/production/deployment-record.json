@@ -1,0 +1,388 @@
+{
+  "siteAlias": "atelier-harmonie",
+  "siteId": "376faa89-fe6c-4ae8-8feb-10520e813a89",
+  "connectedRepository": "weareheadless/atelier-harmonie",
+  "branch": "main",
+  "initialCommit": "130c5c5",
+  "componentSourceCommit": "e4c3190",
+  "sourceBuildManifest": "build-manifest.json",
+  "published": false,
+  "placement": {
+    "navbar": {
+      "elementId": "customElement1",
+      "tag": "atelier-navbar-v1",
+      "sourceFile": "atelier-navbar-v1.js",
+      "container": "shared header",
+      "status": "human reported placed; source selection and saved desktop/mobile geometry await human confirmation"
+    },
+    "home": {
+      "elementId": "customElement2",
+      "tag": "atelier-home-v1",
+      "sourceFile": "atelier-home-v1.js",
+      "container": "homepage section",
+      "status": "human reported placed; source selection and saved desktop/mobile geometry await human confirmation"
+    },
+    "footer": {
+      "elementId": "customElement3",
+      "tag": "atelier-footer-v1",
+      "sourceFile": "atelier-footer-v1.js",
+      "container": "shared footer",
+      "status": "human reported placed; source selection and saved desktop/mobile geometry await human confirmation"
+    }
+  },
+  "startupCustomCodeInstalled": true,
+  "startupRelease": "atelier-production-20261018-v50",
+  "layoutWarning": "Local UI version 740 predates human placement. Do not CLI-publish it.",
+  "liveObservedRelease": "atelier-production-20261018-v2",
+  "pendingPublication": "Catalog translation startup isolation and localized homepage product URLs pushed; startup v50 installed; current saved Editor layout publication required before live confirmation.",
+  "fixes": [
+    "Scope fragment lookups through componentRoot to avoid hero local root temporal-dead-zone error; restores hero/carousel initialization and deferred reviews",
+    "Load shared prototype Google Fonts stylesheet in document head so shadow components can use Parisienne and other fonts",
+    "Use identical 40px flex alignment for menu links and dropdown summaries"
+  ],
+  "shop": {
+    "route": "/shop",
+    "tag": "atelier-shop-v1",
+    "requestedElementId": "customElement4",
+    "sourceCommit": "d626782",
+    "placement": "pending human",
+    "published": false,
+    "dataSource": "Wix Stores/Products",
+    "instructions": "SHOP_PLACEMENT.md",
+    "startupInstalled": true,
+    "startupEmbedId": "79fcc94b-358e-4454-aff7-1c6192156fe5",
+    "featuredProduct": "Most recently updated in-stock product with image; Wix public catalog order descending _updatedDate",
+    "heroImageFit": "4:5 portrait cover inside an offset hairline frame; max 430px desktop, full width mobile",
+    "visualReview": "Desktop 1440px and mobile 390px screenshots reviewed after 2026-10-20 embed update"
+  },
+  "lamps": {
+    "route": "/lampes",
+    "tag": "atelier-lamps-v1",
+    "requestedElementId": "customElement5",
+    "sourceCommit": "d626782",
+    "placement": "pending human",
+    "published": false,
+    "instructions": "LAMPS_PLACEMENT.md",
+    "startupInstalled": true,
+    "startupEmbedId": "c3341e82-ffc0-4d73-a3be-cc8de6915376",
+    "design": "Measured masonry tiles with ivory backgrounds, fine beige borders, padded captions and square corners; hero photo in an offset hairline frame with a 3:4 cover crop",
+    "carouselImageFit": "Natural width/height; no fixed photo frame; pending human publication",
+    "heroImageFit": "3:4 cover inside an offset hairline frame; clamp(300px,32vw,430px) desktop, 300-340px tablet/mobile",
+    "visualReview": "Desktop 1440px and mobile 390px screenshots reviewed after 2026-10-20 embed update"
+  },
+  "seats": {
+    "route": "/sieges",
+    "tag": "atelier-seats-v1",
+    "requestedElementId": "customElement6",
+    "sourceCommit": "d626782",
+    "placement": "pending human",
+    "published": false,
+    "instructions": "SEATS_PLACEMENT.md",
+    "startupInstalled": true,
+    "startupEmbedId": "0824f76d-abf7-482b-80b0-e8337a786d75"
+  },
+  "deco": {
+    "route": "/objets-deco",
+    "tag": "atelier-deco-v1",
+    "requestedElementId": "customElement7",
+    "sourceCommit": "d626782",
+    "placement": "pending human",
+    "published": false,
+    "instructions": "DECO_PLACEMENT.md",
+    "startupInstalled": true,
+    "startupEmbedId": "a15c64a9-afab-425b-963a-dcfe10a88c8b"
+  },
+  "gift": {
+    "route": "/gift-card",
+    "sourceCommit": "09f8946",
+    "placement": "pending human; retain native Gift Cards app between intro and guide",
+    "published": false,
+    "instructions": "GIFT_PLACEMENT.md",
+    "startupInstalled": true,
+    "intro": {
+      "tag": "atelier-gift-intro-v1",
+      "requestedElementId": "customElement8",
+      "startupEmbedId": "1340430c-7161-4222-a40a-bed40d93d610"
+    },
+    "guide": {
+      "tag": "atelier-gift-guide-v1",
+      "requestedElementId": "customElement9",
+      "startupEmbedId": "115c3eb7-791d-4128-a46d-1f2c52d6e344"
+    }
+  },
+  "restoration": {
+    "route": "/tapisserie-restauration",
+    "tag": "atelier-restoration-v1",
+    "requestedElementId": "customElement10",
+    "sourceCommit": "a731216",
+    "placement": "pending human; retain native contact form below custom element",
+    "published": false,
+    "instructions": "RESTORATION_PLACEMENT.md",
+    "startupInstalled": true,
+    "startupEmbedId": "da2e0e39-6ae0-40f8-ae59-6174aaed74fd",
+    "contactIntegration": {
+      "status": "Removed at user request; all contact UI and submissions remain native Wix"
+    },
+    "design": "Shared hero and accessible Sièges / Abat-jour / Coussins tabs; original content preserved; independent native contact workflow"
+  },
+  "contact": {
+    "route": "/tapisserie-restauration",
+    "tag": "atelier-contact-v1",
+    "visualReview": "Desktop screenshot reviewed after 2026-10-20 update",
+    "design": "Square contact photo in offset hairline frame; heading rose; native form untouched"
+  },
+  "fabrics": {
+    "route": "/les-tissus",
+    "tag": "atelier-fabrics-v1",
+    "requestedElementId": "customElement12",
+    "sourceCommit": "4d71377",
+    "placement": "pending human; native contact section retained below",
+    "published": false,
+    "instructions": "FABRICS_PLACEMENT.md",
+    "startupInstalled": true,
+    "startupEmbedId": "1af5b53c-30ec-4516-a034-d9bd64f47819"
+  },
+  "b2b": {
+    "route": "/b2b",
+    "tag": "atelier-b2b-v1",
+    "requestedElementId": "customElement13",
+    "sourceCommit": "29c5d5a",
+    "placement": "pending human; native contact section retained below",
+    "published": false,
+    "instructions": "B2B_PLACEMENT.md",
+    "startupInstalled": true,
+    "startupEmbedId": "669b0d3b-3a56-41f0-a84f-ae1fb22d9c49",
+    "photoAttribution": "All project photographs are Villa du Clos Normand, not a separate restaurant project",
+    "layout": "Unified project card: gallery left, enlarged illustration/name/description/deliverables right; compact heading above",
+    "inspection": "Live old layout inspected in IAB; rebuilt local desktop preview visually reviewed at 1280px; next/previous gallery checked with stable 586.66px frame; live publication pending"
+  },
+  "workshops": {
+    "route": "/les-ateliers",
+    "tag": "atelier-workshops-v1",
+    "visualReview": "Desktop screenshots reviewed after 2026-10-20 update",
+    "design": "Hero and panel photos in offset hairline frames; program heading rose; about heading blue italic; contact heading rose"
+  },
+  "about": {
+    "route": "/a-propos",
+    "tag": "atelier-about-v1",
+    "visualReview": "Desktop screenshots reviewed after 2026-10-20 update",
+    "design": "Portrait and chairs photos in offset hairline frames; story heading rose; values heading blue italic"
+  },
+  "quote": {
+    "route": "/devis",
+    "tags": [
+      "atelier-quote-top-v1",
+      "atelier-quote-bottom-v1"
+    ],
+    "visualReview": "Desktop screenshot reviewed after 2026-10-20 update",
+    "design": "Short rose section rules; process heading rose; pricing heading blue italic; step cards with small rose rule; native Wix form untouched"
+  },
+  "journal": {
+    "route": "/blog",
+    "sourceCommit": "dfd2803",
+    "placement": "pending human; native Wix Blog feed retained",
+    "published": false,
+    "instructions": "JOURNAL_PLACEMENT.md",
+    "startupInstalled": true,
+    "top": {
+      "tag": "atelier-journal-top-v1",
+      "requestedElementId": "customElement18",
+      "startupEmbedId": "0800721b-4b36-479f-97ef-b50ae2044743"
+    },
+    "bottom": {
+      "tag": "atelier-journal-bottom-v1",
+      "requestedElementId": "customElement19",
+      "startupEmbedId": "44549894-ece3-466e-90ef-0375f9a3a02d"
+    }
+  },
+  "product": {
+    "route": "/product-page/:slug",
+    "tag": "atelier-product-v1",
+    "requestedElementId": "customElement20",
+    "sourceCommit": "d626782",
+    "placement": "pending human; retain Store Page/app and URLs",
+    "published": false,
+    "instructions": "PRODUCT_PLACEMENT.md",
+    "startupInstalled": true,
+    "plannedStartupRelease": "atelier-production-20261018-v40",
+    "startupStatus": "Installed; receipt hashes and mappings inspected",
+    "visualReview": "Desktop 1440px and mobile 390px screenshots reviewed after 2026-10-20 embed update; image now fills its frame",
+    "dataSource": "Wix Stores/Products and Stores/Variants; documented variant and currentCart APIs",
+    "startupEmbedId": "d1343538-27ba-4069-8c5b-4d20db25e22a",
+    "startupRelease": "atelier-production-20261018-v40",
+    "design": "Portrait 3:4 cover frame centered with an offset hairline; description and info collapsed in one native accordion group",
+    "nativeHost": "Retained nonvisual host: immediate and per-navigation hide/collapse; never automatic expand/show; errors stay in custom view",
+    "nativeHostConfirmation": "Human reported collapse works",
+    "questionCta": "mailto:mathildevalle.atelier@gmail.com with product name in subject",
+    "description": "Static excerpt and native modal side panel; desktop right panel, mobile full viewport; details no longer expand page",
+    "descriptionFollowup": "Narrative fallback from named product-info/description sections; nested paragraph boundaries preserved; actual loaded definition version observable",
+    "screenshotEvidence": "Human screenshot confirms earlier excerpt above buttons, not missing",
+    "renderStability": "No destructive timeout; deduplicated same-slug URL changes; SEO isolated; stale and duplicate loading/error attributes ignored after render",
+    "gallery": "3:4 portrait cover frame, max 520px wide desktop and full width mobile; offset hairline; thumbnails, prev/next and zoom retained",
+    "secondStartupEmbedId": "d6615a9d-f7a2-46d1-b5b2-efc6651d4cc6"
+  },
+  "productfaq": {
+    "route": "/product-page/:slug",
+    "tag": "atelier-product-faq-v1",
+    "requestedElementId": "customElement21",
+    "sourceCommit": "fde0abb",
+    "startupInstalled": true,
+    "startupEmbedId": "48172cc5-b758-4a53-86bd-f9536dbb16c6",
+    "instructions": "PRODUCT_FAQ_PLACEMENT.md",
+    "placement": "pending human; after recommendations and before native contact/footer",
+    "published": false
+  },
+  "availability": {
+    "sourceCommit": "2e27a1f",
+    "startupRelease": "atelier-production-20261018-v41",
+    "instructions": "AVAILABILITY.md",
+    "routes": [
+      "/",
+      "/shop",
+      "/lampes",
+      "/sieges",
+      "/objets-deco",
+      "/product-page/:slug"
+    ],
+    "data": "Established Wix getAtelierProducts feed with exact normalized slug/canonical URL matching; no separate slug-query method",
+    "published": false,
+    "homeLabels": "Disponible or Épuisé when resolved; unknown explicitly unknown"
+  },
+  "homeFilters": {
+    "sourceCommit": "9fa081f",
+    "startupRelease": "atelier-production-20261018-v42",
+    "instructions": "HOME_FILTERS.md",
+    "first": [
+      "Abat-jour",
+      "Suspensions",
+      "Baladeuses"
+    ],
+    "second": [
+      "Lampes à poser",
+      "Les sièges",
+      "Objets déco",
+      "Kits DIY"
+    ],
+    "defaults": [
+      "Abat-jour",
+      "Lampes à poser"
+    ],
+    "published": false
+  },
+  "terms": {
+    "route": "/conditions-generales-de-vente",
+    "pageId": "i8cyj",
+    "tag": "atelier-terms-v1",
+    "requestedElementId": "customElement22",
+    "sourceCommit": "c27eba3",
+    "startupInstalled": true,
+    "startupEmbedIds": [
+      "2df3654a-bafe-4fdc-bb9f-a6e9dbec1147",
+      "72053d34-0095-46a1-a93f-1e16c0407434"
+    ],
+    "instructions": "TERMS_PLACEMENT.md",
+    "content": "Original 18 articles and withdrawal annex, visual redesign only",
+    "placement": "pending human",
+    "published": false
+  },
+  "generalterms": {
+    "route": "/conditions-generales",
+    "pageId": "vgud5",
+    "tag": "atelier-general-terms-v1",
+    "requestedElementId": "customElement23",
+    "sourceCommit": "bcd2b20",
+    "startupInstalled": true,
+    "startupEmbedId": "2ee1ebe8-02e8-43e8-b45f-13a88f908888",
+    "instructions": "GENERAL_TERMS_PLACEMENT.md",
+    "content": "Original preamble, eight articles and effective date 30/10/2023 preserved; design only",
+    "placement": "pending human",
+    "published": false
+  },
+  "privacy": {
+    "route": "/politique-de-confidentialite",
+    "pageId": "u54cx",
+    "tag": "atelier-privacy-v1",
+    "requestedElementId": "customElement24",
+    "sourceCommit": "d9b0251",
+    "startupInstalled": true,
+    "startupEmbedId": "f72d84b1-cb9f-4521-8e5d-9a05851988f1",
+    "instructions": "PRIVACY_PLACEMENT.md",
+    "content": "Original five articles, subsections and dates preserved; design only",
+    "placement": "pending human",
+    "published": false
+  },
+  "cookies": {
+    "route": "/politique-de-cookies",
+    "pageId": "ignax",
+    "tag": "atelier-cookies-v1",
+    "requestedElementId": "customElement25",
+    "sourceCommit": "6793638",
+    "startupInstalled": true,
+    "startupEmbedId": "8f960fea-1796-4738-bde8-62b6dbabaf8a",
+    "instructions": "COOKIES_PLACEMENT.md",
+    "content": "Original three sections and guidance links preserved; native consent behavior unchanged",
+    "placement": "pending human",
+    "published": false
+  },
+  "navbarCart": {
+    "sourceCommit": "e0e2b53",
+    "startupRelease": "atelier-production-20261018-v47",
+    "instructions": "NAVBAR_CART.md",
+    "elementId": "customElement1",
+    "count": "Sum of native Wix currentCart line-item quantities",
+    "events": "Initial load, component ready and Wix onCartChange",
+    "published": false
+  },
+  "multilingual": {
+    "bridgeAppVersion": "2.0",
+    "sourceCommit": "cae30d2",
+    "englishVisibility": "hidden (human reported; unchanged)",
+    "nativeEnglishRecordsCreated": 156,
+    "nativeEnglishFields": 423,
+    "publishedProductTranslations": 35,
+    "bulkFailures": 0,
+    "startupReceiptMappingsChecked": 37,
+    "instructions": "MULTILINGUAL.md",
+    "publishedLayout": false
+  },
+  "navbarLanguage": {
+    "sourceCommit": "601d7bd",
+    "startupRelease": "atelier-production-20261018-v49",
+    "instructions": "NAVBAR_LANGUAGE.md",
+    "published": false,
+    "receiptMappingsChecked": 37
+  },
+  "catalogLocaleFix": {
+    "sourceCommit": "e4c3190",
+    "startupRelease": "atelier-production-20261018-v50",
+    "receiptMappingsChecked": 37,
+    "published": false,
+    "observedBefore": "Public French and English shop both set catalog-error; translated chrome rendered; no product cards."
+  },
+  "motion": {
+    "home": "GSAP core 3.12.5 lazy-loaded after window load (500ms delay) from jsDelivr; hero image settle, below-fold headings/cards/sections reveal once via IntersectionObserver; prefers-reduced-motion disables load; scoped to home shadow root; ~28KB gzip, no ScrollTrigger"
+  },
+  "navbarLockup": {
+    "tag": "atelier-navbar-v1",
+    "release": "2026-10-20",
+    "desktop": "72px logo; 42px Parisienne Atelier; 14px de l’harmonie; 7px tagline",
+    "mobile": "38x46 logo; 26px Atelier; 9px de l’harmonie; tagline hidden",
+    "note": "Added as a final shadow style so it wins over earlier navbar rules"
+  },
+  "performance": {
+    "updatedAt": "2026-10-20T17:10:46.215Z",
+    "connectedRepoCommits": [
+      "a04bea8",
+      "edb17dd",
+      "c09530b"
+    ],
+    "changes": [
+      "All static component images now use Wix fit URLs, AVIF and quality settings",
+      "Catalog backend image and heroImage now return 600/900px fit URLs",
+      "All SEO markup images now use 600x800 fit URLs and lazy loading",
+      "Global route preloads now use valid fit URLs with both dimensions (previous width-only fill URLs returned HTTP 400)"
+    ],
+    "pendingPublish": "Publish connected repository commit c09530b from the Wix Editor",
+    "pageScoping": "Wix Custom Embeds API exposes pageFilter as read-only. Mapping prepared in PACKET_SCOPES.md; filters must be applied in Wix Custom Code UI."
+  }
+}

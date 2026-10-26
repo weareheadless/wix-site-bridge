@@ -26,7 +26,10 @@ export function safeError(error, secretValues = []) {
     return "Wix reports a revision conflict. No retry was attempted; re-read and plan again.";
   }
   if (Number.isInteger(error?.status)) {
-    return `Wix request failed with HTTP ${error.status}. Response details were omitted.`;
+    const code = typeof error.code === "string" && /^[A-Z0-9_-]{1,60}$/.test(error.code) ? ` (${error.code})` : "";
+    const fields = Array.isArray(error.fields) && error.fields.length ? `; fields: ${error.fields.join(", ")}` : "";
+    const hints = Array.isArray(error.hints) && error.hints.length ? `; validation: ${error.hints.join(", ")}` : "";
+    return `Wix request failed with HTTP ${error.status}${code}${fields}${hints}. Response details were omitted.`;
   }
   return redact(error?.message ?? "Operation failed.", secretValues);
 }

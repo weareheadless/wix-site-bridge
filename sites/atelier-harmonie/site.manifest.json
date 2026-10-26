@@ -1,0 +1,1286 @@
+{
+  "version": 1,
+  "site": {
+    "alias": "atelier-harmonie",
+    "siteId": "376faa89-fe6c-4ae8-8feb-10520e813a89",
+    "liveUrl": "https://www.atelier-harmonie.com/",
+    "routes": [
+      "/",
+      "/copy-of-accueil",
+      "/shop",
+      "/lampes",
+      "/sieges",
+      "/objets-deco",
+      "/gift-card",
+      "/tapisserie-restauration",
+      "/les-tissus",
+      "/b2b",
+      "/les-ateliers",
+      "/a-propos",
+      "/devis",
+      "/blog",
+      "/product-page/:slug",
+      "/conditions-generales-de-vente",
+      "/conditions-generales",
+      "/politique-de-confidentialite",
+      "/politique-de-cookies",
+      "/lampes/:slug",
+      "/livraison"
+    ],
+    "components": [
+      {
+        "name": "navbar",
+        "source": "sites/atelier-harmonie/production/custom-elements/atelier-navbar-v1.js",
+        "tagName": "atelier-navbar-v1",
+        "routes": [
+          "*"
+        ],
+        "wixElementIds": [
+          "customElement1"
+        ],
+        "datasetBindings": [
+          "Wix currentCart read-only total line-item quantity; onCartChange drives numeric cart-count attribute via shared masterPage"
+        ]
+      },
+      {
+        "name": "home",
+        "source": "sites/atelier-harmonie/production/custom-elements/atelier-home-v1.js",
+        "tagName": "atelier-home-v1",
+        "routes": [
+          "/"
+        ],
+        "wixElementIds": [
+          "customElement2"
+        ],
+        "datasetBindings": [
+          "Live paginated getAtelierProducts drives disjoint lighting/other-creation rails with category filters, current prices and stock; hero independent"
+        ]
+      },
+      {
+        "name": "footer",
+        "source": "sites/atelier-harmonie/production/custom-elements/atelier-footer-v1.js",
+        "tagName": "atelier-footer-v1",
+        "routes": [
+          "*"
+        ],
+        "wixElementIds": [
+          "customElement3"
+        ],
+        "datasetBindings": []
+      },
+      {
+        "name": "shop",
+        "source": "sites/atelier-harmonie/production/custom-elements/atelier-shop-v1.js",
+        "tagName": "atelier-shop-v1",
+        "routes": [
+          "/shop"
+        ],
+        "wixElementIds": [
+          "customElement4"
+        ],
+        "datasetBindings": [
+          "Read-only Stores/Products via backend/atelier-shop.web; native Wix currentCart"
+        ]
+      },
+      {
+        "name": "lamps",
+        "source": "sites/atelier-harmonie/production/custom-elements/atelier-lamps-v1.js",
+        "tagName": "atelier-lamps-v1",
+        "routes": [
+          "/lampes"
+        ],
+        "wixElementIds": [
+          "customElement5"
+        ],
+        "datasetBindings": [
+          "Live Stores/Products through existing backend/atelier-shop.web; native currentCart"
+        ]
+      },
+      {
+        "name": "seats",
+        "source": "sites/atelier-harmonie/production/custom-elements/atelier-seats-v1.js",
+        "tagName": "atelier-seats-v1",
+        "routes": [
+          "/sieges"
+        ],
+        "wixElementIds": [
+          "customElement6"
+        ],
+        "datasetBindings": [
+          "Live Stores/Products through backend/atelier-shop.web; native Wix currentCart"
+        ]
+      },
+      {
+        "name": "deco",
+        "source": "sites/atelier-harmonie/production/custom-elements/atelier-deco-v1.js",
+        "tagName": "atelier-deco-v1",
+        "routes": [
+          "/objets-deco"
+        ],
+        "wixElementIds": [
+          "customElement7"
+        ],
+        "datasetBindings": [
+          "Live Stores/Products via backend/atelier-shop.web; native currentCart"
+        ]
+      },
+      {
+        "name": "giftintro",
+        "source": "sites/atelier-harmonie/production/custom-elements/atelier-gift-intro-v1.js",
+        "tagName": "atelier-gift-intro-v1",
+        "routes": [
+          "/gift-card"
+        ],
+        "wixElementIds": [
+          "customElement8"
+        ],
+        "datasetBindings": [
+          "Native Wix Gift Cards widget preserved separately; no replacement payment or issuance logic"
+        ]
+      },
+      {
+        "name": "giftguide",
+        "source": "sites/atelier-harmonie/production/custom-elements/atelier-gift-guide-v1.js",
+        "tagName": "atelier-gift-guide-v1",
+        "routes": [
+          "/gift-card"
+        ],
+        "wixElementIds": [
+          "customElement9"
+        ],
+        "datasetBindings": [
+          "Native Wix Gift Cards widget preserved separately; no replacement payment or issuance logic"
+        ]
+      },
+      {
+        "name": "restoration",
+        "source": "sites/atelier-harmonie/production/custom-elements/atelier-restoration-v1.js",
+        "tagName": "atelier-restoration-v1",
+        "routes": [
+          "/tapisserie-restauration"
+        ],
+        "wixElementIds": [
+          "customElement10"
+        ],
+        "datasetBindings": [
+          "Keep original native Wix contact form and submission bindings outside custom element"
+        ]
+      },
+      {
+        "name": "contact",
+        "source": "sites/atelier-harmonie/production/custom-elements/atelier-contact-v1.js",
+        "tagName": "atelier-contact-v1",
+        "routes": [
+          "/tapisserie-restauration"
+        ],
+        "wixElementIds": [
+          "customElement11"
+        ],
+        "datasetBindings": [
+          "Presentational intro only. Native Wix form remains separate and owns submissions."
+        ]
+      },
+      {
+        "name": "fabrics",
+        "source": "sites/atelier-harmonie/production/custom-elements/atelier-fabrics-v1.js",
+        "tagName": "atelier-fabrics-v1",
+        "routes": [
+          "/les-tissus"
+        ],
+        "wixElementIds": [
+          "customElement12"
+        ],
+        "datasetBindings": [
+          "Editorial only; preserve original native Wix contact form below component"
+        ]
+      },
+      {
+        "name": "b2b",
+        "source": "sites/atelier-harmonie/production/custom-elements/atelier-b2b-v1.js",
+        "tagName": "atelier-b2b-v1",
+        "routes": [
+          "/b2b"
+        ],
+        "wixElementIds": [
+          "customElement13"
+        ],
+        "datasetBindings": [
+          "Editorial only. Native Wix contact form and notifications preserved separately."
+        ]
+      },
+      {
+        "name": "workshops",
+        "source": "sites/atelier-harmonie/production/custom-elements/atelier-workshops-v1.js",
+        "tagName": "atelier-workshops-v1",
+        "routes": [
+          "/les-ateliers"
+        ],
+        "wixElementIds": [
+          "customElement14"
+        ],
+        "datasetBindings": [
+          "Original external Wecandoo booking URLs; no local booking/payment store"
+        ]
+      },
+      {
+        "name": "about",
+        "source": "sites/atelier-harmonie/production/custom-elements/atelier-about-v1.js",
+        "tagName": "atelier-about-v1",
+        "routes": [
+          "/a-propos"
+        ],
+        "wixElementIds": [
+          "customElement15"
+        ],
+        "datasetBindings": [
+          "Editorial only; keep native Wix contact form separately"
+        ]
+      },
+      {
+        "name": "quotetop",
+        "source": "sites/atelier-harmonie/production/custom-elements/atelier-quote-top-v1.js",
+        "tagName": "atelier-quote-top-v1",
+        "routes": [
+          "/devis"
+        ],
+        "wixElementIds": [
+          "customElement16"
+        ],
+        "datasetBindings": [
+          "Preserve native Wix quote form, photo and upload/submission behavior unchanged"
+        ]
+      },
+      {
+        "name": "quotebottom",
+        "source": "sites/atelier-harmonie/production/custom-elements/atelier-quote-bottom-v1.js",
+        "tagName": "atelier-quote-bottom-v1",
+        "routes": [
+          "/devis"
+        ],
+        "wixElementIds": [
+          "customElement17"
+        ],
+        "datasetBindings": [
+          "Preserve native Wix quote form, photo and upload/submission behavior unchanged"
+        ]
+      },
+      {
+        "name": "journaltop",
+        "source": "sites/atelier-harmonie/production/custom-elements/atelier-journal-top-v1.js",
+        "tagName": "atelier-journal-top-v1",
+        "routes": [
+          "/blog"
+        ],
+        "wixElementIds": [
+          "customElement18"
+        ],
+        "datasetBindings": [
+          "Retain real native Wix Blog feed, posts, categories, pagination and members behavior"
+        ]
+      },
+      {
+        "name": "journalbottom",
+        "source": "sites/atelier-harmonie/production/custom-elements/atelier-journal-bottom-v1.js",
+        "tagName": "atelier-journal-bottom-v1",
+        "routes": [
+          "/blog"
+        ],
+        "wixElementIds": [
+          "customElement19"
+        ],
+        "datasetBindings": [
+          "Retain real native Wix Blog feed, posts, categories, pagination and members behavior"
+        ]
+      },
+      {
+        "name": "product",
+        "source": "sites/atelier-harmonie/production/custom-elements/atelier-product-v1.js",
+        "tagName": "atelier-product-v1",
+        "routes": [
+          "/product-page/:slug"
+        ],
+        "wixElementIds": [
+          "customElement20"
+        ],
+        "datasetBindings": [
+          "Read-only Stores/Products and Stores/Variants; documented getProductVariants; Wix currentCart owns pricing and checkout"
+        ]
+      },
+      {
+        "name": "productfaq",
+        "source": "sites/atelier-harmonie/production/custom-elements/atelier-product-faq-v1.js",
+        "tagName": "atelier-product-faq-v1",
+        "routes": [
+          "/product-page/:slug"
+        ],
+        "wixElementIds": [
+          "customElement21"
+        ],
+        "datasetBindings": [
+          "Static original five FAQ answers; keep native contact form separately"
+        ]
+      },
+      {
+        "name": "terms",
+        "source": "sites/atelier-harmonie/production/custom-elements/atelier-terms-v1.js",
+        "tagName": "atelier-terms-v1",
+        "routes": [
+          "/conditions-generales-de-vente"
+        ],
+        "wixElementIds": [
+          "customElement22"
+        ],
+        "datasetBindings": [
+          "Original 18 legal articles and withdrawal annex preserved in static source; no transaction or terms modification"
+        ]
+      },
+      {
+        "name": "generalterms",
+        "source": "sites/atelier-harmonie/production/custom-elements/atelier-general-terms-v1.js",
+        "tagName": "atelier-general-terms-v1",
+        "routes": [
+          "/conditions-generales"
+        ],
+        "wixElementIds": [
+          "customElement23"
+        ],
+        "datasetBindings": [
+          "Original CGU preamble, eight articles and existing effective date preserved; visual redesign only"
+        ]
+      },
+      {
+        "name": "privacy",
+        "source": "sites/atelier-harmonie/production/custom-elements/atelier-privacy-v1.js",
+        "tagName": "atelier-privacy-v1",
+        "routes": [
+          "/politique-de-confidentialite"
+        ],
+        "wixElementIds": [
+          "customElement24"
+        ],
+        "datasetBindings": [
+          "Five original privacy articles and subsections preserved; original issue/update dates and retention text unchanged; design only"
+        ]
+      },
+      {
+        "name": "cookies",
+        "source": "sites/atelier-harmonie/production/custom-elements/atelier-cookies-v1.js",
+        "tagName": "atelier-cookies-v1",
+        "routes": [
+          "/politique-de-cookies"
+        ],
+        "wixElementIds": [
+          "customElement25"
+        ],
+        "datasetBindings": [
+          "Original three cookie-policy sections and external guidance links preserved; native consent behavior untouched"
+        ]
+      },
+      {
+        "name": "lampcategory",
+        "source": "sites/atelier-harmonie/production/custom-elements/atelier-lamp-category-v1.js",
+        "tagName": "atelier-lamp-category-v1",
+        "routes": [
+          "/lampes/:slug"
+        ],
+        "wixElementIds": [
+          "catlampes"
+        ],
+        "datasetBindings": [
+          "Existing dynamicDataset storeCollection reference and Wix Stores catalog/cart"
+        ]
+      },
+      {
+        "name": "shipping",
+        "source": "sites/atelier-harmonie/production/custom-elements/atelier-shipping-v1.js",
+        "tagName": "atelier-shipping-v1",
+        "routes": [
+          "/livraison"
+        ],
+        "wixElementIds": [
+          "livraison"
+        ],
+        "datasetBindings": [
+          "Static shipping rate table supplied by the owner; Wix checkout remains authoritative"
+        ]
+      }
+    ],
+    "customCode": [
+      {
+        "id": "00b2da0f-23a8-4f8f-b400-2f8a29d9d8b2",
+        "position": "BODY_END",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "routeGuard": "/copy-of-accueil",
+        "mountId": "navbar",
+        "mountOrder": 5,
+        "htmlFile": "sites/atelier-harmonie/prototype/00-navbar.html",
+        "enabled": false,
+        "release": "atelier-performance-20261020-v53-geometry"
+      },
+      {
+        "id": "0888c6ad-ed2b-477a-ade0-aea3f4c913b7",
+        "position": "BODY_END",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "routeGuard": "/copy-of-accueil",
+        "mountId": "hero",
+        "mountOrder": 10,
+        "htmlFile": "sites/atelier-harmonie/prototype/01-hero.html",
+        "enabled": false,
+        "release": "atelier-performance-20261020-v53-geometry"
+      },
+      {
+        "id": "0fd09e54-ee53-4fdb-be6b-6cf36e0e2bda",
+        "position": "BODY_END",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "routeGuard": "/copy-of-accueil",
+        "mountId": "introduction",
+        "mountOrder": 15,
+        "htmlFile": "sites/atelier-harmonie/prototype/01b-introduction.html",
+        "enabled": false,
+        "release": "atelier-performance-20261020-v53-geometry"
+      },
+      {
+        "id": "8641c6b4-5169-4a52-9c79-29cc1a47de88",
+        "position": "BODY_END",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "routeGuard": "/copy-of-accueil",
+        "mountId": "categories",
+        "mountOrder": 18,
+        "htmlFile": "sites/atelier-harmonie/prototype/01c-categories.html",
+        "enabled": false,
+        "release": "atelier-performance-20261020-v53-geometry"
+      },
+      {
+        "id": "606cc89d-7f6a-4f0f-90b1-c9f16f319edc",
+        "position": "BODY_END",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "routeGuard": "/copy-of-accueil",
+        "mountId": "savoir-faire",
+        "mountOrder": 20,
+        "htmlFile": "sites/atelier-harmonie/prototype/02-savoir-faire.html",
+        "enabled": false,
+        "release": "atelier-performance-20261020-v53-geometry"
+      },
+      {
+        "id": "1c297f6d-1811-42b4-bc47-5ed4b0e3f347",
+        "position": "BODY_END",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "routeGuard": "/copy-of-accueil",
+        "mountId": "collections",
+        "mountOrder": 23,
+        "htmlFile": "sites/atelier-harmonie/prototype/02b-collections.html",
+        "enabled": false,
+        "release": "atelier-performance-20261020-v53-geometry"
+      },
+      {
+        "id": "e41647d5-b491-4250-b8c9-4fc494dce8db",
+        "position": "BODY_END",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "routeGuard": "/copy-of-accueil",
+        "mountId": "sur-mesure",
+        "mountOrder": 25,
+        "htmlFile": "sites/atelier-harmonie/prototype/02c-sur-mesure.html",
+        "enabled": false,
+        "release": "atelier-performance-20261020-v53-geometry"
+      },
+      {
+        "id": "7bbada7c-f7bb-4a42-ba13-5da6562c885b",
+        "position": "BODY_END",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "routeGuard": "/copy-of-accueil",
+        "mountId": "boutique",
+        "mountOrder": 30,
+        "htmlFile": "sites/atelier-harmonie/prototype/03-boutique.html",
+        "enabled": false,
+        "release": "atelier-performance-20261020-v53-geometry"
+      },
+      {
+        "id": "444403e8-465c-47d4-9e7f-9d26c975593a",
+        "position": "BODY_END",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "routeGuard": "/copy-of-accueil",
+        "mountId": "inspiration",
+        "mountOrder": 35,
+        "htmlFile": "sites/atelier-harmonie/prototype/03b-inspiration.html",
+        "enabled": false,
+        "release": "atelier-performance-20261020-v53-geometry"
+      },
+      {
+        "id": "104fef32-a0a4-419e-8943-b4bb466c637a",
+        "position": "BODY_END",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "routeGuard": "/copy-of-accueil",
+        "mountId": "avis",
+        "mountOrder": 37,
+        "htmlFile": "sites/atelier-harmonie/prototype/03c-avis.html",
+        "enabled": false,
+        "release": "atelier-performance-20261020-v53-geometry"
+      },
+      {
+        "id": "2feaa5e8-e8ec-4818-9fc2-a33de6bf679c",
+        "position": "BODY_END",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "routeGuard": "/copy-of-accueil",
+        "mountId": "atelier",
+        "mountOrder": 40,
+        "htmlFile": "sites/atelier-harmonie/prototype/04-atelier.html",
+        "enabled": false,
+        "release": "atelier-performance-20261020-v53-geometry"
+      },
+      {
+        "id": "6ea520f8-9838-4d9f-af4e-39cdc12520ae",
+        "position": "BODY_END",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "routeGuard": "/copy-of-accueil",
+        "mountId": "engagements",
+        "mountOrder": 45,
+        "htmlFile": "sites/atelier-harmonie/prototype/04b-engagements.html",
+        "enabled": false,
+        "release": "atelier-performance-20261020-v53-geometry"
+      },
+      {
+        "id": "6de2a6af-1855-4dc0-a292-a6f1c0ff4e1d",
+        "position": "BODY_END",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "routeGuard": "/copy-of-accueil",
+        "mountId": "instagram",
+        "mountOrder": 47,
+        "htmlFile": "sites/atelier-harmonie/prototype/04c-instagram.html",
+        "enabled": false,
+        "release": "atelier-performance-20261020-v53-geometry"
+      },
+      {
+        "id": "a80089fa-8f13-4e5d-9121-fe980ff955b5",
+        "position": "BODY_END",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "routeGuard": "/copy-of-accueil",
+        "mountId": "contact",
+        "mountOrder": 50,
+        "htmlFile": "sites/atelier-harmonie/prototype/05-contact.html",
+        "enabled": false,
+        "release": "atelier-performance-20261020-v53-geometry"
+      },
+      {
+        "id": "5d5dcf8d-801e-4029-a804-864e59d1ea36",
+        "name": "Atelier production early registration — initial",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-elements-global.html",
+        "purpose": "nonvisual-early-registration",
+        "enabled": true,
+        "release": "atelier-performance-20261020-v53-geometry"
+      },
+      {
+        "id": "f0a7cc61-94e1-4f74-9e8d-8a7e0ad8db85",
+        "name": "Atelier production early registration — navigation",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-elements-global.html",
+        "purpose": "nonvisual-early-registration",
+        "enabled": true,
+        "release": "atelier-performance-20261020-v53-geometry"
+      },
+      {
+        "id": "e5c3306c-5c12-4e47-a964-769f447fba92",
+        "name": "Atelier production early-packet-navbar-1.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": true,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-navbar-1.html",
+        "purpose": "nonvisual-early-registration",
+        "enabled": true,
+        "release": "atelier-performance-20261020-v53-geometry"
+      },
+      {
+        "id": "f51d200b-5a72-42af-9888-343a96ad77c4",
+        "name": "Atelier production early-packet-home-1.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "pages",
+          "pageIds": [
+            "lf68i"
+          ]
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-home-1.html",
+        "purpose": "nonvisual-early-registration",
+        "enabled": true,
+        "release": "atelier-performance-20261020-v53-geometry"
+      },
+      {
+        "id": "6a817d01-dde1-4c27-b881-0cd2334b1055",
+        "name": "Atelier production early-packet-home-2.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "pages",
+          "pageIds": [
+            "lf68i"
+          ]
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-home-2.html",
+        "purpose": "nonvisual-early-registration",
+        "enabled": true,
+        "release": "atelier-performance-20261020-v53-geometry"
+      },
+      {
+        "id": "bc560b09-ea35-47ed-a623-65edf44f96c9",
+        "name": "Atelier production early-packet-footer-1.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": true,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-footer-1.html",
+        "purpose": "nonvisual-early-registration",
+        "enabled": true,
+        "release": "atelier-performance-20261020-v53-geometry"
+      },
+      {
+        "id": "79fcc94b-358e-4454-aff7-1c6192156fe5",
+        "name": "Atelier production early-packet-shop-1.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "pages",
+          "pageIds": [
+            "uafgz"
+          ]
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-shop-1.html",
+        "purpose": "nonvisual-early-registration",
+        "enabled": true,
+        "release": "atelier-performance-20261020-v53-geometry"
+      },
+      {
+        "id": "c3341e82-ffc0-4d73-a3be-cc8de6915376",
+        "name": "Atelier production early-packet-lamps-1.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "pages",
+          "pageIds": [
+            "eiusq"
+          ]
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-lamps-1.html",
+        "purpose": "nonvisual-early-registration",
+        "enabled": true,
+        "release": "atelier-performance-20261020-v53-geometry"
+      },
+      {
+        "id": "0824f76d-abf7-482b-80b0-e8337a786d75",
+        "name": "Atelier production early-packet-seats-1.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "pages",
+          "pageIds": [
+            "halt3"
+          ]
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-seats-1.html",
+        "purpose": "nonvisual-early-registration",
+        "enabled": true,
+        "release": "atelier-performance-20261020-v53-geometry"
+      },
+      {
+        "id": "a15c64a9-afab-425b-963a-dcfe10a88c8b",
+        "name": "Atelier production early-packet-deco-1.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "pages",
+          "pageIds": [
+            "y2f9r"
+          ]
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-deco-1.html",
+        "purpose": "nonvisual-early-registration",
+        "enabled": true,
+        "release": "atelier-performance-20261020-v53-geometry"
+      },
+      {
+        "id": "1340430c-7161-4222-a40a-bed40d93d610",
+        "name": "Atelier production early-packet-giftintro-1.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "pages",
+          "pageIds": [
+            "dqttd"
+          ]
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-giftintro-1.html",
+        "purpose": "nonvisual-early-registration",
+        "enabled": true,
+        "release": "atelier-performance-20261020-v53-geometry"
+      },
+      {
+        "id": "115c3eb7-791d-4128-a46d-1f2c52d6e344",
+        "name": "Atelier production early-packet-giftguide-1.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "pages",
+          "pageIds": [
+            "dqttd"
+          ]
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-giftguide-1.html",
+        "purpose": "nonvisual-early-registration",
+        "enabled": true,
+        "release": "atelier-performance-20261020-v53-geometry"
+      },
+      {
+        "id": "da2e0e39-6ae0-40f8-ae59-6174aaed74fd",
+        "name": "Atelier production early-packet-restoration-1.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "pages",
+          "pageIds": [
+            "bcg5b"
+          ]
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-restoration-1.html",
+        "purpose": "nonvisual-early-registration",
+        "enabled": true,
+        "release": "atelier-performance-20261020-v53-geometry"
+      },
+      {
+        "id": "68db761f-4115-448c-9d8b-4306b1b84ec4",
+        "name": "Atelier production early-packet-contact-1.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": true,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-contact-1.html",
+        "purpose": "nonvisual-early-registration",
+        "enabled": true,
+        "release": "atelier-performance-20261020-v53-geometry"
+      },
+      {
+        "id": "1af5b53c-30ec-4516-a034-d9bd64f47819",
+        "name": "Atelier production early-packet-fabrics-1.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "pages",
+          "pageIds": [
+            "enr9k"
+          ]
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-fabrics-1.html",
+        "purpose": "nonvisual-early-registration",
+        "enabled": true,
+        "release": "atelier-performance-20261020-v53-geometry"
+      },
+      {
+        "id": "669b0d3b-3a56-41f0-a84f-ae1fb22d9c49",
+        "name": "Atelier production early-packet-b2b-1.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "pages",
+          "pageIds": [
+            "t2es8"
+          ]
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-b2b-1.html",
+        "purpose": "nonvisual-early-registration",
+        "enabled": true,
+        "release": "atelier-performance-20261020-v53-geometry"
+      },
+      {
+        "id": "e4194673-654e-4e14-93f9-d1fb45198336",
+        "name": "Atelier production early-packet-workshops-1.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "pages",
+          "pageIds": [
+            "ntpl0"
+          ]
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-workshops-1.html",
+        "purpose": "nonvisual-early-registration",
+        "enabled": true,
+        "release": "atelier-performance-20261020-v53-geometry"
+      },
+      {
+        "id": "3a7f985a-d818-4646-acef-0e4fa5069221",
+        "name": "Atelier production early-packet-about-1.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "pages",
+          "pageIds": [
+            "yn9k9"
+          ]
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-about-1.html",
+        "purpose": "nonvisual-early-registration",
+        "enabled": true,
+        "release": "atelier-performance-20261020-v53-geometry"
+      },
+      {
+        "id": "21798ef3-5ae2-4583-9a20-4d3fb13bfb1d",
+        "name": "Atelier production early-packet-quotetop-1.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "pages",
+          "pageIds": [
+            "zehpb"
+          ]
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-quotetop-1.html",
+        "purpose": "nonvisual-early-registration",
+        "enabled": true,
+        "release": "atelier-performance-20261020-v53-geometry"
+      },
+      {
+        "id": "017a8d7c-20df-4bcf-82c7-f04406a1f0c5",
+        "name": "Atelier production early-packet-quotebottom-1.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "pages",
+          "pageIds": [
+            "zehpb"
+          ]
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-quotebottom-1.html",
+        "purpose": "nonvisual-early-registration",
+        "enabled": true,
+        "release": "atelier-performance-20261020-v53-geometry"
+      },
+      {
+        "id": "0800721b-4b36-479f-97ef-b50ae2044743",
+        "name": "Atelier production early-packet-journaltop-1.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "pages",
+          "pageIds": [
+            "gibju"
+          ]
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-journaltop-1.html",
+        "purpose": "nonvisual-early-registration",
+        "enabled": true,
+        "release": "atelier-performance-20261020-v53-geometry"
+      },
+      {
+        "id": "44549894-ece3-466e-90ef-0375f9a3a02d",
+        "name": "Atelier production early-packet-journalbottom-1.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "pages",
+          "pageIds": [
+            "gibju"
+          ]
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-journalbottom-1.html",
+        "purpose": "nonvisual-early-registration",
+        "enabled": true,
+        "release": "atelier-performance-20261020-v53-geometry"
+      },
+      {
+        "id": "d1343538-27ba-4069-8c5b-4d20db25e22a",
+        "name": "Atelier production early-packet-product-1.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "pages",
+          "pageIds": [
+            "lj022"
+          ]
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-product-1.html",
+        "purpose": "nonvisual-early-registration",
+        "enabled": true,
+        "release": "atelier-performance-20261020-v53-geometry"
+      },
+      {
+        "id": "48172cc5-b758-4a53-86bd-f9536dbb16c6",
+        "name": "Atelier production early-packet-productfaq-1.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "pages",
+          "pageIds": [
+            "lj022"
+          ]
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-productfaq-1.html",
+        "purpose": "nonvisual-early-registration",
+        "enabled": true,
+        "release": "atelier-performance-20261020-v53-geometry"
+      },
+      {
+        "id": "d6615a9d-f7a2-46d1-b5b2-efc6651d4cc6",
+        "name": "Atelier production early-packet-product-2.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "pages",
+          "pageIds": [
+            "lj022"
+          ]
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-product-2.html",
+        "purpose": "nonvisual-early-registration",
+        "enabled": true,
+        "release": "atelier-performance-20261020-v53-geometry"
+      },
+      {
+        "id": "2df3654a-bafe-4fdc-bb9f-a6e9dbec1147",
+        "name": "Atelier production early-packet-terms-1.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-terms-1.html",
+        "purpose": "nonvisual-early-registration",
+        "enabled": false,
+        "release": "atelier-performance-20261020-v53-geometry"
+      },
+      {
+        "id": "72053d34-0095-46a1-a93f-1e16c0407434",
+        "name": "Atelier production early-packet-terms-2.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-terms-2.html",
+        "purpose": "nonvisual-early-registration",
+        "enabled": false,
+        "release": "atelier-performance-20261020-v53-geometry"
+      },
+      {
+        "id": "2ee1ebe8-02e8-43e8-b45f-13a88f908888",
+        "name": "Atelier production early-packet-generalterms-1.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "pages",
+          "pageIds": [
+            "i8cyj"
+          ]
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-generalterms-1.html",
+        "purpose": "nonvisual-early-registration",
+        "enabled": false,
+        "release": "atelier-performance-20261020-v53-geometry"
+      },
+      {
+        "id": "f72d84b1-cb9f-4521-8e5d-9a05851988f1",
+        "name": "Atelier production early-packet-privacy-1.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "pages",
+          "pageIds": [
+            "u54cx"
+          ]
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-privacy-1.html",
+        "purpose": "nonvisual-early-registration",
+        "enabled": true,
+        "release": "atelier-performance-20261020-v53-geometry"
+      },
+      {
+        "id": "8f960fea-1796-4738-bde8-62b6dbabaf8a",
+        "name": "Atelier production early-packet-cookies-1.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "pages",
+          "pageIds": [
+            "ignax"
+          ]
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-cookies-1.html",
+        "purpose": "nonvisual-early-registration",
+        "enabled": true,
+        "release": "atelier-performance-20261020-v53-geometry"
+      },
+      {
+        "id": "de3fd457-5a06-4565-9aa4-62e3774ff478",
+        "name": "Atelier production early-packet-home-3.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "pages",
+          "pageIds": [
+            "lf68i"
+          ]
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-home-3.html",
+        "purpose": "nonvisual-early-registration",
+        "enabled": true,
+        "release": "atelier-performance-20261020-v53-geometry"
+      },
+      {
+        "id": "f380bf40-1eaf-45b0-b6d3-75112c1dfe9c",
+        "name": "Atelier production early-packet-shop-2.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "pages",
+          "pageIds": [
+            "uafgz"
+          ]
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-shop-2.html",
+        "purpose": "nonvisual-early-registration",
+        "enabled": true,
+        "release": "atelier-performance-20261020-v53-geometry"
+      },
+      {
+        "id": "f2c2ee7f-53fa-473b-8a5f-c57028025b43",
+        "name": "Atelier production early-packet-fabrics-2.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "pages",
+          "pageIds": [
+            "enr9k"
+          ]
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-fabrics-2.html",
+        "purpose": "nonvisual-early-registration",
+        "enabled": true,
+        "release": "atelier-performance-20261020-v53-geometry"
+      },
+      {
+        "id": "e47023e7-db01-4253-a052-c487c341721a",
+        "name": "Atelier production early-packet-b2b-2.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "pages",
+          "pageIds": [
+            "t2es8"
+          ]
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-b2b-2.html",
+        "purpose": "nonvisual-early-registration",
+        "enabled": true,
+        "release": "atelier-performance-20261020-v53-geometry"
+      },
+      {
+        "id": "06f65980-3e16-4dd1-8ca4-43e560020173",
+        "name": "Atelier production early-packet-terms-3.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": true,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-terms-3.html",
+        "purpose": "nonvisual-early-registration",
+        "enabled": false,
+        "release": "atelier-performance-20261020-v53-geometry"
+      },
+      {
+        "id": "78d528e2-1ba8-4547-9ad8-32ad138c2e86",
+        "name": "Atelier production early-packet-generalterms-2.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "pages",
+          "pageIds": [
+            "i8cyj"
+          ]
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-generalterms-2.html",
+        "purpose": "nonvisual-early-registration",
+        "enabled": false,
+        "release": "atelier-performance-20261020-v53-geometry"
+      },
+      {
+        "id": "deabf405-88b2-46ec-8c22-3eb9dba37167",
+        "name": "Atelier production early-packet-privacy-2.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "pages",
+          "pageIds": [
+            "u54cx"
+          ]
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-privacy-2.html",
+        "purpose": "nonvisual-early-registration",
+        "enabled": true,
+        "release": "atelier-performance-20261020-v53-geometry"
+      },
+      {
+        "id": "41e2873b-2a99-4747-b1b6-156878469855",
+        "name": "Atelier production early registration — lamp categories",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "pages",
+          "pageIds": [
+            "pyd4k"
+          ]
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-lampcategory-1.html",
+        "purpose": "nonvisual-early-registration",
+        "enabled": true,
+        "release": "atelier-performance-20261020-v53-geometry"
+      },
+      {
+        "id": "523191ed-77dc-478f-bc73-4dbd63c1110f",
+        "name": "Atelier production early-packet-shipping-1.html",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "pages",
+          "pageIds": [
+            "yx5sd"
+          ]
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "htmlFile": "sites/atelier-harmonie/production/custom-code/early-packet-shipping-1.html",
+        "purpose": "route-guarded-shipping",
+        "enabled": true,
+        "release": "atelier-performance-20261020-v53-geometry"
+      },
+      {
+        "id": "9605b5ef-04c6-47b2-9994-7acb4b01990e",
+        "name": "StoresChannels Google Site Verification",
+        "purpose": "live-sync",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "enabled": true,
+        "loadOnce": false
+      },
+      {
+        "id": "3b6ddcef-061e-4cc6-9652-42524fd350d7",
+        "name": "Topbar",
+        "purpose": "live-sync",
+        "position": "BODY_START",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "enabled": false,
+        "loadOnce": false
+      }
+    ],
+    "connectedRepo": "weareheadless/atelier-harmonie",
+    "defaultBranch": "main"
+  }
+}
