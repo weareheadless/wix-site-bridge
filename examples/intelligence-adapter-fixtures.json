@@ -1,14 +1,14 @@
 {
   "schemaVersion": "wix-bridge-compatibility/1",
-  "bridge": { "version": "0.1.0", "baseline": "1f9baca1c70c2e46c33bc022aa239bd9d35a4959", "mcpProtocols": ["2024-11-05", "2025-03-26", "2025-06-18", "2025-11-25"] },
+  "bridge": { "version": "0.1.0", "baseline": "1f9baca1c70c2e46c33bc022aa239bd9d35a4959", "hostRevision": "1146444e7af997b37ff5ca4ac5ea2cdcfaebed31", "consumerRevision": "0c3f9ce395b3c9291da916061c9d2c2ad71395c", "mcpProtocols": ["2024-11-05", "2025-03-26", "2025-06-18", "2025-11-25"] },
   "consumers": [
     { "operation": "inspect", "consumer": "inspectBridgeSite", "cli": "inspect", "mcp": "wix_bridge_inspect", "status": "supported", "effect": "read" },
     { "operation": "plan", "consumer": "planBridgeSite", "cli": "plan", "mcp": "wix_bridge_plan", "status": "supported", "effect": "read" },
     { "operation": "deploy", "consumer": "deployBridgeSite", "cli": "deploy", "mcp": "wix_bridge_deploy", "status": "supported", "effect": "immediately_live_embed_apply" },
-    { "operation": "release", "consumer": "releaseBridgeSite", "cli": "release", "mcp": "wix_bridge_release", "status": "partial_compatibility", "unsupportedFlags": ["--non-interactive"], "effect": "code_publish_then_embed_apply" },
+    { "operation": "release", "consumer": "releaseBridgeSite", "cli": "release", "mcp": "wix_bridge_release", "status": "partial_compatibility", "hostOnly": { "acceptedFlag": "--non-interactive", "flagBehavior": "parsed_but_unused", "publishInvocation": "wix_publish_source_remote_y", "unattendedPublishAuthorized": false }, "unsupportedFlags": ["--non-interactive"], "effect": "code_publish_then_embed_apply" },
     { "operation": "verify", "consumer": "verifyBridgeSite", "cli": "verify", "mcp": "wix_bridge_verify", "status": "supported", "effect": "read" },
     { "operation": "snippet", "consumer": "readBridgeSnippet", "cli": "snippet", "mcp": "wix_bridge_read_snippet", "status": "supported", "effect": "read_manifest_scoped" },
-    { "operation": "update-snippet", "consumer": "updateBridgeSnippet", "cli": null, "mcp": null, "status": "unsupported", "unsupportedFlags": ["--html-file", "--preserve-scope"], "effect": "arbitrary_html_update" }
+    { "operation": "update-snippet", "consumer": "updateBridgeSnippet", "cli": null, "mcp": null, "status": "unsupported", "hostOnly": { "cli": "update-snippet", "flags": ["--html-file", "--preserve-scope"] }, "unsupportedFlags": ["--html-file", "--preserve-scope"], "effect": "arbitrary_html_update" }
   ],
   "capabilities": [
     { "name": "target_allowlist", "operations": ["all"], "effect": "read", "gate": "explicit_manifest_alias_and_WIX_ALLOWED_SITE_IDS_match" },
@@ -21,7 +21,9 @@
   "scenarios": [
     { "name": "stale_embed_revision", "given": "Wix returns HTTP 409 or 412 during Custom Embed update", "expected": "stop_without_retry_and_return_failed_or_partial_with_replan_instruction" },
     { "name": "release_code_published_then_embed_conflict", "given": "Wix CLI publish succeeded and a later embed update conflicts", "expected": "preserve_code_publish_receipt_and_report_partial_embed_outcome; do_not_claim_atomic_rollback" },
-    { "name": "intervening_edit_before_restore", "given": "current embed hash or revision differs from the saved snapshot", "expected": "refuse_all_restore_writes_and_return_blocked" },
+    { "name": "restore_hash_matches_before", "given": "current embed content hash equals the saved beforeSha256", "expected": "no_op_without_update" },
+    { "name": "restore_hash_matches_desired", "given": "current embed content hash equals the release desiredSha256 and current revision is fetched before update", "expected": "restore_saved_previous_content_using_fetched_revision_cas" },
+    { "name": "restore_hash_is_other", "given": "any current embed hash is neither beforeSha256 nor desiredSha256", "expected": "block_all_restore_writes_before_mutation" },
     { "name": "mcp_publish_apply", "given": "MCP publish or release called with apply=true", "expected": "requires_local_terminal; no unattended_publish" }
   ]
 }
