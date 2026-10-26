@@ -1,5 +1,6 @@
 {
   "schemaVersion": "wix-bridge-compatibility/1",
+  "preparedEmbedProtocol": { "contract": "wix-prepared-embed/1", "version": 1, "htmlPublic": false, "applyRequires": ["exact_plan_id", "expected_desired_sha256", "explicit_apply"], "unknownOutcome": "blocked_until_readback_reconcile", "intelligenceBinding": false },
   "bridge": { "version": "0.1.0", "baseline": "1f9baca1c70c2e46c33bc022aa239bd9d35a4959", "hostRevision": "1146444e7af997b37ff5ca4ac5ea2cdcfaebed31", "consumerRevision": "0c3f9ce395b3c9291da916061c9d2c2ad71395c1", "mcpProtocols": ["2024-11-05", "2025-03-26", "2025-06-18", "2025-11-25"] },
   "consumers": [
     { "operation": "inspect", "consumer": "inspectBridgeSite", "cli": "inspect", "mcp": "wix_bridge_inspect", "status": "supported", "effect": "read" },
@@ -8,7 +9,10 @@
     { "operation": "release", "consumer": "releaseBridgeSite", "cli": "release", "mcp": "wix_bridge_release", "status": "partial_compatibility", "hostOnly": { "acceptedFlag": "--non-interactive", "flagBehavior": "parsed_but_unused", "publishInvocation": "wix_publish_source_remote_y", "unattendedPublishAuthorized": false }, "unsupportedFlags": ["--non-interactive"], "effect": "code_publish_then_embed_apply" },
     { "operation": "verify", "consumer": "verifyBridgeSite", "cli": "verify", "mcp": "wix_bridge_verify", "status": "supported", "effect": "read" },
     { "operation": "snippet", "consumer": "readBridgeSnippet", "cli": "snippet", "mcp": "wix_bridge_read_snippet", "status": "supported", "effect": "read_manifest_scoped" },
-    { "operation": "update-snippet", "consumer": "updateBridgeSnippet", "cli": null, "mcp": null, "status": "unsupported", "hostOnly": { "cli": "update-snippet", "flags": ["--html-file", "--preserve-scope"] }, "unsupportedFlags": ["--html-file", "--preserve-scope"], "effect": "arbitrary_html_update" }
+    { "operation": "update-snippet", "consumer": "updateBridgeSnippet", "cli": null, "mcp": null, "status": "unsupported", "hostOnly": { "cli": "update-snippet", "flags": ["--html-file", "--preserve-scope"] }, "unsupportedFlags": ["--html-file", "--preserve-scope"], "effect": "arbitrary_html_update" },
+    { "operation": "prepared-embed-plan", "consumer": "preparedEmbedPlan", "cli": "prepared-embed-plan", "mcp": "wix_bridge_prepared_embed_plan", "status": "supported", "effect": "private_manifest_scoped_preparation" },
+    { "operation": "prepared-embed-apply", "consumer": "preparedEmbedApply", "cli": "prepared-embed-apply", "mcp": "wix_bridge_prepared_embed_apply", "status": "supported", "effect": "immediately_live_embed_apply_with_durable_intent" },
+    { "operation": "prepared-embed-reconcile", "consumer": "preparedEmbedReconcile", "cli": "prepared-embed-reconcile", "mcp": "wix_bridge_prepared_embed_reconcile", "status": "supported", "effect": "read_only_reconciliation" }
   ],
   "capabilities": [
     { "name": "target_allowlist", "operations": ["all"], "effect": "read", "gate": "explicit_manifest_alias_and_WIX_ALLOWED_SITE_IDS_match" },
@@ -16,7 +20,9 @@
     { "name": "local_artifact", "operations": ["build"], "effect": "private_preparation", "gate": "siteRepo_and_apply_for_local_write" },
     { "name": "embed_mutation", "operations": ["deploy", "restore"], "effect": "immediately_live_embed_apply", "gate": "apply_and_current_revision_and_exact_manifest_scope" },
     { "name": "code_publish", "operations": ["publish", "release"], "effect": "code_publish", "gate": "apply_and_interactive_wix_cli_confirmation" },
-    { "name": "editor_placement", "operations": [], "effect": "manual_editor", "gate": "documented_owner_or_operator_setup" }
+    { "name": "editor_placement", "operations": [], "effect": "manual_editor", "gate": "documented_owner_or_operator_setup" },
+    { "name": "prepared_embed", "operations": ["prepared-embed-plan", "prepared-embed-apply", "prepared-embed-reconcile"], "effect": "private_preparation_and_manifest_scoped_embed_mutation", "gate": "explicit_alias_and_allowlist_and_reviewed_plan_hash_and_apply" },
+    { "name": "intelligence_binding", "operations": [], "effect": "not_activated", "gate": "none" }
   ],
   "scenarios": [
     { "name": "stale_embed_revision", "given": "Wix returns HTTP 409 or 412 during Custom Embed update", "expected": "stop_without_retry_and_return_failed_or_partial_with_replan_instruction" },
@@ -24,6 +30,8 @@
     { "name": "restore_hash_matches_before", "given": "current embed content hash equals the saved beforeSha256", "expected": "no_op_without_update" },
     { "name": "restore_hash_matches_desired", "given": "current embed content hash equals the release desiredSha256 and current revision is fetched before update", "expected": "restore_saved_previous_content_using_fetched_revision_cas" },
     { "name": "restore_hash_is_other", "given": "any current embed hash is neither beforeSha256 nor desiredSha256", "expected": "block_all_restore_writes_before_mutation" },
-    { "name": "mcp_publish_apply", "given": "MCP publish or release called with apply=true", "expected": "requires_local_terminal; no unattended_publish" }
+    { "name": "mcp_publish_apply", "given": "MCP publish or release called with apply=true", "expected": "requires_local_terminal; no_unattended_publish" },
+    { "name": "prepared_embed_unknown_response", "given": "Wix mutation response is lost", "expected": "block_repeat_apply; reconcile_by_readback_only; preserve_uncertainty" },
+    { "name": "prepared_embed_concurrent_apply", "given": "two callers apply the same plan concurrently", "expected": "exclusive_plan_lock_allows_at_most_one_mutation" }
   ]
 }

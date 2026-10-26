@@ -7,6 +7,7 @@ import { executeRelease, planRelease } from "./release-operation.mjs";
 import { deploySnippets, inspectSnippets, planSnapshot, planSnippetDeployment, readConfiguredSnippet, restoreSnippets, snapshotSnippets } from "./release.mjs";
 import { assertAllowedTarget, newId, redact, sha256, targetAllowlist, writePrivateJson } from "./security.mjs";
 import { WixAppTokenProvider, WixCustomEmbedsClient } from "./wix-client.mjs";
+import { capabilityDeclaration, runPreparedEmbed } from "./prepared-embed.mjs";
 
 function secretValues(env) {
   return [env.WIX_APP_SECRET, env.WIX_CLI_API_KEY, env.WIX_CUSTOM_EMBEDS_ACCESS_TOKEN];
@@ -36,12 +37,17 @@ export async function runOperation(command, args, env = process.env, options = {
     const authConfigured = Boolean(env.WIX_APP_ID && env.WIX_APP_SECRET && env.WIX_APP_INSTANCE_ID);
     return {
       status: "ok",
+      capability: capabilityDeclaration(),
       target: { alias: site.alias, siteId: site.siteId, connectedRepo: site.connectedRepo, defaultBranch: site.defaultBranch },
       allowlisted: true,
       customEmbedsAuth: authConfigured ? "configured (not contacted)" : "missing Wix app credentials",
       wixCli: "checked when publish or release is requested",
       sourceRepo: publish ? { branch: publish.branch, sourceCommit: publish.sourceCommit, uiConfigSha256: publish.uiConfigSha256 } : "not checked; pass --site-repo"
     };
+  }
+
+  if (["prepared-embed-plan", "prepared-embed-apply", "prepared-embed-reconcile"].includes(command)) {
+    return runPreparedEmbed(command, { site, stateDir, client: clientFor(site, env), args });
   }
 
   if (command === "build") {
