@@ -10,3 +10,10 @@
 - Never commit secrets, local snapshots, or release receipts. Logs and tool output must redact credentials.
 - Keep runtime CMS records and dataset behavior in Wix. Do not create a parallel data store.
 - The native editor placement of custom elements and dataset bindings is a one-time Wix UI setup and must be documented, not represented as an API operation.
+## Agent task coordination
+
+For UI/OPS implementation work, follow `docs/agent-coordination.md`: claim one
+Ready issue with the actual run ID and bounded plan, keep an early draft PR,
+record real tests and hand off for latest-diff manager review. Scope changes
+require explicit replanning; agents stop before merge or deployment. Reuse the
+shared key and existing Project, issues and CI; do not add a bot-management system.
