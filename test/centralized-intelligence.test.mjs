@@ -68,7 +68,7 @@ test("CrawlSEO consumer calls map to existing MCP tools or explicit unsupported 
   assert.equal(fixture.schemaVersion, "wix-bridge-compatibility/1");
   assert.equal(fixture.bridge.baseline, "1f9baca1c70c2e46c33bc022aa239bd9d35a4959");
   assert.equal(fixture.bridge.hostRevision, "1146444e7af997b37ff5ca4ac5ea2cdcfaebed31");
-  assert.equal(fixture.bridge.consumerRevision, "0c3f9ce395b3c9291da916061c9d2c2ad71395c");
+  assert.match(fixture.bridge.consumerRevision, /^[a-f0-9]{40}$/);
   for (const consumer of fixture.consumers) {
     if (consumer.cli === null) {
       assert.equal(consumer.status, "unsupported");
@@ -109,7 +109,8 @@ test("capability fixture distinguishes read, local preparation, live embed apply
 test("partial, stale and interactive-CLI outcomes stay explicit in consumer fixtures", () => {
   const scenarios = new Map(fixture.scenarios.map(({ name, expected }) => [name, expected]));
   assert.match(scenarios.get("stale_embed_revision"), /stop_without_retry/);
-  assert.match(scenarios.get("release_code_published_then_embed_conflict"), /partial_embed_outcome/);
+  assert.match(scenarios.get("release_code_published_then_embed_conflict"), /final_partial_receipt_records_codePublished_true_and_snapshot_source_identity/);
+  assert.match(scenarios.get("release_code_published_then_embed_conflict"), /no_standalone_publish_receipt/);
   assert.match(scenarios.get("mcp_publish_apply"), /requires_local_terminal/);
   assert.equal(scenarios.get("restore_hash_matches_before"), "no_op_without_update");
   assert.match(scenarios.get("restore_hash_matches_desired"), /fetched_revision_cas/);

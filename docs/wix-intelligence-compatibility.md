@@ -1,6 +1,6 @@
 # Wix intelligence adapter compatibility inventory
 
-Status: UI-013 inventory for generic Wix Bridge `main` at `1f9baca1c70c2e46c33bc022aa239bd9d35a4959` (`package.json` version `0.1.0`), compared with the host checkout at `1146444e7af997b37ff5ca4ac5ea2cdcfaebed31`. The CrawlSEO consumer is pinned to `0c3f9ce395b3c9291da916061c9d2c2ad71395c`. This is a repository-source comparison, not a Wix tenant test or a platform API certification. The machine-readable rows and intentional incompatibilities live in `examples/intelligence-adapter-fixtures.json` and are checked by `test/centralized-intelligence.test.mjs`.
+Status: UI-013 inventory for generic Wix Bridge `main` at `1f9baca1c70c2e46c33bc022aa239bd9d35a4959` (`package.json` version `0.1.0`), compared with the host checkout at `1146444e7af997b37ff5ca4ac5ea2cdcfaebed31`. The CrawlSEO consumer is pinned to `0c3f9ce395b3c9291da916061c9d2c2ad71395c1`. This is a repository-source comparison, not a Wix tenant test or a platform API certification. The machine-readable rows and intentional incompatibilities live in `examples/intelligence-adapter-fixtures.json` and are checked by `test/centralized-intelligence.test.mjs`.
 
 ## Contract and trust boundaries
 
