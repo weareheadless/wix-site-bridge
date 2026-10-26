@@ -10,3 +10,10 @@
 - Never commit secrets, local snapshots, or release receipts. Logs and tool output must redact credentials.
 - Keep runtime CMS records and dataset behavior in Wix. Do not create a parallel data store.
 - The native editor placement of custom elements and dataset bindings is a one-time Wix UI setup and must be documented, not represented as an API operation.
+# Centralized intelligence work
+
+For the UI-001–UI-018 shared intelligence initiative, read
+`docs/centralized-intelligence-reference.md`, the linked canonical specification,
+and the owning issue/dependencies before implementation. Preserve this repository's
+existing CMS, approval, target and release contracts. The shared design is proposed;
+do not treat documentation as tenant activation or publication authorization.
