@@ -1,6 +1,11 @@
 #!/usr/bin/env node
 import { runOperation, outputText } from "./bridge.mjs";
 import { safeError } from "./security.mjs";
+import { pathToFileURL } from "node:url";
+
+export function exitCodeForStatus(status) {
+  return ["partial", "failed", "blocked", "uncertain", "publish-failed", "drift"].includes(status) ? 2 : 0;
+}
 
 function parseArgs(tokens) {
   const options = {};
@@ -36,17 +41,19 @@ Every operation requires an explicit target alias and a matching site ID in
 WIX_ALLOWED_SITE_IDS. Custom Embeds also require a Wix app installation and
 WIX_APP_ID, WIX_APP_SECRET, and WIX_APP_INSTANCE_ID.\n`;
 
-try {
-  const { command, options } = parseArgs(process.argv.slice(2));
-  if (!command || options.help) {
-    process.stdout.write(help);
-    process.exitCode = command ? 0 : 2;
-  } else {
-    const result = await runOperation(command, options, process.env, { transport: "cli" });
-    process.stdout.write(`${outputText(result)}\n`);
-    if (["partial", "failed", "blocked", "publish-failed", "drift"].includes(result.status)) process.exitCode = 2;
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  try {
+    const { command, options } = parseArgs(process.argv.slice(2));
+    if (!command || options.help) {
+      process.stdout.write(help);
+      process.exitCode = command ? 0 : 2;
+    } else {
+      const result = await runOperation(command, options, process.env, { transport: "cli" });
+      process.stdout.write(`${outputText(result)}\n`);
+      process.exitCode = exitCodeForStatus(result.status);
+    }
+  } catch (error) {
+    process.stderr.write(`${safeError(error, [process.env.WIX_APP_SECRET, process.env.WIX_CLI_API_KEY])}\n`);
+    process.exitCode = 1;
   }
-} catch (error) {
-  process.stderr.write(`${safeError(error, [process.env.WIX_APP_SECRET, process.env.WIX_CLI_API_KEY])}\n`);
-  process.exitCode = 1;
 }

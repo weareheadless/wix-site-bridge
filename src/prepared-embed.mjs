@@ -14,6 +14,7 @@ function declaredScope(snippet) {
 }
 
 function assertTarget(embed, candidate, snippet) {
+  if (!snippet) throw new Error(`Selected site's manifest no longer declares prepared embed ${candidate.snippetId}; refusing to mutate or retry.`);
   if (!embed || embed.id !== candidate.snippetId) throw new Error("Prepared embed target could not be read.");
   if (embed.position !== candidate.position || JSON.stringify(liveScope(embed)) !== JSON.stringify(candidate.pageScope)) throw new Error("Prepared embed placement or page scope changed; refusing to mutate.");
   if (embed.embedData?.category !== candidate.category || embed.loadOnce !== candidate.loadOnce) throw new Error("Prepared embed category or loadOnce setting changed; refusing to mutate.");
@@ -133,7 +134,12 @@ export async function reconcilePreparedEmbed({ site, stateDir, client, planId })
   const paths = statePaths(stateDir, planId);
   const candidate = await readJson(paths.candidate);
   if (candidate.protocol !== PROTOCOL || candidate.siteAlias !== site.alias || candidate.siteId !== site.siteId) throw new Error("Prepared plan belongs to a different target or protocol.");
-  const receipt = await readJson(paths.receipt);
+  let receipt;
+  try { receipt = await readJson(paths.receipt); }
+  catch (error) {
+    if (error.code !== "ENOENT") throw error;
+    throw new Error("Prepared embed receipt is missing; outcome remains unknown. Reconcile is read-only and no mutation or retry was attempted.");
+  }
   if (receipt.planId !== planId || receipt.siteId !== site.siteId || receipt.siteAlias !== site.alias) throw new Error("Prepared receipt target does not match the selected site.");
   if (["complete", "reconciled"].includes(receipt.status)) return { ...receipt, receiptPath: paths.receipt };
   if (receipt.status === "applying") {
@@ -148,8 +154,8 @@ export async function reconcilePreparedEmbed({ site, stateDir, client, planId })
     return { ...blocked, receiptPath: paths.receipt };
   }
   try { assertTarget(current, candidate, site.customCode.find((item) => item.id === candidate.snippetId)); }
-  catch {
-    const blocked = { ...receipt, status: "uncertain", outcome: "target-drift", error: "Target scope or manifest binding changed; operator resolution required." };
+  catch (error) {
+    const blocked = { ...receipt, status: "uncertain", outcome: "target-drift", error: `${error.message} Operator resolution required.` };
     await writePrivateJson(paths.receipt, blocked);
     return { ...blocked, receiptPath: paths.receipt };
   }

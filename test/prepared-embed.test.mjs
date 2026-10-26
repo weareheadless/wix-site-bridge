@@ -5,6 +5,7 @@ import path from "node:path";
 import test from "node:test";
 import { applyPreparedEmbed, capabilityDeclaration, planPreparedEmbed, reconcilePreparedEmbed } from "../src/prepared-embed.mjs";
 import { outputText } from "../src/bridge.mjs";
+import { exitCodeForStatus } from "../src/cli.mjs";
 
 const site = { alias: "demo", siteId: "site-1", customCode: [{ id: "embed-1", position: "HEAD", pageScope: { type: "all" }, category: "ESSENTIAL", loadOnce: true }] };
 
@@ -42,6 +43,12 @@ test("capability declaration is versioned, bounded, and has no intelligence acti
   assert.equal(declaration.capabilities.preparedEmbedApply, true);
   assert.equal(declaration.capabilities.arbitraryEmbedUpdate, false);
   assert.equal(declaration.capabilities.intelligenceBinding, false);
+});
+
+test("CLI maps uncertain outcomes to non-zero while dry-run and reconciled remain successful", () => {
+  assert.equal(exitCodeForStatus("uncertain"), 2);
+  assert.equal(exitCodeForStatus("reconciled"), 0);
+  assert.equal(exitCodeForStatus("dry-run"), 0);
 });
 
 test("plan/apply keeps HTML private and persists intent before a single verified mutation", async (t) => {
@@ -96,6 +103,23 @@ test("lost response after mutation is reconciled by readback without a retry", a
   assert.equal(applied.status, "uncertain");
   const result = await reconcilePreparedEmbed({ site, stateDir, client: api, planId: plan.planId });
   assert.equal(result.status, "reconciled"); assert.equal(result.uncertaintyRetained, true); assert.equal(api.calls.update, 1);
+});
+
+test("missing receipt and removed manifest declaration fail closed with explicit reconciliation state", async (t) => {
+  const stateDir = await fixture(t); const api = client(); const missing = await prepare(stateDir, api);
+  await assert.rejects(() => reconcilePreparedEmbed({ site, stateDir, client: api, planId: missing.planId }), /receipt is missing.*outcome remains unknown/i);
+  assert.equal(api.calls.update, 0);
+
+  const uncertainApi = client({ updateError: Error("socket lost") });
+  // Recreate the candidate with a state where the mutation outcome is unknown.
+  const uncertainPlan = await prepare(stateDir, uncertainApi);
+  await applyPreparedEmbed({ site, stateDir, client: uncertainApi, planId: uncertainPlan.planId, expectedSha256: uncertainPlan.desiredSha256 });
+  const changedSite = { ...site, customCode: [] };
+  const result = await reconcilePreparedEmbed({ site: changedSite, stateDir, client: uncertainApi, planId: uncertainPlan.planId });
+  assert.equal(result.status, "uncertain");
+  assert.match(result.error, /manifest no longer declares/i);
+  assert.equal(uncertainApi.calls.update, 1);
+  assert.equal(api.calls.update, 0);
 });
 
 test("readback mismatch and unavailable state remain uncertain; receipt persistence interruption never mutates", async (t) => {
