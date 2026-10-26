@@ -24,12 +24,13 @@ const help = `Wix Site Bridge
 
 Usage: npm run bridge -- <operation> --manifest <file> --site <alias> [options]
 
-Read-only/planning: inspect, doctor, snippets, snippet, build, plan, verify
-Mutations (dry-run by default): build --apply, snapshot --apply, deploy --apply,
+Read-only/planning: inspect, doctor, snippets, snippet, build, plan, verify, prepared-embed-plan, prepared-embed-reconcile
+Mutations (dry-run by default): build --apply, snapshot --apply, deploy --apply, prepared-embed-apply --plan-id <id> --expected-sha256 <hash> --apply,
   publish --apply, release --apply, restore --snapshot <release-id> --apply
 
 Options: --site-repo <Wix-connected repo> --state-dir <private local state dir>
          --snippet <configured embed id> --snapshot <release id> --out <artifact path>
+         --html <prepared HTML> --plan-id <prepared plan id> --expected-sha256 <reviewed desired hash>
 
 Every operation requires an explicit target alias and a matching site ID in
 WIX_ALLOWED_SITE_IDS. Custom Embeds also require a Wix app installation and
