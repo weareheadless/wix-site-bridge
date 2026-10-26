@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "wix-bridge-compatibility/1",
+  "bridge": { "version": "0.1.0", "baseline": "1f9baca1c70c2e46c33bc022aa239bd9d35a4959", "mcpProtocols": ["2024-11-05", "2025-03-26", "2025-06-18", "2025-11-25"] },
+  "consumers": [
+    { "operation": "inspect", "consumer": "inspectBridgeSite", "cli": "inspect", "mcp": "wix_bridge_inspect", "status": "supported", "effect": "read" },
+    { "operation": "plan", "consumer": "planBridgeSite", "cli": "plan", "mcp": "wix_bridge_plan", "status": "supported", "effect": "read" },
+    { "operation": "deploy", "consumer": "deployBridgeSite", "cli": "deploy", "mcp": "wix_bridge_deploy", "status": "supported", "effect": "immediately_live_embed_apply" },
+    { "operation": "release", "consumer": "releaseBridgeSite", "cli": "release", "mcp": "wix_bridge_release", "status": "partial_compatibility", "unsupportedFlags": ["--non-interactive"], "effect": "code_publish_then_embed_apply" },
+    { "operation": "verify", "consumer": "verifyBridgeSite", "cli": "verify", "mcp": "wix_bridge_verify", "status": "supported", "effect": "read" },
+    { "operation": "snippet", "consumer": "readBridgeSnippet", "cli": "snippet", "mcp": "wix_bridge_read_snippet", "status": "supported", "effect": "read_manifest_scoped" },
+    { "operation": "update-snippet", "consumer": "updateBridgeSnippet", "cli": null, "mcp": null, "status": "unsupported", "unsupportedFlags": ["--html-file", "--preserve-scope"], "effect": "arbitrary_html_update" }
+  ],
+  "capabilities": [
+    { "name": "target_allowlist", "operations": ["all"], "effect": "read", "gate": "explicit_manifest_alias_and_WIX_ALLOWED_SITE_IDS_match" },
+    { "name": "custom_embed_read", "operations": ["snippets", "snippet", "plan", "verify"], "effect": "read", "gate": "documented_custom_embeds_api_and_manage_custom_embeds_app_identity" },
+    { "name": "local_artifact", "operations": ["build"], "effect": "private_preparation", "gate": "siteRepo_and_apply_for_local_write" },
+    { "name": "embed_mutation", "operations": ["deploy", "restore"], "effect": "immediately_live_embed_apply", "gate": "apply_and_current_revision_and_exact_manifest_scope" },
+    { "name": "code_publish", "operations": ["publish", "release"], "effect": "code_publish", "gate": "apply_and_interactive_wix_cli_confirmation" },
+    { "name": "editor_placement", "operations": [], "effect": "manual_editor", "gate": "documented_owner_or_operator_setup" }
+  ],
+  "scenarios": [
+    { "name": "stale_embed_revision", "given": "Wix returns HTTP 409 or 412 during Custom Embed update", "expected": "stop_without_retry_and_return_failed_or_partial_with_replan_instruction" },
+    { "name": "release_code_published_then_embed_conflict", "given": "Wix CLI publish succeeded and a later embed update conflicts", "expected": "preserve_code_publish_receipt_and_report_partial_embed_outcome; do_not_claim_atomic_rollback" },
+    { "name": "intervening_edit_before_restore", "given": "current embed hash or revision differs from the saved snapshot", "expected": "refuse_all_restore_writes_and_return_blocked" },
+    { "name": "mcp_publish_apply", "given": "MCP publish or release called with apply=true", "expected": "requires_local_terminal; no unattended_publish" }
+  ]
+}
