@@ -65,6 +65,23 @@ export async function runOperation(command, args, env = process.env, options = {
     const cli = spawnSync(wixExecutable(), ["--version"], { encoding: "utf8", stdio: "ignore", env });
     return {
       status: "ok",
+      // The host negotiates operations from this contract instead of assuming
+      // them. An operation is advertised only when this bridge implements it.
+      contract: "wix-bridge-generic-v1",
+      capabilities: {
+        inspect: true,
+        plan: true,
+        deploy: true,
+        publish: true,
+        release: true,
+        verify: true,
+        read_embed: true,
+        write_embed: true,
+        update_snippet: true,
+        cms: false,
+        seo_tags: false,
+        private_editor_revision: false
+      },
       target: { alias: site.alias, siteId: site.siteId, connectedRepo: site.connectedRepo, defaultBranch: site.defaultBranch },
       allowlisted: true,
       customEmbedsAuth: authConfigured ? "configured (not contacted)" : "missing Wix app credentials",
@@ -77,6 +94,7 @@ export async function runOperation(command, args, env = process.env, options = {
 
   if (command === "create-snippet") {
     if (!args.name || args.name.trim().length > 100) throw new Error("Pass --name with a custom embed name from 1 to 100 characters.");
+    if (!/^crawlseo\b/i.test(args.name.trim())) throw new Error("Custom embeds created by this bridge must be named with the CrawlSEO prefix so the generic write path can recognise them.");
     if (!args.htmlFile) throw new Error("Pass --html-file with the local HTML fragment for the new custom embed.");
     const position = args.position ?? "BODY_END";
     const category = args.category ?? "FUNCTIONAL";
@@ -245,6 +263,95 @@ export async function runOperation(command, args, env = process.env, options = {
       }
     }
     return { status: apply ? "written" : "dry-run", artifacts: output };
+  }
+
+  if (command === "read-embed") {
+    if (!args.snippet) throw new Error("Pass --snippet with the custom embed ID.");
+    const embed = await clientFor(site, env).get(args.snippet);
+    return {
+      embed: {
+        id: embed.id,
+        name: embed.name,
+        revision: String(embed.revision),
+        enabled: embed.enabled,
+        position: embed.position,
+        category: embed.embedData?.category,
+        loadOnce: embed.loadOnce,
+        pageScope: livePageScope(embed),
+        html: redact(embed.embedData?.html ?? "", secretValues(env)),
+        htmlSha256: sha256(embed.embedData?.html ?? "")
+      }
+    };
+  }
+
+  if (command === "write-embed") {
+    if (!args.snippet) throw new Error("Pass --snippet with the custom embed ID.");
+    if (!args.htmlFile) throw new Error("Pass --html-file with the HTML fragment.");
+    if (!args.route) throw new Error("Pass --route for the exact page path so the write keeps its route guard.");
+    const client = clientFor(site, env);
+    const current = await client.get(args.snippet);
+    // Only embeds this bridge created are writable without a manifest entry.
+    // A human's embed is never overwritten by a generic delivery.
+    if (!/^crawlseo\b/i.test(current.name ?? "")) {
+      throw new Error(`Custom embed ${current.id} is not managed by CrawlSEO; refusing to overwrite ${current.name ?? "an unnamed embed"}.`);
+    }
+    const sourceHtml = await readFile(path.resolve(args.htmlFile), "utf8");
+    if (!sourceHtml.trim()) throw new Error("The HTML fragment is empty.");
+    const routePath = args.route.replace(/\/+$/, "") || "/";
+    // A generic write must keep the same route guard as creation. Writing the
+    // raw fragment would make the embed render on every page.
+    const html = routeGuardedEmbed(sourceHtml, routePath);
+    const beforeSha256 = sha256(current.embedData?.html ?? "");
+    const afterSha256 = sha256(html);
+    const details = {
+      snippetId: current.id,
+      name: current.name,
+      position: current.position,
+      pageScope: livePageScope(current),
+      category: current.embedData?.category,
+      loadOnce: current.loadOnce,
+      routeGuard: routePath,
+      htmlBytes: Buffer.byteLength(html, "utf8"),
+      sourceHtmlBytes: Buffer.byteLength(sourceHtml, "utf8"),
+      htmlSha256: afterSha256,
+      sourcePath: path.resolve(args.htmlFile)
+    };
+    if (!apply) return { status: "dry-run", target: { alias: site.alias, siteId: site.siteId }, wouldUpdate: details };
+    const snapshot = await saveCurrentSnapshot({
+      site,
+      stateDir,
+      items: [{ id: current.id, current, beforeSha256, desiredHtml: html, afterSha256 }],
+      kind: "embed-write"
+    });
+    const operationId = newId("embed-write");
+    const receiptPath = path.join(stateDir, "receipts", `${operationId}.json`);
+    const receiptBase = {
+      operationId,
+      siteAlias: site.alias,
+      siteId: site.siteId,
+      createdAt: new Date().toISOString(),
+      ...details,
+      beforeSha256,
+      afterSha256,
+      snapshotId: snapshot.snapshotId,
+      snapshotPath: path.join(stateDir, "snapshots", `${snapshot.snapshotId}.json`)
+    };
+    await writePrivateJson(receiptPath, { ...receiptBase, status: "pending" });
+    try {
+      await client.updateHtml(current, html, current.embedData?.category, current.loadOnce);
+      const confirmed = await client.get(current.id);
+      if (sha256(confirmed.embedData?.html ?? "") !== afterSha256) throw new Error("Wix returned content that does not match the planned hash.");
+      const receipt = { ...receiptBase, status: "updated", confirmedRevision: String(confirmed.revision) };
+      await writePrivateJson(receiptPath, receipt);
+      return { ...receipt, receiptPath };
+    } catch (error) {
+      await writePrivateJson(receiptPath, {
+        ...receiptBase,
+        status: "failed",
+        failure: { name: error.name, httpStatus: Number.isInteger(error.status) ? error.status : null }
+      }).catch(() => {});
+      throw error;
+    }
   }
 
   if (command === "list-snippets" || command === "snippets") {
