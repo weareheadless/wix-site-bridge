@@ -17,7 +17,13 @@ explicitly every time.
 The bridge requires these environment names, mapped from the installed Wix app
 credentials: `WIX_APP_ID`, `WIX_APP_SECRET`, `WIX_APP_INSTANCE_ID`, and
 `WIX_ALLOWED_SITE_IDS`. Never print their values, commit them, or substitute
-another customer's credentials. The verified local Mac source for the app ID
+another customer's credentials.
+
+Static-page title and meta description use a separate Wix API key with
+`Manage SEO Settings` (`SCOPE.PROMOTE.MANAGE-SEO`), stored as
+`WIX_SEO_API_KEY`. The installed-app token is accepted by Custom Embeds but
+returns HTTP 403 on the Item SEO Tags API. The key lives in the site's private
+`.wix-bridge-state/app.env`, never in a manifest or source file. The verified local Mac source for the app ID
 and secret is `/private/tmp/wix-app-setup-clean/atelier-embed-bridge/.env.local`
 (`WIX_CLIENT_ID` maps to `WIX_APP_ID`; `WIX_CLIENT_SECRET` maps to
 WIX_APP_SECRET is mapped from WIX_CLIENT_SECRET. The box copy is /ATELIER/.wix-bridge.env with mode 600; source it without printing values, map the two WIX_CLIENT names, and keep it outside Git.

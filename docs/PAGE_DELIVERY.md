@@ -75,9 +75,11 @@ an all-pages entry inert everywhere else.
 ## Who does what
 
 - **CrawlSEO** writes the component source, commits and pushes it, and calls the
-  bridge for both entries.
+  bridge for both entries and, when the page configures them, its SEO title and
+  meta description.
 - **The bridge** creates the entries, rewrites them in place on retry, reads the
-  stored hash back, and disables a replaced embed.
+  stored hash back, disables a replaced embed, and publishes the page's SEO tags
+  through the Item SEO Tags API.
 - **The human** creates one blank, published Wix page at the route. There is no
   editor placement step: the mount adds the element to the page container.
   Optionally, narrow each entry's page scope in the Wix Custom Code panel; the
@@ -85,6 +87,27 @@ an all-pages entry inert everywhere else.
 
 Wix has no public API to create a site page, and the Custom Embed page filter is
 read-only. That is why the page and the scope are human steps.
+
+## Page SEO title and meta description
+
+The page title and meta description are Wix page settings, not Custom Embed
+content. The bridge sets them with the **Item SEO Tags API**:
+
+1. `GET /promote/seo/v1/item-seo-tags/STATIC_PAGE` lists the site's static pages.
+   The response has no page URL, so the bridge matches the route against the
+   canonical link in each item's `tags` or `resolvedTags`.
+2. `PATCH /promote/seo/v1/item-seo-tags/STATIC_PAGE/{pageId}` replaces the title
+   and description and keeps every other tag the page owns. `publish: true`
+   updates the existing published revision; it never publishes the whole site.
+
+This is a separate credential from Custom Embeds: a Wix API key with
+`Manage SEO Settings` (`SCOPE.PROMOTE.MANAGE-SEO`), stored as `WIX_SEO_API_KEY`.
+The installed-app token used by Custom Embeds gets HTTP 403 on this API.
+
+`seo-tags` is read-only by default and applies with `--apply`. A delivery passes
+the page's configured title and description once, after the packet and mount are
+written. A failure is reported in the delivery result; it does not hide a page
+that already rendered.
 
 ## Retry and update rules
 

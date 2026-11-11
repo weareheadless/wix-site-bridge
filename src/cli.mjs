@@ -27,14 +27,15 @@ const help = `Wix Site Bridge
 
 Usage: npm run bridge -- <operation> --manifest <file> --site <alias> [options]
 
-Read-only/planning: inspect, doctor, snippets, snippet, read-embed, build, plan, verify,
+Read-only/planning: inspect, doctor, snippets, snippet, read-embed, seo-tags, build, plan, verify,
   create-snippet (requires --name and --html-file; use exact --route or --all-pages)
   update-snippet (requires --snippet and --html-file; use exact --route, --all-pages, or --preserve-scope for a content packet)
 Mutations (dry-run by default): create-snippet --apply, write-embed --apply, write-packet --apply, disable-embed --apply,
-  build --apply, snapshot --apply, deploy --apply, publish --apply, release --apply, restore --snapshot <release-id> --apply
+  seo-tags --apply, build --apply, snapshot --apply, deploy --apply, publish --apply, release --apply, restore --snapshot <release-id> --apply
 
   write-packet (requires --snippet and --html-file; CrawlSEO early packet or page mount only; optional --load-once)
   disable-embed (requires --snippet; CrawlSEO embed only)
+  seo-tags (requires --route; --title and/or --description with --apply; sets a static page's title and meta description and publishes it)
 
 Options: --site-repo <Wix-connected repo> --state-dir <private local state dir>
          --snippet <configured embed id> --snapshot <release id> --out <artifact path>
@@ -45,6 +46,7 @@ Options: --site-repo <Wix-connected repo> --state-dir <private local state dir>
          --enabled <true|false> --load-once <true|false> --category <Wix category>
          --mount-id <section-id> --mount-order <0..999> (append a stacked section)
          --from-category <current category, for an explicit category change>
+         --title <text> --description <text> (static-page SEO with seo-tags)
 
 Every operation requires an explicit target alias and a matching site ID in
 WIX_ALLOWED_SITE_IDS. Custom Embeds also require a Wix app installation and

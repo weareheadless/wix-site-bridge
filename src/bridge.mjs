@@ -8,7 +8,7 @@ import { inspectPublishTarget, publishWixSite, wixExecutable } from "./publish.m
 import { executeRelease, planRelease } from "./release-operation.mjs";
 import { deploySnippets, inspectSnippets, planSnapshot, planSnippetDeployment, readConfiguredSnippet, restoreSnippets, saveCurrentSnapshot, snapshotSnippets } from "./release.mjs";
 import { assertAllowedTarget, newId, redact, sha256, targetAllowlist, writePrivateJson } from "./security.mjs";
-import { WixAppTokenProvider, WixCustomEmbedsClient } from "./wix-client.mjs";
+import { WixAppTokenProvider, WixCustomEmbedsClient, WixSeoClient, currentSeoValue, pageItemForRoute } from "./wix-client.mjs";
 
 function secretValues(env) {
   return [env.WIX_APP_SECRET, env.WIX_CLI_API_KEY, env.WIX_CUSTOM_EMBEDS_ACCESS_TOKEN];
@@ -81,16 +81,80 @@ export async function runOperation(command, args, env = process.env, options = {
         disable_embed: true,
         update_snippet: true,
         cms: false,
-        seo_tags: false,
+        seo_tags: true,
         private_editor_revision: false
       },
       target: { alias: site.alias, siteId: site.siteId, connectedRepo: site.connectedRepo, defaultBranch: site.defaultBranch },
       allowlisted: true,
       customEmbedsAuth: authConfigured ? "configured (not contacted)" : "missing Wix app credentials",
+      seoAuth: env.WIX_SEO_API_KEY || env.WIX_API_KEY ? "configured (not contacted)" : "missing WIX_SEO_API_KEY",
       wixCli: cli.status === 0 ? `installed (${wixExecutable() === "wix" ? "PATH" : "workspace"})` : "not installed",
       sourceRepo: publish
         ? { branch: publish.branch, sourceCommit: publish.sourceCommit, uiConfigSha256: publish.uiConfigSha256 }
         : site.connectedRepo ? "not checked; pass --site-repo" : "not connected; create and connect a separate Wix site source repository"
+    };
+  }
+
+  if (command === "seo-tags") {
+    const route = String(args.route ?? "").trim().replace(/\/+$/, "");
+    if (!route.startsWith("/") || route === "/" || /[?#\s]/.test(route) || route.includes("//") || route.split("/").includes("..")) {
+      throw new Error("Pass --route as one exact, non-root page path, such as /agenda-artisans-normandie.");
+    }
+    const title = typeof args.title === "string" ? args.title.trim() : "";
+    const description = typeof args.description === "string" ? args.description.trim() : "";
+    if (title.length > 200) throw new Error("--title is longer than 200 characters.");
+    if (description.length > 500) throw new Error("--description is longer than 500 characters.");
+
+    const seo = new WixSeoClient({ siteId: site.siteId, apiKey: env.WIX_SEO_API_KEY ?? env.WIX_API_KEY });
+    const pages = await seo.listStaticPages();
+    const item = pageItemForRoute(pages, route);
+    if (!item) throw new Error(`No static page has canonical route ${route}. The page must exist and be published.`);
+    const currentTitle = currentSeoValue(item, "title");
+    const currentDescription = currentSeoValue(item, "meta", "description");
+    const nextTitle = title || currentTitle || undefined;
+    const nextDescription = description || currentDescription || undefined;
+
+    if (!apply) {
+      return {
+        status: "ok",
+        target: { alias: site.alias, siteId: site.siteId },
+        route,
+        pageId: item.itemId,
+        currentTitle,
+        currentDescription,
+        wouldSet: { title: nextTitle ?? null, description: nextDescription ?? null }
+      };
+    }
+    if (!title && !description) {
+      throw new Error("Pass --title and/or --description with --apply.");
+    }
+
+    const updated = await seo.setItemSeoTags(item, { title: nextTitle, description: nextDescription });
+    const tags = Array.isArray(updated.itemSeoTags?.tags) ? updated.itemSeoTags.tags : [];
+    const operationId = newId("seo-set");
+    const receiptPath = path.join(stateDir, "receipts", `${operationId}.json`);
+    await writePrivateJson(receiptPath, {
+      operationId,
+      siteAlias: site.alias,
+      siteId: site.siteId,
+      createdAt: new Date().toISOString(),
+      status: "applied",
+      route,
+      pageId: item.itemId,
+      title: nextTitle ?? null,
+      description: nextDescription ?? null,
+      publish: true
+    });
+    return {
+      status: "ok",
+      target: { alias: site.alias, siteId: site.siteId },
+      route,
+      pageId: item.itemId,
+      published: true,
+      title: currentSeoValue({ tags }, "title"),
+      description: currentSeoValue({ tags }, "meta", "description"),
+      tags,
+      receipt: receiptPath
     };
   }
 

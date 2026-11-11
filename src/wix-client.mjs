@@ -212,3 +212,160 @@ export class WixCustomEmbedsClient {
     return result.customEmbed;
   }
 }
+
+const SEO_API = "https://www.wixapis.com/promote/seo/v1/item-seo-tags";
+
+function tagCanonicalHref(tag) {
+  if (tag?.type !== "link") return null;
+  const rel = String(tag.props?.rel ?? "");
+  if (!rel.split(/\s+/).includes("canonical")) return null;
+  return typeof tag.props?.href === "string" ? tag.props.href : null;
+}
+
+/** The canonical path a static page's SEO tags already carry. */
+export function canonicalPath(item) {
+  const tags = [
+    ...(Array.isArray(item.tags) ? item.tags : []),
+    ...(Array.isArray(item.resolvedTags) ? item.resolvedTags.map((entry) => entry?.tag).filter(Boolean) : [])
+  ];
+  for (const tag of tags) {
+    const href = tagCanonicalHref(tag);
+    if (!href) continue;
+    try {
+      return new URL(href).pathname.replace(/\/+$/, "") || "/";
+    } catch {
+      return href.replace(/\/+$/, "") || "/";
+    }
+  }
+  return null;
+}
+
+/**
+ * Find the static page whose canonical route is exactly this path. The SEO API
+ * does not return a page URL, but its resolved canonical tag does.
+ */
+export function pageItemForRoute(items, route) {
+  const target = String(route ?? "").trim().replace(/\/+$/, "") || "/";
+  const matches = (Array.isArray(items) ? items : []).filter((item) => canonicalPath(item) === target);
+  if (matches.length > 1) throw new Error(`More than one static page has canonical route ${target}.`);
+  return matches[0] ?? null;
+}
+
+/** Replace the title and description, keep every other tag the page owns. */
+export function mergeSeoTags(tags, { title, description }) {
+  const kept = (Array.isArray(tags) ? tags : []).filter((tag) => {
+    if (tag?.type === "title") return false;
+    if (tag?.type === "meta" && tag.props?.name === "description") return false;
+    return true;
+  });
+  const next = [];
+  if (title) next.push({ type: "title", children: title });
+  if (description) next.push({ type: "meta", props: { name: "description", content: description } });
+  return [...next, ...kept];
+}
+
+export function currentSeoValue(item, type, name) {
+  const pick = (tag) => (type === "meta" ? tag?.props?.content : tag?.children) ?? null;
+  const own = (Array.isArray(item.tags) ? item.tags : []).find(
+    (tag) => tag?.type === type && (type !== "meta" || tag.props?.name === name)
+  );
+  if (own) return pick(own);
+  const resolved = (Array.isArray(item.resolvedTags) ? item.resolvedTags : [])
+    .map((entry) => entry?.tag)
+    .find((tag) => tag?.type === type && (type !== "meta" || tag.props?.name === name));
+  return pick(resolved);
+}
+
+/**
+ * Static-page SEO settings use a Wix API key, not the app-instance token used
+ * by Custom Embeds. The key needs Manage SEO Settings.
+ */
+export class WixSeoClient {
+  constructor({ siteId, apiKey, fetchImpl = fetch }) {
+    this.siteId = siteId;
+    this.apiKey = String(apiKey ?? "").trim();
+    this.fetchImpl = fetchImpl;
+  }
+
+  async request(url, init = {}) {
+    if (!this.apiKey) {
+      throw new Error("SEO page settings require WIX_SEO_API_KEY: a Wix API key with Manage SEO Settings.");
+    }
+    let response;
+    try {
+      response = await this.fetchImpl(String(url), {
+        ...init,
+        headers: {
+          authorization: this.apiKey,
+          "wix-site-id": this.siteId,
+          ...(init.body ? { "content-type": "application/json" } : {}),
+          ...init.headers
+        }
+      });
+    } catch {
+      throw new Error("Could not reach the Wix SEO API.");
+    }
+    if (!response.ok) {
+      let code = null;
+      const fields = [];
+      const hints = [];
+      try {
+        const body = await response.json();
+        code = body.code ?? body.errorCode ?? body.details?.applicationError?.code ?? null;
+        const violations = [
+          body.fieldViolations,
+          body.validationError?.fieldViolations,
+          body.details?.fieldViolations,
+          body.details?.validationError?.fieldViolations,
+          body.details?.validationError?.violations,
+          body.data?.violations
+        ].flat().filter(Boolean);
+        for (const violation of violations) {
+          fields.push(violation.field ?? violation.path ?? violation.fieldName ?? violation.fieldPath);
+          const hint = validationHint(violation);
+          if (hint) hints.push(hint);
+          hints.push(...detailedValidationHints(violation));
+        }
+      } catch {
+        // Only a safe status is reported when Wix does not return JSON.
+      }
+      throw new WixRequestError(response.status, code, fields, hints, `Wix SEO request failed (HTTP ${response.status}).`);
+    }
+    if (response.status === 204) return {};
+    try {
+      return await response.json();
+    } catch {
+      throw new Error("Wix returned an unreadable SEO response.");
+    }
+  }
+
+  async listStaticPages() {
+    const items = [];
+    let cursor;
+    do {
+      const url = new URL(`${SEO_API}/STATIC_PAGE`);
+      url.searchParams.set("paging.limit", "100");
+      if (cursor) url.searchParams.set("paging.cursor", cursor);
+      const result = await this.request(url);
+      items.push(...(Array.isArray(result.itemSeoTags) ? result.itemSeoTags : []));
+      const metadata = result.pagingMetadata ?? {};
+      const next = metadata.cursors?.next ?? metadata.cursor ?? null;
+      cursor = metadata.hasNext ? next : null;
+      if (metadata.hasNext && !cursor) throw new Error("Wix returned a next-page marker without an SEO cursor.");
+    } while (cursor);
+    return items;
+  }
+
+  async setItemSeoTags(item, { title, description, publish = true }) {
+    if (!item?.itemId) throw new Error("A static page item with an itemId is required.");
+    const tags = mergeSeoTags(item.tags, { title, description });
+    return this.request(`${SEO_API}/STATIC_PAGE/${encodeURIComponent(item.itemId)}`, {
+      method: "PATCH",
+      body: JSON.stringify({
+        itemSeoTags: { tags },
+        fieldMask: "tags",
+        publish
+      })
+    });
+  }
+}

@@ -95,6 +95,12 @@ export WIX_ALLOWED_SITE_IDS="<exact-wix-site-id>"
 
 The instance ID is available from the Wix `Instance App Installed` event for that installation. Do not put these values in a manifest, source file, issue, or chat. The bridge never prints or writes the app secret or access token.
 
+Static-page SEO settings use a different credential. Create a Wix API key with `Manage SEO Settings` (`SCOPE.PROMOTE.MANAGE-SEO`) and store it as `WIX_SEO_API_KEY`. The app-instance token used by Custom Embeds is not accepted by the Item SEO Tags API. The bridge never prints or writes the key.
+
+```sh
+export WIX_SEO_API_KEY="<wix-api-key-with-manage-seo>"
+```
+
 The site publishing key is separate. For CI, Wix documents a site permission named **Wix CLI for Sites - Git Integration**. Configure it as a repository/CI secret and authenticate using the supported Wix CLI `wix login --api-key` flow. Do not use that key for Custom Embeds. Locally, `wix login` can use the Wix CLI's own authentication store. See [Set Up GitHub Actions for Wix CLI for Sites](https://dev.wix.com/docs/develop-websites-sdk/code-your-site/developer-environments/ides/git-integration/set-up-git-hub-actions).
 
 `WIX_ALLOWED_SITE_IDS` is mandatory for every operation. It is a comma-, semicolon-, or whitespace-separated list of exact IDs. It must include the one site ID in the selected manifest. Every command and tool also requires the explicit `--site` alias (or MCP `site` argument). Placeholder IDs, alias mismatches, unknown snippet IDs, and sites outside the allowlist are refused.
@@ -174,6 +180,18 @@ npm run bridge -- write-packet \
   --snippet <custom-embed-id> \
   --html-file ./packet.html \
   --load-once false \
+  --apply
+
+# Read or set a static page's SEO title and meta description. The page is
+# matched by the canonical URL its SEO tags already carry, because the API does
+# not return page URLs. --apply publishes the existing page revision; it never
+# publishes the whole site. Requires WIX_SEO_API_KEY.
+npm run bridge -- seo-tags \
+  --manifest ./sites/atelier-harmonie/site.manifest.json \
+  --site atelier-harmonie \
+  --route /agenda-artisans-normandie \
+  --title "Page title | Site name" \
+  --description "The page description." \
   --apply
 
 # Disable an embed CrawlSEO created, for example an older HTML embed that a
@@ -263,9 +281,9 @@ source for it, and never batch-deploy across the two customers.
 
 ## Supported and unsupported operations
 
-Supported: manifest validation, target inspection, Custom Embed list/read/create/update, in-place CrawlSEO packet and mount rewrite (`write-packet`), disabling replaced CrawlSEO embeds (`disable-embed`), deterministic component packet generation, plan/diff, private snapshot, revision-checked snippet deploy, selected-branch Wix CLI publish, concise code-plus-snippet release, hash/HTTP verification, and snippet rollback.
+Supported: manifest validation, target inspection, Custom Embed list/read/create/update, in-place CrawlSEO packet and mount rewrite (`write-packet`), disabling replaced CrawlSEO embeds (`disable-embed`), deterministic component packet generation, plan/diff, private snapshot, revision-checked snippet deploy, selected-branch Wix CLI publish, concise code-plus-snippet release, hash/HTTP verification, snippet rollback, and static-page SEO title/description through `seo-tags` (Item SEO Tags API, published page revision).
 
-Unsupported through the bridge: deleting Custom Embeds; changing snippet placement or page filter; creating Wix pages or changing their menu visibility/access rules; adding/repositioning Wix editor elements; changing page layout or dataset wiring through a fabricated API; pushing site source commits on the user's behalf; CMS record/schema mutation; atomic code-plus-snippet deployment; automated visual approval; and automatic code rollback. Use Wix's editor for page setup and the explicitly documented one-time native placement; use supported Git/Wix CLI workflows for site code.
+Unsupported through the bridge: deleting Custom Embeds; changing snippet placement or page filter; creating Wix pages or changing their menu visibility/access rules; adding/repositioning Wix editor elements; changing page layout or dataset wiring through a fabricated API; pushing site source commits on the user's behalf; CMS record/schema mutation; atomic code-plus-snippet deployment; automated visual approval; and automatic code rollback. Page title and meta description are supported; page creation, navigation placement and menu visibility are still editor actions. Use Wix's editor for page setup and the explicitly documented one-time native placement; use supported Git/Wix CLI workflows for site code.
 
 ## Local validation
 
