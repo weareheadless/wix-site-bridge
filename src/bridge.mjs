@@ -361,11 +361,12 @@ export async function runOperation(command, args, env = process.env, options = {
     if (!args.htmlFile) throw new Error("Pass --html-file with the packet HTML.");
     const client = clientFor(site, env);
     const current = await client.get(args.snippet);
-    // A packet is a HEAD script that registers a component; it must not be
-    // wrapped in the content-embed route guard, which replaces the page
-    // container. Only packets this bridge created are writable.
-    if (!/^crawlseo early packet\b/i.test(current.name ?? "")) {
-      throw new Error(`Custom embed ${current.id} is not a CrawlSEO early packet; refusing to overwrite ${current.name ?? "an unnamed embed"}.`);
+    // Two kinds of CrawlSEO embed are bare scripts that must not be wrapped in
+    // the content-embed route guard, which replaces the page container: the
+    // early packet that registers a component, and the page mount that puts it
+    // on the page. Both read their own scope from the script itself.
+    if (!/^crawlseo (early packet|page mount)\b/i.test(current.name ?? "")) {
+      throw new Error(`Custom embed ${current.id} is not a CrawlSEO script embed; refusing to overwrite ${current.name ?? "an unnamed embed"}.`);
     }
     const html = await readFile(path.resolve(args.htmlFile), "utf8");
     if (!html.trim()) throw new Error("The packet HTML is empty.");
