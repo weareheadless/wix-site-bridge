@@ -77,6 +77,7 @@ export async function runOperation(command, args, env = process.env, options = {
         verify: true,
         read_embed: true,
         write_embed: true,
+        write_packet: true,
         disable_embed: true,
         update_snippet: true,
         cms: false,
@@ -325,6 +326,70 @@ export async function runOperation(command, args, env = process.env, options = {
       kind: "embed-write"
     });
     const operationId = newId("embed-write");
+    const receiptPath = path.join(stateDir, "receipts", `${operationId}.json`);
+    const receiptBase = {
+      operationId,
+      siteAlias: site.alias,
+      siteId: site.siteId,
+      createdAt: new Date().toISOString(),
+      ...details,
+      beforeSha256,
+      afterSha256,
+      snapshotId: snapshot.snapshotId,
+      snapshotPath: path.join(stateDir, "snapshots", `${snapshot.snapshotId}.json`)
+    };
+    await writePrivateJson(receiptPath, { ...receiptBase, status: "pending" });
+    try {
+      await client.updateHtml(current, html, current.embedData?.category, current.loadOnce);
+      const confirmed = await client.get(current.id);
+      if (sha256(confirmed.embedData?.html ?? "") !== afterSha256) throw new Error("Wix returned content that does not match the planned hash.");
+      const receipt = { ...receiptBase, status: "updated", confirmedRevision: String(confirmed.revision) };
+      await writePrivateJson(receiptPath, receipt);
+      return { ...receipt, receiptPath };
+    } catch (error) {
+      await writePrivateJson(receiptPath, {
+        ...receiptBase,
+        status: "failed",
+        failure: { name: error.name, httpStatus: Number.isInteger(error.status) ? error.status : null }
+      }).catch(() => {});
+      throw error;
+    }
+  }
+
+  if (command === "write-packet") {
+    if (!args.snippet) throw new Error("Pass --snippet with the custom embed ID.");
+    if (!args.htmlFile) throw new Error("Pass --html-file with the packet HTML.");
+    const client = clientFor(site, env);
+    const current = await client.get(args.snippet);
+    // A packet is a HEAD script that registers a component; it must not be
+    // wrapped in the content-embed route guard, which replaces the page
+    // container. Only packets this bridge created are writable.
+    if (!/^crawlseo early packet\b/i.test(current.name ?? "")) {
+      throw new Error(`Custom embed ${current.id} is not a CrawlSEO early packet; refusing to overwrite ${current.name ?? "an unnamed embed"}.`);
+    }
+    const html = await readFile(path.resolve(args.htmlFile), "utf8");
+    if (!html.trim()) throw new Error("The packet HTML is empty.");
+    const beforeSha256 = sha256(current.embedData?.html ?? "");
+    const afterSha256 = sha256(html);
+    const details = {
+      snippetId: current.id,
+      name: current.name,
+      position: current.position,
+      pageScope: livePageScope(current),
+      category: current.embedData?.category,
+      loadOnce: current.loadOnce,
+      htmlBytes: Buffer.byteLength(html, "utf8"),
+      htmlSha256: afterSha256,
+      sourcePath: path.resolve(args.htmlFile)
+    };
+    if (!apply) return { status: "dry-run", target: { alias: site.alias, siteId: site.siteId }, wouldUpdate: details };
+    const snapshot = await saveCurrentSnapshot({
+      site,
+      stateDir,
+      items: [{ id: current.id, current, beforeSha256, desiredHtml: html, afterSha256 }],
+      kind: "packet-write"
+    });
+    const operationId = newId("packet-write");
     const receiptPath = path.join(stateDir, "receipts", `${operationId}.json`);
     const receiptBase = {
       operationId,
