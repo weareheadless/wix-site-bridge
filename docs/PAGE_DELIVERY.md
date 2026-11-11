@@ -11,8 +11,8 @@ is the mechanics contract. The product loop lives in the CrawlSEO repository at
 | Artifact | Written by | Where |
 | --- | --- | --- |
 | component source | CrawlSEO | `<site-repo>/src/public/custom-elements/<tag>.js`, committed and pushed |
-| early packet | the bridge, `create-snippet` / `write-packet` | Custom Code, `HEAD`, `ESSENTIAL`, load-once, all pages |
-| page mount | the bridge, `create-snippet` / `write-packet` | Custom Code, `BODY_END`, `ESSENTIAL`, load-once, all pages |
+| early packet | the bridge, `create-snippet` / `write-packet` | Custom Code, `HEAD`, `ESSENTIAL`, reload on every page, all pages |
+| page mount | the bridge, `create-snippet` / `write-packet` | Custom Code, `BODY_END`, `ESSENTIAL`, reload on every page, all pages |
 
 Names are fixed and carry the tag, so a retry finds the entry it created:
 
@@ -20,8 +20,11 @@ Names are fixed and carry the tag, so a retry finds the entry it created:
 - `CrawlSEO page mount — <tag>`.
 
 A long source is gzip + base64 and split into ordered chunks under the Wix
-limit: the bridge chunks at 14,000 characters and refuses an entry at 15,000.
-The last chunk decompresses and defines the element.
+limit: the bridge chunks at 13,500 characters and refuses an entry at 15,000.
+Each chunk writes its own indexed slot, and any chunk that completes the set
+decompresses it. The chunks are therefore order- and repeat-safe: Wix may load
+them in any order, and may rerun them on navigation, without corrupting the
+payload.
 
 ## Why two entries
 
@@ -56,6 +59,19 @@ locale, because the guard differs:
 - the default locale's entry also answers its explicit prefix (`/fr/...`), never
   another locale's prefix.
 
+## Execution settings
+
+Both entries are created with Wix's load-once setting **off** ("reload on every
+page"). That is not a performance preference: with load-once on, Wix runs the
+entry only during the initial site render, so a visitor who reaches the page by
+client-side navigation would never mount it. The bridge sets it off on create,
+and `write-packet` can correct an existing entry with `--load-once false` and
+verifies the readback.
+
+Page scope remains a human step because Wix exposes it read-only. Narrowing the
+entries to their page is a transfer optimization: the route guard already makes
+an all-pages entry inert everywhere else.
+
 ## Who does what
 
 - **CrawlSEO** writes the component source, commits and pushes it, and calls the
@@ -74,6 +90,11 @@ read-only. That is why the page and the scope are human steps.
 
 - A retry looks up the entries by their exact names and rewrites them, so it
   never creates a second packet or mount for the same tag.
+- A retry sets load-once off on both entries. An existing entry with the wrong
+  setting is corrected in the same write.
+- A source that got shorter disables the packet chunks it no longer needs, so an
+  old chunk cannot wait for a set that will never complete or transfer bytes on
+  every page.
 - `write-packet` refuses any embed whose name is not `CrawlSEO early packet` or
   `CrawlSEO page mount`, so a human's embed is never overwritten.
 - `disable-embed` refuses any name that does not start with `CrawlSEO`.
@@ -108,8 +129,10 @@ repository.
    is it pushed?
 3. Do the packet and the mount both exist under the exact `CrawlSEO` names?
 4. Does each entry carry the same route and language guard?
-5. Is every packet chunk below 15,000 characters?
-6. Did both hashes read back as a match?
-7. Does the rendered page contain `<tag>` on a fresh load and after an internal
+5. Is load-once off on the packet and on the mount?
+6. Is every packet chunk below 15,000 characters, and is the chunk set complete
+   with no disabled leftovers?
+7. Did both hashes read back as a match?
+8. Does the rendered page contain `<tag>` on a fresh load and after an internal
    navigation?
-8. If the page was previously an HTML embed, is that embed disabled?
+9. If the page was previously an HTML embed, is that embed disabled?

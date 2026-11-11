@@ -33,7 +33,7 @@ Read-only/planning: inspect, doctor, snippets, snippet, read-embed, build, plan,
 Mutations (dry-run by default): create-snippet --apply, write-embed --apply, write-packet --apply, disable-embed --apply,
   build --apply, snapshot --apply, deploy --apply, publish --apply, release --apply, restore --snapshot <release-id> --apply
 
-  write-packet (requires --snippet and --html-file; CrawlSEO early packet or page mount only)
+  write-packet (requires --snippet and --html-file; CrawlSEO early packet or page mount only; optional --load-once)
   disable-embed (requires --snippet; CrawlSEO embed only)
 
 Options: --site-repo <Wix-connected repo> --state-dir <private local state dir>

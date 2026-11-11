@@ -167,11 +167,13 @@ npm run bridge -- update-snippet \
 # Rewrite one CrawlSEO early packet or page mount in place, by embed id.
 # Only names starting with "CrawlSEO early packet" or "CrawlSEO page mount"
 # are accepted; the current revision and page scope are preserved.
+# Pass --load-once false so the entry also runs on an internal navigation.
 npm run bridge -- write-packet \
   --manifest ./sites/atelier-harmonie/site.manifest.json \
   --site atelier-harmonie \
   --snippet <custom-embed-id> \
   --html-file ./packet.html \
+  --load-once false \
   --apply
 
 # Disable an embed CrawlSEO created, for example an older HTML embed that a

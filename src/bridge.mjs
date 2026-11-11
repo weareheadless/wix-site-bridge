@@ -370,6 +370,13 @@ export async function runOperation(command, args, env = process.env, options = {
     }
     const html = await readFile(path.resolve(args.htmlFile), "utf8");
     if (!html.trim()) throw new Error("The packet HTML is empty.");
+    // A packet or mount must run when its page renders. Wix's default,
+    // load once, only runs at the initial site render, so a client-side
+    // navigation to the page would never mount it. Keep the live value only
+    // when the caller does not ask for a change.
+    const loadOnce = args.loadOnce === undefined
+      ? current.loadOnce
+      : parseBooleanOption(args.loadOnce, current.loadOnce, "load-once");
     const beforeSha256 = sha256(current.embedData?.html ?? "");
     const afterSha256 = sha256(html);
     const details = {
@@ -378,7 +385,8 @@ export async function runOperation(command, args, env = process.env, options = {
       position: current.position,
       pageScope: livePageScope(current),
       category: current.embedData?.category,
-      loadOnce: current.loadOnce,
+      loadOnceBefore: current.loadOnce,
+      loadOnceAfter: loadOnce,
       htmlBytes: Buffer.byteLength(html, "utf8"),
       htmlSha256: afterSha256,
       sourcePath: path.resolve(args.htmlFile)
@@ -405,9 +413,10 @@ export async function runOperation(command, args, env = process.env, options = {
     };
     await writePrivateJson(receiptPath, { ...receiptBase, status: "pending" });
     try {
-      await client.updateHtml(current, html, current.embedData?.category, current.loadOnce);
+      await client.updateHtml(current, html, current.embedData?.category, loadOnce);
       const confirmed = await client.get(current.id);
       if (sha256(confirmed.embedData?.html ?? "") !== afterSha256) throw new Error("Wix returned content that does not match the planned hash.");
+      if (Boolean(confirmed.loadOnce) !== Boolean(loadOnce)) throw new Error("Wix did not apply the requested load-once setting.");
       const receipt = { ...receiptBase, status: "updated", confirmedRevision: String(confirmed.revision) };
       await writePrivateJson(receiptPath, receipt);
       return { ...receipt, receiptPath };
