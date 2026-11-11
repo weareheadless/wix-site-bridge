@@ -185,7 +185,8 @@ npm run bridge -- write-packet \
 # Read or set a static page's SEO title and meta description. The page is
 # matched by the canonical URL its SEO tags already carry, because the API does
 # not return page URLs. --apply publishes the existing page revision; it never
-# publishes the whole site. Requires WIX_SEO_API_KEY.
+# publishes the whole site. Requires WIX_SEO_API_KEY. The API covers the site's
+# primary language only; a translated page's SEO is an editor setting.
 npm run bridge -- seo-tags \
   --manifest ./sites/atelier-harmonie/site.manifest.json \
   --site atelier-harmonie \

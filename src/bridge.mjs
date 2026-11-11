@@ -123,6 +123,7 @@ export async function runOperation(command, args, env = process.env, options = {
         pageId: item.itemId,
         currentTitle,
         currentDescription,
+        hasOverride: item.hasOverride === true,
         wouldSet: { title: nextTitle ?? null, description: nextDescription ?? null }
       };
     }
@@ -152,6 +153,7 @@ export async function runOperation(command, args, env = process.env, options = {
       route,
       pageId: item.itemId,
       published: true,
+      hasOverride: true,
       title: currentSeoValue({ tags }, "title"),
       description: currentSeoValue({ tags }, "meta", "description"),
       tags,

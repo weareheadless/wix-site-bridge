@@ -104,6 +104,13 @@ This is a separate credential from Custom Embeds: a Wix API key with
 `Manage SEO Settings` (`SCOPE.PROMOTE.MANAGE-SEO`), stored as `WIX_SEO_API_KEY`.
 The installed-app token used by Custom Embeds gets HTTP 403 on this API.
 
+The API reads and writes the site's **primary language only**: listing returns
+one item per page with the primary tags, and a write with a `language` is
+rejected with `LANGUAGE_NOT_SUPPORTED`. A translated page's title and
+description are a Wix editor setting; a page that must set them itself does it
+from its own component and is verified in a rendered document, not in the raw
+HTML.
+
 `seo-tags` is read-only by default and applies with `--apply`. A failure is
 reported in the delivery result; it does not hide a page that already rendered.
 
