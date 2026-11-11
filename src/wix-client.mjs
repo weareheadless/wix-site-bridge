@@ -368,4 +368,17 @@ export class WixSeoClient {
       })
     });
   }
+
+  /**
+   * Publish the site's saved revision. Custom-code changes written through the
+   * Custom Embeds API are drafts until the site is published, and a publish
+   * from the connected repository can restore an older saved revision, so a
+   * delivery publishes once after its writes and verifies the result.
+   */
+  async publishSite() {
+    return this.request("https://www.wixapis.com/site-publisher/v1/site/publish", {
+      method: "POST",
+      body: "{}"
+    });
+  }
 }

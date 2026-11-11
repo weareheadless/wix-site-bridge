@@ -104,10 +104,27 @@ This is a separate credential from Custom Embeds: a Wix API key with
 `Manage SEO Settings` (`SCOPE.PROMOTE.MANAGE-SEO`), stored as `WIX_SEO_API_KEY`.
 The installed-app token used by Custom Embeds gets HTTP 403 on this API.
 
-`seo-tags` is read-only by default and applies with `--apply`. A delivery passes
-the page's configured title and description once, after the packet and mount are
-written. A failure is reported in the delivery result; it does not hide a page
-that already rendered.
+`seo-tags` is read-only by default and applies with `--apply`. A failure is
+reported in the delivery result; it does not hide a page that already rendered.
+
+## Publishing after writes
+
+Custom Embed writes are **drafts**. The live page keeps serving the last
+published revision until the site is published, and publishing also restores
+page settings from the saved revision — so a page title or description written
+before the publish can be rolled back by it. Publish first, then set the SEO
+tags, then verify both on the live page.
+
+`publish-site` calls `POST /site-publisher/v1/site/publish` with the same
+`WIX_SEO_API_KEY`. It is dry-run by default and applies with `--apply`. The call
+publishes the site's saved revision, not one page: use it only for a site whose
+published revision is the intended one.
+
+A publish triggered by a push to the connected repository can also restore an
+older revision over the drafts. CrawlSEO therefore publishes, reads the raw live
+document for the packet key the delivery wrote, and publishes again — up to
+three rounds — before it reports the page as published. A page it cannot confirm
+is reported as `pending`, never as success.
 
 ## Retry and update rules
 

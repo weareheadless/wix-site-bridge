@@ -31,11 +31,12 @@ Read-only/planning: inspect, doctor, snippets, snippet, read-embed, seo-tags, bu
   create-snippet (requires --name and --html-file; use exact --route or --all-pages)
   update-snippet (requires --snippet and --html-file; use exact --route, --all-pages, or --preserve-scope for a content packet)
 Mutations (dry-run by default): create-snippet --apply, write-embed --apply, write-packet --apply, disable-embed --apply,
-  seo-tags --apply, build --apply, snapshot --apply, deploy --apply, publish --apply, release --apply, restore --snapshot <release-id> --apply
+  seo-tags --apply, publish-site --apply, build --apply, snapshot --apply, deploy --apply, publish --apply, release --apply, restore --snapshot <release-id> --apply
 
   write-packet (requires --snippet and --html-file; CrawlSEO early packet or page mount only; optional --load-once)
   disable-embed (requires --snippet; CrawlSEO embed only)
   seo-tags (requires --route; --title and/or --description with --apply; sets a static page's title and meta description and publishes it)
+  publish-site (publishes the site's saved revision with the SEO key; Custom Embeds API writes are drafts until then)
 
 Options: --site-repo <Wix-connected repo> --state-dir <private local state dir>
          --snippet <configured embed id> --snapshot <release id> --out <artifact path>

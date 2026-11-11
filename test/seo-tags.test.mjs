@@ -115,3 +115,21 @@ test("sets tags and publishes through the SEO API", async () => {
     { type: "meta", props: { name: "description", content: "New description" } },
   ]);
 });
+
+test("publishes the site through the Site Publisher API", async () => {
+  const calls = [];
+  const client = new WixSeoClient({
+    siteId: "site-1",
+    apiKey: "test-key",
+    fetchImpl: async (url, init) => {
+      calls.push({ url: String(url), init });
+      return new Response("{}", { status: 200, headers: { "content-type": "application/json" } });
+    },
+  });
+
+  await client.publishSite();
+  assert.match(calls[0].url, /site-publisher\/v1\/site\/publish$/);
+  assert.equal(calls[0].init.method, "POST");
+  assert.equal(calls[0].init.headers.authorization, "test-key");
+  assert.equal(calls[0].init.headers["wix-site-id"], "site-1");
+});

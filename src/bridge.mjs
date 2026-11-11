@@ -11,7 +11,7 @@ import { assertAllowedTarget, newId, redact, sha256, targetAllowlist, writePriva
 import { WixAppTokenProvider, WixCustomEmbedsClient, WixSeoClient, currentSeoValue, pageItemForRoute } from "./wix-client.mjs";
 
 function secretValues(env) {
-  return [env.WIX_APP_SECRET, env.WIX_CLI_API_KEY, env.WIX_CUSTOM_EMBEDS_ACCESS_TOKEN];
+  return [env.WIX_APP_SECRET, env.WIX_CLI_API_KEY, env.WIX_CUSTOM_EMBEDS_ACCESS_TOKEN, env.WIX_SEO_API_KEY];
 }
 
 export async function loadContext(args, env = process.env) {
@@ -82,6 +82,7 @@ export async function runOperation(command, args, env = process.env, options = {
         update_snippet: true,
         cms: false,
         seo_tags: true,
+        publish_site: true,
         private_editor_revision: false
       },
       target: { alias: site.alias, siteId: site.siteId, connectedRepo: site.connectedRepo, defaultBranch: site.defaultBranch },
@@ -154,6 +155,34 @@ export async function runOperation(command, args, env = process.env, options = {
       title: currentSeoValue({ tags }, "title"),
       description: currentSeoValue({ tags }, "meta", "description"),
       tags,
+      receipt: receiptPath
+    };
+  }
+
+  if (command === "publish-site") {
+    const seo = new WixSeoClient({ siteId: site.siteId, apiKey: env.WIX_SEO_API_KEY ?? env.WIX_API_KEY });
+    const operationId = newId("publish-site");
+    if (!apply) {
+      return {
+        status: "ok",
+        target: { alias: site.alias, siteId: site.siteId },
+        wouldPublish: true,
+        operationId
+      };
+    }
+    await seo.publishSite();
+    const receiptPath = path.join(stateDir, "receipts", `${operationId}.json`);
+    await writePrivateJson(receiptPath, {
+      operationId,
+      siteAlias: site.alias,
+      siteId: site.siteId,
+      createdAt: new Date().toISOString(),
+      status: "published"
+    });
+    return {
+      status: "ok",
+      target: { alias: site.alias, siteId: site.siteId },
+      published: true,
       receipt: receiptPath
     };
   }
