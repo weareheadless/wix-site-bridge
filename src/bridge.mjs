@@ -77,6 +77,7 @@ export async function runOperation(command, args, env = process.env, options = {
         verify: true,
         read_embed: true,
         write_embed: true,
+        disable_embed: true,
         update_snippet: true,
         cms: false,
         seo_tags: false,
@@ -342,6 +343,61 @@ export async function runOperation(command, args, env = process.env, options = {
       const confirmed = await client.get(current.id);
       if (sha256(confirmed.embedData?.html ?? "") !== afterSha256) throw new Error("Wix returned content that does not match the planned hash.");
       const receipt = { ...receiptBase, status: "updated", confirmedRevision: String(confirmed.revision) };
+      await writePrivateJson(receiptPath, receipt);
+      return { ...receipt, receiptPath };
+    } catch (error) {
+      await writePrivateJson(receiptPath, {
+        ...receiptBase,
+        status: "failed",
+        failure: { name: error.name, httpStatus: Number.isInteger(error.status) ? error.status : null }
+      }).catch(() => {});
+      throw error;
+    }
+  }
+
+  if (command === "disable-embed") {
+    if (!args.snippet) throw new Error("Pass --snippet with the custom embed ID.");
+    const client = clientFor(site, env);
+    const current = await client.get(args.snippet);
+    // Only embeds this bridge created are managed without a manifest entry.
+    if (!/^crawlseo\b/i.test(current.name ?? "")) {
+      throw new Error(`Custom embed ${current.id} is not managed by CrawlSEO; refusing to disable ${current.name ?? "an unnamed embed"}.`);
+    }
+    const details = {
+      snippetId: current.id,
+      name: current.name,
+      position: current.position,
+      pageScope: livePageScope(current),
+      enabledBefore: current.enabled,
+      enabledAfter: false
+    };
+    if (!apply) return { status: "dry-run", target: { alias: site.alias, siteId: site.siteId }, wouldDisable: details };
+    const snapshot = await saveCurrentSnapshot({
+      site,
+      stateDir,
+      items: [{ id: current.id, current, beforeSha256: sha256(current.embedData?.html ?? ""), desiredHtml: current.embedData?.html ?? "", afterSha256: sha256(current.embedData?.html ?? "") }],
+      kind: "embed-disable"
+    });
+    const operationId = newId("embed-disable");
+    const receiptPath = path.join(stateDir, "receipts", `${operationId}.json`);
+    const receiptBase = {
+      operationId,
+      siteAlias: site.alias,
+      siteId: site.siteId,
+      createdAt: new Date().toISOString(),
+      ...details,
+      snapshotId: snapshot.snapshotId,
+      snapshotPath: path.join(stateDir, "snapshots", `${snapshot.snapshotId}.json`)
+    };
+    await writePrivateJson(receiptPath, { ...receiptBase, status: "pending" });
+    try {
+      await client.request("https://www.wixapis.com/embeds/v1/custom-embeds/" + encodeURIComponent(current.id), {
+        method: "PATCH",
+        body: JSON.stringify({ customEmbed: { id: current.id, revision: String(current.revision), enabled: false } })
+      });
+      const confirmed = await client.get(current.id);
+      if (confirmed.enabled !== false) throw new Error("Wix did not disable the embed.");
+      const receipt = { ...receiptBase, status: "disabled", confirmedRevision: String(confirmed.revision) };
       await writePrivateJson(receiptPath, receipt);
       return { ...receipt, receiptPath };
     } catch (error) {
