@@ -14,6 +14,18 @@ Read-only inspection of `/home/admin/susimacdonald-rentals` on the authorized VP
 
 That repository is a reference, not an Atelier deployment target. Never copy its routes, tags, images, analytics, credentials, or site identity into Atelier.
 
+## Relationship to CrawlSEO page delivery
+
+This document governs the site-wide startup controllers: one canonical Head
+controller, its route registry, and the shared header/footer registration. A
+page CrawlSEO delivers is a separate pair: a `HEAD` early packet that registers
+that page's element and a `BODY_END` mount that places it, documented in
+[Page delivery](PAGE_DELIVERY.md).
+
+Both can exist on the same site. Neither replaces the other: do not route a
+CrawlSEO page through the central registry, and do not treat a CrawlSEO packet
+as coverage for a startup controller.
+
 ## Mandatory global registration contract
 
 1. Maintain one canonical Head controller source. Install it as Essential Custom Code in two synchronized entries: all pages / load once for initial document startup, and all pages / load on each new page for Wix internal navigation. Use explicit site manifests and supported setup; never pretend the bridge can change read-only placement/page scope.

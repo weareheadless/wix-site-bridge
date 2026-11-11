@@ -30,8 +30,11 @@ Usage: npm run bridge -- <operation> --manifest <file> --site <alias> [options]
 Read-only/planning: inspect, doctor, snippets, snippet, read-embed, build, plan, verify,
   create-snippet (requires --name and --html-file; use exact --route or --all-pages)
   update-snippet (requires --snippet and --html-file; use exact --route, --all-pages, or --preserve-scope for a content packet)
-Mutations (dry-run by default): create-snippet --apply, write-embed --apply, build --apply, snapshot --apply, deploy --apply,
-  publish --apply, release --apply, restore --snapshot <release-id> --apply
+Mutations (dry-run by default): create-snippet --apply, write-embed --apply, write-packet --apply, disable-embed --apply,
+  build --apply, snapshot --apply, deploy --apply, publish --apply, release --apply, restore --snapshot <release-id> --apply
+
+  write-packet (requires --snippet and --html-file; CrawlSEO early packet or page mount only)
+  disable-embed (requires --snippet; CrawlSEO embed only)
 
 Options: --site-repo <Wix-connected repo> --state-dir <private local state dir>
          --snippet <configured embed id> --snapshot <release id> --out <artifact path>

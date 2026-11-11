@@ -27,7 +27,7 @@ Mutations remain dry-run unless the selected site/release is authorized and `--a
 
 ## Wix deployment repositories
 
-The shared repository remains the customer-source workspace. Wix's Git Integration generates a dedicated connected repo for each Wix site. Only copy the selected customer's production files into that repo, respecting its existing page/master code and `wix.config.json`. Record both source revision and connected-repo revision; keep published UI, source and early packets synchronized. Never connect multiple customer sites to a shared deployment branch.
+The shared repository remains the customer-source workspace. Wix's Git Integration generates a dedicated connected repo for each Wix site. Only copy the selected customer's production files into that repo, respecting its existing page/master code and `wix.config.json`. Record both source revision and connected-repo revision; keep published UI, source and early packets synchronized. A CrawlSEO-delivered page is a pair: its `HEAD` early packet and its `BODY_END` mount, plus the component source in the connected repo; see [Page delivery](../docs/PAGE_DELIVERY.md). Never connect multiple customer sites to a shared deployment branch.
 
 ## Adding a customer
 

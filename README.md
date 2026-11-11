@@ -14,18 +14,37 @@ flowchart LR
   W --> D[Wix CMS datasets and page code]
 ```
 
+## Page delivery
+
+CrawlSEO delivers a Wix page as three artifacts: the component source in the
+site's connected repository, a `HEAD` early packet that registers the custom
+element, and a `BODY_END` mount that places it. The bridge creates and rewrites
+both entries; the human creates only the blank page. Read
+[Page delivery](docs/PAGE_DELIVERY.md) before touching a delivered page or
+writing any other document about how pages are delivered.
+
 ## Current status
 
-- Local CLI and MCP adapter, deterministic packet generation, Custom Embed create/read/update, snapshot, release, verification, and snippet rollback are implemented.
-- `sites/atelier-harmonie/site.manifest.json` selects Atelier Harmonie explicitly. The exact site ID is also recorded in `.env.example` for the required `WIX_ALLOWED_SITE_IDS` boundary.
-- The Wix CLI for Sites (`@wix/cli` 1.1.263) is installed locally in the ignored `.wix-cli/` directory. The editor reports an unavailable old connection under `chocholesmarrons/atelier-harmonie`; reconnection under `weareheadless` is pending. Custom Embeds credentials are used from a private local environment and are not stored here.
-- A hidden-from-menu `/copy-of-accueil` prototype page has been published and visually checked in the in-app browser at desktop width. The embed replaces the duplicate page content below Atelier's native header and leaves its footer in place. Anyone with the URL can open it; the original homepage remains the homepage. Preview: [atelier-harmonie.com/copy-of-accueil](https://www.atelier-harmonie.com/copy-of-accueil).
-- `site-agent` is a separate generic content manager and is not the Wix bridge. The existing `susimacdonald-rentals` repository is not used or changed here.
+- Local CLI and MCP adapter, deterministic packet generation, Custom Embed
+  create/read/update/disable, snapshot, release, verification, and snippet
+  rollback are implemented.
+- Atelier Harmonie and SusiMacDonald each keep their own manifest, connected
+  repository and customer documents under `sites/`. Current release state is
+  recorded in each site's `production/deployment-record.json` and private
+  receipts; this README is not a release log.
+- `sites/atelier-harmonie/site.manifest.json` selects Atelier Harmonie
+  explicitly. The exact site ID is also recorded in `.env.example` for the
+  required `WIX_ALLOWED_SITE_IDS` boundary.
+- The Wix CLI for Sites (`@wix/cli` 1.1.263) is installed locally in the
+  ignored `.wix-cli/` directory. The connected Atelier source repository is
+  `weareheadless/atelier-harmonie`; the older `chocholesmarrons` connection is
+  not used. See `sites/atelier-harmonie/AGENTS.md` and its production documents.
+- `site-agent` is a separate generic content manager and is not the Wix bridge.
 
 
 ## Multiple customer websites
 
-Shared bridge tooling stays in `src/`. Customer code, manifests and instructions live in `sites/<alias>/`; see [customer layout](sites/README.md). Atelier’s approved design and staged production components are in `sites/atelier-harmonie/`. Production deployment is still pending its supported Wix Git reconnection and native placement. Root `site.manifest.json` is a compatibility symlink for historical local recovery commands, not a second manifest.
+Shared bridge tooling stays in `src/`. Customer code, manifests and instructions live in `sites/<alias>/`; see [customer layout](sites/README.md). Atelier’s approved design and staged production components are in `sites/atelier-harmonie/`. Pages are delivered through the connected repository and the packet + mount pair, not through editor placement. Root `site.manifest.json` is a compatibility symlink for historical local recovery commands, not a second manifest.
 
 ## Prerequisites
 
@@ -48,7 +67,16 @@ The official **Publish Site** SDK action also exists. It publishes saved changes
 
 ### Custom Embeds API
 
-The Custom Embeds API manages dashboard code snippets at `HEAD`, `BODY_START`, or `BODY_END`. These are not canvas HTML embed elements or general editor layout APIs. The API supports list, get, create, update, and delete operations; the bridge supports creating new embeds and reading/updating IDs already listed in a site's manifest. List supports cursor paging with a maximum of 100 items per request. The documented custom embed name length is 1–100 characters. The API object marks `pageFilter` read-only, so new API-created embeds apply to all pages. To make a prototype safe, `create-snippet` and `update-snippet` require an exact non-root route. For a single embed, the wrapper waits for Wix's page content to settle and replaces the content of `#PAGES_CONTAINER`, `#main_MF`, or the semantic `main` container; the site's native header and footer stay in place. For stacked sections, each manifest entry declares a unique `mountId` and stable `mountOrder`. Each section appends to the shared prototype root and the bridge sorts sections by that order, regardless of which API snippet loads first. Every section should be self-contained and use the same exact route guard. Pass both `--mount-id` and `--mount-order` when creating each stacked embed. The bridge compresses the supplied HTML before sending it to Wix, then restores it in the visitor's browser with the widely available `DecompressionStream` API. If decoding fails or the page content does not settle, it leaves the existing page content unchanged. The API page scope itself remains site-wide, and the bridge reports that explicitly. Creating the Wix page itself and hiding it from site navigation are separate Wix Editor actions; they are not Custom Embeds API operations. A page hidden from navigation is still public to anyone with its URL. The API schema pages reviewed here don't list an HTML-body size limit; deployments still fail closed on any Wix API rejection. Categories affect consent/loading behavior; category changes must be declared in the manifest and `--from-category` must match the current live category. See [Create Custom Embed](https://dev.wix.com/docs/api-reference/business-management/custom-embeds/create-custom-embed), [Custom Embed Object](https://dev.wix.com/docs/api-reference/business-management/custom-embeds/custom-embed-object), and [DecompressionStream](https://developer.mozilla.org/en-US/docs/Web/API/DecompressionStream).
+The Custom Embeds API manages dashboard code snippets at `HEAD`, `BODY_START`, or `BODY_END`. These are not canvas HTML embed elements or general editor layout APIs. The API supports list, get, create, update, and delete operations; the bridge creates new embeds and reads or updates existing ones, including the CrawlSEO entries that no manifest lists. List supports cursor paging with a maximum of 100 items per request. The documented custom embed name length is 1–100 characters. The API object marks `pageFilter` read-only, so new API-created embeds apply to all pages. To make a prototype safe, `create-snippet` and `update-snippet` require an exact non-root route; pass `--all-pages` only for a self-guarding CrawlSEO entry. For a single embed, the wrapper waits for Wix's page content to settle and replaces the content of `#PAGES_CONTAINER`, `#main_MF`, or the semantic `main` container; the site's native header and footer stay in place. For stacked sections, each manifest entry declares a unique `mountId` and stable `mountOrder`. Each section appends to the shared prototype root and the bridge sorts sections by that order, regardless of which API snippet loads first. Every section should be self-contained and use the same exact route guard. Pass both `--mount-id` and `--mount-order` when creating each stacked embed. The bridge compresses the supplied HTML before sending it to Wix, then restores it in the visitor's browser with the widely available `DecompressionStream` API. If decoding fails or the page content does not settle, it leaves the existing page content unchanged. The API page scope itself remains site-wide, and the bridge reports that explicitly. Creating the Wix page itself and hiding it from site navigation are separate Wix Editor actions; they are not Custom Embeds API operations. A page hidden from navigation is still public to anyone with its URL. The API schema pages reviewed here don't list an HTML-body size limit; deployments still fail closed on any Wix API rejection. Categories affect consent/loading behavior; category changes must be declared in the manifest and `--from-category` must match the current live category. See [Create Custom Embed](https://dev.wix.com/docs/api-reference/business-management/custom-embeds/create-custom-embed), [Custom Embed Object](https://dev.wix.com/docs/api-reference/business-management/custom-embeds/custom-embed-object), and [DecompressionStream](https://developer.mozilla.org/en-US/docs/Web/API/DecompressionStream).
+
+The wrapper described above is the prototype/fallback HTML embed lane, used by a
+site with no connected repository. A CrawlSEO-delivered page uses two bare
+script entries instead: a `HEAD` early packet named `CrawlSEO early packet —
+<tag> — <n>` that registers the custom element, and a `BODY_END` mount named
+`CrawlSEO page mount — <tag>` that places it. Both carry their own route and
+language guard, so they are created with `--all-pages`; the human may narrow
+their page scope in the Custom Code panel. See
+[Page delivery](docs/PAGE_DELIVERY.md) for the full rule set.
 
 An update must include the current `revision`. The bridge does one read, sends one update with that revision, and never retries a conflict automatically. Wix documents that a Custom Embed update is applied on the next site render; it does not wait for a site publish. See [Custom Embeds API reference and sample flows](https://dev.wix.com/docs/api-reference/business-management/custom-embeds/create-custom-embed), [Update Custom Embed](https://dev.wix.com/docs/api-reference/business-management/custom-embeds/update-custom-embed), and [Custom Embed Object](https://dev.wix.com/docs/api-reference/business-management/custom-embeds/custom-embed-object).
 
@@ -75,12 +103,12 @@ The site publishing key is separate. For CI, Wix documents a site permission nam
 
 1. Create the new Wix site and connect it to a **separate site source repository** using Wix's Git Integration setup. Save editor UI changes so the repository's `wix.config.json` represents the UI snapshot intended for code publishing.
 2. Clone that connected repo. Record its owner/repository, default branch, Wix site ID (from the dashboard URL), public routes, custom element tags, Wix element IDs, dataset bindings, and the IDs, positions, categories, load-once setting, and page scopes of any dashboard Custom Embeds.
-3. Make a site-specific copy of `examples/new-site.manifest.json`. Fill in those details and keep this bridge's `WIX_ALLOWED_SITE_IDS` limited to the test site's ID. Add only Custom Embeds the site actually uses; remove the example snippet mapping if it does not need an early packet.
-4. In Wix's editor, place any native Custom Element once, set its tag name and element ID, and connect the existing Wix dataset/page code. Record that one-time setup in the manifest. The bridge does not claim an API to add, size, position, or bind Wix editor elements.
+3. Make a site-specific copy of `examples/new-site.manifest.json`. Fill in those details and keep this bridge's `WIX_ALLOWED_SITE_IDS` limited to the test site's ID. Add only Custom Embeds the site actually uses. A site whose pages are delivered by CrawlSEO does not need the example snippet mapping; each delivered page gets its own packet and mount through the delivery lane (see [Page delivery](docs/PAGE_DELIVERY.md)).
+4. A CrawlSEO-delivered page needs one blank, published Wix page at its route; the mount places the element, so there is no editor placement step. For a site that keeps hand-placed native custom elements, place each element once in the editor, set its tag name and element ID, and connect the existing Wix dataset/page code. Record that one-time setup in the manifest. The bridge does not claim an API to add, size, position, or bind Wix editor elements.
 5. Export credentials locally. Run the commands below from the bridge repository, passing the local path to the Wix-connected site source repo.
 6. After a release, verify snippet hashes, inspect a fresh live DOM, and review desktop and mobile renderings. Fix any issue before calling the deployment visually verified.
 
-The example component is a vanilla browser Custom Element at `examples/site-source/src/public/custom-elements/property-card.js`. The example manifest records the route, tag, Wix element ID, and intended dataset binding. The artifact generator compresses that same source to a deterministic gzip/base64 `<script>` packet; the example output is `examples/generated/wh-property-card.html`. The packet uses `DecompressionStream` and dynamic evaluation, so its browser/CSP behavior must be validated on the actual test site. The bridge does not add this loading pattern to sites unless their manifest maps a component to a Custom Embed.
+The example component is a vanilla browser Custom Element at `examples/site-source/src/public/custom-elements/property-card.js`. The example manifest records the route, tag, Wix element ID, and intended dataset binding. The artifact generator compresses that same source to a deterministic gzip/base64 `<script>` packet; the example output is `examples/generated/wh-property-card.html`. The packet uses `DecompressionStream` and dynamic evaluation, so its browser/CSP behavior must be validated on the actual test site. The example is a reference build. A CrawlSEO-delivered page does not depend on a manifest mapping: it gets its packet and mount through the delivery lane described in [Page delivery](docs/PAGE_DELIVERY.md).
 
 Regenerate the checked-in example packet after editing the component source:
 
@@ -134,6 +162,24 @@ npm run bridge -- update-snippet \
   --route /copy-of-accueil \
   --category ESSENTIAL \
   --from-category FUNCTIONAL \
+  --apply
+
+# Rewrite one CrawlSEO early packet or page mount in place, by embed id.
+# Only names starting with "CrawlSEO early packet" or "CrawlSEO page mount"
+# are accepted; the current revision and page scope are preserved.
+npm run bridge -- write-packet \
+  --manifest ./sites/atelier-harmonie/site.manifest.json \
+  --site atelier-harmonie \
+  --snippet <custom-embed-id> \
+  --html-file ./packet.html \
+  --apply
+
+# Disable an embed CrawlSEO created, for example an older HTML embed that a
+# delivered element has replaced. Refuses any non-CrawlSEO embed.
+npm run bridge -- disable-embed \
+  --manifest ./sites/atelier-harmonie/site.manifest.json \
+  --site atelier-harmonie \
+  --snippet <custom-embed-id> \
   --apply
 
 npm run bridge -- doctor \
@@ -205,18 +251,17 @@ Code publishing and Custom Embed updates are non-atomic. A release records a pri
 - Code rollback is not automatic. Use a Git revert on the Wix-connected default branch and publish that commit with `wix publish`, or restore a Wix Site History version through Wix's supported flow. A Git revert does not undo runtime CMS data; Site History also does not restore database collection data. See [About Site History](https://dev.wix.com/docs/develop-websites-sdk/publish-your-site/site-history/about-site-history).
 - The API `verify` command checks current embed hashes and can check a configured URL's HTTP status. It does not inspect the browser DOM or take desktop/mobile screenshots. A successful API/hash check alone is not proof the visible deployment works.
 
-## Future SusiMacDonald adoption
+## SusiMacDonald
 
-SusiMacDonald is not an authorized deployment target for this work. For a future, separately authorized adoption:
-
-1. Inspect the existing site and its officially connected source repository read-only. Record the exact site ID, connected repo/default branch, routes, custom element tags and Wix element IDs, dataset bindings, and Custom Embed IDs, positions, categories, and page scopes.
-2. Add a separate Susi site manifest and allowlist entry only when that future adoption is authorized. Do not substitute its site ID for a new test target.
-3. Preserve its existing Wix-native layout, Velo page code, and CMS datasets. Map the canonical component source to the existing early packet only where that site currently uses one; use generated packets from the same source artifact. Do not install an early packet where none is needed.
-4. Plan and snapshot first, inspect the diff, and use the staged release/rollback process above. Complete fresh live DOM and desktop/mobile visual checks before confirming a visible change.
+SusiMacDonald is a separate authorized target with its own site ID, credentials
+and connected source repository (`weareheadless/susimacdonald-wix`). Its
+manifest, embed inventory and translation documents are in
+`sites/susimacdonald/`. Never substitute Atelier's identity, credentials or
+source for it, and never batch-deploy across the two customers.
 
 ## Supported and unsupported operations
 
-Supported: manifest validation, target inspection, Custom Embed list/read/create, deterministic component packet generation, plan/diff, private snapshot, revision-checked snippet deploy, selected-branch Wix CLI publish, concise code-plus-snippet release, hash/HTTP verification, and snippet rollback.
+Supported: manifest validation, target inspection, Custom Embed list/read/create/update, in-place CrawlSEO packet and mount rewrite (`write-packet`), disabling replaced CrawlSEO embeds (`disable-embed`), deterministic component packet generation, plan/diff, private snapshot, revision-checked snippet deploy, selected-branch Wix CLI publish, concise code-plus-snippet release, hash/HTTP verification, and snippet rollback.
 
 Unsupported through the bridge: deleting Custom Embeds; changing snippet placement or page filter; creating Wix pages or changing their menu visibility/access rules; adding/repositioning Wix editor elements; changing page layout or dataset wiring through a fabricated API; pushing site source commits on the user's behalf; CMS record/schema mutation; atomic code-plus-snippet deployment; automated visual approval; and automatic code rollback. Use Wix's editor for page setup and the explicitly documented one-time native placement; use supported Git/Wix CLI workflows for site code.
 
@@ -226,4 +271,4 @@ Unsupported through the bridge: deleting Custom Embeds; changing snippet placeme
 npm test
 ```
 
-Tests cover deterministic artifact generation, target allowlisting, redaction, private snapshot permissions, token exchange and scope headers, revision conflicts, paging, dry-run behavior, partial update recovery, overwrite protection, release ordering, publish failure handling, and MCP stdio registration. These are local tests with simulated Wix responses; they are not evidence of a live Wix deployment.
+Tests cover deterministic artifact generation, target allowlisting, redaction, private snapshot permissions, token exchange and scope headers, revision conflicts, paging, dry-run behavior, partial update recovery, overwrite protection, release ordering, publish failure handling, CrawlSEO packet and mount rewriting, and MCP stdio registration. These are local tests with simulated Wix responses; they are not evidence of a live Wix deployment.

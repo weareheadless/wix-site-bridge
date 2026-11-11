@@ -70,14 +70,25 @@ private receipt for embed ID `41e2873b-2a99-4747-b1b6-156878469855`.
 - Wix code publishing and snippet updates are separate, non-atomic operations. Review the release receipt and its recovery instructions after every applied release.
 - Never commit secrets, local snapshots, or release receipts. Logs and tool output must redact credentials.
 - Keep runtime CMS records and dataset behavior in Wix. Do not create a parallel data store.
-- The native editor placement of custom elements and dataset bindings is a one-time Wix UI setup and must be documented, not represented as an API operation.
+- The native editor placement of custom elements and dataset bindings is a one-time Wix UI setup and must be documented, not represented as an API operation. A CrawlSEO-delivered page needs no such placement: its mount creates the element.
+
+## CrawlSEO page delivery
+
+A page CrawlSEO delivers is a pair of Custom Code entries plus the component
+source. Read `docs/PAGE_DELIVERY.md` before touching one.
+
+- The early packet is `HEAD`, named `CrawlSEO early packet — <tag> — <n>`, and only registers the element. The page mount is `BODY_END`, named `CrawlSEO page mount — <tag>`, and only places it. Both are required; neither works alone, and they must never both mount content.
+- Rewrite an entry with `write-packet`, by embed id. Disable a replaced embed with `disable-embed`. Both refuse names that are not CrawlSEO entries. A retry rewrites in place; never create a second entry with the same name.
+- The component source belongs in the site's connected repository under `src/public/custom-elements/`.
+- The human creates the blank, published page. There is no editor placement step for a CrawlSEO page, so do not ask for a manifest element ID or a manual tag placement.
 
 ## CRITICAL — global startup performance gate for every production page
 
 - Before homepage promotion, page creation, or any production page release, read `docs/GLOBAL_EARLY_REGISTRATION.md`. This mandatory contract comes from the inspected `susimacdonald-rentals` implementation; it is not optional polish.
+- That contract covers the site-wide startup controllers. It is separate from a per-page CrawlSEO packet and mount: a CrawlSEO-delivered page needs its own pair even when the site already has startup controllers, and a page does not join the central registry merely because it has a CrawlSEO packet.
 - Every production route must have explicit coverage in the central early custom-element registry, including shared header definitions and dynamic routes. Keep the all-pages initial-load and per-navigation Head controllers synchronized, with matching guarded inline packets and normal Wix source fallback. Rebuild/deploy packets whenever their component source changes.
 - Preload only the actual first hero image with matching responsive URLs and defer noncritical work. Confirm live content on fresh loads and internal navigation. Registration timing alone is not proof of paint or speed.
-- Global Custom Code is for early registration/nonvisual startup. The current stacked root-injection prototype is a design reference, not the production placement architecture. Put production navigation in one real custom element inside Wix's shared header container, and page sections in proper Wix section elements. Remove replaced native visual children after preserving behavior; do not retain hidden duplicate navbar/footer layers or persistent document observers as a production solution.
+- Global Custom Code is for early registration/nonvisual startup. The current stacked root-injection prototype is a design reference, not the production placement architecture. Put production navigation in one real custom element inside Wix's shared header container, and page sections in proper Wix section elements. A CrawlSEO-delivered page is the exception: its mount owns the content container. Remove replaced native visual children after preserving behavior; do not retain hidden duplicate navbar/footer layers or persistent document observers as a production solution.
 - Block promotion until the required implementation and per-route coverage are recorded. Do not claim the reference site's pilot performance scores apply to Atelier. Keep explicit site authorization, existing API boundaries, recovery, CMS, and source-repository boundaries in force.
 
 ## Shared repository / customer areas
@@ -88,7 +99,7 @@ private receipt for embed ID `41e2873b-2a99-4747-b1b6-156878469855`.
 
 ## Shared placement workflow
 
-- The human handles Wix Editor placement, section removal, sizing and element settings. Agents must not operate the Wix Editor UI unless the human explicitly changes this workflow.
+- The human handles Wix Editor placement, section removal, sizing and element settings. Agents must not operate the Wix Editor UI unless the human explicitly changes this workflow. A CrawlSEO-delivered page is not placed in the editor: its mount creates the element. See [Page delivery](docs/PAGE_DELIVERY.md).
 - Agents build and push component source, Velo bindings and synchronized global startup packets. Give the human precise file names, tag names, element IDs and sizing instructions when placement is required.
 - Do not publish using a stale local UI snapshot after the human edits layout. The human's saved Editor layout is authoritative; synchronize it through a supported workflow before any CLI publish, or ask the human to publish from the Editor after release readiness is confirmed.
 
