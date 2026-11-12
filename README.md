@@ -196,8 +196,9 @@ npm run bridge -- seo-tags \
   --apply
 
 # Publish the site's saved revision. Custom Embed writes are drafts until a
-# publish, and publishing restores page settings from that revision, so publish
-# before setting SEO tags. Requires WIX_SEO_API_KEY.
+# publish, and publishing restores page settings from that revision, so the
+# command reads each page's own title/description first and writes them back
+# afterwards. Requires WIX_SEO_API_KEY.
 npm run bridge -- publish-site \
   --manifest ./sites/atelier-harmonie/site.manifest.json \
   --site atelier-harmonie \

@@ -127,6 +127,13 @@ tags, then verify both on the live page.
 publishes the site's saved revision, not one page: use it only for a site whose
 published revision is the intended one.
 
+A publish restores page settings from that saved revision, so tags written
+through the Item SEO Tags API (which live outside the revision) are lost with
+it. `publish-site` therefore reads every page that owns its title or
+description first, publishes, then writes each page's own tags back and
+reports how many it restored. Skipping that step is what stripped the agenda
+page's title and description on a manual publish.
+
 A publish triggered by a push to the connected repository can also restore an
 older revision over the drafts. CrawlSEO therefore publishes, reads the raw live
 document for the packet key the delivery wrote, and publishes again — up to

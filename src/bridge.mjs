@@ -164,27 +164,50 @@ export async function runOperation(command, args, env = process.env, options = {
   if (command === "publish-site") {
     const seo = new WixSeoClient({ siteId: site.siteId, apiKey: env.WIX_SEO_API_KEY ?? env.WIX_API_KEY });
     const operationId = newId("publish-site");
+    // A site publish restores page settings from its saved revision, and the
+    // Item SEO Tags API writes live outside that revision. The page's own tags
+    // are read first and written back afterwards, so a publish never strips a
+    // page of its title and description.
+    const pages = await seo.listStaticPages();
+    const owned = pages
+      .map((item) => ({
+        item,
+        title: currentSeoValue(item, "title"),
+        description: currentSeoValue(item, "meta", "description")
+      }))
+      .filter((entry) => entry.item.hasOverride === true && (entry.title || entry.description));
     if (!apply) {
       return {
         status: "ok",
         target: { alias: site.alias, siteId: site.siteId },
         wouldPublish: true,
+        wouldRestore: owned.length,
         operationId
       };
     }
     await seo.publishSite();
+    const restored = [];
+    for (const entry of owned) {
+      const updated = await seo.setItemSeoTags(entry.item, {
+        title: entry.title || undefined,
+        description: entry.description || undefined
+      });
+      restored.push({ pageId: entry.item.itemId, tags: updated.itemSeoTags?.tags?.length ?? 0 });
+    }
     const receiptPath = path.join(stateDir, "receipts", `${operationId}.json`);
     await writePrivateJson(receiptPath, {
       operationId,
       siteAlias: site.alias,
       siteId: site.siteId,
       createdAt: new Date().toISOString(),
-      status: "published"
+      status: "published",
+      restored
     });
     return {
       status: "ok",
       target: { alias: site.alias, siteId: site.siteId },
       published: true,
+      restored,
       receipt: receiptPath
     };
   }
