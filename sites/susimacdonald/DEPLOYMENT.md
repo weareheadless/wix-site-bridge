@@ -17,20 +17,61 @@ If a component exists only in `susimacdonald-rentals`, copy it into
 repo as the source from that point on. Editing both copies is what produced the
 wrong-lane deliveries; one element has one home.
 
-## The three artifacts
+## The delivery
 
-A page delivery is exactly three things:
+A page delivery is four things, and one of them is a human step:
 
 1. **Component** — `src/public/custom-elements/<tag>.js` in the connected repo,
    light DOM so the copy stays in the document, bilingual in one source when the
    page has a translated route.
-2. **Early packet** — `HEAD`, one entry per locale per chunk, registered before
-   Wix's loader runs.
-3. **Mount** — `BODY_END`, creates `<tag>` in `#PAGES_CONTAINER` and re-mounts it
-   through hydration.
+2. **Editor placement** — the custom element placed on the page, with the
+   element and its section sized for desktop and mobile. Human step; there is no
+   API. Record the Wix element id (e.g. `comp-mwmg963v`) and the Wix section id
+   (e.g. `comp-mwmb8lz3`).
+3. **Early packet** — `HEAD`, one entry per locale per chunk, registered before
+   Wix's loader runs. It registers and preloads; nothing else.
+4. **Page code** — `src/pages/<Page Name>.<pageId>.js`, binding the Wix element
+   id and relaying `section-resize` so the wrapper keeps the element's height.
+
+There is no mount. A BODY_END mount has to move the element out of its editor
+section to survive hydration, so it defeats the saved geometry, rebuilds the
+page after first paint and puts back the visible reload and CLS 0.709. The
+retired mount entry is disabled and the deploy fails if it is live again.
 
 A standalone HTML embed is the fallback lane for a site **without** a connected
 repository. This site has one, so an HTML embed is always the wrong artifact.
+
+## Performance (read this before building, not after)
+
+The page is measured against its siblings, not against a general ideal:
+
+| Gate | Target |
+| --- | --- |
+| CLS | 0 (anything above 0.05 is a bug) |
+| LCP | the element's own hero `<img>`, preloaded |
+| Images | no "Improve image delivery" opportunity on PSI |
+| Transfer | at or below a sibling page (~2.8 MB here; the Wix shell is most of it) |
+| TBT | ~70 ms, set by the site and its tags, not by this page |
+
+What produces each failure, from pages that already shipped:
+
+- **CLS 0.709 / the page jumps.** The page is built after first paint: a mount,
+  a `display:none` on `#SITE_PAGES`, or an unsized element section. The element
+  belongs in the server HTML with its section height already saved.
+- **A visible reload.** Two elements, or an element moved by a mount while Wix
+  hydration runs. Check for a second `<tag>` and for a parent of `#masterPage`.
+- **"I placed the element and nothing improved."** The mount is still enabled
+  and is relocating the placed element. Disable it.
+- **2.4 MB of images.** 560 px files in 134 px slots, and uploaded PNGs served
+  as PNG. Ask for `.jpg` (Wix transcodes by the requested file name) and carry
+  `srcset`/`sizes`.
+- **LCP 6 s with a 3 s FCP.** The hero is a CSS background, or the element does
+  not exist at parse time. Preload the hero with a real `<link>` in the packet.
+
+Measure with PageSpeed Insights, not with Lighthouse on this box: the machine is
+shared and can report 30x the TBT and a later LCP (4,000 ms against PSI's 70 ms
+on the same page). Local runs are still good for transferred bytes and CLS.
+Three runs, same URL, same device, compare medians.
 
 ## Build
 
@@ -54,19 +95,18 @@ Output goes to `packets/`. The script:
   `/* global __CC_LOCALE__ */`: esbuild substitutes the define, but Wix's own
   build lints the source without it and fails `no-undef` otherwise;
 - gzips and base64s the bundle;
-- splits it into 12,400-character chunks. The bridge accepts up to 13,500 and
-  refuses 15,000, so leave headroom;
-- writes one guarded packet per chunk plus the mount.
+- splits it into chunks under 13,500 characters. The current build uses 9,900
+  base64 characters per chunk, because the chunk also carries the packet script;
+- writes one guarded packet per chunk.
 
-Every packet and the mount guard their own route in the script itself. That is
-why a site-wide entry is safe and why the shared controller is not touched for a
-single page.
+Every packet guards its own route in the script itself. That is why a site-wide
+entry is safe and why the shared controller is not touched for a single page.
 
 ## Deploy
 
 One command does the whole delivery in the only order that works — build, write
-all five entries, publish once, read the hashes back, and decode the live
-document:
+the four packet entries, disable the retired mount, publish once, read the
+hashes back, and decode the live document:
 
 ```sh
 cd /home/admin/susimacdonald-wix
@@ -83,9 +123,9 @@ and publishes the revision it started from; a write that lands while it is
 rolling out can be overwritten by its snapshot. That is what made the page flip
 between the new page and an older, unstyled packet.
 
-### The five entries
+### The four entries
 
-The page is two artifact kinds, not one:
+The page is one artifact kind plus the editor element:
 
 - two HEAD early packets per locale, which register `<tag>` before Wix's loader
   and preload the hero with a real `<link>`. They do not hide the page or paint
@@ -103,8 +143,8 @@ cd /home/admin/wix-site-bridge
 set -a; . sites/susimacdonald/.wix-bridge-state/app.env; set +a
 ```
 
-Create the packet chunks and the page embed once. Names are fixed, so a retry
-updates the same entry instead of adding another:
+Create the packet chunks once. Names are fixed, so a retry updates the same
+entry instead of adding another:
 
 ```sh
 node src/cli.mjs create-snippet \
@@ -115,13 +155,12 @@ node src/cli.mjs create-snippet \
   --html-file /home/admin/susimacdonald-wix/packets/<tag>-packet-<locale>-<n>.html \
   --position HEAD --category ESSENTIAL --all-pages --load-once false --apply
 
-node src/cli.mjs create-snippet \
+# There is no mount entry. If one exists from an earlier delivery, disable it:
+node src/cli.mjs disable-embed \
   --manifest sites/susimacdonald/site.manifest.json \
   --site susimacdonald \
   --state-dir sites/susimacdonald/.wix-bridge-state \
-  --name "CrawlSEO page mount — <tag>" \
-  --html-file /home/admin/susimacdonald-wix/packets/<tag>-mount.html \
-  --position BODY_END --category ESSENTIAL --all-pages --load-once false --apply
+  --snippet <mount-id> --apply
 ```
 
 On a rebuild, rewrite the existing entries with `write-packet` and the same
@@ -139,7 +178,8 @@ node src/cli.mjs write-packet \
 
 Page scope is read-only in the API. Narrowing the entries in the Custom Code
 panel is an optional transfer optimization; the route guard already makes them
-inert elsewhere.
+inert elsewhere. The element itself is on one page, so scoping the packets to
+that page is the clean state.
 
 ## Page title and meta description
 
@@ -169,7 +209,8 @@ rendered document, not the raw HTML.
 
 ## Publish
 
-Publish **after** the five writes, never before or during them. A publish takes
+Publish **after** the four writes and the mount disable, never before or during
+them. A publish takes
 minutes and publishes the revision it started from; a write that lands while it
 is rolling out can be replaced by that snapshot, which is how the page reverted
 to an older unstyled packet. Publish through the bridge API:
@@ -206,26 +247,36 @@ Do not report a delivery from a green API response alone.
 2. Decode the live bundle, not just the API: fetch the page, extract both HEAD
    chunks, gunzip them and check for the current markers. `read-embed` shows the
    draft; only the live document proves what visitors receive.
-3. Raw live HTML contains the packet key for each locale chunk and the page
-   embed.
-4. Rendered document contains `<tag>` on a fresh load and after an internal
+3. Served HTML: one `<city-condos-puerto>` or `<tag>`, the hero preload, and no
+   mount script, no `cc-pm-` style and no rule hiding `#SITE_PAGES`. The element
+   in the served HTML is what makes the page exist before JavaScript.
+4. Rendered document: exactly one `<tag>`, one `<h1>`, its parent inside
+   `#SITE_PAGES` and not `#masterPage`, the section at least as tall as the
+   element, the footer below it, on a fresh load and after an internal
    navigation.
-5. Both locales: their own copy, their own links, one `<h1>`.
+5. Both locales: their own copy, their own links.
 6. The page's own title and meta description appear in the rendered document.
 7. The other routes still work: a site-wide entry must be inert there.
+8. Performance gates from the section above: CLS 0, LCP the element's hero, no
+   image-delivery opportunity, transfer no larger than a sibling page. Record
+   the PSI URL and the run date; do not substitute a local Lighthouse score.
 
 ## Rollback
 
-Disable the packet chunks and the mount with `disable-embed`; their ids are in
-`site.manifest.json` and `embed-inventory.json`. Nothing else on the page was
-changed, so the previous page returns on the next render. If a rebuild made the
-page worse, restore the last known-good entry from its receipt first, then fix
-the source — never layer a new guess on a broken live state.
+Disable the packet chunks with `disable-embed`; their ids are in
+`site.manifest.json` and `embed-inventory.json`. The element stays on the page
+but is no longer defined early, so Wix loads its own source — slower, but
+visible. If a rebuild made the page worse, restore the last known-good entry
+from its receipt first, then fix the source; never layer a new guess on a broken
+live state.
 
 ## Do not
 
 - Paste a standalone HTML page into Wix on this site.
 - Build a second packet from a second repository copy.
 - Create a second entry when a retry can rewrite the first.
+- Add a BODY_END mount to a page whose element is placed.
+- Hide `#SITE_PAGES`, paint a placeholder, or set a min-height from a packet.
 - Use `wix publish`, or Atelier's app credentials, tokens or state.
-- Claim success without the rendered-document check.
+- Claim success, or a score, without the served-HTML, rendered-document and PSI
+  checks.

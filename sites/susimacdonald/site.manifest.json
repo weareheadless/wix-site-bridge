@@ -344,7 +344,10 @@
         "name": "CrawlSEO early packet — city-condos-puerto — en",
         "position": "HEAD",
         "pageScope": {
-          "type": "all"
+          "type": "pages",
+          "pageIds": [
+            "qu5lr"
+          ]
         },
         "category": "ESSENTIAL",
         "loadOnce": false,
@@ -356,7 +359,10 @@
         "name": "CrawlSEO early packet — city-condos-puerto — es",
         "position": "HEAD",
         "pageScope": {
-          "type": "all"
+          "type": "pages",
+          "pageIds": [
+            "qu5lr"
+          ]
         },
         "category": "ESSENTIAL",
         "loadOnce": false,
@@ -368,7 +374,10 @@
         "name": "CrawlSEO early packet — city-condos-puerto — en 2",
         "position": "HEAD",
         "pageScope": {
-          "type": "all"
+          "type": "pages",
+          "pageIds": [
+            "qu5lr"
+          ]
         },
         "category": "ESSENTIAL",
         "loadOnce": false,
@@ -380,7 +389,10 @@
         "name": "CrawlSEO early packet — city-condos-puerto — es 2",
         "position": "HEAD",
         "pageScope": {
-          "type": "all"
+          "type": "pages",
+          "pageIds": [
+            "qu5lr"
+          ]
         },
         "category": "ESSENTIAL",
         "loadOnce": false,
@@ -441,8 +453,9 @@
         },
         "category": "ESSENTIAL",
         "loadOnce": false,
-        "enabled": true,
-        "purpose": "existing-snippet-inventory"
+        "enabled": false,
+        "purpose": "retired-mount",
+        "retired": "2026-11-18: the element is placed in the page at comp-mwmg963v; a BODY_END mount moves it out of section comp-mwmb8lz3, so it must stay disabled."
       }
     ]
   }

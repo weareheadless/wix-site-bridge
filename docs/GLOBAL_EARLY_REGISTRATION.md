@@ -19,8 +19,10 @@ That repository is a reference, not an Atelier deployment target. Never copy its
 This document governs the site-wide startup controllers: one canonical Head
 controller, its route registry, and the shared header/footer registration. A
 page CrawlSEO delivers is a separate pair: a `HEAD` early packet that registers
-that page's element and a `BODY_END` mount that places it, documented in
-[Page delivery](PAGE_DELIVERY.md).
+that page's element, and the element itself placed in the page and sized in the
+editor, documented in [Page delivery](PAGE_DELIVERY.md). A `BODY_END` mount is
+a prototype lane only; it cannot meet the performance contract because it
+builds the page after first paint.
 
 Both can exist on the same site. Neither replaces the other: do not route a
 CrawlSEO page through the central registry, and do not treat a CrawlSEO packet
@@ -34,7 +36,7 @@ as coverage for a startup controller.
 4. Update the corresponding packet **and** Wix component source together whenever a component changes. Update both controller entries whenever controller logic changes. Record source fingerprints, release, route, actual registered tags, and deployment assignments so stale early code cannot override newer source.
 5. No private GitHub/CDN loading, credentials in public loaders, `eval`, or new CMS queries. Only matching packets decompress/execute; inspect and minimize globally transferred packet bytes as coverage expands.
 6. Discover/preload only the first critical image using the **same responsive URLs, sizes, and crop as the visible hero**. Use high fetch priority; do not preload the entire slider. Dynamic image discovery must use existing page metadata/data with a bounded, scoped observer if needed. Lazy-start below-fold images and review widgets near their viewport without withholding essential text/links.
-7. Use global Custom Code for early registration and justified nonvisual startup behavior. Visible production UI belongs in actual Wix custom elements placed in the appropriate shared header or page sections. Do not promote the prototype's delayed root replacement, hidden duplicate header/footer, broad persistent document observers, or generated-selector layout overrides as production architecture.
+7. Use global Custom Code for early registration and justified nonvisual startup behavior. Visible production UI belongs in actual Wix custom elements placed in the appropriate shared header or page sections, with the element and its section sized per breakpoint before measuring. A packet that hides the page or paints its own placeholder is replacing the page at runtime and will show up as CLS. Do not promote the prototype's delayed root replacement, hidden duplicate header/footer, broad persistent document observers, or generated-selector layout overrides as production architecture.
 8. Before releasing each page, inspect the published content on desktop/mobile and fresh document startup **plus internal navigation** to/from the page. Confirm actual component content, all sections, hero image, menu/cart and other changed interactions, original copy/links/SEO, and CMS behavior. Registration markers prove definition only, not visibility, LCP, or successful data loading. Missing or empty elements are release failures.
 9. Preserve a central disable switch and a per-document control such as `?earlyElements=off`. Rollback must leave the supported Wix source loader functional; disable packet entries as well when removing their transfer cost. Store rollback evidence privately.
 

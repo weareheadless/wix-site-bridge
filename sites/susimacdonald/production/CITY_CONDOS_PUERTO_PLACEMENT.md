@@ -1,47 +1,58 @@
-# Puerto Morelos condos — placing the page element
+# Puerto Morelos condos — page element placement (done)
 
-The page is a Wix **Custom Element**, the same mechanism as every other city
-page. The early packets and the page code are already in the connected
-repository. This is the one editor action Wix exposes no API for.
+The page is a Wix **Custom Element** placed in the page, the same mechanism as
+every other city page. It is live. This file records what was placed and the
+mistake that made the placement look ineffective.
 
-## What to place
+## What is on the page
 
-1. Open the page **Condos For Sale In Puerto Morelos** (`/puerto-morelos-condos-sale`)
-   in the Wix Editor.
-2. Add a full-width section at the top of the page body, below the header.
-   Remove its padding and set its background to `#171714`. Name it clearly;
-   note its ID if it is not `#section1`.
-3. **Add Elements → Embed → Popular Embeds → Custom Element.**
-4. Set:
-   - tag name: `city-condos-puerto`
-   - element ID: `customElement1`
-   - width: 100% of the section, no side margins
-   - initial height: 7600 px (the page code corrects it from the element's
-     `section-resize` event)
-5. Delete the old 2024 article sections. They are not used by the element.
-6. Save and publish from the editor.
+| Thing | Value |
+| --- | --- |
+| Wix element id (wrapper) | `comp-mwmg963v` |
+| Wix section id | `comp-mwmb8lz3` |
+| Tag name | `city-condos-puerto` |
+| Page | `/puerto-morelos-condos-sale`, `/es/puerto-morelos-condos-sale` (page id `qu5lr`) |
 
-## What is already live
+The element sits inside `#SITE_PAGES > … > section#comp-mwmb8lz3 >
+div#comp-mwmg963v`, so it is part of the delivered HTML. Its hero image is the
+LCP element and the section holds the page height while the element upgrades.
 
-- HEAD early packets: `CrawlSEO early packet — city-condos-puerto — en|es`
-  (two chunks per locale), register the element before Wix's loader.
-- BODY_END fallback: `CrawlSEO page mount — city-condos-puerto` mounts the
-  element as a sibling of `#PAGES_CONTAINER` while the editor element is
-  missing. It can be disabled once the editor element renders.
-- Page code: `src/pages/Condos For Sale In Puerto Morelos.qu5lr.js` relays the
-  height to `#customElement1`.
-- Page title and description: written through the SEO API.
+## What is live
 
-## Why it matters
+- Four HEAD packet chunks (`CrawlSEO early packet — city-condos-puerto — en|es`,
+  two per locale), page-scoped to `qu5lr`, `loadOnce=false`, route-guarded. They
+  register the element and emit `<link rel=preload>` for the hero. They do not
+  hide the page, paint a placeholder or set a height.
+- Page code `src/pages/Condos For Sale In Puerto Morelos.qu5lr.js`, binding
+  `#comp-mwmg963v` and relaying `section-resize`.
+- Page title and description through the SEO API (English); the Spanish ones are
+  the editor's.
 
-An editor-placed element is in the page's server HTML, so the packet upgrades it
-in place. There is no create-after-paint and no second mount, which is what
-removes the last visible reload on this page.
+## The retired mount
 
-## Verify
+`CrawlSEO page mount — city-condos-puerto` (`a7d40ed1-…`) is **disabled**.
 
-1. Fresh load: `<city-condos-puerto>` is in the raw HTML, not only after JS.
-2. One element, one `<h1>`, no reload between the header and the content.
-3. The section grows to the element height; nothing is clipped at 1440 px or
-   390 px.
-4. Disable the BODY_END mount and repeat; the page must still render.
+It has to stay disabled. While it was live it ran
+`document.querySelector('city-condos-puerto')` and then inserted that node as a
+sibling of `#PAGES_CONTAINER`, i.e. it moved the placed element out of
+`comp-mwmb8lz3`, while the packet kept `#SITE_PAGES` at `display:none`. The page
+looked the same, so the placement appeared to change nothing: the page was still
+a runtime mount, with the visible reload and CLS 0.709 that come with it.
+
+## Verified after the fix
+
+- Served HTML: one `<city-condos-puerto>`, the hero preload, no mount script, no
+  `cc-pm-` style.
+- Rendered: one element inside `#SITE_PAGES`, 10,559 px tall at 412 px wide with
+  10,570 px reserved by its section, footer below it, one `<h1>`.
+- CLS 0 in repeated runs (was 0.709).
+- First-load images 91 KiB (was 2,363 KiB); page transfer 2,782 KiB (PSI had
+  4,961 KiB and an "improve image delivery" saving of 1,920 KiB).
+- Desktop and `/es/` checked on a fresh load.
+
+## If this page is ever rebuilt
+
+Place the element and size the element **and its section** for desktop and
+mobile before measuring. Do not add a BODY_END mount. The sequence and the
+gates are in the site's `AGENTS.md` and `DEPLOYMENT.md`; the contract is
+`wix-site-bridge/docs/PAGE_DELIVERY.md`.
