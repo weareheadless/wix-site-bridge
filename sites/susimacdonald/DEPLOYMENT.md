@@ -160,6 +160,8 @@ new tags back.
 Do not report a delivery from a green API response alone.
 
 1. Stored hash: `read-embed` must return exactly the bytes that were written.
+   Re-read after a publish as well: a site publish can put a saved Custom Code
+   revision back, so rewrite any entry whose hash no longer matches.
 2. Raw live HTML contains the packet key for each locale chunk and the mount.
 3. Rendered document contains `<tag>` on a fresh load and after an internal
    navigation.
