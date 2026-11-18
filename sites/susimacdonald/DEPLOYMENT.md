@@ -88,11 +88,13 @@ between the new page and an older, unstyled packet.
 The page is two artifact kinds, not one:
 
 - two HEAD early packets per locale, which register `<tag>` before Wix's loader
-  and paint the hero placeholder while the element is being defined;
-- one BODY_END page embed, which mounts the element as a sibling of
-  `#PAGES_CONTAINER`. It must not be a child of that container: Wix hydration
-  replaces the container's children, which re-creates the element and makes the
-  page visibly reload.
+  and preload the hero with a real `<link>`. They do not hide the page or paint
+  a placeholder: the element is in the page's server HTML, so it upgrades in
+  place and its section already reserves the height;
+- no page mount. A BODY_END mount has to move the element out of its editor
+  section to survive hydration, which recreates the page after first paint, puts
+  back the visible reload and costs CLS 0.709. The mount entry is disabled and
+  the deploy fails if it is live again.
 
 Credentials are this site's own app credentials. Never use Atelier's.
 

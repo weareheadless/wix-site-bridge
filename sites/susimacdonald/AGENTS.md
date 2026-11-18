@@ -93,31 +93,32 @@
 - This pipeline writes Wix listing content; it is not the site publisher. Do not run `wix publish` from the CLI.
 
 
-## Puerto Morelos condos page (page lane, no editor placement)
+## Puerto Morelos condos page (editor-placed element)
 
 `/puerto-morelos-condos-sale` and `/es/puerto-morelos-condos-sale` are delivered
-as one custom element, not from the controller's city list. Rebuilt 18 November
-2026 to replace the 2024 article and carry the O3 recommendation.
+as one custom element placed in the page, not from a page mount.
 
 - Tag `city-condos-puerto`. Source, build script, deploy script and built
   packets are all in the connected repo:
   `src/public/custom-elements/city-condos-puerto-v1.js`,
   `scripts/build-early-packets-pages.mjs`,
   `scripts/deploy-city-condos-puerto.mjs`, `packets/`.
-- The HEAD packet hides the old page and paints the real hero as a placeholder
-  from the first frame. The BODY_END embed mounts the element as a **sibling**
-  of `#PAGES_CONTAINER`, not a child: Wix hydration replaces that container's
-  children after first paint, which is what made the element appear twice and
-  the old page flash back. A sibling survives hydration.
-- Four HEAD chunks and one BODY_END mount, all `loadOnce=false`, all guarding
-  their own route. The unsuffixed `… — <locale>` entry is chunk 1 of 2.
+- The element is in the page's server HTML inside section `comp-mwmb8lz3`
+  (wrapper `comp-mwmg963v`), so its hero is the LCP element and its height is
+  reserved by the section. Do not add a BODY_END mount: a mount has to move the
+  element out of that section to survive hydration, which defeats the editor
+  geometry, recreates the page after first paint, and put the page back to
+  CLS 0.709.
+- Four HEAD chunks, all `loadOnce=false`, each guarding its own route. They only
+  register the element and emit a `<link rel=preload>` for the hero at parse
+  time; they must not hide `#SITE_PAGES` or paint a placeholder. The unsuffixed
+  `… — <locale>` entry is chunk 1 of 2.
+- `scripts/deploy-city-condos-puerto.mjs` writes the four chunks, disables the
+  retired mount entry, publishes, and fails unless the served HTML contains the
+  editor element, the preload, and no cover or mount.
+- Page code `src/pages/Condos For Sale In Puerto Morelos.qu5lr.js` binds
+  `#comp-mwmg963v` and relays `section-resize`.
 - The element sets `document.title` and the meta description for its locale.
   The English settings are also written through `seo-tags`; the Spanish ones are
   the editor's, so the rendered-document statement is the current fallback.
-- The target delivery is the same as every other city page: the element placed
-  once in the editor (tag `city-condos-puerto`, ID `customElement1`) so it is in
-  the page's server HTML, the HEAD packets registering it, and the page code in
-  `src/pages/Condos For Sale In Puerto Morelos.qu5lr.js` relaying its height.
-  The BODY_END mount is only the fallback until that placement exists.
-  Exact editor steps: `production/CITY_CONDOS_PUERTO_PLACEMENT.md`.
 - Follow `DEPLOYMENT.md` for rebuild, retry, publish, verification and rollback.
