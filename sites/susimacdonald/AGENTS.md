@@ -114,4 +114,10 @@ as one custom element, not from the controller's city list. Rebuilt 18 November
 - The element sets `document.title` and the meta description for its locale.
   The English settings are also written through `seo-tags`; the Spanish ones are
   the editor's, so the rendered-document statement is the current fallback.
+- The target delivery is the same as every other city page: the element placed
+  once in the editor (tag `city-condos-puerto`, ID `customElement1`) so it is in
+  the page's server HTML, the HEAD packets registering it, and the page code in
+  `src/pages/Condos For Sale In Puerto Morelos.qu5lr.js` relaying its height.
+  The BODY_END mount is only the fallback until that placement exists.
+  Exact editor steps: `production/CITY_CONDOS_PUERTO_PLACEMENT.md`.
 - Follow `DEPLOYMENT.md` for rebuild, retry, publish, verification and rollback.
