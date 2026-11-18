@@ -125,12 +125,12 @@ reported in the delivery result; it does not hide a page that already rendered.
 
 ## Publishing after writes
 
-Custom Embed writes are **drafts**. The live page keeps serving the last
-published revision until the site is published, and publishing also restores
-page settings from the saved revision. The normal order is therefore: write the
-embeds, `publish-site`, then `seo-tags`, then verify. Tags set before a publish
-are not lost either: `publish-site` reads them first, publishes, then writes
-them back.
+Custom Embed writes must be followed by a site publish, and the publish must not
+overlap them. A publish publishes the revision it started from and can take
+minutes; a write that lands while it is rolling out can be replaced by that
+older snapshot. The order is therefore: write every entry, wait, `publish-site`,
+then verify the live document. `wix publish` is not this operation and stays
+forbidden.
 
 `publish-site` calls `POST /site-publisher/v1/site/publish` with the same
 site-scoped token. It is dry-run by default and applies with `--apply`. The call

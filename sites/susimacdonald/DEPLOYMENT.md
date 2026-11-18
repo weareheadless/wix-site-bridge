@@ -57,6 +57,32 @@ single page.
 
 ## Deploy
 
+One command does the whole delivery in the only order that works — build, write
+all five entries, publish once, read the hashes back, and decode the live
+document:
+
+```sh
+cd /home/admin/susimacdonald-wix
+node scripts/deploy-city-condos-puerto.mjs
+```
+
+It exits `0` only when the stored hashes match the built files and the live page
+decodes to the expected bundle. If a publish that was already in flight puts an
+older packet back, it rewrites the entries and publishes again, up to three
+rounds.
+
+Do not run the publish and the writes in parallel. A site publish takes minutes
+and publishes the revision it started from; a write that lands while it is
+rolling out can be overwritten by its snapshot. That is what made the page flip
+between the new page and an older, unstyled packet.
+
+### The five entries
+
+The page is two artifact kinds, not one:
+
+- two HEAD early packets per locale, which register `<tag>` before Wix's loader;
+- one BODY_END page embed, which mounts it.
+
 Credentials are this site's own app credentials. Never use Atelier's.
 
 ```sh
@@ -64,8 +90,8 @@ cd /home/admin/wix-site-bridge
 set -a; . sites/susimacdonald/.wix-bridge-state/app.env; set +a
 ```
 
-Create the packet chunks and the mount once. Names are fixed, so a retry updates
-the same entry instead of adding another:
+Create the packet chunks and the page embed once. Names are fixed, so a retry
+updates the same entry instead of adding another:
 
 ```sh
 node src/cli.mjs create-snippet \
@@ -130,8 +156,10 @@ rendered document, not the raw HTML.
 
 ## Publish
 
-Custom Embed writes are drafts until the site is published. Publish through the
-bridge API:
+Publish **after** the five writes, never before or during them. A publish takes
+minutes and publishes the revision it started from; a write that lands while it
+is rolling out can be replaced by that snapshot, which is how the page reverted
+to an older unstyled packet. Publish through the bridge API:
 
 ```sh
 node src/cli.mjs publish-site \
@@ -160,13 +188,16 @@ new tags back.
 Do not report a delivery from a green API response alone.
 
 1. Stored hash: `read-embed` must return exactly the bytes that were written.
-   Re-read after a publish as well: a site publish can put a saved Custom Code
-   revision back, so rewrite any entry whose hash no longer matches.
-2. Raw live HTML contains the packet key for each locale chunk and the mount.
-3. Rendered document contains `<tag>` on a fresh load and after an internal
+   Re-read after the publish; a publish can put a saved Custom Code revision
+   back, so rewrite any entry whose hash no longer matches.
+2. Decode the live bundle, not just the API: fetch the page, extract both HEAD
+   chunks, gunzip them and check for the current markers. `read-embed` shows the
+   draft; only the live document proves what visitors receive.
+3. Raw live HTML contains the packet key for each locale chunk and the page
+   embed.
+4. Rendered document contains `<tag>` on a fresh load and after an internal
    navigation.
-4. Both locales: their own copy, their own links, one `<h1>`.
-5. Desktop and 390px mobile: no horizontal overflow, no doubled sections.
+5. Both locales: their own copy, their own links, one `<h1>`.
 6. The page's own title and meta description appear in the rendered document.
 7. The other routes still work: a site-wide entry must be inert there.
 

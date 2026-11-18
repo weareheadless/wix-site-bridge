@@ -34,9 +34,16 @@
 
 ## Publishing
 
-- Publish a delivery with the bridge API: `publish-site ... --apply`, which calls
+- Publish a delivery with the bridge API, **after** the five Custom Code writes:
+  `publish-site ... --apply`, which calls
   `POST /site-publisher/v1/site/publish` and publishes the site's **saved**
   revision. This is a required, agent-run step, not a human handover.
+- Never write packets while a publish is running. A publish takes minutes and
+  publishes the revision it started from, so a write that lands during it can be
+  replaced by the older snapshot. That is what flipped this page back to an
+  unstyled packet. Use `susimacdonald-wix/scripts/deploy-city-condos-puerto.mjs`:
+  it writes, publishes, reads the hashes back, decodes the live document and
+  repairs if needed.
 - **Never run `wix publish`.** That is the CLI publish of the local UI snapshot
   from the connected repository and it has repeatedly replaced the saved Spanish
   state with English. `publish-site` does not send a local snapshot, so the two
