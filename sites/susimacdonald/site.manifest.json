@@ -41,18 +41,6 @@
         "purpose": "existing-snippet-inventory"
       },
       {
-        "id": "2ebd0658-c315-4e90-a532-0960b6e61acd",
-        "name": "chainlit styling",
-        "position": "HEAD",
-        "pageScope": {
-          "type": "all"
-        },
-        "category": "ESSENTIAL",
-        "loadOnce": true,
-        "enabled": true,
-        "purpose": "existing-snippet-inventory"
-      },
-      {
         "id": "fc54303b-b84e-4af4-b8b0-8d41355cc04f",
         "name": "Rental page FAQ and news styles",
         "position": "HEAD",
@@ -68,23 +56,8 @@
         "purpose": "existing-snippet-inventory"
       },
       {
-        "id": "febc8d2e-95d7-4349-b942-62034b9697aa",
-        "name": "Puerto Morelos — early hero registration pilot",
-        "position": "HEAD",
-        "pageScope": {
-          "type": "pages",
-          "pageIds": [
-            "e61h9"
-          ]
-        },
-        "category": "ESSENTIAL",
-        "loadOnce": false,
-        "enabled": false,
-        "purpose": "existing-snippet-inventory"
-      },
-      {
         "id": "6245ffcb-4cc7-4ca4-ae87-136c974eb381",
-        "name": "Susi — early custom element registration",
+        "name": "Susi — Early registration controller (every page)",
         "position": "HEAD",
         "pageScope": {
           "type": "all"
@@ -96,18 +69,18 @@
       },
       {
         "id": "f1609014-c6c1-4eaa-804e-d28c87713dd1",
-        "name": "Susi early packet — cities hero",
+        "name": "Susi early packet — City landing pages: hero",
         "position": "HEAD",
         "pageScope": {
           "type": "pages",
           "pageIds": [
+            "x6kem",
             "ch3wm",
             "cva3h",
-            "e61h9",
+            "xlqrv",
             "ejdrn",
-            "p20az",
-            "x6kem",
-            "xlqrv"
+            "e61h9",
+            "p20az"
           ]
         },
         "category": "ESSENTIAL",
@@ -117,18 +90,18 @@
       },
       {
         "id": "cf970d8b-e82e-41d5-a118-a9e0a7998d06",
-        "name": "Susi early packet — cities-listings",
+        "name": "Susi early packet — City landing pages: listings",
         "position": "HEAD",
         "pageScope": {
           "type": "pages",
           "pageIds": [
+            "x6kem",
             "ch3wm",
             "cva3h",
-            "e61h9",
+            "xlqrv",
             "ejdrn",
-            "p20az",
-            "x6kem",
-            "xlqrv"
+            "e61h9",
+            "p20az"
           ]
         },
         "category": "ESSENTIAL",
@@ -138,18 +111,18 @@
       },
       {
         "id": "4358a4f4-b8a6-424e-b35f-42f11f0b54b7",
-        "name": "Susi early packet — cities-guide",
+        "name": "Susi early packet — City landing pages: city guide",
         "position": "HEAD",
         "pageScope": {
           "type": "pages",
           "pageIds": [
+            "x6kem",
             "ch3wm",
             "cva3h",
-            "e61h9",
+            "xlqrv",
             "ejdrn",
-            "p20az",
-            "x6kem",
-            "xlqrv"
+            "e61h9",
+            "p20az"
           ]
         },
         "category": "ESSENTIAL",
@@ -159,7 +132,7 @@
       },
       {
         "id": "67d39dc3-f840-4ee0-b897-94efaf0064fd",
-        "name": "Susi early packet — playa",
+        "name": "Susi early packet — Playa / Cozumel / Bacalar pages",
         "position": "HEAD",
         "pageScope": {
           "type": "all"
@@ -171,17 +144,17 @@
       },
       {
         "id": "7acc2d1d-cb80-4086-8d6e-5e767f6002ef",
-        "name": "Susi early packet — units",
+        "name": "Susi early packet — Riviera Maya unit-type sale pages",
         "position": "HEAD",
         "pageScope": {
           "type": "pages",
           "pageIds": [
-            "d4oad",
+            "m83ag",
+            "hytmz",
+            "sxnkz",
             "f2k5h",
             "hlceo",
-            "hytmz",
-            "m83ag",
-            "sxnkz"
+            "d4oad"
           ]
         },
         "category": "ESSENTIAL",
@@ -191,7 +164,7 @@
       },
       {
         "id": "87186364-afc7-4103-8428-f783be13e7c8",
-        "name": "Susi early packet — home",
+        "name": "Susi early packet — Homepage: hero + featured listings",
         "position": "HEAD",
         "pageScope": {
           "type": "pages",
@@ -206,7 +179,7 @@
       },
       {
         "id": "9410c467-b293-48f9-8bff-9e888063c9bf",
-        "name": "Susi early packet — rentals",
+        "name": "Susi early packet — Rentals: listings page",
         "position": "HEAD",
         "pageScope": {
           "type": "pages",
@@ -220,20 +193,8 @@
         "purpose": "existing-snippet-inventory"
       },
       {
-        "id": "3f87ecac-b108-48b6-90f2-2fee2cf1203a",
-        "name": "Susi early packet — Rentals: CTA + FAQ",
-        "position": "HEAD",
-        "pageScope": {
-          "type": "all"
-        },
-        "category": "ESSENTIAL",
-        "loadOnce": true,
-        "enabled": true,
-        "purpose": "Rentals CTA + FAQ early packet"
-      },
-      {
         "id": "0a8830a0-e744-4255-9893-d32aded70d6b",
-        "name": "Susi early packet — listing-detail",
+        "name": "Susi early packet — Listing detail: template",
         "position": "HEAD",
         "pageScope": {
           "type": "all"
@@ -245,7 +206,7 @@
       },
       {
         "id": "1800cbdf-3de2-4f4a-ac65-373af7a951bf",
-        "name": "Susi — critical image discovery",
+        "name": "Susi — Critical image preload",
         "position": "HEAD",
         "pageScope": {
           "type": "all"
@@ -257,7 +218,7 @@
       },
       {
         "id": "5b7edf14-687f-4961-a909-37ff76defa35",
-        "name": "Susi — initial document early bootstrap",
+        "name": "Susi — Early registration bootstrap (initial load)",
         "position": "HEAD",
         "pageScope": {
           "type": "all"
@@ -269,13 +230,157 @@
       },
       {
         "id": "12c380f0-709c-4085-bd24-2eb93d170946",
-        "name": "Susi early packet — unit type hub",
+        "name": "Susi early packet — Unit Types hub",
         "position": "HEAD",
         "pageScope": {
           "type": "pages",
           "pageIds": [
             "t198b"
           ]
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "enabled": true,
+        "purpose": "existing-snippet-inventory"
+      },
+      {
+        "id": "b307fcfb-399a-4730-869b-a32ceaa80664",
+        "name": "Susi early packet — Listing detail: related cards",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": true,
+        "enabled": true,
+        "purpose": "existing-snippet-inventory"
+      },
+      {
+        "id": "2c1820f9-05eb-42ef-927e-1d1e621fb0e6",
+        "name": "Susi early packet — Playa translation continuation",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": true,
+        "enabled": true,
+        "purpose": "existing-snippet-inventory"
+      },
+      {
+        "id": "ab7c0067-e425-44e6-8c5f-6416cbd4d3e3",
+        "name": "Susi — disabled overlay (unused)",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": true,
+        "enabled": true,
+        "purpose": "existing-snippet-inventory"
+      },
+      {
+        "id": "b581fdf2-1f9b-4d70-a41f-6958dfc11d62",
+        "name": "Susi — disabled overlay 2 (unused)",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": true,
+        "enabled": true,
+        "purpose": "existing-snippet-inventory"
+      },
+      {
+        "id": "ce3250fd-9fec-4715-a403-73d93d986baa",
+        "name": "Susi — disabled overlay 3 (unused)",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": true,
+        "enabled": true,
+        "purpose": "existing-snippet-inventory"
+      },
+      {
+        "id": "2e0efc9e-a9e7-4350-8a5f-397a69520533",
+        "name": "Susi — disabled overlay 4 (unused)",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": true,
+        "enabled": true,
+        "purpose": "existing-snippet-inventory"
+      },
+      {
+        "id": "11fe7ffd-c880-4244-9dc2-912e13f5acda",
+        "name": "Susi early packet — Homepage: About + Testimonials",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": true,
+        "enabled": true,
+        "purpose": "existing-snippet-inventory"
+      },
+      {
+        "id": "3f87ecac-b108-48b6-90f2-2fee2cf1203a",
+        "name": "Susi early packet — Rentals: CTA + FAQ",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": true,
+        "enabled": true,
+        "purpose": "existing-snippet-inventory"
+      },
+      {
+        "id": "7b7e7073-9dc2-4643-bf81-1acf53642de9",
+        "name": "CrawlSEO early packet — city-condos-puerto — en",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "enabled": true,
+        "purpose": "existing-snippet-inventory"
+      },
+      {
+        "id": "63f6668b-46e6-4f76-bb11-f337848c8a07",
+        "name": "CrawlSEO early packet — city-condos-puerto — es",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "enabled": true,
+        "purpose": "existing-snippet-inventory"
+      },
+      {
+        "id": "a0e06f94-f4be-477d-af79-79d30fe9df9c",
+        "name": "CrawlSEO early packet — city-condos-puerto — en 2",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "enabled": true,
+        "purpose": "existing-snippet-inventory"
+      },
+      {
+        "id": "3d2415cf-6d8f-4989-8dfb-00ddda2c84fb",
+        "name": "CrawlSEO early packet — city-condos-puerto — es 2",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
         },
         "category": "ESSENTIAL",
         "loadOnce": false,
@@ -325,28 +430,16 @@
         "purpose": "existing-snippet-inventory"
       },
       {
-        "id": "b307fcfb-399a-4730-869b-a32ceaa80664",
-        "name": "Susi early packet — listing related",
-        "position": "HEAD",
+        "id": "a7d40ed1-882b-44d6-bee6-20e6d4651308",
+        "name": "CrawlSEO page mount — city-condos-puerto",
+        "position": "BODY_END",
         "pageScope": {
           "type": "all"
         },
         "category": "ESSENTIAL",
-        "loadOnce": true,
+        "loadOnce": false,
         "enabled": true,
-        "purpose": "Spanish listing-detail packet"
-      },
-      {
-        "id": "2c1820f9-05eb-42ef-927e-1d1e621fb0e6",
-        "name": "Susi early packet — playa translation continuation",
-        "position": "HEAD",
-        "pageScope": {
-          "type": "all"
-        },
-        "category": "ESSENTIAL",
-        "loadOnce": true,
-        "enabled": true,
-        "purpose": "Second half of route-guarded Playa packet when localized source exceeds the Wix embed limit"
+        "purpose": "existing-snippet-inventory"
       }
     ]
   }

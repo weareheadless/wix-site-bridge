@@ -277,8 +277,9 @@ export function currentSeoValue(item, type, name) {
 }
 
 /**
- * Static-page SEO settings use a Wix API key, not the app-instance token used
- * by Custom Embeds. The key needs Manage SEO Settings.
+ * Static-page SEO settings use a site-scoped token, not the app-instance token
+ * used by Custom Embeds: an API key with Manage SEO Settings, or the Wix CLI
+ * session's token for this site (the bridge resolves that fallback itself).
  */
 export class WixSeoClient {
   constructor({ siteId, apiKey, fetchImpl = fetch }) {
@@ -289,7 +290,7 @@ export class WixSeoClient {
 
   async request(url, init = {}) {
     if (!this.apiKey) {
-      throw new Error("SEO page settings require WIX_SEO_API_KEY: a Wix API key with Manage SEO Settings.");
+      throw new Error("SEO page settings require a site-scoped token: set WIX_SEO_API_KEY (Manage SEO Settings) or authenticate the Wix CLI for this site.");
     }
     let response;
     try {

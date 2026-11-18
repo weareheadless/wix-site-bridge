@@ -19,14 +19,16 @@ credentials: `WIX_APP_ID`, `WIX_APP_SECRET`, `WIX_APP_INSTANCE_ID`, and
 `WIX_ALLOWED_SITE_IDS`. Never print their values, commit them, or substitute
 another customer's credentials.
 
-Static-page title and meta description use a separate Wix API key with
-`Manage SEO Settings` (`SCOPE.PROMOTE.MANAGE-SEO`), stored as
-`WIX_SEO_API_KEY`. The installed-app token is accepted by Custom Embeds but
-returns HTTP 403 on the Item SEO Tags API. The same key publishes the site, and
-Custom Embed writes only reach the live page after a publish: write the embeds,
-publish, then set the SEO tags, then verify both on the live page. The key lives
-in the site's private `.wix-bridge-state/app.env`, never in a manifest or source
-file. The verified local Mac source for the app ID
+Static-page title and meta description, and site publishing, need a site-scoped
+token rather than the app-instance token. Use `WIX_SEO_API_KEY` when a site has
+one (`Manage SEO Settings`, `SCOPE.PROMOTE.MANAGE-SEO`). When it does not, the
+bridge resolves the Wix CLI session's own token for that exact `siteId`
+(`wix token -s <siteId>`), which is site-scoped and is not a borrowed
+credential. The installed-app token is accepted by Custom Embeds but returns
+HTTP 403 on the Item SEO Tags API. Custom Embed writes only reach the live page
+after a publish, so the delivery order is: write the embeds, `publish-site`,
+`seo-tags`, then verify the rendered page. An explicit key lives in the site's
+private `.wix-bridge-state/app.env`, never in a manifest or source file. The verified local Mac source for the app ID
 and secret is `/private/tmp/wix-app-setup-clean/atelier-embed-bridge/.env.local`
 (`WIX_CLIENT_ID` maps to `WIX_APP_ID`; `WIX_CLIENT_SECRET` maps to
 WIX_APP_SECRET is mapped from WIX_CLIENT_SECRET. The box copy is /ATELIER/.wix-bridge.env with mode 600; source it without printing values, map the two WIX_CLIENT names, and keep it outside Git.
@@ -112,7 +114,9 @@ source. Read `docs/PAGE_DELIVERY.md` before touching one.
 - Agents build and push component source, Velo bindings and synchronized global startup packets. Give the human precise file names, tag names, element IDs and sizing instructions when placement is required.
 - Do not publish using a stale local UI snapshot after the human edits layout. The human's saved Editor layout is authoritative; synchronize it through a supported workflow before any CLI publish, or ask the human to publish from the Editor after release readiness is confirmed.
 
-## ABSOLUTE PUBLISH RULE
+## Publishing
 
-- Agents must never run `wix publish` or publish the site through the CLI/API. CLI publish publishes the Editor's current language/UI state and has repeatedly reverted the Spanish site to English. Only the human publishes from the Wix Editor, after switching to the Spanish language and saving that language. Agents may push code, components and early packets; they may not publish.
+- Publish a delivery with `publish-site --apply`: `POST /site-publisher/v1/site/publish` publishes the site's **saved** revision, which is the intended one. This is an agent step and the normal last step of a page delivery.
+- Never run `wix publish`. It publishes the local UI snapshot from the connected repository and has repeatedly reverted the saved Spanish state to English. `publish-site` never sends a local snapshot, so the two are not interchangeable.
+- A publish restores page settings from the saved revision. `publish-site` reads each page's own title and description first, publishes, then writes those tags back. Do not replace that with a manual editor publish.
 

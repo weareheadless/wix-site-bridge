@@ -27,6 +27,25 @@ function clientFor(site, env) {
   return new WixCustomEmbedsClient({ siteId: site.siteId, tokenProvider: WixAppTokenProvider.fromEnv(env) });
 }
 
+/**
+ * Static-page SEO and site publishing use a site-scoped token, not the
+ * app-instance token that Custom Embeds use. Prefer an explicit API key; when
+ * the site has none, use the Wix CLI session's own token for this site. That
+ * token is generated on demand for the selected siteId, so it is never another
+ * site's credential and cannot publish a different site by mistake.
+ */
+function seoApiKey(site, env) {
+  const configured = String(env.WIX_SEO_API_KEY ?? env.WIX_API_KEY ?? "").trim();
+  if (configured) return configured;
+  const result = spawnSync(wixExecutable(), ["token", "-s", site.siteId], {
+    encoding: "utf8",
+    stdio: ["ignore", "pipe", "ignore"],
+    timeout: 60_000,
+  });
+  if (result.status !== 0) return "";
+  return String(result.stdout || "").split(/\r?\n/).map((line) => line.trim()).filter(Boolean).pop() ?? "";
+}
+
 function livePageScope(embed) {
   const pageIds = embed.pageFilter?.pageIds;
   return !pageIds?.length ? { type: "all" } : { type: "pages", pageIds: [...pageIds].sort() };
@@ -88,7 +107,7 @@ export async function runOperation(command, args, env = process.env, options = {
       target: { alias: site.alias, siteId: site.siteId, connectedRepo: site.connectedRepo, defaultBranch: site.defaultBranch },
       allowlisted: true,
       customEmbedsAuth: authConfigured ? "configured (not contacted)" : "missing Wix app credentials",
-      seoAuth: env.WIX_SEO_API_KEY || env.WIX_API_KEY ? "configured (not contacted)" : "missing WIX_SEO_API_KEY",
+      seoAuth: env.WIX_SEO_API_KEY || env.WIX_API_KEY ? "configured (site API key, not contacted)" : "wix-cli-session (site token on demand)",
       wixCli: cli.status === 0 ? `installed (${wixExecutable() === "wix" ? "PATH" : "workspace"})` : "not installed",
       sourceRepo: publish
         ? { branch: publish.branch, sourceCommit: publish.sourceCommit, uiConfigSha256: publish.uiConfigSha256 }
@@ -106,7 +125,7 @@ export async function runOperation(command, args, env = process.env, options = {
     if (title.length > 200) throw new Error("--title is longer than 200 characters.");
     if (description.length > 500) throw new Error("--description is longer than 500 characters.");
 
-    const seo = new WixSeoClient({ siteId: site.siteId, apiKey: env.WIX_SEO_API_KEY ?? env.WIX_API_KEY });
+    const seo = new WixSeoClient({ siteId: site.siteId, apiKey: seoApiKey(site, env) });
     const pages = await seo.listStaticPages();
     const item = pageItemForRoute(pages, route);
     if (!item) throw new Error(`No static page has canonical route ${route}. The page must exist and be published.`);
@@ -162,7 +181,7 @@ export async function runOperation(command, args, env = process.env, options = {
   }
 
   if (command === "publish-site") {
-    const seo = new WixSeoClient({ siteId: site.siteId, apiKey: env.WIX_SEO_API_KEY ?? env.WIX_API_KEY });
+    const seo = new WixSeoClient({ siteId: site.siteId, apiKey: seoApiKey(site, env) });
     const operationId = newId("publish-site");
     // A site publish restores page settings from its saved revision, and the
     // Item SEO Tags API writes live outside that revision. The page's own tags

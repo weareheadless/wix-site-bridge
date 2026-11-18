@@ -2,10 +2,11 @@
 
 - Selected customer alias: `susimacdonald`; verified Wix dashboard site ID `878460ca-c98c-402b-8a10-862023f67cce`, name SusiMacDonald. Always use `--site susimacdonald`, this manifest and this site's isolated state/credentials.
 - Our installed bridge app and documented APIs are the deployment path; the Wix plugin is not required. Never reuse Atelier's app installation, credentials, IDs, tags, source or release state.
-- Existing source: `/home/admin/susimacdonald-rentals` on the authorized VPS; GitHub `weareheadless/susimacdonald-rentals`. This is an existing source repository, not yet verified as Wix Git Integration's officially connected deployment repository.
-- Read its AGENTS.md, README.md, ARCHITECTURE.md, PROJECT_PLAN.md, `docs/GLOBAL_EARLY_REGISTRATION_2026-10-16.md` and current rollout ledger before changes. Preserve existing Wix navbar/footer, custom elements, CMS datasets/filters/sort and approved design. Public page data stays read-only. No parallel CMS store or queries.
+- Existing source of record: the **connected** `weareheadless/susimacdonald-wix` repository. The older `weareheadless/susimacdonald-rentals` repository is archive and reference only; it must not hold a second copy of a component or any packet. Read `DEPLOYMENT.md` in this folder before any page, packet or publish work — it is the runbook and it wins over older notes.
+- Read the rentals archive only for history: its AGENTS.md, README.md, ARCHITECTURE.md, PROJECT_PLAN.md and `docs/` ledger. Preserve existing Wix navbar/footer, custom elements, CMS datasets/filters/sort and approved design. Public page data stays read-only. No parallel CMS store or queries.
+- Human creates a missing blank Wix page. Everything after that — component, packets, mount, page title/description and the API publish — is the agent's job.
 - This request authorizes bridge connection only, not page redesign, publishing, data changes or replacing existing startup code. Inventory live embeds and map exact IDs/scopes before any later mutation. Both existing initial and navigation controllers must remain synchronized with their packets and normal source when a future source release is authorized.
-- Human handles Wix Editor placement, sizing, section cleanup and publication. Agents do not operate Editor UI or publish stale layout snapshots.
+- Human handles Wix Editor placement, sizing and section cleanup when a layout change is genuinely needed, and creates a missing page. Agents do not operate Editor UI and never publish a stale local layout snapshot; API publish of the saved revision is the agent's step (see Publishing below).
 - New app needs only `SCOPE.EDITOR.MANAGE_CUSTOM_EMBEDS` (plus Wix's forced basic app-instance access). The human explicitly approved creation, this scope, installation and the final Wix terms agreement; installation and own-app API access are now verified. Do not inherit Atelier translation scopes.
 
 ## Mexican Spanish
@@ -31,9 +32,18 @@
 - If a regression appears, restore the last known-good packet from its receipt first, then fix the canonical source. Never pile a new speculative fix on a broken live state.
 - Native Wix header/footer, menus, CMS card fields and listing-detail source are separate translation domains. Do not claim they are translated because embeds are translated, and do not use runtime overlays to fake them.
 
-## ABSOLUTE PUBLISH RULE
+## Publishing
 
-- Agents must never run `wix publish` or publish the site through the CLI/API. CLI publish publishes the Editor's current language/UI state and has repeatedly reverted the Spanish site to English. Only the human publishes from the Wix Editor, after switching to the Spanish language and saving that language. Agents may push code, components and early packets; they may not publish.
+- Publish a delivery with the bridge API: `publish-site ... --apply`, which calls
+  `POST /site-publisher/v1/site/publish` and publishes the site's **saved**
+  revision. This is a required, agent-run step, not a human handover.
+- **Never run `wix publish`.** That is the CLI publish of the local UI snapshot
+  from the connected repository and it has repeatedly replaced the saved Spanish
+  state with English. `publish-site` does not send a local snapshot, so the two
+  are not interchangeable.
+- A publish restores page settings from the saved revision. `publish-site` reads
+  every page's own title and description first, publishes, then writes those
+  tags back. Do not skip that and do not "fix" it with a manual editor publish.
 
 ## CMS and listing-data safety
 
@@ -75,3 +85,19 @@
 - Never use a partial `PUT` to adjust the result. Use the pipeline to repopulate, then only targeted translation-content or safe field updates for corrections.
 - This pipeline writes Wix listing content; it is not the site publisher. Do not run `wix publish` from the CLI.
 
+
+## Puerto Morelos condos page (page lane, no editor placement)
+
+`/puerto-morelos-condos-sale` and `/es/puerto-morelos-condos-sale` are delivered
+as one custom element, not from the controller's city list. Rebuilt 18 November
+2026 to replace the 2024 article and carry the O3 recommendation.
+
+- Tag `city-condos-puerto`. Source, build script and built packets are all in
+  the connected repo: `src/public/custom-elements/city-condos-puerto-v1.js`,
+  `scripts/build-early-packets-pages.mjs`, `packets/`.
+- Four HEAD chunks and one BODY_END mount, all `loadOnce=false`, all guarding
+  their own route. The unsuffixed `… — <locale>` entry is chunk 1 of 2.
+- The element sets `document.title` and the meta description for its locale.
+  The English settings are also written through `seo-tags`; the Spanish ones are
+  the editor's, so the rendered-document statement is the current fallback.
+- Follow `DEPLOYMENT.md` for rebuild, retry, publish, verification and rollback.

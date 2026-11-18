@@ -10,9 +10,13 @@ is the mechanics contract. The product loop lives in the CrawlSEO repository at
 
 | Artifact | Written by | Where |
 | --- | --- | --- |
-| component source | CrawlSEO | `<site-repo>/src/public/custom-elements/<tag>.js`, committed and pushed |
+| component source | CrawlSEO | `<connected-repo>/src/public/custom-elements/<tag>.js`, committed and pushed |
 | early packet | the bridge, `create-snippet` / `write-packet` | Custom Code, `HEAD`, `ESSENTIAL`, reload on every page, all pages |
 | page mount | the bridge, `create-snippet` / `write-packet` | Custom Code, `BODY_END`, `ESSENTIAL`, reload on every page, all pages |
+
+The connected repository named in the site manifest is the only source. An older
+repository may still hold history for that site, but it must not hold a second
+copy of a component or any packet: one element is edited and built in one place.
 
 Names are fixed and carry the tag, so a retry finds the entry it created:
 
@@ -74,19 +78,22 @@ an all-pages entry inert everywhere else.
 
 ## Who does what
 
-- **CrawlSEO** writes the component source, commits and pushes it, and calls the
-  bridge for both entries and, when the page configures them, its SEO title and
-  meta description.
+- **CrawlSEO** writes the component source in the connected repository, commits
+  and pushes it, and calls the bridge for every packet chunk, the mount, the
+  page's SEO title and description, and the publish.
 - **The bridge** creates the entries, rewrites them in place on retry, reads the
-  stored hash back, disables a replaced embed, and publishes the page's SEO tags
-  through the Item SEO Tags API.
-- **The human** creates one blank, published Wix page at the route. There is no
-  editor placement step: the mount adds the element to the page container.
-  Optionally, narrow each entry's page scope in the Wix Custom Code panel; the
-  API applies new entries to all pages and cannot change the filter.
+  stored hash back, disables a replaced embed, writes the page's SEO tags through
+  the Item SEO Tags API, and publishes the saved site revision through
+  `POST /site-publisher/v1/site/publish`.
+- **The human** creates one blank, published Wix page at the route if it does
+  not exist. There is no editor placement step: the mount adds the element to the
+  page container. Optionally, narrow each entry's page scope in the Wix Custom
+  Code panel; the API applies new entries to all pages and cannot change the
+  filter.
 
 Wix has no public API to create a site page, and the Custom Embed page filter is
-read-only. That is why the page and the scope are human steps.
+read-only. That is why the page and the scope are human steps. Everything else,
+including the publish, is automated.
 
 ## Page SEO title and meta description
 
@@ -100,9 +107,11 @@ content. The bridge sets them with the **Item SEO Tags API**:
    and description and keeps every other tag the page owns. `publish: true`
    updates the existing published revision; it never publishes the whole site.
 
-This is a separate credential from Custom Embeds: a Wix API key with
-`Manage SEO Settings` (`SCOPE.PROMOTE.MANAGE-SEO`), stored as `WIX_SEO_API_KEY`.
-The installed-app token used by Custom Embeds gets HTTP 403 on this API.
+This is a site-scoped credential, not the installed-app token (which returns
+HTTP 403 here). Use a Wix API key with `Manage SEO Settings`
+(`SCOPE.PROMOTE.MANAGE-SEO`) stored as `WIX_SEO_API_KEY`; when a site has none,
+the bridge generates the Wix CLI session's token for that exact `siteId`. The
+token is per site, so it cannot read or publish another site.
 
 The API reads and writes the site's **primary language only**: listing returns
 one item per page with the primary tags, and a write with a `language` is
@@ -118,17 +127,19 @@ reported in the delivery result; it does not hide a page that already rendered.
 
 Custom Embed writes are **drafts**. The live page keeps serving the last
 published revision until the site is published, and publishing also restores
-page settings from the saved revision — so a page title or description written
-before the publish can be rolled back by it. Publish first, then set the SEO
-tags, then verify both on the live page.
+page settings from the saved revision. The normal order is therefore: write the
+embeds, `publish-site`, then `seo-tags`, then verify. Tags set before a publish
+are not lost either: `publish-site` reads them first, publishes, then writes
+them back.
 
 `publish-site` calls `POST /site-publisher/v1/site/publish` with the same
-`WIX_SEO_API_KEY`. It is dry-run by default and applies with `--apply`. The call
+site-scoped token. It is dry-run by default and applies with `--apply`. The call
 publishes the site's saved revision, not one page: use it only for a site whose
-published revision is the intended one.
+published revision is the intended one. It is not `wix publish`, which pushes
+the local UI snapshot.
 
 A publish restores page settings from that saved revision, so tags written
-through the Item SEO Tags API (which live outside the revision) are lost with
+through the Item SEO Tags API (which live outside the revision) can be lost with
 it. `publish-site` therefore reads every page that owns its title or
 description first, publishes, then writes each page's own tags back and
 reports how many it restored. Skipping that step is what stripped the agenda
