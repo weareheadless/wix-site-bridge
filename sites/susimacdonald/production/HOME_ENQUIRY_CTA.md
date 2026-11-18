@@ -28,9 +28,9 @@ home elements already use.
 | --- | --- |
 | tag | `home-enquiry-v1` |
 | source | `susimacdonald-wix/src/public/custom-elements/home-enquiry-v1.js` |
-| Wix element id (human sets) | `homeEnquiry` |
+| Wix element id | `homeEnquiry` once set in the editor; currently the default `comp-mwmm10oi`, which the page code also binds |
 | packet | `Susi early packet — Homepage: About + Testimonials` (`11fe7ffd-…`), homepage-scoped (`h4hzq`), already carried by the shared controller's `/` keys |
-| page code | `src/pages/Home.h4hzq.js` |
+| page code | `src/pages/Home.h4hzq.js` — binds `#homeEnquiry`, else the default `#comp-mwmm10oi` |
 | opens | `#section1` → `#form22`, Tailored List form `456726ce-f0ed-4172-82b0-2b43b9883e4a` |
 
 There is no page-scoped packet for `/`: `create-snippet` needs a non-root route,
@@ -60,9 +60,13 @@ transition. Delete it with the embed.
 1. In the homepage enquiry section, replace the `#html3` HTML embed with
    **Add Elements → Embed → Popular Embeds → Custom Element**, tag name
    `home-enquiry-v1`.
-2. Set the element id to `homeEnquiry`, and size the element and its section for
-   desktop and mobile (the element is 332 px tall at 1440 px wide).
+2. Set the element id to `homeEnquiry` (until then the page code binds the
+   default id `comp-mwmm10oi`), and size the element and its section for desktop
+   and mobile (the element is 332 px tall at 1440 px wide).
 3. Delete the `#html3` embed and the transition branch in `Home.h4hzq.js`.
+4. Publish in the editor. Page code from the connected repo does not reach the
+   live site on `git push` or on the bridge's `publish-site`: the editor's
+   publish is what deploys it. A code fix that "did nothing" is usually this.
 
 After placement, verify: one `<home-enquiry-v1>` in the served HTML inside
 `#SITE_PAGES`, the section at least as tall as the element, the button expanding

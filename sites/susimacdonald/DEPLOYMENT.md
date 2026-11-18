@@ -32,6 +32,11 @@ A page delivery is four things, and one of them is a human step:
    Wix's loader runs. It registers and preloads; nothing else.
 4. **Page code** — `src/pages/<Page Name>.<pageId>.js`, binding the Wix element
    id and relaying `section-resize` so the wrapper keeps the element's height.
+   Page code reaches the live site on the **editor's** publish, not on
+   `git push` and not on the bridge's `publish-site`: the live bundle is built
+   from the editor's code state. When a page-code fix "does nothing", fetch
+   `"<pageId>":"https://bundler-velo…/pages/<pageId>.js/…"` from the served
+   HTML and grep the bundle for the change before debugging anything else.
 
 There is no mount. A BODY_END mount has to move the element out of its editor
 section to survive hydration, so it defeats the saved geometry, rebuilds the
