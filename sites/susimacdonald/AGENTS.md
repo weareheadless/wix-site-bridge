@@ -50,6 +50,8 @@ Symptoms of the wrong delivery, so they are recognised early:
 | element placed but no metric moved | the retired mount is still live and relocating it |
 | 2 MB of images | 560 px files in 134 px slots, or a PNG served as PNG |
 | LCP 6 s with a 3 s FCP | the hero is a CSS background, or the element is not in the parsed HTML |
+| `customElements.get(tag)` is true but the live page still runs the old release | only one of the two shared-controller entries was written; both carry the same source and the later one wins (see `DEPLOYMENT.md`) |
+| an element is registered but never appears | it is not placed in the page; registration does not create DOM |
 
 ## Mexican Spanish
 

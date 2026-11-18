@@ -123,6 +123,25 @@ and publishes the revision it started from; a write that lands while it is
 rolling out can be overwritten by its snapshot. That is what made the page flip
 between the new page and an older, unstyled packet.
 
+### The shared controller has two entries — write both or neither
+
+The homepage is the one route with no page-scoped packet: `create-snippet` needs
+a non-root `--route`, so the home elements are registered by the site-wide
+controller. That controller is installed twice, on purpose:
+
+| Entry | id | load once |
+| --- | --- | --- |
+| `Susi — Early registration controller (every page)` | `6245ffcb-4cc7-4ca4-ae87-136c974eb381` | false |
+| `Susi — Early registration bootstrap (initial load)` | `5b7edf14-687f-4961-a909-37ff76defa35` | true |
+
+Both are HEAD and all-pages, and both carry the *same* source. The second one
+runs later in the head, so writing only the first publishes a new release string
+and a new route key that the second one immediately overwrites: the page keeps
+the old registry, the new element is never registered, and `data-<tag>` on
+`meta[name=susi-early-elements]` stays absent. A CTA "registered but never
+defined" is this, not a bad packet. Update both with
+`update-snippet --preserve-scope`, then publish once.
+
 ### The four entries
 
 The page is one artifact kind plus the editor element:

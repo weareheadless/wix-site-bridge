@@ -320,12 +320,16 @@
         "name": "Susi early packet — Homepage: About + Testimonials",
         "position": "HEAD",
         "pageScope": {
-          "type": "all"
+          "type": "pages",
+          "pageIds": [
+            "h4hzq"
+          ]
         },
         "category": "ESSENTIAL",
-        "loadOnce": true,
+        "loadOnce": false,
         "enabled": true,
-        "purpose": "existing-snippet-inventory"
+        "purpose": "existing-snippet-inventory",
+        "note": "Carries the homepage lower elements: home-about-v1, home-reviews-v1 and home-enquiry-v1 (the enquiry CTA that opens the Tailored List form #form22)."
       },
       {
         "id": "3f87ecac-b108-48b6-90f2-2fee2cf1203a",
