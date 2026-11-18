@@ -11,9 +11,9 @@
 
 ## Building a page: the sequence
 
-Read this before writing code for a new page. Steps 1-2 are human steps and are
-not optional; the page is measured against its siblings, and an unplaced
-element cannot pass.
+Read this before writing code for a new page. Step 1 is a human step and is not
+optional: the page is measured against its siblings, and an element that is not
+placed and sized cannot pass no matter what the code does.
 
 1. **Placement (human).** A published Wix page at the route, with the custom
    element on it and the element **and its section** sized for desktop and
