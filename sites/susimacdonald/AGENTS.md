@@ -76,7 +76,7 @@ Symptoms of the wrong delivery, so they are recognised early:
 
 ## Publishing
 
-- Publish a delivery with the bridge API, **after** the five Custom Code writes:
+- Publish a delivery with the bridge API, **after** the packet writes and the mount disable:
   `publish-site ... --apply`, which calls
   `POST /site-publisher/v1/site/publish` and publishes the site's **saved**
   revision. This is a required, agent-run step, not a human handover.
