@@ -1,7 +1,7 @@
 {
   "siteAlias": "susimacdonald",
   "siteId": "878460ca-c98c-402b-8a10-862023f67cce",
-  "readAt": "2026-11-18T15:42:28.623Z",
+  "readAt": "2026-11-18T16:58:03.838Z",
   "snippets": [
     {
       "id": "b7e6eda4-b81e-4aeb-9556-dd0269aeb8c4",
@@ -365,8 +365,8 @@
       "category": "ESSENTIAL",
       "loadOnce": false,
       "enabled": true,
-      "revision": "2",
-      "sha256": "79bb2c75d1251cf40d506645d8190b5f49b3a9b93d6e82cdee36bafb4c12c850"
+      "revision": "7",
+      "sha256": "6b4cdf7e26b4a3eeed9d176ee185bd05d3c4ed06fea448720a44c3d7f1f3a633"
     },
     {
       "id": "63f6668b-46e6-4f76-bb11-f337848c8a07",
@@ -378,8 +378,8 @@
       "category": "ESSENTIAL",
       "loadOnce": false,
       "enabled": true,
-      "revision": "2",
-      "sha256": "ed05e22430b1e32ac27c4ee42c7811452fd655a5631960b8e480ff3f17fcdd72"
+      "revision": "7",
+      "sha256": "ac365d9ca1e6b420d8c80186a75cb3d598794b8b62d57735321916268ab16a54"
     },
     {
       "id": "a0e06f94-f4be-477d-af79-79d30fe9df9c",
@@ -391,8 +391,8 @@
       "category": "ESSENTIAL",
       "loadOnce": false,
       "enabled": true,
-      "revision": "1",
-      "sha256": "2965655f74457a96156ff8eb19f901dcbf8ddd3b5c9e0b912cb6d065b41e157a"
+      "revision": "6",
+      "sha256": "e275a9125196fd971776e1ae8e1daadc9ed2fe473c288ff7fbce2da22f94deec"
     },
     {
       "id": "3d2415cf-6d8f-4989-8dfb-00ddda2c84fb",
@@ -404,8 +404,8 @@
       "category": "ESSENTIAL",
       "loadOnce": false,
       "enabled": true,
-      "revision": "1",
-      "sha256": "b49b30871170780a8dc92e7bb28d0d9380de3a6b531c7ed32b1f5fc454a2b570"
+      "revision": "6",
+      "sha256": "95b8e0ae8fe70262283e602e26b0b8c4185b153ce3221e20e062d80b1dc10313"
     },
     {
       "id": "e1f6e9f7-37eb-4a0e-952e-8608666b5168",
@@ -457,13 +457,16 @@
       "name": "CrawlSEO page mount — city-condos-puerto",
       "position": "BODY_END",
       "pageScope": {
-        "type": "all"
+        "type": "pages",
+        "pageIds": [
+          "qu5lr"
+        ]
       },
       "category": "ESSENTIAL",
       "loadOnce": false,
       "enabled": true,
-      "revision": "1",
-      "sha256": "538c98326e2694ecabb7717ec5de171c2a0f71df8978b365f7077963a755499e"
+      "revision": "4",
+      "sha256": "4786c274eb3a28a978594c06466ab8105e8b7c620fb6469ab19a654a125f19f1"
     }
   ]
 }

@@ -434,7 +434,10 @@
         "name": "CrawlSEO page mount — city-condos-puerto",
         "position": "BODY_END",
         "pageScope": {
-          "type": "all"
+          "type": "pages",
+          "pageIds": [
+            "qu5lr"
+          ]
         },
         "category": "ESSENTIAL",
         "loadOnce": false,
