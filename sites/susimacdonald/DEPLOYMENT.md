@@ -44,6 +44,11 @@ ESBUILD_BIN=/SEO/node_modules/esbuild/bin/esbuild \
 
 Output goes to `packets/`. The script:
 
+- serves resize-appropriate images: Wix transcodes by the requested **file
+  name**, so `.../fill/w_420,h_525,al_c,q_75/FACHADA%205.jpg` returns a 46 KB
+  JPEG from an uploaded PNG that would otherwise be 801 KB at `w_560`. Any
+  element that takes images from Wix Media must ask for `.jpg` and carry
+  `srcset`/`sizes`; a 560 px card image in a 134 px slot is 10x the bytes;
 - compiles one bundle per locale (`--define:__CC_LOCALE__`), so a page does not
   ship the other language's copy. The component must start with
   `/* global __CC_LOCALE__ */`: esbuild substitutes the define, but Wix's own
