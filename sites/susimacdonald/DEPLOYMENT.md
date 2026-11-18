@@ -45,7 +45,9 @@ ESBUILD_BIN=/SEO/node_modules/esbuild/bin/esbuild \
 Output goes to `packets/`. The script:
 
 - compiles one bundle per locale (`--define:__CC_LOCALE__`), so a page does not
-  ship the other language's copy;
+  ship the other language's copy. The component must start with
+  `/* global __CC_LOCALE__ */`: esbuild substitutes the define, but Wix's own
+  build lints the source without it and fails `no-undef` otherwise;
 - gzips and base64s the bundle;
 - splits it into 12,400-character chunks. The bridge accepts up to 13,500 and
   refuses 15,000, so leave headroom;
