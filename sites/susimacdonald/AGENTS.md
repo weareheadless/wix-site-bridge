@@ -99,9 +99,16 @@
 as one custom element, not from the controller's city list. Rebuilt 18 November
 2026 to replace the 2024 article and carry the O3 recommendation.
 
-- Tag `city-condos-puerto`. Source, build script and built packets are all in
-  the connected repo: `src/public/custom-elements/city-condos-puerto-v1.js`,
-  `scripts/build-early-packets-pages.mjs`, `packets/`.
+- Tag `city-condos-puerto`. Source, build script, deploy script and built
+  packets are all in the connected repo:
+  `src/public/custom-elements/city-condos-puerto-v1.js`,
+  `scripts/build-early-packets-pages.mjs`,
+  `scripts/deploy-city-condos-puerto.mjs`, `packets/`.
+- The HEAD packet hides the old page and paints the real hero as a placeholder
+  from the first frame. The BODY_END embed mounts the element as a **sibling**
+  of `#PAGES_CONTAINER`, not a child: Wix hydration replaces that container's
+  children after first paint, which is what made the element appear twice and
+  the old page flash back. A sibling survives hydration.
 - Four HEAD chunks and one BODY_END mount, all `loadOnce=false`, all guarding
   their own route. The unsuffixed `… — <locale>` entry is chunk 1 of 2.
 - The element sets `document.title` and the meta description for its locale.

@@ -80,8 +80,12 @@ between the new page and an older, unstyled packet.
 
 The page is two artifact kinds, not one:
 
-- two HEAD early packets per locale, which register `<tag>` before Wix's loader;
-- one BODY_END page embed, which mounts it.
+- two HEAD early packets per locale, which register `<tag>` before Wix's loader
+  and paint the hero placeholder while the element is being defined;
+- one BODY_END page embed, which mounts the element as a sibling of
+  `#PAGES_CONTAINER`. It must not be a child of that container: Wix hydration
+  replaces the container's children, which re-creates the element and makes the
+  page visibly reload.
 
 Credentials are this site's own app credentials. Never use Atelier's.
 
