@@ -27,30 +27,66 @@ paste, a publish or a measurement.
 
 ## 1. Copy
 
-One JSON per page in `src/page-content/<tag>.json`: `hero`, `buildings`,
-`tags`, and the `en` / `es` copy objects. The element is the Puerto Morelos
-condo template with its copy and listings swapped, so the JSON is the only
-difference between city pages. Nothing else about a page is improvised.
+One JSON per page in `src/page-content/<tag>.json`: `route`, `hero`, `source`
+(the city and kind the page lists), `tags`, and the `en` / `es` copy objects.
+Every page is the same layout from `src/templates/city-type-page.js`, so the
+JSON is the only difference between city pages. It never carries a property
+list or a count.
 
-## 2. Build
+Numbers in the copy are tokens, not literals: `{n}` listings, `{min}`–`{max}`
+price range, `{beds}` bedroom range. They are filled from the rows the page
+receives, so the copy cannot drift from the CMS. Nothing else about a page is
+improvised.
+
+## 2. Listings
+
+No page carries a property list. `src/public/city-listings.js` queries the
+site's `Recipes` collection for the page's city and kind, keeps sales only and
+maps each row to the card shape. Sales only means: no rental (a `type` saying
+rent/renta, a monthly price, or a rental route), and a price at or above USD
+20,000. The price is the one the listing quotes (`price`, the "from" figure);
+`priceRange` is a bucket and only a fallback.
+
+Both checks read the row, not one field, because `/es` returns translated
+content: `type` is "Renta" there, and `priceRange` can be empty while `price`
+is still the same number. Filtering on the English word alone let two Playa
+rentals onto the Spanish page, which is why the check also looks at the monthly
+price and the route. The page code for the page (`src/pages/<page>.js`)
+runs it on ready and sets the element's `buildings` attribute; the element
+renders the cards, the full table and the token numbers from whatever it
+receives, and re-renders when the attribute changes.
+
+A new development in the CMS therefore appears on the page without a rebuild or
+a deploy. A page is rebuilt only when its layout or copy changes.
+
+Do not add a build-time list or a fixed count to a JSON, an element or a
+packet: that is the bug this replaced (a page offering 14 buildings out of the
+full CMS set). Do not move the feed to an HTTP endpoint either: `/_functions/*`
+answers 500 `MODULE_LOAD_ERROR` on this site, so the repository has no endpoint
+file and the Velo page code is the only feed.
+
+## 3. Build
 
 ```sh
 cd /home/admin/susimacdonald-wix
 ESBUILD_BIN=/SEO/node_modules/esbuild/bin/esbuild node scripts/build-city-type-pages.mjs
 ```
 
-It writes, for every page in its registry:
+It reads `src/templates/city-type-page.js` and writes, for every page in the
+registry:
 
 - `src/public/custom-elements/<tag>-v1.js` — light DOM so the copy stays in the
   document, bilingual in one source, `/* global __CC_LOCALE__ */` at the top;
 - `packets/<tag>-packet-<locale>-<n>.html` — per locale, gzip + base64, chunks
   under 13,500 characters, each guarded to its own route and carrying the hero
-  `<link rel=preload>`.
+  `<link rel=preload>`. The number of chunks is whatever the element fits in:
+  most pages take two per locale, the Puerto Morelos page takes three, and the
+  deploy reads the count from `packets/` instead of assuming.
 
 The packet defines the element first on the live page, so **rebuild the packets
 whenever the component changes**; a stale packet pins the old component.
 
-## 3. Deploy
+## 4. Deploy
 
 One command per page set: build, write every chunk (creating an entry by name
 when it does not exist, rewriting it in place when it does), `publish-site`,
@@ -85,7 +121,7 @@ Rules that are not negotiable:
 - `publish-site` restores each page's own title and description after
   publishing. Do not "fix" a missing title with a manual editor publish.
 
-## 4. The slot the element lives in
+## 5. The slot the element lives in
 
 Wix places the element in a slot (`#comp-…`, `display:flex`) whose height is the
 value saved in the editor, and as a flex item the element resolves
@@ -98,20 +134,23 @@ value saved in the editor, and as a flex item the element resolves
 
 Never resolve this from Velo page code. `$w('#comp-…').on('section-resize')`
 binds but never receives the element's `CustomEvent` on this site (live:
-`relay bound`, no `relay applies`, box unchanged), and page code only reaches
-production through the editor's code publish. Page code is optional; no layout
-depends on it.
+`relay bound`, no `relay applies`, box unchanged). Page code supplies the
+listing rows and nothing else; no layout depends on it.
 
-## 5. Verify (agent)
+## 6. Verify (agent)
 
 - Stored hash of every chunk matches the built file.
 - Served HTML: one `<tag>`, the hero preload, the packet for each locale, no
   mount script, no `cc-pm-` cover.
 - Rendered, fresh load, at 1440 and 390, EN and ES: one element, one `<h1>`, the
   footer directly after the content (no empty band), no horizontal overflow.
+- Listing counts: the element shows the current CMS count in the facts and the
+  copy (`{n}`, `{min}`–`{max}`, `{beds}`), in both locales, and the page log
+  reads `city-<tag>: N listings sent to #…`. A count lower than the CMS's own
+  filtered set means the page code did not receive the rows.
 - Performance gates below.
 
-## 6. Performance gates
+## 7. Performance gates
 
 | Gate | Target | How it fails |
 | --- | --- | --- |
@@ -136,7 +175,7 @@ Measure PSI mobile for the real numbers. Never use Lighthouse on this box for
 TBT or a score: the machine is shared and reports ~30x the real TBT (4,000 ms
 against PSI's 70 ms on the same page). Local runs are fine for bytes and CLS.
 
-## 7. Page title and meta description
+## 8. Page title and meta description
 
 `seo-tags --route <route> --title … --description … --apply` writes them through
 the Item SEO Tags API with a site-scoped token: `WIX_SEO_API_KEY` /
@@ -148,7 +187,7 @@ The API reads and writes the **primary language only**. A translated page's
 title and description are an editor setting, so `/es/…` keeps the editor's value
 and is verified in the rendered document instead.
 
-## 8. Retry, rollback, legacy
+## 9. Retry, rollback, legacy
 
 - A retry looks the entries up by their exact names and rewrites them; it never
   creates a second packet for the same chunk. `publish-site` and `publish` are
@@ -164,7 +203,7 @@ and is verified in the rendered document instead.
   source; updating only one leaves the page on the old registry. They are not
   part of a page delivery.
 
-## 9. Page registry
+## 10. Page registry
 
 Content is in `src/page-content/<tag>.json`; the element is
 `src/public/custom-elements/<tag>-v1.js`. The Wix element and section ids are

@@ -21,6 +21,19 @@ site. Nothing here changes how a page is built, deployed or published.
 
 ## Listings
 
+- The CMS is the only source of a page's property list. City pages read it at
+  runtime (`src/public/city-listings.js` plus the page code, which sets the
+  element's `buildings` attribute); never bake a list, a count or a price range
+  into a page JSON, a component or a packet.
+- City pages show sales only: no rental (type, monthly price or rental route)
+  and a price at or above USD 20,000. `/es` serves translated field values, so
+  `type` reads "Renta" there: filter on the row, never on the English word
+  alone.
+- Quote the price the listing states (`price`, the "from" figure), not
+  `priceRange`, which is a bucket ("$50,000 - 100,000 USD") and made every card
+  quote the bucket floor.
+- The HTTP endpoint lane is not available on this site (`/_functions/*` returns
+  500 `MODULE_LOAD_ERROR`), so there is no endpoint file in the repository.
 - Never update a Wix Data collection item with a partial `PUT`. Use `PATCH` with
   `fieldModifications`, or fetch the whole item, keep a private copy and send it
   back complete.
