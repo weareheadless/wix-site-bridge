@@ -177,8 +177,8 @@ deployed.
 | Playa houses | `city-houses-playa` | `/playa-del-carmen-house-sale` | `comp-mwn01eun` | `comp-mwmy60v7` |
 | Playa condos | `city-condos-playa` | `/playa-del-carmen-condos-sale` | `comp-mwmzxblg` | `comp-m2c1hp5f` |
 | Playa beachfront | `city-beachfront-playa` | `/playa-del-carmen-beachfront-sale` | `comp-mwmyntax` | `comp-mwmy7usw` |
-| Tulum condos | `city-condos-tulum` | `/tulum-condos-sale` | — | — |
-| Cozumel condos | `city-condos-cozumel` | `/cozumel-condos-sale` | — | — |
-| Bacalar condos | `city-condos-bacalar` | `/bacalar-condos-sale` | — | — |
-| Puerto Aventuras condos | `city-condos-puerto-aventuras` | `/puerto-aventuras-condos-sale` | — | — |
-| Akumal condos | `city-condos-akumal` | `/akumal-condos-sale` | — | — |
+| Tulum condos | `city-condos-tulum` | `/tulum-condos-sale` | `comp-mwnf0ol0` | `comp-mwnf019b` |
+| Cozumel condos | `city-condos-cozumel` | `/cozumel-condos-sale` | `comp-mwnf69x5` | `comp-mwnf4dku` |
+| Bacalar condos | `city-condos-bacalar` | `/bacalar-condos-sale` | `comp-mwnf9qo3` | `comp-mwnf936x` |
+| Puerto Aventuras condos | `city-condos-puerto-aventuras` | `/puerto-aventuras-condos-sale` | `comp-mwnfcogn` | `comp-mwnfc33x` |
+| Akumal condos | `city-condos-akumal` | `/akumal-condos-sale` | `comp-mwnfhp32` | `comp-mwnfgwqs` |
