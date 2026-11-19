@@ -221,3 +221,36 @@ deployed.
 | Bacalar condos | `city-condos-bacalar` | `/bacalar-condos-sale` | `comp-mwnf9qo3` | `comp-mwnf936x` |
 | Puerto Aventuras condos | `city-condos-puerto-aventuras` | `/puerto-aventuras-condos-sale` | `comp-mwnfcogn` | `comp-mwnfc33x` |
 | Akumal condos | `city-condos-akumal` | `/akumal-condos-sale` | `comp-mwnfhp32` | `comp-mwnfgwqs` |
+
+### The rentals page
+
+`/apartments-for-rent-in-playa-del-carmen` (page id `gkrfz`) is not a city-type
+page: its copy lives in the element, not in `src/page-content/`.
+
+- Element: `src/public/custom-elements/rental-experience-v2.js` — hero, the
+  listing collection, and the long-form guide (condo rentals, apartment
+  rentals, long-term rentals, what renting costs, the application and the
+  contract), English and Spanish in one source, light DOM.
+- Packet: `node scripts/build-rental-packet.mjs` writes
+  `packets/rental-experience-packet.html`. One Custom Code entry holds 15,000
+  characters and the script fails if the packet outgrows it, so copy is written
+  to fit the entry instead of opening a second one.
+- It is written in place: the entry's name has no `crawlseo` prefix, so
+  `write-packet` and `write-embed` refuse it.
+
+```sh
+node src/cli.mjs update-snippet \
+  --manifest ./sites/susimacdonald/site.manifest.json --site susimacdonald \
+  --snippet 9410c467-b293-48f9-8bff-9e888063c9bf \
+  --html-file /home/admin/susimacdonald-wix/packets/rental-experience-packet.html \
+  --preserve-scope --apply
+```
+
+Then `publish-site`, `seo-tags` for the route, and `publish`.
+
+Two things are specific to this page. The guide is mounted from the element's
+own `_mount` through `window.__rentalGuide`, not by wrapping
+`connectedCallback` afterwards: Wix's server-rendered element can upgrade before
+the packet has finished running, so a later patch never executes and the guide
+never appears. And the element sets its own Spanish title and description,
+because `seo-tags` writes the primary language only.
