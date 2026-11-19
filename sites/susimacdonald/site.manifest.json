@@ -460,6 +460,18 @@
         "enabled": false,
         "purpose": "retired-mount",
         "retired": "2026-11-18: the element is placed in the page at comp-mwmg963v; a BODY_END mount moves it out of section comp-mwmb8lz3, so it must stay disabled."
+      },
+      {
+        "id": "708b3853-d551-4c6c-ad64-1b73b08c04e1",
+        "name": "CrawlSEO early packet — Riviera Maya city hero",
+        "position": "HEAD",
+        "pageScope": {
+          "type": "all"
+        },
+        "category": "ESSENTIAL",
+        "loadOnce": false,
+        "enabled": false,
+        "purpose": "disabled: redundant, Velo defines the element first"
       }
     ]
   }
