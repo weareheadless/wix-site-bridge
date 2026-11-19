@@ -58,9 +58,14 @@ when it does not exist, rewriting it in place when it does), `publish-site`,
 documents.
 
 ```sh
-node scripts/deploy-city-type-pages.mjs                     # every page in the registry
-node scripts/deploy-city-type-pages.mjs --pages city-condos-tulum
+node scripts/deploy-city-type-pages.mjs                            # every page in the registry
+node scripts/deploy-city-type-pages.mjs --pages=city-condos-tulum  # one page
+node scripts/deploy-city-type-pages.mjs --pages=city-condos-tulum,city-condos-cozumel
 ```
+
+A page that is not placed yet fails the last check (`<tag>` absent from the
+served HTML) by design: build and commit it, deploy it once the element is on
+the page.
 
 It exits `0` only when the stored hashes match the built files and every live
 page decodes with its element, both packets, the preload and no mount. If a
