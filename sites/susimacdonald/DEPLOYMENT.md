@@ -156,17 +156,22 @@ entry is safe and why the shared controller is not touched for a single page.
 ## Deploy
 
 One command does the whole delivery in the only order that works — build, write
-the four packet entries, disable the retired mount, publish once, read the
-hashes back, and decode the live document:
+the packet entries, publish once, read the hashes back, and decode the live
+document:
 
 ```sh
 cd /home/admin/susimacdonald-wix
-node scripts/deploy-city-condos-puerto.mjs
+node scripts/deploy-city-condos-puerto.mjs   # Puerto Morelos condos
+node scripts/deploy-playa-type-pages.mjs     # Playa houses, condos, beachfront
 ```
 
-It exits `0` only when the stored hashes match the built files and the live page
+A page that has both components and page code also needs the repository publish,
+which `deploy-playa-type-pages.mjs` runs after `publish-site`; the Puerto Morelos
+script only writes Custom Code, because that page's element is unchanged.
+
+Both exit `0` only when the stored hashes match the built files and the live page
 decodes to the expected bundle. If a publish that was already in flight puts an
-older packet back, it rewrites the entries and publishes again, up to three
+older packet back, they rewrite the entries and publish again, up to three
 rounds.
 
 Do not run the publish and the writes in parallel. A site publish takes minutes

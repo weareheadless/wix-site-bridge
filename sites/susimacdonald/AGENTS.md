@@ -41,12 +41,14 @@ does.
    `CrawlSEO early packet — <tag> — <locale>[ <n>]`. They register the element
    and emit the hero `<link rel=preload>`, nothing else: no hiding
    `#SITE_PAGES`, no placeholder, no min-height, no mount.
-5. **Deploy (agent).** Build, commit and push the component and the rebuilt
-   packets, `create-snippet` / `write-packet` every chunk, read the stored hash
-   back, `publish-site --apply`, then `publish --site-repo` for the page code
-   when the page has any. Publish after the writes, never during. Rebuild the
-   packets whenever the component changes: the packet defines the element
-   first, so a stale packet pins the old component on the live page.
+5. **Deploy (agent).** `node scripts/deploy-playa-type-pages.mjs` for the Playa
+   type pages, `node scripts/deploy-city-condos-puerto.mjs` for Puerto Morelos:
+   they build, write every chunk, publish the site, publish the repository code
+   when the page has code, read the hashes back and decode the live document.
+   Commit and push the component and the rebuilt packets as part of the same
+   step. Publish after the writes, never during. Rebuild the packets whenever
+   the component changes: the packet defines the element first, so a stale
+   packet pins the old component on the live page.
 6. **Verify (agent).** Served HTML: one `<tag>`, the preload, no mount script,
    no `cc-pm-` style. Rendered: one element, parent inside `#SITE_PAGES`, no
    empty band between the last section and the footer, both locales, no

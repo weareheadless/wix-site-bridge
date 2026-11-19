@@ -54,9 +54,11 @@ symptom to look for.
 
 Rules that follow:
 
-- The element is placed in the page and its **section is sized per breakpoint**
-  before anything is measured. A saved height is the only thing that keeps the
-  footer still while the element upgrades.
+- The element is placed in the page and its section has a **saved height** before
+  anything is measured: that height holds the footer still while the element
+  upgrades. The element then sizes the slot to its content on connect, so the
+  saved height is a placeholder, not the final page length — a section left at
+  the saved height is the empty band above the footer described below.
 - The packet registers and preloads. It must not hide `#SITE_PAGES`, paint a
   placeholder, set a min-height or move anything: a page that is hidden and
   rebuilt after paint is a page with CLS.
