@@ -19,24 +19,52 @@ wrong-lane deliveries; one element has one home.
 
 ## The delivery
 
-A page delivery is four things, and one of them is a human step:
+A page delivery is three agent artifacts and one human step, and the split does
+not change from task to task:
 
 1. **Component** — `src/public/custom-elements/<tag>.js` in the connected repo,
    light DOM so the copy stays in the document, bilingual in one source when the
    page has a translated route.
-2. **Editor placement** — the custom element placed on the page, with the
-   element and its section sized for desktop and mobile. Human step; there is no
-   API. Record the Wix element id (e.g. `comp-mwmg963v`) and the Wix section id
-   (e.g. `comp-mwmb8lz3`).
-3. **Early packet** — `HEAD`, one entry per locale per chunk, registered before
-   Wix's loader runs. It registers and preloads; nothing else.
-4. **Page code** — `src/pages/<Page Name>.<pageId>.js`, binding the Wix element
-   id and relaying `section-resize` so the wrapper keeps the element's height.
-   Page code reaches the live site on the **editor's** publish, not on
-   `git push` and not on the bridge's `publish-site`: the live bundle is built
-   from the editor's code state. When a page-code fix "does nothing", fetch
-   `"<pageId>":"https://bundler-velo…/pages/<pageId>.js/…"` from the served
-   HTML and grep the bundle for the change before debugging anything else.
+2. **Early packets** — `HEAD`, one entry per locale per chunk, registered before
+   Wix's loader runs. It registers and preloads; nothing else. The agent creates
+   and writes these entries through the bridge (`create-snippet`, then
+   `write-packet` on retry). Creating, scoping or pasting a packet is never a
+   handover.
+3. **Deploy** — build, commit, push, write the packets, read the stored hashes
+   back, `publish-site --apply`, and `publish --site-repo` when the page also has
+   page code. The agent does this; the human never publishes for a page delivery.
+
+The one human step is **editor placement**: the custom element placed on the
+page with its tag name, and the Wix element id (e.g. `comp-mwmg963v`) and
+section id (e.g. `comp-mwmb8lz3`) recorded. The editor's saved height is a
+placeholder for the upgrade, not the final height: the element corrects it on
+connect (next section).
+
+**Page code** (`src/pages/<Page Name>.<pageId>.js`) is optional and must not be
+load-bearing. It only reaches the live site on the editor's code publish, not on
+`git push` and not on `publish-site`, so a layout fix that depends on it is a fix
+that may never arrive. When a page-code change "does nothing", fetch the page
+bundle from the served HTML and grep it for the change before debugging
+anything else.
+
+## The slot height the element corrects
+
+Wix puts the placed element in a slot (`#comp-…`, `display:flex`) whose height is
+the value saved in the editor. As a flex item the element resolves
+`min-height:auto` to that height, so its box stays at the editor height even with
+`height:auto`. That is what produced 500–640 px of empty page above the footer on
+the Playa type pages at 1440 px while mobile was exact.
+
+The element owns this, in its own source:
+
+1. `align-self:flex-start` and `height:auto` on the tag, so it sizes to content;
+2. `min-height:0 !important` inline on connect;
+3. the measured content height (last section's bottom − element's top) written to
+   the slot's inline `height`, re-applied from a `ResizeObserver`.
+
+Never resolve it from Velo page code: `$w('#comp-…').on('section-resize')` binds
+but never receives the element's `CustomEvent` on this site, verified live.
+
 
 There is no mount. A BODY_END mount has to move the element out of its editor
 section to survive hydration, so it defeats the saved geometry, rebuilds the
@@ -56,7 +84,25 @@ The page is measured against its siblings, not against a general ideal:
 | LCP | the element's own hero `<img>`, preloaded |
 | Images | no "Improve image delivery" opportunity on PSI |
 | Transfer | at or below a sibling page (~2.8 MB here; the Wix shell is most of it) |
+| Time to element | at or below the closest delivered sibling, measured the same way |
 | TBT | ~70 ms, set by the site and its tags, not by this page |
+
+Speed parity is a gate, not a research topic. Compare the time until the element
+is defined on the new page and on its sibling (unthrottled, three runs, medians):
+
+| Page | element defined | after its packets existed |
+| --- | --- | --- |
+| Playa houses | 3,169 ms | 2,222 ms |
+| Playa condos | 2,988 ms | 2,011 ms |
+| Playa beachfront | 3,257 ms | 2,130 ms |
+| Puerto Morelos condos (reference) | 1,799 ms | 1,933 ms |
+
+The 1.2 s gap was the missing HEAD packets: without them the element waits for
+Wix's code bundle. Two identical pages do not load differently because of the
+framework, so a slower sibling means a delivery difference — usually no packet,
+a packet only on one locale, or a packet whose route guard does not match. Copy
+the sibling's packet count, position, load-once setting and guards exactly.
+
 
 What produces each failure, from pages that already shipped:
 

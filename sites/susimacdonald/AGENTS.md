@@ -4,42 +4,63 @@
 - Our installed bridge app and documented APIs are the deployment path; the Wix plugin is not required. Never reuse Atelier's app installation, credentials, IDs, tags, source or release state.
 - Existing source of record: the **connected** `weareheadless/susimacdonald-wix` repository. The older `weareheadless/susimacdonald-rentals` repository is archive and reference only; it must not hold a second copy of a component or any packet. Read `DEPLOYMENT.md` in this folder before any page, packet or publish work — it is the runbook and it wins over older notes.
 - Read the rentals archive only for history: its AGENTS.md, README.md, ARCHITECTURE.md, PROJECT_PLAN.md and `docs/` ledger. Preserve existing Wix navbar/footer, custom elements, CMS datasets/filters/sort and approved design. Public page data stays read-only. No parallel CMS store or queries.
-- Human creates the Wix page and places/sizes the custom element on it. Everything after that — component, page code, packets, page title/description and the API publish — is the agent's job. There is no mount in a delivery.
+- **The split is fixed, and it is not a per-message decision.** The human: creates
+  the Wix page when it does not exist, places the Custom Element on it with the
+  tag name, and gives the agent the Wix element id (`comp-…`) and section id.
+  The agent: component source, its build, every Custom Code / Custom Embed entry
+  (packets), the page's SEO title and description, the git commit and push, the
+  deploy and the publish, the live verification, and the performance gates. A
+  task is never finished by asking the human to create an embed, paste packet
+  HTML, apply page code, run a publish or measure a page: those are agent steps
+  and the bridge performs them.
 - This request authorizes bridge connection only, not page redesign, publishing, data changes or replacing existing startup code. Inventory live embeds and map exact IDs/scopes before any later mutation. Both existing initial and navigation controllers must remain synchronized with their packets and normal source when a future source release is authorized.
 - Human handles Wix Editor placement, sizing and section cleanup when a layout change is genuinely needed, and creates a missing page. Agents do not operate Editor UI and never publish a stale local layout snapshot; API publish of the saved revision is the agent's step (see Publishing below).
 - New app needs only `SCOPE.EDITOR.MANAGE_CUSTOM_EMBEDS` (plus Wix's forced basic app-instance access). The human explicitly approved creation, this scope, installation and the final Wix terms agreement; installation and own-app API access are now verified. Do not inherit Atelier translation scopes.
 
 ## Building a page: the sequence
 
-Read this before writing code for a new page. Step 1 is a human step and is not
-optional: the page is measured against its siblings, and an element that is not
-placed and sized cannot pass no matter what the code does.
+Read this before writing code for a page. Steps 1 and 2 are the only human
+parts, and they are placement, not delivery: the page is measured against its
+siblings, and an element that is not placed cannot pass no matter what the code
+does.
 
-1. **Placement (human).** A published Wix page at the route, with the custom
-   element on it and the element **and its section** sized for desktop and
-   mobile. Ask for the Wix element id (`comp-…`) and section id; record them.
-   A page with no saved height shifts when the element renders.
-2. **Component (agent).** Light DOM, one source, bilingual in the same file,
+1. **Page and placement (human).** A published Wix page at the route, with the
+   Custom Element placed on it: Add Elements > Embed > Popular Embeds > Custom
+   Element, tag name = `<tag>`. Ask for and record the Wix element id (`comp-…`)
+   and the section id. The editor's saved height is only a placeholder: the
+   element corrects it on connect (see "The slot the element lives in").
+2. **What the human does not do.** No packet, no Custom Embed, no page code, no
+   publish, no measurement. If a step needs the Wix editor's code panel or a
+   Custom Code entry, it is the agent's step, done through the bridge.
+3. **Component (agent).** Light DOM, one source, bilingual in the same file,
    `/* global __CC_LOCALE__ */` at the top, images from Wix Media requested as
-   `.jpg` with `srcset`/`sizes` for the real slot.
-3. **Page code (agent).** Bind the recorded Wix element id and relay
-   `section-resize` to its height, as the other city pages do.
+   `.jpg` with `srcset`/`sizes` for the real slot. Copy the closest delivered
+   sibling page rather than designing a new structure.
 4. **Packets (agent).** One entry per locale per chunk, route-guarded,
-   load-once off, under 13,500 characters. They register the element and emit
-   the hero `<link rel=preload>`, nothing else: no hiding `#SITE_PAGES`, no
-   placeholder, no min-height, no mount.
-5. **Deploy (agent).** `susimacdonald-wix/scripts/deploy-city-condos-puerto.mjs`
-   is the model: write, disable any retired mount, publish, read hashes back,
-   decode the served bundle. Publish after the writes, never during.
+   load-once off, `HEAD`, under 13,500 characters, named
+   `CrawlSEO early packet — <tag> — <locale>[ <n>]`. They register the element
+   and emit the hero `<link rel=preload>`, nothing else: no hiding
+   `#SITE_PAGES`, no placeholder, no min-height, no mount.
+5. **Deploy (agent).** Build, commit and push the component and the rebuilt
+   packets, `create-snippet` / `write-packet` every chunk, read the stored hash
+   back, `publish-site --apply`, then `publish --site-repo` for the page code
+   when the page has any. Publish after the writes, never during. Rebuild the
+   packets whenever the component changes: the packet defines the element
+   first, so a stale packet pins the old component on the live page.
 6. **Verify (agent).** Served HTML: one `<tag>`, the preload, no mount script,
-   no `cc-pm-` style. Rendered: one element, parent inside `#SITE_PAGES`, the
-   section at least as tall as the element, footer below, both locales, no
+   no `cc-pm-` style. Rendered: one element, parent inside `#SITE_PAGES`, no
+   empty band between the last section and the footer, both locales, no
    overflow at 1440 and 390.
-7. **Performance gates (agent).** PageSpeed Insights mobile, three runs on the
-   same URL: CLS 0, LCP the element's own hero image, no "Improve image
-   delivery" opportunity, transfer no larger than a sibling page. Do not use
-   Lighthouse on this box for TBT or a score: the machine is shared and reports
-   ~30x the real TBT (4,000 ms against PSI's 70 ms on the same page).
+7. **Performance gates (agent).** A delivered page loads at the speed of its
+   closest delivered sibling, measured the same way. PageSpeed Insights mobile,
+   three runs on the same URL: CLS 0, LCP the element's own hero image, no
+   "Improve image delivery" opportunity, transfer no larger than a sibling page.
+   Do not use Lighthouse on this box for TBT or a score: the machine is shared
+   and reports ~30x the real TBT (4,000 ms against PSI's 70 ms on the same page).
+   When a page is slower than its sibling, the cause is a delivery difference,
+   not a mystery: compare the time until the element is defined on both pages.
+   A page whose element waits for Wix's loader is a page missing its packets;
+   the fix is to create them, never to investigate the framework.
 
 Symptoms of the wrong delivery, so they are recognised early:
 
@@ -52,6 +73,35 @@ Symptoms of the wrong delivery, so they are recognised early:
 | LCP 6 s with a 3 s FCP | the hero is a CSS background, or the element is not in the parsed HTML |
 | `customElements.get(tag)` is true but the live page still runs the old release | only one of the two shared-controller entries was written; both carry the same source and the later one wins (see `DEPLOYMENT.md`) |
 | an element is registered but never appears | it is not placed in the page; registration does not create DOM |
+| an empty band between the last section and the footer on desktop only | the element is stretched to the slot's editor height; see "The slot the element lives in" |
+
+## The slot the element lives in
+
+Wix does not give a placed custom element a wrapper it sizes freely. The element
+sits in a slot (`#comp-…`, `display:flex`) whose height is the value saved in the
+editor, and as a flex item the element resolves `min-height:auto` to that slot
+height. Two consequences, both seen live:
+
+- the element's own box stays at the editor height even with `height:auto`, so
+  measuring `offsetHeight` reports the empty band as content, and a section sized
+  from it can never shrink;
+- on desktop the section keeps that height and leaves 500–640 px of empty page
+  above the footer (mobile hid it, which is why it looked breakpoint-specific).
+
+The element fixes this itself, and that is the documented mechanism:
+
+1. `align-self:flex-start` and `height:auto` on the tag, so it sizes to content;
+2. `min-height:0 !important` set inline on connect, because the flex automatic
+   minimum keeps the old slot height;
+3. the measured content height (last section's bottom − element's top) written
+   onto the slot's inline `height`, re-applied from a `ResizeObserver`.
+
+Do not make the layout depend on Velo page code. `$w('#comp-…').on(
+'section-resize')` binds on this site but never receives the element's
+`CustomEvent` (measured: `relay bound`, no `relay applies`, box unchanged), and
+page code only reaches production through the editor's code publish. Page code
+stays optional and must never be the thing that closes the gap.
+
 
 ## Mexican Spanish
 
@@ -160,8 +210,9 @@ as one custom element placed in the page, not from a page mount.
 - `scripts/deploy-city-condos-puerto.mjs` writes the four chunks, disables the
   retired mount entry, publishes, and fails unless the served HTML contains the
   editor element, the preload, and no cover or mount.
-- Page code `src/pages/Condos For Sale In Puerto Morelos.qu5lr.js` binds
-  `#comp-mwmg963v` and relays `section-resize`.
+- Page code `src/pages/Condos For Sale In Puerto Morelos.qu5lr.js` is optional and
+  legacy: it binds `#comp-mwmg963v` and tries to relay `section-resize`, but the
+  element sizes its own slot, so the page does not depend on it.
 - The element sets `document.title` and the meta description for its locale.
   The English settings are also written through `seo-tags`; the Spanish ones are
   the editor's, so the rendered-document statement is the current fallback.

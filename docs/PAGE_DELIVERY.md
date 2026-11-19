@@ -1,8 +1,9 @@
 # Page delivery: the element in the page, the packet in the head
 
-A CrawlSEO page is a custom element placed in a Wix page, registered before
-Wix's loader by a HEAD packet, plus the page code that relays its height. The
-element is in the page's HTML; the packet only makes it upgrade early.
+A CrawlSEO page is a custom element placed in a Wix page and registered before
+Wix's loader by a HEAD packet. The element is in the page's HTML; the packet only
+makes it upgrade early. The element also sizes its own Wix slot, so the section
+ends where the content ends (see "The slot the element lives in").
 
 The BODY_END mount is a prototype lane, not delivery. It exists for a page that
 has no placed element yet, and a mounted page cannot meet the performance
@@ -15,8 +16,8 @@ survive hydration, outside the section the editor sized, and after first paint.
 | Artifact | Written by | Where |
 | --- | --- | --- |
 | component source | the agent | `<connected-repo>/src/public/custom-elements/<tag>.js`, committed and pushed |
-| editor placement | the human | the element on the page, with its section sized for desktop and mobile |
-| page code | the agent | `<connected-repo>/src/pages/<Page Name>.<pageId>.js`, relays `section-resize` |
+| editor placement | the human | the element on the page; the saved height is a placeholder the element corrects |
+| page code | the agent, optional | `<connected-repo>/src/pages/<Page Name>.<pageId>.js`; never load-bearing |
 | early packet | the agent, `create-snippet` / `write-packet` | Custom Code, `HEAD`, one entry per locale per chunk, route-guarded |
 | page mount | nobody, once the element is placed | `disable-embed` the retired entry |
 
@@ -48,6 +49,7 @@ symptom to look for.
 | LCP | the element's own hero `<img>`, preloaded, around 2.5 s on PSI mobile | the hero is a CSS background, or the element mounts after the page |
 | Images | no "Improve image delivery" opportunity on PSI | 560 px files in 134 px slots, or an uploaded PNG served as PNG |
 | Transfer | at or below a sibling page on the same site | the page ships its own copy of images the site already uses |
+| Time to element | at or below the closest delivered sibling | the page has no packet, so its element waits for Wix's code bundle (~1.2 s slower, measured on the Playa type pages) |
 | TBT | whatever the site's own pages get (~70 ms here) | not this page's job; the Wix shell and its tags set it |
 
 Rules that follow:
@@ -58,6 +60,10 @@ Rules that follow:
 - The packet registers and preloads. It must not hide `#SITE_PAGES`, paint a
   placeholder, set a min-height or move anything: a page that is hidden and
   rebuilt after paint is a page with CLS.
+- A page that loads slower than its delivered sibling is a delivery bug, not a
+  framework question. Compare the time until the element is defined on both
+  pages; the usual difference is a missing packet, a packet on one locale only,
+  or a route guard that does not match. Copy the sibling's packets exactly.
 - A measured page is never mounted from BODY_END. The mount must move the
   element out of its section to survive hydration, which defeats the editor
   geometry and puts the page back to create-after-paint.
@@ -82,7 +88,8 @@ With the element in the page:
   and the section's saved height holds the page still while it upgrades;
 - the packet upgrades it in place; nothing is created, moved or replaced after
   first paint;
-- the page code only relays `section-resize` to the element's Wix wrapper.
+- the element sizes its own slot, so the section ends where the content ends;
+  page code is optional and no layout depends on it.
 
 With a BODY_END mount instead:
 
@@ -100,6 +107,29 @@ cannot be made to score like a placed one.
 The custom element renders the reviewed copy into the light DOM, so it stays in
 the document for crawlers. JSON-LD is moved to `document.head` on connect,
 because structured data inside a custom element is not read.
+
+## The slot the element lives in
+
+Wix places the element in a slot (`#comp-…`, `display:flex`) whose height is the
+value saved in the editor, and as a flex item the element resolves
+`min-height:auto` to that slot height. So the element's box stays at the editor
+height whatever its own CSS says, `offsetHeight` reports the empty band as
+content, and a section sized from it never shrinks. On the Playa type pages that
+was 500–640 px of empty page above the footer at 1440 px, hidden on mobile.
+
+The element owns the correction, and this is the only mechanism to rely on:
+
+1. `align-self:flex-start` and `height:auto` on the tag, so it sizes to content;
+2. `min-height:0 !important` inline on connect (the flex automatic minimum is
+   what holds the old height);
+3. the measured content height (last section's bottom − element's top) written to
+   the slot's inline `height`, re-applied from a `ResizeObserver`.
+
+Not from Velo: `$w('#comp-…').on('section-resize')` binds but never receives the
+element's `CustomEvent` on this site (live: `relay bound`, no `relay applies`,
+box unchanged), and page code only reaches production through the editor's code
+publish. Page code is optional and never load-bearing.
+
 
 ## Locales
 
@@ -121,26 +151,32 @@ by client-side navigation would never register the element. The bridge sets it
 off on create, and `write-packet` can correct an existing entry with
 `--load-once false` and verifies the readback.
 
-Page scope remains a human step because Wix exposes it read-only. Narrowing the
-entries to their page is a transfer optimization: the route guard already makes
-an all-pages entry inert everywhere else.
+Narrowing an entry's page scope is optional and not part of a delivery: Wix
+exposes the filter read-only, and the route guard already makes an all-pages
+entry inert everywhere else. Never make a delivery wait on it.
 
 ## Who does what
 
-- **CrawlSEO** writes the component source and page code in the connected
-  repository, commits and pushes them, and calls the bridge for every packet
-  chunk, the page's SEO title and description, and the publish.
+The split is fixed for every page and is not a per-task decision.
+
+- **The agent** owns everything technical: the component source, its build, the
+  page code when a page needs it, every Custom Code / Custom Embed entry
+  (`create-snippet`, `write-packet`, `disable-embed`), the page's SEO title and
+  description, the commit and push, the deploy, the publish, the live
+  verification and the performance gates. The bridge performs the writes on the
+  agent's behalf.
 - **The bridge** creates the entries, rewrites them in place on retry, reads the
   stored hash back, disables a replaced embed, writes the page's SEO tags through
   the Item SEO Tags API, and publishes the saved site revision through
   `POST /site-publisher/v1/site/publish`.
-- **The human** creates the Wix page if it does not exist, places the custom
+- **The human** creates the Wix page if it does not exist and places the custom
   element on it (Add Elements > Embed > Popular Embeds > Custom Element, tag
-  name = the tag), and sizes the element and its section for desktop and
-  mobile. This is the one step with no API. Record the Wix element id and the
-  section id in the delivery notes. Optionally, narrow each entry's page scope
-  in the Wix Custom Code panel; the API applies new entries to all pages and
-  cannot change the filter.
+  name = the tag), then reports the Wix element id and section id. That is the
+  whole human part.
+
+A delivery is never handed back to the human for a packet, an embed, a code
+paste, a publish or a measurement. If a step needs the editor's code panel, it
+does not belong in the delivery; make the element do it, as the slot sizing does.
 
 Wix has no public API to create a site page, and the Custom Embed page filter is
 read-only. That is why the page and the scope are human steps. Everything else,
@@ -248,21 +284,29 @@ repository.
 
 ## Checklist for an agent
 
-1. Is the element placed in the page and its section sized for desktop and
-   mobile? If not, stop: there is no mount substitute. Ask the human, and record
-   the returned Wix element id and section id.
+1. Is the element placed in the page? That is the only thing asked of the human;
+   record the returned Wix element id and section id. There is no mount
+   substitute.
 2. Does the component source exist at `src/public/custom-elements/<tag>.js`,
    light DOM, bilingual in one source where the page has two locales, starting
    with `/* global __CC_LOCALE__ */`, and is it pushed?
-3. Does the page code bind the real Wix element id and relay `section-resize`?
+3. Does the element size its own slot — `align-self:flex-start`, `height:auto`,
+   `min-height:0 !important` inline, content height written to the slot's inline
+   height — and does the page therefore end where the content ends at 1440 px and
+   390 px? (Not page code: the Velo relay never fires here.)
 4. Is every packet chunk under 13,500 characters, route-guarded, load-once off,
-   and free of page hiding, placeholders and min-heights?
+   and free of page hiding, placeholders and min-heights? Were the packets
+   rebuilt after the last component change, and does every locale have its own
+   entry?
 5. Is the retired mount entry disabled, and would the deploy fail if it came
    back?
 6. Do the stored hashes read back as a match, and did you decode the served
    bundle rather than trusting `read-embed`?
 7. Does the served HTML contain one `<tag>` and the hero preload, and no mount?
-8. Does the rendered page show one element, one `<h1>`, both locales, the
-   footer in place, and no horizontal overflow at 1440 px and 390 px?
+8. Does the rendered page show one element, one `<h1>`, both locales, the footer
+   directly after the content, and no horizontal overflow at 1440 px and 390 px?
 9. Does PSI mobile report CLS 0, the element's hero as LCP, no image-delivery
    opportunity, and transfer no larger than a sibling page?
+10. Does the page reach its element as fast as its closest delivered sibling
+    (three unthrottled runs, medians)? If not, it is missing packets — create
+    them; do not investigate the framework.
