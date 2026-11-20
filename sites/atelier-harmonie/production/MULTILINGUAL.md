@@ -1,5 +1,17 @@
 # English translation release — draft
 
+## Route-authoritative locale (v60)
+
+English now renders only when the path starts with `/en`. The `locale` attribute
+fed from Wix's `multilingual.currentLanguage`, and `documentElement.lang` before
+it, used to be consulted first; in the Editor and its preview Wix reports the
+editing language, so every custom element painted English on French pages while
+French was selected. Both the shared component runtime and the page-code helper
+(`src/public/atelier-locale.js`) now take the route as the answer and only fall
+back to `currentLanguage` when no URL is available. Nothing about language
+visibility, Wix translation content or the native language selector changed.
+
+
 Target: `--site atelier-harmonie`, site ID `376faa89-fe6c-4ae8-8feb-10520e813a89`.
 
 English exists in Wix Multilingual and is hidden by the human's choice. Keep it hidden. No English visibility, locale, original French content or native translation content has been changed by this release.

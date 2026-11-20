@@ -24,7 +24,9 @@ function atelierLocalized(Base, dictionary) {
    super.disconnectedCallback?.();
   }
   atelierIsEnglish() {
-   return (this.getAttribute('locale') || (/^\/en(?:\/|$)/.test(location.pathname) ? 'en' : document.documentElement.lang)).toLowerCase().startsWith('en');
+   // The published route decides the locale: English lives only under /en.
+   // Wix's editor context reports its own editing language, which used to win here.
+   return /^\/en(?:\/|$)/.test(location.pathname);
   }
   localizeAtelier() {
    const root = this.shadowRoot;
