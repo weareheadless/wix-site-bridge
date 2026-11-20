@@ -37,6 +37,14 @@ form and social/Ecomaison destinations are unchanged.
   `#customElement15` (page code `src/pages/A PROPOS.yn9k9.js` assigns
   `seoMarkup`), so both languages were updated there too.
 
+### Story photograph
+
+The mid-page figure uses the restored chaise longue
+(`bae3ac_73bd8ccdef024c81822f7376d980b682~mv2.jpeg`), landscape 4:3, replacing
+the two armchairs photo, in both the component and its crawlable markup. The
+photograph beside the native contact form is a Wix image element in the native
+section; it is not part of this element and can only be swapped in the Editor.
+
 ### Known gap: stale SSR/SEO markup
 
 The rendered element and the early packet are current on `/a-propos` and
